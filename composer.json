@@ -8,13 +8,14 @@
 		"baum/baum": "~1.0",
 		 "intervention/image": "^2.2",
 		"davejamesmiller/laravel-breadcrumbs": "2.*",
-		"artdarek/oauth-4-laravel": "dev-master"
+		"artdarek/oauth-4-laravel": "dev-master",
+      "laracasts/commander": "~1.0"
 
 	},
 	"require-dev": {
     "way/generators": "~2.0",
-		"laracasts/integrated": "^0.15.6"
-},
+    "laracasts/integrated": "^0.15.6"
+    },
 	"autoload": {
 		"classmap": [
 			"app/commands",
@@ -23,7 +24,11 @@
 			"app/database/migrations",
 			"app/database/seeds",
 			"app/tests/TestCase.php"
-		]
+		],
+      "psr-0": {
+        "Enclassfied" : "src/"
+      }
+
 	},
 	"scripts": {
 		"post-install-cmd": [
