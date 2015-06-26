@@ -11,3 +11,5 @@ Thumbs.db
 .idea/vcs.xml
 
 .idea/workspace.xml
+
+tests/logs/output.html
