@@ -122,6 +122,10 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
+        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'Laracasts\Commander\CommanderServiceProvider',
+        'Artdarek\OAuth\OAuthServiceProvider'
+
 	),
 
 	/*
@@ -188,6 +192,10 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
+
+
+        'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
+        'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 
 	),
 
