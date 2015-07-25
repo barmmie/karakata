@@ -15,4 +15,13 @@ return array(
 
 	'debug' => true,
 
+    'providers' => [
+        'Way\Generators\GeneratorsServiceProvider',
+//        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+    ],
+
+//    'aliases' => [
+//        'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+//    ]
+
 );

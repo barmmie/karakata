@@ -51,6 +51,12 @@ App::error(function(Exception $exception, $code)
 	Log::error($exception);
 });
 
+App::error(function(Enclassified\Exceptions\ValidationFailedException $exception){
+    return Redirect::back()
+        ->withInput()
+        ->withErrors($exception->getErrors());
+});
+
 /*
 |--------------------------------------------------------------------------
 | Maintenance Mode Handler
@@ -79,3 +85,6 @@ App::down(function()
 */
 
 require app_path().'/filters.php';
+require app_path().'/listeners.php';
+
+App::bind('Laracasts\Commander\CommandTranslator', 'Enclassified\Services\MyCommandTranslator');

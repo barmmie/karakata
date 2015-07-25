@@ -1,0 +1,1 @@
+/vagrant/apps/enclassifiedd/app/views/items/show.blade.php

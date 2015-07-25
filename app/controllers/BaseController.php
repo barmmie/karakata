@@ -2,7 +2,10 @@
 
 class BaseController extends Controller {
 
-	/**
+    use \Laracasts\Commander\CommanderTrait;
+
+
+    /**
 	 * Setup the layout used by the controller.
 	 *
 	 * @return void

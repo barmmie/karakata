@@ -37,13 +37,14 @@ Route::filter('auth', function()
 {
 	if (Auth::guest())
 	{
+        flashError('Authentication required', 'You need to login to proceed');
 		if (Request::ajax())
 		{
 			return Response::make('Unauthorized', 401);
 		}
 		else
 		{
-			return Redirect::guest('login');
+			return Redirect::guest(route('users.login'));
 		}
 	}
 });
@@ -67,7 +68,7 @@ Route::filter('auth.basic', function()
 
 Route::filter('guest', function()
 {
-	if (Auth::check()) return Redirect::to('/');
+//	if (Auth::check()) return Redirect::to('/');
 });
 
 /*

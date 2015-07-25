@@ -1,5 +1,6 @@
 /bootstrap/compiled.php
 /vendor
+/node_modules
 composer.phar
 composer.lock
 .env.*.php
@@ -7,6 +8,8 @@ composer.lock
 .DS_Store
 Thumbs.db
 /.idea/*
+.idea/enclassified.iml
+/app/storage
 
 .idea/vcs.xml
 

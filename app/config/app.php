@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug' => false,
+	'debug' => true,
 
 	/*
 	|--------------------------------------------------------------------------
@@ -124,9 +124,11 @@ return array(
 
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Laracasts\Commander\CommanderServiceProvider',
-        'Artdarek\OAuth\OAuthServiceProvider'
+        'Artdarek\OAuth\OAuthServiceProvider',
+        'Clockwork\Support\Laravel\ClockworkServiceProvider'
 
-	),
+
+    ),
 
 	/*
 	|--------------------------------------------------------------------------
@@ -197,6 +199,9 @@ return array(
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
 
-	),
+                'Clockwork' => 'Clockwork\Support\Laravel\Facade',
+
+
+    ),
 
 );

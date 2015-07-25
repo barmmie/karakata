@@ -5,16 +5,19 @@
 	"license": "MIT",
 	"require": {
 		"laravel/framework": "4.2.*",
-		"baum/baum": "~1.0",
 		 "intervention/image": "^2.2",
 		"davejamesmiller/laravel-breadcrumbs": "2.*",
 		"artdarek/oauth-4-laravel": "dev-master",
-      "laracasts/commander": "~1.0"
+      "laracasts/commander": "~1.0",
+      "kalnoy/nestedset": "1.1.*"
+
+
 
 	},
 	"require-dev": {
     "way/generators": "~2.0",
-    "laracasts/integrated": "^0.15.6"
+    "laracasts/integrated": "^0.15.6",
+      "itsgoingd/clockwork": "~1.8"
     },
 	"autoload": {
 		"classmap": [
@@ -22,14 +25,23 @@
 			"app/controllers",
 			"app/models",
 			"app/database/migrations",
-			"app/database/seeds",
-			"app/tests/TestCase.php"
+			"app/database/seeds"
+
 		],
-      "psr-0": {
-        "Enclassfied" : "src/"
+      "files": [
+        "app/helpers.php"
+      ],
+      "psr-4": {
+        "Enclassified\\" : "app/Enclassified"
       }
 
 	},
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php",
+      "tests/support"
+    ]
+  },
 	"scripts": {
 		"post-install-cmd": [
 			"php artisan clear-compiled",
