@@ -36,7 +36,9 @@ Route::group(['before'=> 'auth'], function(){
     Route::get('items/new', ['as' => 'items.new', 'uses' => 'ItemsController@create']);
     Route::post('items/new', ['as' => 'items.store', 'uses' => 'ItemsController@store']);
 
-    Route::get('myitems', ['as' => 'dash.items', 'uses' => 'DashController@myitems']);
+    Route::get('myitems', ['as' => 'dash.myitems', 'uses' => 'DashController@myitems']);
+
+    Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
 
 
 });

@@ -1,20 +1,22 @@
 <?php namespace Admin;
+
 use Category, Request, View, DB, Input, App;
 
 
-class CategoriesController extends \BaseController {
+class CategoriesController extends \BaseController
+{
     public function __construct()
     {
         // filter to validate POST requests
-        $this->beforeFilter(function()
-        {
-            $this->request = (object) Input::all();
-            if ( ! Request::ajax() ||
-                ! in_array($this->request->action, ["addCategory", "deleteCategory", "renameCategory", "moveCategory"])
+        $this->beforeFilter(function () {
+            $this->request = (object)Input::all();
+            if (!Request::ajax() ||
+                !in_array($this->request->action, ["addCategory", "deleteCategory", "renameCategory", "moveCategory"])
                 //(\Validator::make(['name' => $this->request->name], ["name" => ["required", "regex:/^[\w\p{Cyrillic}\040,.-_']+$/u"]])->fails())
             ) App::abort(405);
         }, ["on" => "post"]);
     }
+
     public function getIndex()
     {
         $categories = Category::fetchTree();
@@ -27,7 +29,7 @@ class CategoriesController extends \BaseController {
     {
         DB::beginTransaction();
 
-        switch($this->request->action) {
+        switch ($this->request->action) {
             case "renameCategory":
                 $status = Category::renameNode($this->request->id, $this->request->originalname, $this->request->name);
                 break;
@@ -45,8 +47,7 @@ class CategoriesController extends \BaseController {
 
             case "moveCategory":
 
-                $status = Category::moveNode($this->request->id, $this->request->to , $this->request->direction, $this->request->parent_id);
-
+                $status = Category::moveNode($this->request->id, $this->request->to, $this->request->direction, $this->request->parent_id);
                 break;
         }
 

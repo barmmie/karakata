@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
+
+    <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/alertify.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/themes/semantic.min.css')}}"/>
     @yield('styles')
 
     <style type="text/css">
@@ -38,6 +41,8 @@
 
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/semantic-ui/semantic.min.js')}}"></script>
+<script src="{{asset('assets/alertify-js/build/alertify.min.js')}}"></script>
+
 @yield('scripts')
 
 @if(Auth::guest())

@@ -12,7 +12,13 @@ class PicturesController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $file =Input::file('file');
+
+        $picture = Picture::upload($file);
+
+        return Response::json(['picture' => $picture]);
+
+
 	}
 
 }

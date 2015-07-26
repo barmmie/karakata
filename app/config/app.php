@@ -125,6 +125,7 @@ return array(
         'DaveJamesMiller\Breadcrumbs\ServiceProvider',
         'Laracasts\Commander\CommanderServiceProvider',
         'Artdarek\OAuth\OAuthServiceProvider',
+        'Intervention\Image\ImageServiceProvider',
         'Clockwork\Support\Laravel\ClockworkServiceProvider'
 
 
@@ -198,6 +199,7 @@ return array(
 
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
+        'Image' => 'Intervention\Image\Facades\Image',
 
                 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 

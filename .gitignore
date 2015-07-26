@@ -10,6 +10,7 @@ Thumbs.db
 /.idea/*
 .idea/enclassified.iml
 /app/storage
+/public/uploads
 
 .idea/vcs.xml
 

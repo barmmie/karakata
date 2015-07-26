@@ -19,6 +19,12 @@
                                 <div class="ui left label">{{Auth::user()->likedItems()->count()}}</div>
                             </a>
 
+                            <a class="item ">
+
+                                Messages
+
+                            </a>
+
 
                         </div>
 

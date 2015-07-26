@@ -18,14 +18,12 @@
 
                     <div class="item p-r-none">
                         <div class="ui buttons">
-                            <div class="ui button">{{Auth::user()->full_name}}</div>
+                            <a class="ui button" href="{{route('dash.myitems')}}">{{Auth::user()->full_name}}</a>
                             <div class="ui floating dropdown icon button">
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
-                                    <div class="item" data-value="drop">Drop</div>
-                                    <div class="item" data-value="horizontal flip">Horizontal Flip</div>
-                                    <div class="item" data-value="fade up">Fade Up</div>
-                                    <div class="item" data-value="scale">Scale</div>
+                                    <a class="item" href="">Profile</a>
+
                                 </div>
                             </div>
                         </div>

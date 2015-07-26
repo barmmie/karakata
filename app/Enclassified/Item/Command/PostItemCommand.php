@@ -52,6 +52,18 @@ class PostItemCommand {
      * @var string
      */
     public $seller_name;
+    /**
+     * @var string
+     */
+    public $pictures_id;
+    /**
+     * @var string
+     */
+    public $seller_name;
+    /**
+     * @var string
+     */
+    public $seller_name;
 
     /**
      * @param string title
@@ -64,8 +76,11 @@ class PostItemCommand {
      * @param string email
      * @param string phone
      * @param string seller_name
+     * @param string pictures_id
+     * @param boolean fallback
+     * @param boolean file
      */
-    public function __construct($title, $description, $type, $category_id, $location_id, $amount, $negotiable, $email, $phone, $seller_name)
+    public function __construct($title, $description, $type, $category_id, $location_id, $amount, $negotiable, $email, $phone, $seller_name, $pictures_id = [], $fallback = false, $file)
     {
         $this->title = $title;
         $this->description = $description;
@@ -74,9 +89,12 @@ class PostItemCommand {
         $this->location_id = $location_id;
         $this->amount = $amount;
         $this->negotiable = (bool)$negotiable;
+        $this->fallback = (bool)$fallback;
         $this->email = $email;
         $this->phone = $phone;
         $this->seller_name = $seller_name;
+        $this->pictures_id = $pictures_id;
+        $this->uploaded_files = $file;
     }
 
     public function rules(){

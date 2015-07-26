@@ -3,6 +3,9 @@
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/jquery.classyedit.css')}}"/>
+
+    <link rel="stylesheet" href="{{asset('assets/dropzone/dist/min/dropzone.min.css')}}"/>
+
 @endsection
 
 @section('content')
@@ -15,6 +18,7 @@
                         Post free classified
                     </h3>
                     @include('partials._form_errors')
+
 
 
                     {{Form::open(['route'=>'items.store', 'class'=>'ui form attached p-lg', 'novalidate' => 'novalidate'])}}
@@ -68,6 +72,7 @@
                         </div>
                     </div>
 
+
                     <div class="required field">
 
                         <label>Ad title</label>
@@ -75,6 +80,20 @@
 
 
                     </div>
+
+                    <div class="field">
+                        <label for="">Photos</label>
+                        <div id="myDropZone" class="dropzone">
+                            <div class="fallback">
+                                <input name="file" type="file" multiple />
+                                <input name="fallback" type="hidden" value="1" />
+                                <p>Choose images you want to attach to the item</p>
+                            </div>
+                        </div>
+                        {{Form::hidden('pictures_id')}}
+                    </div>
+
+
 
                     <div class="required field">
                         <label>Description</label>
@@ -200,12 +219,83 @@
     </div>
 
 
+
 @endsection
 
 @section('scripts')
     <script src="{{asset('assets/js/jquery.classyedit.js')}}"></script>
+    <script src="{{asset('assets/dropzone/dist/min/dropzone.min.js')}}"></script>
     <script>
         $(document).ready(function () {
+
+            var $picturesId = $("input[name='pictures_id']");
+
+            Form = {
+
+                getCurrentPicturesArray: function() {
+                    current_pictures_array = []
+
+                    var current_pictures_list = $picturesId.val();
+
+                    if(current_pictures_list!="") var current_pictures_array = current_pictures_list.split(',');
+
+                    current_pictures_array = current_pictures_array.map(function(val){return parseInt(val)});
+
+                    return current_pictures_array
+                },
+                addFileToPicturesArray: function(file) {
+                    var current_pictures_array = this.getCurrentPicturesArray();
+                    current_pictures_array.push(file._uuid)
+                    $picturesId.val(current_pictures_array)
+                },
+                removeFileFromPicturesArray: function(file) {
+                    var current_pictures_array = this.getCurrentPicturesArray();
+                    current_pictures_array.sp
+                    $picturesId.val(current_pictures_array)
+
+                }
+            }
+
+
+            Dropzone.autoDiscover = false;
+
+            dropzone = new Dropzone("div#myDropZone", {
+                    url : "{{route('pictures.store')}}",
+                    addRemoveLinks: true,
+                    maxFilesize: 3,
+                    maxFiles: 5,
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name=token]').attr("content")
+                    },
+                    acceptedFiles : 'image/*',
+                    dictDefaultMessage: 'Add more photos and sell even faster',
+                    maxfilesexceeded: function(file, rt) {
+                        alertify.warning('You can\'t upload more than 5 images')
+                        this.removeFile(file);
+                    },
+                    success: function (file, response) {
+                        file._uuid = response.picture.id;
+                        file.isServerProcessed = true;
+                        file.previewElement.classList.add('dz-complete');
+                        file.previewElement.classList.add("dz-success");
+
+                        Form.addFileToPicturesArray(file)
+                    },
+                    error: function (file, response) {
+                        alertify.warning('Could not upload ')
+                        file.previewElement.classList.add("dz-error");
+                    }
+                });
+
+
+            dropzone.on('removedfile', function(file){
+                if(file.isServerProcessed) {
+                    //remove file._uuid from
+                    //$("input[name='pictures_id[]']").val()
+                    Form.removeFileFromPicturesArray(file)
+                }
+            });
+
             $('.classy-editor').ClassyEdit();
 
             $('.ui.accordion').accordion();
@@ -318,7 +408,11 @@
                         }
                     })
             ;
-        })
+
+
+
+
+        });
     </script>
 
 
