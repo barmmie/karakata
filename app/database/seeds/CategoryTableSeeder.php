@@ -7,9 +7,11 @@
  */
 use Kalnoy\Nestedset\NestedSet;
 
-class CategoryTableSeeder extends Seeder {
+class CategoryTableSeeder extends Seeder
+{
 
-    public function run() {
+    public function run()
+    {
         DB::table('categories')->truncate();
 
         NestedSet::createRoot('categories', array(
@@ -30,24 +32,79 @@ class CategoryTableSeeder extends Seeder {
                 'Health & beauty',
                 'Miscellaneaous',
                 'Property & Shipping',
+                'Tax money & Visas',
+                'Telecoms and computers',
+                'Travel services and tours',
+                'Tuition and home lessons'
+
             ],
             'For Sale' => [
-                'Audio & Stereo'
-            ]
+                'Audio & Stereo',
+                'Baby kids & stuff',
+                'CDs DVDs, Games & Books',
+                'Clothes, Footwear & accessories',
+                'Computers & software',
+                'Home & garden',
+                'Music & instrument',
+                'Office furniture & equipments',
+                'Phones, Mobile phones & laptops',
+                'Sports leisure travel',
+                'Tickets',
+                'Tv Dvd & Cameras',
+                'Video games & cameras',
+                'Video games & consoles',
+            ],
+            'Property' => [
+                'House for rent',
+                'House for sale',
+                'Apartments for rent',
+                'Apartments for sale',
+                'Farm ranches',
+                'Land',
+                'Vacation rentals',
+                'Commercial builidng'
+
+
+            ],
+            'Pets' => [
+                'Pets for sale',
+                'Petsitters & dogwalkers',
+                'Pet equipments & accessories',
+                'Missing lost and found'
+            ],
+            'Jobs' => [
+                'Full-time jobs',
+                'Internet jobs',
+                'Learn and earn jobs',
+                'Manual labor jobs'
+            ],
+            'Learning' => [
+                'Sports classes',
+                'Language classes',
+                'Personal fitness',
+                'Music lessons'
+            ],
+            'Community' => [
+                'Pets for sale',
+                'Petsitters & dogwalkers',
+                'Pet equipments & accessories',
+                'Missing lost and found'
+            ],
         ];
 
-        foreach($cat_array as $key => $categories){
+        foreach ($cat_array as $key => $categories) {
 
             $this->addChildren($categories, $key);
         }
 
     }
 
-    protected function addChildren($categories, $parentTitle) {
+    protected function addChildren($categories, $parentTitle)
+    {
 
         $parent = Category::addNode($parentTitle);
 
-        foreach($categories as $category){
+        foreach ($categories as $category) {
             $cat = Category::addNode($category);
             Category::moveNode($cat['id'], $parent['id'], 'inside', $cat['parent_id']);
         }

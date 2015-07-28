@@ -31,13 +31,13 @@ class TestCase extends IntegrationTest {
         
     }
 
-    protected function login($user=null) {
+    protected function login($user=null, $password = null) {
         $user = $user?:TestDummy::create('User');
-
+        $password = $password?:'password';
 
         return $this->visit('login')
             ->fill( $user->email, 'email')
-            ->fill('password', 'password')
+            ->fill( $password, 'password')
             ->press('Signin');
     }
 

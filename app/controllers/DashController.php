@@ -9,8 +9,10 @@
 
 
 class DashController extends \BaseController {
+
+
     public function myitems() {
-        $items = Auth::user()->items;
+        $items = Auth::user()->items()->with('pictures','location','category')->paginate(10);
 
         return View::make('dash.myitems', compact('items'));
     }

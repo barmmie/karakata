@@ -25,6 +25,8 @@ class ItemsTest extends TestCase {
                 ->visit('items/new')
                 ->submitForm('Create my ad', $item)
                 ->seeInDatabase('items', $item)
+                ->visit('/myitems')
+                ->see($item['title'])
             ;
     }
 

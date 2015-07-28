@@ -14,7 +14,10 @@ class Category extends \Kalnoy\Nestedset\Node {
     {
         parent::boot();
 
-
+        static::saved(function($category){
+            static::where('id',$category->id)
+            ->update(['slug' => $category->id.'-'.Str::slug($category->title, '-')]);
+        });
 
         static::deleted(function(){
             Cache::forget('categories_cache');
@@ -30,9 +33,35 @@ class Category extends \Kalnoy\Nestedset\Node {
 
     }
 
-    public static function fetchTree() {
+    public function items()
+    {
+        return $this->hasMany('Item');
+    }
+
+    public function active_items()
+    {
+        return $this->hasMany('Item')->where('status', Item::APPROVED_STATUS);
+    }
+
+    public function nestedKeys() {
+        $categories = $this->descendants()->lists('id');
+
+        $categories[] = $this->getKey();
+
+        return $categories;
+
+    }
+
+    public static function fetchTree($fetchItemsCount = false) {
 //        return Cache::rememberForever('categories_cache', function () {
-            return static::withoutRoot()->get(['id', 'title as label', '_lft', '_rgt', 'parent_id'])->toTree();
+
+        $cats = static::withoutRoot();
+
+        if($fetchItemsCount) {
+            $cats = $cats->with('active_items');
+        }
+
+        return $cats->get(['id', 'title as label', '_lft', '_rgt', 'parent_id', 'slug'])->toTree();
 //        });
     }
 

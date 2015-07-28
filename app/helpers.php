@@ -29,3 +29,11 @@ function flash($type, $messageContent, $additionalInfo='') {
     Session::flash('feedback', $messages);
 }
 
+function divide_array($array, $segmentCount) {
+    $dataCount = count($array);
+    if ($dataCount == 0) return [];
+    $segmentLimit = ceil($dataCount / $segmentCount);
+    $outputArray = array_chunk($array, $segmentLimit);
+
+    return $outputArray;
+}

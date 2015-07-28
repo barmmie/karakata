@@ -27,6 +27,8 @@ Route::group(['before'=> 'guest'], function(){
 
 });
 
+Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 'uses' => 'CategoriesController@show']);
+
 Route::group(['before'=> 'auth'], function(){
 
 
@@ -35,11 +37,17 @@ Route::group(['before'=> 'auth'], function(){
 
     Route::get('items/new', ['as' => 'items.new', 'uses' => 'ItemsController@create']);
     Route::post('items/new', ['as' => 'items.store', 'uses' => 'ItemsController@store']);
+    Route::get('items/{id}/edit', ['as' => 'items.edit', 'uses' => 'ItemsController@edit']);
+    Route::post('items/{id}', ['as' => 'items.update', 'uses' => 'ItemsController@update']);
 
     Route::get('myitems', ['as' => 'dash.myitems', 'uses' => 'DashController@myitems']);
 
-    Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
 
+    Route::get('profile', ['as' => 'users.profile', 'uses' => 'UsersController@edit']);
+    Route::post('profile', ['as' => 'users.update_profile', 'uses' => 'UsersController@update']);
+    Route::post('password', ['as' => 'users.update_password', 'uses' => 'UsersController@updatePassword']);
+
+    Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
 
 });
 

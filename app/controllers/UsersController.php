@@ -56,25 +56,49 @@ class UsersController extends \BaseController {
 	 * Show the form for editing the specified resource.
 	 * GET /users/{id}/edit
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function edit($id)
+	public function edit()
 	{
-		//
+        $user = Auth::user();
+		return View::make('users.edit', compact('user'));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 * PUT /users/{id}
 	 *
-	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update()
 	{
-		//
+        $result = $this->execute('Enclassified\User\Command\UpdateProfileCommand');
+
+        if($result['success']) {
+            flashSuccess('Update Successful', $result['message']);
+            return Redirect::route('dash.myitems');
+        } else {
+            flashError('Operation failed', $result['message']);
+            return Redirect::back()
+                ->withInput()
+                ->withErrors();
+        }
 	}
+
+    public function updatePassword()
+    {
+        $result = $this->execute('Enclassified\User\Command\UpdatePasswordCommand');
+
+        if($result['success']) {
+            flashSuccess('Password update Successful', $result['message']);
+            return Redirect::route('dash.myitems');
+        } else {
+            flashError('Operation failed', $result['message']);
+            return Redirect::back()
+                ->withInput()
+                ;
+        }
+    }
 
 	/**
 	 * Remove the specified resource from storage.
@@ -92,15 +116,15 @@ class UsersController extends \BaseController {
     {
 
         try {
-            $user = User::where('confirmation_token', $token)->firstOrFail()->confirmEmail();
-
+            $user = User::where('confirmation_token', $token)->firstOrFail();
+            $user->confirmEmail();
         } catch(\Illuminate\Database\Eloquent\ModelNotFoundException $e) {
             flashError('Invalid verification link.', 'The link you clicked has either expired or is invalid.');
             return Redirect::route('pages.homepage');
         }
 
 
-        flashSuccess('Verification successful', 'You can proceed to login');
+        flashSuccess('Verification successful', "{$user->full_name}, You can proceed to login");
 
         return Redirect::route('pages.homepage');
     }

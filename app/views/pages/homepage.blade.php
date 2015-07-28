@@ -19,229 +19,36 @@
                     </div>
 
                     <div class="ui doubling stackable grid">
-                        <div class="five wide column">
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal road icon"></i>
-                                    <div class="content">
-                                        Automobiles
-                                        <div class="sub header">2,430</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Car parts & accessories
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Vans and trucks
-                                    </a>
+                        @if(count($categories) > 0)
+                            @foreach($categories as $category_list)
+                                <div class="five wide column">
+                                    @foreach($category_list as $category)
+                                    <div class="ui content m-b-md">
+                                        <a class="ui teal header" href="{{route('categories.show', $category['slug'] )}}">
+                                            <i class="bordered inverted shadowed teal road icon"></i>
+                                            <div class="content">
+                                                {{$category['label']}}
+                                            </div>
+                                        </a>
+                                        <div class="ui list">
+                                            @foreach($category['children'] as $child)
+                                            <a class="item" href="{{route('categories.show', [$category['slug'], $child['slug']])}}">
+                                                <i class="right triangle icon"></i>
+                                                {{$child['label']}} ({{count($child['active_items'])}})
+                                            </a>
+                                            @endforeach
 
-                                    <a class="item"><i class="right triangle icon"></i> Motorbikes</a>
-                                    <a class="item"><i class="right triangle icon"></i>Wanted</a>
 
-                                </div>
-                            </div>
-
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal home icon"></i>
-                                    <div class="content">
-                                        Property
-                                        <div class="sub header">5,430</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        House for rent
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                       House for sale
-                                    </a>
-
-                                    <a class="item"><i class="right triangle icon"></i> Apartments for rent</a>
-                                    <a class="item"><i class="right triangle icon"></i> Apartments for sale</a>
-                                    <a class="item"><i class="right triangle icon"></i> Farm ranches</a>
-
-                                    <a class="item"><i class="right triangle icon"></i> Land</a>
-                                    <a class="item"><i class="right triangle icon"></i> Vacation rentals</a>
-                                    <a class="item"><i class="right triangle icon"></i> Commercial builidng</a>
-                                </div>
-                            </div>
-
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal folder icon"></i>
-                                    <div class="content">
-                                        Jobs
-                                        <div class="sub header">6,375</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Full-time jobs
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Internet jobs
-                                    </a>
-
-                                    <a class="item"><i class="right triangle icon"></i> Learn and earn jobs</a>
-                                    <a class="item"><i class="right triangle icon"></i> Manual labor jobs</a>
-
-                                </div>
-                            </div>
-
-                        </div>
-                        <div class="five wide column">
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal travel icon"></i>
-                                    <div class="content">
-                                        Services
-                                        <div class="sub header">3,234</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Building, Home & removals
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Entertainment
-                                    </a>
-
-                                    <a class="item"><i class="right triangle icon"></i> Health and Beauty</a>
-                                    <a class="item"><i class="right triangle icon"></i>Miscellaneous</a>
-                                    <a class="item"><i class="right triangle icon"></i>Property & shipping</a>
-                                    <a class="item"><i class="right triangle icon"></i>Tax, Money and Visas</a>
-                                    <a class="item"><i class="right triangle icon"></i>Telecoms & computers</a>
-                                    <a class="item"><i class="right triangle icon"></i>Travel services & Tours</a>
-                                    <a class="item"><i class="right triangle icon"></i>Tuitions & home lessons</a>
-
-                                </div>
-
-                                <div class="ui content m-b-md">
-                                    <a href="test" class="ui teal header">
-                                        <i class="bordered inverted shadowed teal paw icon"></i>
-
-                                        <div class="content">
-                                            Pets
-                                            <div class="sub header">2,430</div>
                                         </div>
-                                    </a>
-                                    <div class="ui list">
-                                        <a class="item">
-                                            <i class="right triangle icon"></i>
-                                            Pets for sale
-                                        </a>
-                                        <a class="item">
-                                            <i class="right triangle icon"></i>
-                                           Petsitters & dogwalkers
-                                        </a>
-
-                                        <a class="item"><i class="right triangle icon"></i> Pet equipments & accessories</a>
-                                        <a class="item"><i class="right triangle icon"></i>Missing lost and found</a>
-
                                     </div>
-                                </div>
+                                        @endforeach
 
-                                <div class="ui content m-b-md">
-                                    <a href="test" class="ui teal header">
-                                        <i class="bordered inverted shadowed teal student icon"></i>
-
-                                        <div class="content">
-                                            Learning
-                                            <div class="sub header">2,430</div>
-                                        </div>
-                                    </a>
-                                    <div class="ui list">
-                                        <a class="item">
-                                            <i class="right triangle icon"></i>
-                                            Sports classes
-                                        </a>
-                                        <a class="item">
-                                            <i class="right triangle icon"></i>
-                                            Language classes
-                                        </a>
-
-                                        <a class="item"><i class="right triangle icon"></i> Personal fitness</a>
-                                        <a class="item"><i class="right triangle icon"></i>Music lessons</a>
-
-                                    </div>
-                                </div>
-
-
-
-                            </div>
-
-                        </div>
-                        <div class="five wide column">
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal shop icon"></i>
-
-                                    <div class="content">
-                                        For sale
-                                        <div class="sub header">10,160</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Audio & stereo
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Baby kids & stuff
-                                    </a>
-
-                                    <a class="item"><i class="right triangle icon"></i> CDs, DVDs, Games & Books</a>
-                                    <a class="item"><i class="right triangle icon"></i>Clothes, Footwear & Accessories</a>
-                                    <a class="item"><i class="right triangle icon"></i>Computers & software</a>
-                                    <a class="item"><i class="right triangle icon"></i>Home & garden</a>
-                                    <a class="item"><i class="right triangle icon"></i>Music & instruments</a>
-                                    <a class="item"><i class="right triangle icon"></i>Office furniture & equipments</a>
-                                    <a class="item"><i class="right triangle icon"></i>Phones, Mobile phones & Telecoms</a>
-                                    <a class="item"><i class="right triangle icon"></i>Sports, Leisure travel</a>
-                                    <a class="item"><i class="right triangle icon"></i>Tickets</a>
-                                    <a class="item"><i class="right triangle icon"></i>Tv Dvd & Cameras</a>
-                                    <a class="item"><i class="right triangle icon"></i>Video games & cameras</a>
-                                    <a class="item"><i class="right triangle icon"></i>Video games & consoles</a>
 
                                 </div>
-                            </div>
+                            @endforeach
 
-                            <div class="ui content m-b-md">
-                                <a href="test" class="ui teal header">
-                                    <i class="bordered inverted shadowed teal tree icon"></i>
+                        @endif
 
-                                    <div class="content">
-                                        Community
-                                        <div class="sub header">230</div>
-                                    </div>
-                                </a>
-                                <div class="ui list">
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Pets for sale
-                                    </a>
-                                    <a class="item">
-                                        <i class="right triangle icon"></i>
-                                        Petsitters & dogwalkers
-                                    </a>
-
-                                    <a class="item"><i class="right triangle icon"></i> Pet equipments & accessories</a>
-                                    <a class="item"><i class="right triangle icon"></i>Missing lost and found</a>
-
-                                </div>
-                            </div>
-                        </div>
 
 
                     </div>

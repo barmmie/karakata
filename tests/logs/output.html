@@ -2,10 +2,10 @@ Host: localhost:8000
 Connection: close
 X-Powered-By: PHP/5.5.23-1+deb.sury.org~precise+2
 Cache-Control: no-cache
-Date: Sat, 25 Jul 2015 00:29:14 GMT
-X-Clockwork-Id: 1437784154.4483.994414430
+Date: Mon, 27 Jul 2015 23:02:57 GMT
+X-Clockwork-Id: 1438038177.6703.969665523
 X-Clockwork-Version: 1.8.1
-Set-Cookie: laravel_session=eyJpdiI6IkV4ZDZneWR4N1g1ZGpzdUJLSk5XT2c9PSIsInZhbHVlIjoiNjhubVJYSlVYSzhXMTBhZjZ2S1pjT1Nsb0poNXdyQ3BpeTFlVG1nY1wvRk1cL0g0dHd5aFpaTWI2QzJuamRkQllQV09Sa0xpXC92eGdQaVlreitcL0VsUzBBPT0iLCJtYWMiOiIzMDQyMTMyMDFmMWU0ZWZiYTc1MTU0YTI2YzE3NjBjNGY1MWRhOGJkNDc4OWI1ODA2NzE0MWNlYjMwOGViNzM2In0%3D; expires=Sat, 25-Jul-2015 02:29:14 GMT; Max-Age=7200; path=/; httponly
+Set-Cookie: laravel_session=eyJpdiI6IlE4N2RGQTExRTNYdWo5bUxJZmRncHc9PSIsInZhbHVlIjoiY01vTjFWbVwvOVZYUFQyT2RcL1hDblRaSnNOQU5hblN3WnlMZ05rTDNcL2JQSjlPWXRRbzFYUzN4TXlWdDFrV3htdDNES2xXNEprQlM5S0FLMjhpeUFsdUE9PSIsIm1hYyI6IjEyNDg3YjUyNzE0NWQ4OTc0N2MyNDRjYzgzNTE3YWExNzMxYmJhNDM1NjI0NGQ4YjAxZDY1NGRjZmRiZWZmNDUifQ%3D%3D; expires=Tue, 28-Jul-2015 01:02:57 GMT; Max-Age=7200; path=/; httponly
 Content-type: text/html
 
 <!DOCTYPE html>
@@ -451,41 +451,149 @@ kbd {
         <div class="frames-container cf ">
             <div class="frame active" id="frame-line-0">
       <div class="frame-method-info">
-        <span class="frame-index">13.</span>
-        <span class="frame-class">Symfony\Component\HttpKernel\Exception\NotFoundHttpException</span>
-        <span class="frame-function"></span>
+        <span class="frame-index">22.</span>
+        <span class="frame-class">Illuminate\View\Engines\CompilerEngine</span>
+        <span class="frame-function">handleViewException</span>
       </div>
 
     <span class="frame-file">
-      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;Routing/&shy;RouteCollection.php<!--
-   --><span class="frame-line">148</span>
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;Engines/&shy;PhpEngine.php<!--
+   --><span class="frame-line">41</span>
     </span>
   </div>
   <div class="frame " id="frame-line-1">
       <div class="frame-method-info">
-        <span class="frame-index">12.</span>
-        <span class="frame-class">Illuminate\Routing\RouteCollection</span>
-        <span class="frame-function">match</span>
+        <span class="frame-index">21.</span>
+        <span class="frame-class">ErrorException</span>
+        <span class="frame-function"></span>
       </div>
 
     <span class="frame-file">
-      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;Routing/&shy;Router.php<!--
-   --><span class="frame-line">1054</span>
+      &hellip;/&shy;app/&shy;storage/&shy;views/&shy;93ef6caafc08c5c55e45307d260e860f<!--
+   --><span class="frame-line">20</span>
     </span>
   </div>
   <div class="frame " id="frame-line-2">
       <div class="frame-method-info">
-        <span class="frame-index">11.</span>
-        <span class="frame-class">Illuminate\Routing\Router</span>
-        <span class="frame-function">findRoute</span>
+        <span class="frame-index">20.</span>
+        <span class="frame-class">Illuminate\Exception\Handler</span>
+        <span class="frame-function">handleError</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;app/&shy;storage/&shy;views/&shy;93ef6caafc08c5c55e45307d260e860f<!--
+   --><span class="frame-line">20</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-3">
+      <div class="frame-method-info">
+        <span class="frame-index">19.</span>
+        <span class="frame-class"></span>
+        <span class="frame-function">include</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;Engines/&shy;PhpEngine.php<!--
+   --><span class="frame-line">37</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-4">
+      <div class="frame-method-info">
+        <span class="frame-index">18.</span>
+        <span class="frame-class">Illuminate\View\Engines\PhpEngine</span>
+        <span class="frame-function">evaluatePath</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;Engines/&shy;CompilerEngine.php<!--
+   --><span class="frame-line">56</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-5">
+      <div class="frame-method-info">
+        <span class="frame-index">17.</span>
+        <span class="frame-class">Illuminate\View\Engines\CompilerEngine</span>
+        <span class="frame-function">get</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;View.php<!--
+   --><span class="frame-line">134</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-6">
+      <div class="frame-method-info">
+        <span class="frame-index">16.</span>
+        <span class="frame-class">Illuminate\View\View</span>
+        <span class="frame-function">getContents</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;View.php<!--
+   --><span class="frame-line">102</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-7">
+      <div class="frame-method-info">
+        <span class="frame-index">15.</span>
+        <span class="frame-class">Illuminate\View\View</span>
+        <span class="frame-function">renderContents</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;View/&shy;View.php<!--
+   --><span class="frame-line">76</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-8">
+      <div class="frame-method-info">
+        <span class="frame-index">14.</span>
+        <span class="frame-class">Illuminate\View\View</span>
+        <span class="frame-function">render</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;Http/&shy;Response.php<!--
+   --><span class="frame-line">43</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-9">
+      <div class="frame-method-info">
+        <span class="frame-index">13.</span>
+        <span class="frame-class">Illuminate\Http\Response</span>
+        <span class="frame-function">setContent</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;symfony/&shy;http-foundation/&shy;Symfony/&shy;Component/&shy;HttpFoundation/&shy;Response.php<!--
+   --><span class="frame-line">202</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-10">
+      <div class="frame-method-info">
+        <span class="frame-index">12.</span>
+        <span class="frame-class">Symfony\Component\HttpFoundation\Response</span>
+        <span class="frame-function">__construct</span>
       </div>
 
     <span class="frame-file">
       &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;Routing/&shy;Router.php<!--
-   --><span class="frame-line">1022</span>
+   --><span class="frame-line">1501</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-3">
+  <div class="frame " id="frame-line-11">
+      <div class="frame-method-info">
+        <span class="frame-index">11.</span>
+        <span class="frame-class">Illuminate\Routing\Router</span>
+        <span class="frame-function">prepareResponse</span>
+      </div>
+
+    <span class="frame-file">
+      &hellip;/&shy;vendor/&shy;laravel/&shy;framework/&shy;src/&shy;Illuminate/&shy;Routing/&shy;Router.php<!--
+   --><span class="frame-line">1036</span>
+    </span>
+  </div>
+  <div class="frame " id="frame-line-12">
       <div class="frame-method-info">
         <span class="frame-index">10.</span>
         <span class="frame-class">Illuminate\Routing\Router</span>
@@ -497,7 +605,7 @@ kbd {
    --><span class="frame-line">1001</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-4">
+  <div class="frame " id="frame-line-13">
       <div class="frame-method-info">
         <span class="frame-index">9.</span>
         <span class="frame-class">Illuminate\Routing\Router</span>
@@ -509,7 +617,7 @@ kbd {
    --><span class="frame-line">775</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-5">
+  <div class="frame " id="frame-line-14">
       <div class="frame-method-info">
         <span class="frame-index">8.</span>
         <span class="frame-class">Illuminate\Foundation\Application</span>
@@ -521,7 +629,7 @@ kbd {
    --><span class="frame-line">745</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-6">
+  <div class="frame " id="frame-line-15">
       <div class="frame-method-info">
         <span class="frame-index">7.</span>
         <span class="frame-class">Illuminate\Foundation\Application</span>
@@ -533,7 +641,7 @@ kbd {
    --><span class="frame-line">20</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-7">
+  <div class="frame " id="frame-line-16">
       <div class="frame-method-info">
         <span class="frame-index">6.</span>
         <span class="frame-class">Clockwork\Support\Laravel\ClockworkLegacyMiddleware</span>
@@ -545,7 +653,7 @@ kbd {
    --><span class="frame-line">72</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-8">
+  <div class="frame " id="frame-line-17">
       <div class="frame-method-info">
         <span class="frame-index">5.</span>
         <span class="frame-class">Illuminate\Session\Middleware</span>
@@ -557,7 +665,7 @@ kbd {
    --><span class="frame-line">47</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-9">
+  <div class="frame " id="frame-line-18">
       <div class="frame-method-info">
         <span class="frame-index">4.</span>
         <span class="frame-class">Illuminate\Cookie\Queue</span>
@@ -569,7 +677,7 @@ kbd {
    --><span class="frame-line">51</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-10">
+  <div class="frame " id="frame-line-19">
       <div class="frame-method-info">
         <span class="frame-index">3.</span>
         <span class="frame-class">Illuminate\Cookie\Guard</span>
@@ -581,7 +689,7 @@ kbd {
    --><span class="frame-line">23</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-11">
+  <div class="frame " id="frame-line-20">
       <div class="frame-method-info">
         <span class="frame-index">2.</span>
         <span class="frame-class">Stack\StackedHttpKernel</span>
@@ -593,7 +701,7 @@ kbd {
    --><span class="frame-line">641</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-12">
+  <div class="frame " id="frame-line-21">
       <div class="frame-method-info">
         <span class="frame-index">1.</span>
         <span class="frame-class">Illuminate\Foundation\Application</span>
@@ -605,7 +713,7 @@ kbd {
    --><span class="frame-line">49</span>
     </span>
   </div>
-  <div class="frame " id="frame-line-13">
+  <div class="frame " id="frame-line-22">
       <div class="frame-method-info">
         <span class="frame-index">0.</span>
         <span class="frame-class"></span>
@@ -622,8 +730,9 @@ kbd {
           <header>
             <div class="exception">
   <h3 class="exc-title">
-                  Symfony \                        Component \                        HttpKernel \                        Exception \                        <span class="exc-title-primary">NotFoundHttpException</span>
-                </h3>
+                  <span class="exc-title-primary">ErrorException</span>
+                    <span title="Exception Code">(E_ERROR)</span>
+      </h3>
 
   <div class="help">
     <button title="show help">HELP</button>
@@ -639,12 +748,21 @@ kbd {
   </div>
 
   <button id="copy-button" class="clipboard" data-clipboard-target="plain-exception" title="copy exception into clipboard"></button>
-  <span id="plain-exception">Symfony\Component\HttpKernel\Exception\NotFoundHttpException thrown with message &quot;&quot;
+  <span id="plain-exception">ErrorException thrown with message &quot;Invalid argument supplied for foreach() (View: /vagrant/apps/enclassifiedd/app/views/pages/homepage.blade.php)&quot;
 
 Stacktrace:
-#13 Symfony\Component\HttpKernel\Exception\NotFoundHttpException in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/RouteCollection.php:148
-#12 Illuminate\Routing\RouteCollection:match in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1054
-#11 Illuminate\Routing\Router:findRoute in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1022
+#22 Illuminate\View\Engines\CompilerEngine:handleViewException in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:41
+#21 ErrorException in /vagrant/apps/enclassifiedd/app/storage/views/93ef6caafc08c5c55e45307d260e860f:20
+#20 Illuminate\Exception\Handler:handleError in /vagrant/apps/enclassifiedd/app/storage/views/93ef6caafc08c5c55e45307d260e860f:20
+#19 include in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php:37
+#18 Illuminate\View\Engines\PhpEngine:evaluatePath in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php:56
+#17 Illuminate\View\Engines\CompilerEngine:get in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php:134
+#16 Illuminate\View\View:getContents in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php:102
+#15 Illuminate\View\View:renderContents in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php:76
+#14 Illuminate\View\View:render in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Http/Response.php:43
+#13 Illuminate\Http\Response:setContent in /vagrant/apps/enclassifiedd/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php:202
+#12 Symfony\Component\HttpFoundation\Response:__construct in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1501
+#11 Illuminate\Routing\Router:prepareResponse in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1036
 #10 Illuminate\Routing\Router:dispatchToRoute in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php:1001
 #9 Illuminate\Routing\Router:dispatch in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:775
 #8 Illuminate\Foundation\Application:dispatch in /vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Foundation/Application.php:745
@@ -659,27 +777,27 @@ Stacktrace:
 </span>
 
   <p class="exc-message">
-      </p>
+    Invalid argument supplied for foreach() (View: /vagrant/apps/enclassifiedd/app/views/pages/homepage.blade.php)  </p>
 </div>
           </header>
           <div class="frame-code-container ">
             <div class="frame-code active" id="frame-code-0">
         <div class="frame-file">
                                 Open:
-            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouteCollection.php&line=148" class="editor-link">
-              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/RouteCollection.php</strong>
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FEngines%2FPhpEngine.php&line=41" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php</strong>
             </a>
                   </div>
-                    <pre class="code-block prettyprint linenums:141">		$others = $this-&gt;checkForAlternateVerbs($request);
-
-		if (count($others) &gt; 0)
+                    <pre class="code-block prettyprint linenums:34">		// an exception is thrown. This prevents any partial views from leaking.
+		try
 		{
-			return $this-&gt;getOtherMethodsRoute($request, $others);
+			include $__path;
 		}
-
-		throw new NotFoundHttpException;
-	}
-</pre>
+		catch (\Exception $e)
+		{
+			$this-&gt;handleViewException($e, $obLevel);
+		}
+ </pre>
                   
                 <div class="frame-comments empty">
                   </div>
@@ -688,48 +806,249 @@ Stacktrace:
             <div class="frame-code " id="frame-code-1">
         <div class="frame-file">
                                 Open:
-            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouter.php&line=1054" class="editor-link">
-              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php</strong>
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fapp%2Fstorage%2Fviews%2F93ef6caafc08c5c55e45307d260e860f&line=20" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/app/storage/views/93ef6caafc08c5c55e45307d260e860f</strong>
             </a>
                   </div>
-                    <pre class="code-block prettyprint linenums:1047">	 * Find the route matching a given request.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return \Illuminate\Routing\Route
-	 */
-	protected function findRoute($request)
-	{
-		$this-&gt;current = $route = $this-&gt;routes-&gt;match($request);
+                    <pre class="code-block prettyprint linenums:13">                    &lt;div class=&quot;m-b-lg&quot;&gt;
+                        &lt;h2 class=&quot;ui dividing header m-b-lg&quot;&gt;
+                            Find classified ads worldwide
+                        &lt;/h2&gt;
+                    &lt;/div&gt;
  
-		return $this-&gt;substituteBindings($route);</pre>
+                    &lt;div class=&quot;ui doubling stackable grid&quot;&gt;
+                        &lt;?php foreach($categories as $category_list): ?&gt;
+                            &lt;div class=&quot;five wide column&quot;&gt;
+                                &lt;?php foreach($category_list as $category): ?&gt;</pre>
                   
-                <div class="frame-comments empty">
+                <div class="frame-comments ">
+                                  <div class="frame-comment" id="comment-1-0">
+              <span class="frame-comment-context">Exception message:</span>
+              Invalid argument supplied for foreach()            </div>
                   </div>
 
       </div>
             <div class="frame-code " id="frame-code-2">
         <div class="frame-file">
                                 Open:
-            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouter.php&line=1022" class="editor-link">
-              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php</strong>
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fapp%2Fstorage%2Fviews%2F93ef6caafc08c5c55e45307d260e860f&line=20" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/app/storage/views/93ef6caafc08c5c55e45307d260e860f</strong>
             </a>
                   </div>
-                    <pre class="code-block prettyprint linenums:1015">	 * Dispatch the request to a route and return the response.
-	 *
-	 * @param  \Illuminate\Http\Request  $request
-	 * @return mixed
-	 */
-	public function dispatchToRoute(Request $request)
-	{
-		$route = $this-&gt;findRoute($request);
+                    <pre class="code-block prettyprint linenums:13">                    &lt;div class=&quot;m-b-lg&quot;&gt;
+                        &lt;h2 class=&quot;ui dividing header m-b-lg&quot;&gt;
+                            Find classified ads worldwide
+                        &lt;/h2&gt;
+                    &lt;/div&gt;
  
-		$this-&gt;events-&gt;fire(&#039;router.matched&#039;, array($route, $request));</pre>
+                    &lt;div class=&quot;ui doubling stackable grid&quot;&gt;
+                        &lt;?php foreach($categories as $category_list): ?&gt;
+                            &lt;div class=&quot;five wide column&quot;&gt;
+                                &lt;?php foreach($category_list as $category): ?&gt;</pre>
                   
                 <div class="frame-comments empty">
                   </div>
 
       </div>
             <div class="frame-code " id="frame-code-3">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FEngines%2FPhpEngine.php&line=37" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/PhpEngine.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:30">		extract($__data);
+ 
+		// We&#039;ll evaluate the contents of the view inside a try/catch block so we can
+		// flush out any stray output that might get out before an error occurs or
+		// an exception is thrown. This prevents any partial views from leaking.
+		try
+		{
+			include $__path;
+		}
+		catch (\Exception $e)</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-4">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FEngines%2FCompilerEngine.php&line=56" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/Engines/CompilerEngine.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:49">		}
+ 
+		$compiled = $this-&gt;compiler-&gt;getCompiledPath($path);
+ 
+		// Once we have the path to the compiled file, we will evaluate the paths with
+		// typical PHP just like any other templates. We also keep a stack of views
+		// which have been rendered for right exception messages to be generated.
+		$results = $this-&gt;evaluatePath($compiled, $data);
+ 
+		array_pop($this-&gt;lastCompiled);</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-5">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FView.php&line=134" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:127">	/**
+	 * Get the evaluated contents of the view.
+	 *
+	 * @return string
+	 */
+	protected function getContents()
+	{
+		return $this-&gt;engine-&gt;get($this-&gt;path, $this-&gt;gatherData());
+	}
+ </pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-6">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FView.php&line=102" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:95">		// We will keep track of the amount of views being rendered so we can flush
+		// the section after the complete rendering operation is done. This will
+		// clear out the sections for any separate views that may be rendered.
+		$this-&gt;factory-&gt;incrementRender();
+ 
+		$this-&gt;factory-&gt;callComposer($this);
+ 
+		$contents = $this-&gt;getContents();
+ 
+		// Once we&#039;ve finished rendering the view, we&#039;ll decrement the render count</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-7">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FView%2FView.php&line=76" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/View/View.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:69">	 * Get the string contents of the view.
+	 *
+	 * @param  \Closure  $callback
+	 * @return string
+	 */
+	public function render(Closure $callback = null)
+	{
+		$contents = $this-&gt;renderContents();
+ 
+		$response = isset($callback) ? $callback($this, $contents) : null;</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-8">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FHttp%2FResponse.php&line=43" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Http/Response.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:36">		}
+ 
+		// If this content implements the &quot;RenderableInterface&quot;, then we will call the
+		// render method on the object so we will avoid any &quot;__toString&quot; exceptions
+		// that might be thrown and have their errors obscured by PHP&#039;s handling.
+		elseif ($content instanceof RenderableInterface)
+		{
+			$content = $content-&gt;render();
+		}
+ </pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-9">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Fsymfony%2Fhttp-foundation%2FSymfony%2FComponent%2FHttpFoundation%2FResponse.php&line=202" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/symfony/http-foundation/Symfony/Component/HttpFoundation/Response.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:195">     * @throws \InvalidArgumentException When the HTTP status code is not valid
+     *
+     * @api
+     */
+    public function __construct($content = &#039;&#039;, $status = 200, $headers = array())
+    {
+        $this-&gt;headers = new ResponseHeaderBag($headers);
+        $this-&gt;setContent($content);
+        $this-&gt;setStatusCode($status);
+        $this-&gt;setProtocolVersion(&#039;1.0&#039;);</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-10">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouter.php&line=1501" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:1494">	 * @param  mixed  $response
+	 * @return \Illuminate\Http\Response
+	 */
+	protected function prepareResponse($request, $response)
+	{
+		if ( ! $response instanceof SymfonyResponse)
+		{
+			$response = new Response($response);
+		}
+ </pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-11">
+        <div class="frame-file">
+                                Open:
+            <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouter.php&line=1036" class="editor-link">
+              <strong>/vagrant/apps/enclassifiedd/vendor/laravel/framework/src/Illuminate/Routing/Router.php</strong>
+            </a>
+                  </div>
+                    <pre class="code-block prettyprint linenums:1029">		$response = $this-&gt;callRouteBefore($route, $request);
+ 
+		if (is_null($response))
+		{
+			$response = $route-&gt;run($request);
+		}
+ 
+		$response = $this-&gt;prepareResponse($request, $response);
+ 
+		// After we have a prepared response from the route or filter we will call to</pre>
+                  
+                <div class="frame-comments empty">
+                  </div>
+
+      </div>
+            <div class="frame-code " id="frame-code-12">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FRouting%2FRouter.php&line=1001" class="editor-link">
@@ -751,7 +1070,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-4">
+            <div class="frame-code " id="frame-code-13">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FFoundation%2FApplication.php&line=775" class="editor-link">
@@ -773,7 +1092,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-5">
+            <div class="frame-code " id="frame-code-14">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FFoundation%2FApplication.php&line=745" class="editor-link">
@@ -795,7 +1114,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-6">
+            <div class="frame-code " id="frame-code-15">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Fitsgoingd%2Fclockwork%2FClockwork%2FSupport%2FLaravel%2FClockworkLegacyMiddleware.php&line=20" class="editor-link">
@@ -817,7 +1136,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-7">
+            <div class="frame-code " id="frame-code-16">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FSession%2FMiddleware.php&line=72" class="editor-link">
@@ -839,7 +1158,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-8">
+            <div class="frame-code " id="frame-code-17">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCookie%2FQueue.php&line=47" class="editor-link">
@@ -861,7 +1180,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-9">
+            <div class="frame-code " id="frame-code-18">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FCookie%2FGuard.php&line=51" class="editor-link">
@@ -883,7 +1202,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-10">
+            <div class="frame-code " id="frame-code-19">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Fstack%2Fbuilder%2Fsrc%2FStack%2FStackedHttpKernel.php&line=23" class="editor-link">
@@ -905,7 +1224,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-11">
+            <div class="frame-code " id="frame-code-20">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fvendor%2Flaravel%2Fframework%2Fsrc%2FIlluminate%2FFoundation%2FApplication.php&line=641" class="editor-link">
@@ -927,7 +1246,7 @@ Stacktrace:
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-12">
+            <div class="frame-code " id="frame-code-21">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fpublic%2Findex.php&line=49" class="editor-link">
@@ -948,7 +1267,7 @@ $app-&gt;run();
                   </div>
 
       </div>
-            <div class="frame-code " id="frame-code-13">
+            <div class="frame-code " id="frame-code-22">
         <div class="frame-file">
                                 Open:
             <a href="subl://open?url=file://%2Fvagrant%2Fapps%2Fenclassifiedd%2Fserver.php&line=19" class="editor-link">
@@ -995,7 +1314,7 @@ require_once $paths[&#039;public&#039;].&#039;/index.php&#039;;
               </thead>
                           <tr>
                 <td>laravel_session</td>
-                <td>eyJpdiI6InVtY1FRUWpmU3VUSWRQcmR1b1R5amc9PSIsInZhbHVlIjoiV0ZsODZ5VzZrN1B6YUV4WFlNUXVoV2hndEdDTmdKRkhQMnI5RUE0d2NZa0gxOGtFWEh3ODJQc2xib2ROWCtQNG5MMVR2NThuTkpjYUpwd1R5N3dvWWc9PSIsIm1hYyI6Ijc3M2NjNThkYjk5ODE0OTJkZTliMGNiNWRkMjRiMGVjYTI5OWUzYTgyMDY1ODIxNzkxNDA1NmU2YTBmMjg2MWIifQ==</td>
+                <td>eyJpdiI6Ik1qZnpRQjJZWVRDQUhXRmEwS1lYNUE9PSIsInZhbHVlIjoicjlwZno0SVExbDQ1SUJ1RzdhWEJcLzE1OGUwVDdcL01tSTg0YTRVKzJsUnZMSHpLNVJmNFY1Yk9NejdBWGJJYkM5ZEU0bWU4VmgxRkZVM1hvQXQxYTFnZz09IiwibWFjIjoiNjc2YTE1OTg5Nzg0Y2ZkYjExMGQwYmJkNjBmNDI5M2ZlMWU3MjViMjEyZjlkM2FkNDMyZDE2YzRlZmIzZGJkMiJ9</td>
               </tr>
                         </table>
               </div>
@@ -1022,7 +1341,7 @@ require_once $paths[&#039;public&#039;].&#039;/index.php&#039;;
               </tr>
                           <tr>
                 <td>REMOTE_PORT</td>
-                <td>48147</td>
+                <td>48874</td>
               </tr>
                           <tr>
                 <td>SERVER_SOFTWARE</td>
@@ -1042,7 +1361,7 @@ require_once $paths[&#039;public&#039;].&#039;/index.php&#039;;
               </tr>
                           <tr>
                 <td>REQUEST_URI</td>
-                <td>/testRollBackTransaction</td>
+                <td>/</td>
               </tr>
                           <tr>
                 <td>REQUEST_METHOD</td>
@@ -1057,12 +1376,8 @@ require_once $paths[&#039;public&#039;].&#039;/index.php&#039;;
                 <td>/vagrant/apps/enclassifiedd/public/index.php</td>
               </tr>
                           <tr>
-                <td>PATH_INFO</td>
-                <td>/testRollBackTransaction</td>
-              </tr>
-                          <tr>
                 <td>PHP_SELF</td>
-                <td>/index.php/testRollBackTransaction</td>
+                <td>/index.php</td>
               </tr>
                           <tr>
                 <td>HTTP_HOST</td>
@@ -1074,19 +1389,23 @@ require_once $paths[&#039;public&#039;].&#039;/index.php&#039;;
               </tr>
                           <tr>
                 <td>HTTP_REFERER</td>
-                <td>http://localhost:8000/testStartTransaction</td>
+                <td>http://localhost:8000/users</td>
               </tr>
                           <tr>
                 <td>HTTP_COOKIE</td>
-                <td>laravel_session=eyJpdiI6InVtY1FRUWpmU3VUSWRQcmR1b1R5amc9PSIsInZhbHVlIjoiV0ZsODZ5VzZrN1B6YUV4WFlNUXVoV2hndEdDTmdKRkhQMnI5RUE0d2NZa0gxOGtFWEh3ODJQc2xib2ROWCtQNG5MMVR2NThuTkpjYUpwd1R5N3dvWWc9PSIsIm1hYyI6Ijc3M2NjNThkYjk5ODE0OTJkZTliMGNiNWRkMjRiMGVjYTI5OWUzYTgyMDY1ODIxNzkxNDA1NmU2YTBmMjg2MWIifQ%3D%3D</td>
+                <td>laravel_session=eyJpdiI6Ik1qZnpRQjJZWVRDQUhXRmEwS1lYNUE9PSIsInZhbHVlIjoicjlwZno0SVExbDQ1SUJ1RzdhWEJcLzE1OGUwVDdcL01tSTg0YTRVKzJsUnZMSHpLNVJmNFY1Yk9NejdBWGJJYkM5ZEU0bWU4VmgxRkZVM1hvQXQxYTFnZz09IiwibWFjIjoiNjc2YTE1OTg5Nzg0Y2ZkYjExMGQwYmJkNjBmNDI5M2ZlMWU3MjViMjEyZjlkM2FkNDMyZDE2YzRlZmIzZGJkMiJ9</td>
+              </tr>
+                          <tr>
+                <td>HTTP_CONTENT_LENGTH</td>
+                <td>0</td>
               </tr>
                           <tr>
                 <td>REQUEST_TIME_FLOAT</td>
-                <td>1437784153.8366</td>
+                <td>1438038175.2956</td>
               </tr>
                           <tr>
                 <td>REQUEST_TIME</td>
-                <td>1437784153</td>
+                <td>1438038175</td>
               </tr>
                         </table>
               </div>

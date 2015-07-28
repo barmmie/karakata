@@ -54,3 +54,7 @@ body {
     display: none;
 }
 
+.ui.secondary.vertical.pointing.side.menu {
+    width: 100%;
+}
+

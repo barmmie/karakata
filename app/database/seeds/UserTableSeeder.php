@@ -9,7 +9,12 @@
 
 class UserTableSeeder extends Seeder {
     public function run(){
+        $faker = \Faker\Factory::create();
         $user = User::register('Test user', 'test@gmail.com', 'password', '08089098090');
         $user->confirmEmail();
+
+        foreach(range(1,10) as $Index) {
+            User::register($faker->name, $faker->email, 'password', $faker->phoneNumber);
+        }
     }
 }

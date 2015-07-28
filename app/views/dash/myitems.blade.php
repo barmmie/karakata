@@ -4,58 +4,15 @@
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
-                <div class="ui segments">
-                    <div class="ui segment">
-                        <h4 class="header">My items</h4>
+                @include('partials._user_sidebar')
 
-                        <div class="ui secondary pointing vertical menu">
-                            <a class="active teal item">
-                                My items
-                                <div class="ui teal pointing left label">{{Auth::user()->items()->count()}}</div>
-                            </a>
-                            <a class="item ">
-
-                                Liked items
-                                <div class="ui left label">{{Auth::user()->likedItems()->count()}}</div>
-                            </a>
-
-                            <a class="item ">
-
-                                Messages
-
-                            </a>
-
-
-                        </div>
-
-
-
-
-                    </div>
-
-                    <div class="ui segment">
-                        <h4 class="header">Enclassified</h4>
-                        <div class="ui secondary pointing vertical menu">
-                            <a class="teal item">
-                                <i class="user icon"></i>
-                                Update profile
-                            </a>
-                            <a class="item">
-                                <i class="sign out icon"></i>
-                                Logout
-
-                            </a>
-
-
-                        </div>
-                    </div>
-                </div>
 
 
             </div>
 
             <div class="twelve wide column">
-                <div class="ui segment">
+                <div class="ui segments">
+                <div class="ui  segment">
                     <h3 class="ui dividing header">
                         <i class="folder icon"></i>
                         My items
@@ -68,71 +25,80 @@
 
                     @else
                         <div class="ui divided items">
-                            <div class="item">
-                                <div class="image">
-                                    <img src="/images/wireframe/image.png">
-                                </div>
-                                <div class="content">
-                                    <a class="header">12 Years a Slave</a>
-                                    <div class="meta">
-                                        <span class="cinema">Union Square 14</span>
+
+                            @foreach($items as $item)
+                                <div class="item">
+                                    <div class="image">
+                                        <img src="{{asset($item->mainThumbnail())}}">
                                     </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
-                                    <div class="extra">
-                                        <div class="ui label">IMAX</div>
-                                        <div class="ui label"><i class="globe icon"></i> Additional Languages</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="image">
-                                    <img src="/images/wireframe/image.png">
-                                </div>
-                                <div class="content">
-                                    <a class="header">My Neighbor Totoro</a>
-                                    <div class="meta">
-                                        <span class="cinema">IFC Cinema</span>
-                                    </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
-                                    <div class="extra">
-                                        <div class="ui right floated primary button">
-                                            Buy tickets
-                                            <i class="right chevron icon"></i>
+                                    <div class="content">
+                                        <a class="header">{{$item->title}}</a>
+                                        <div class="meta">
+                                            <span class="date">
+                                                <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
+                                            </span>
+
+                                            <span class="category">
+                                                <i class="minus icon"></i>{{$item->category->title}}<i class="minus icon"></i>
+                                            </span>
+                                             <span class="location">
+                                                <i class="teal marker icon"></i>{{$item->location->name}}
+                                            </span>
+
                                         </div>
-                                        <div class="ui label">Limited</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="item">
-                                <div class="image">
-                                    <img src="/images/wireframe/image.png">
-                                </div>
-                                <div class="content">
-                                    <a class="header">Watchmen</a>
-                                    <div class="meta">
-                                        <span class="cinema">IFC</span>
-                                    </div>
-                                    <div class="description">
-                                        <p></p>
-                                    </div>
-                                    <div class="extra">
-                                        <div class="ui right floated primary button">
-                                            Buy tickets
-                                            <i class="right chevron icon"></i>
+                                        <div class="description">
+                                            <p></p>
+                                        </div>
+                                        <div class="extra">
+                                            <a class="ui right floated button" href="{{route('items.edit', $item->id)}}">
+                                                <i class="pencil icon"></i>
+
+                                                Edit
+                                            </a>
+                                            <div class="ui brown tag label">£ {{$item->amount}}</div>
+                                            @if($item->isApproved())
+                                            <div class="ui green label">APPROVED</div>
+                                            @endif
+
+                                            @if($item->isPending())
+                                            <div class="ui yellow label">PENDING APPROVAL</div>
+                                            @endif
+
+                                            @if($item->isRejected())
+                                            <div class="ui red label">REJECTED</div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endforeach
                         </div>
 
                     @endif
 
 
 
+                </div>
+                    @if(count($items) > 10)
+                <div class="ui secondary segment">
+                    <div class="ui pagination menu">
+                        <a class="active item">
+                            1
+                        </a>
+                        <div class="disabled item">
+                            ...
+                        </div>
+                        <a class="item">
+                            10
+                        </a>
+                        <a class="item">
+                            11
+                        </a>
+                        <a class="item">
+                            12
+                        </a>
+                    </div>
+                </div>
+                        @endif
                 </div>
             </div>
         </div>

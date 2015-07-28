@@ -21,7 +21,7 @@
 
 
 
-                    {{Form::open(['route'=>'items.store', 'class'=>'ui form attached p-lg', 'novalidate' => 'novalidate'])}}
+                    {{Form::open(['route'=>'items.store', 'files' => true, 'class'=>'ui form attached p-lg', 'novalidate' => 'novalidate'])}}
                     <div class="ui error message"></div>
 
                     <div class="two fields">
@@ -85,8 +85,8 @@
                         <label for="">Photos</label>
                         <div id="myDropZone" class="dropzone">
                             <div class="fallback">
-                                <input name="file" type="file" multiple />
-                                <input name="fallback" type="hidden" value="1" />
+                                <input name="files" type="file" multiple />
+                                <input name="multipart_upload" type="hidden" value="1" />
                                 <p>Choose images you want to attach to the item</p>
                             </div>
                         </div>

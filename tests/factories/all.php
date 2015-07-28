@@ -18,8 +18,8 @@ $factory('Location', [
 
 
 $factory('Item', [
-    'title' => $faker->words(),
-    'description' => $faker->sentence(),
+    'title' => $faker->sentence,
+    'description' => $faker->text,
     'location_id' => 2,
     'category_id' => 4,
     'amount' => $faker->numberBetween(1000, 2000),

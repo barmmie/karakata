@@ -1,0 +1,38 @@
+<?php
+
+// Composer: "fzaninotto/faker": "v1.3.0"
+use Faker\Factory as Faker;
+
+class ItemSeederTableSeeder extends Seeder {
+
+	public function run()
+	{
+		$faker = Faker::create();
+
+        $categories = Category::all();
+
+        foreach($categories as $category) {
+            foreach(range(1, rand(5,15)) as $index)
+            {
+                $title = $faker->sentence;
+                DB::table('items')->insert(['title' => $title ,
+                    'description' => $faker->text,
+                    'category_id' => $category->id,
+                    'location_id' => rand(1,50),
+                    'type' => $faker->randomElement(['personal','business']),
+                    'amount' => $faker->numberBetween(1200,4000),
+                    'negotiable' => $faker->boolean(),
+                    'email' => $faker->email,
+                    'phone' => $faker->phoneNumber,
+                    'seller_name' => $faker->phoneNumber,
+                    'user_id' => rand(1,10),
+                    'slug' => \Str::slug($title, '-'),
+                    'status' => rand(1,4)
+                    ]);
+            }
+        }
+
+
+	}
+
+}
