@@ -12,19 +12,108 @@
 
             <div class="twelve wide column">
                 <div class="ui segments">
-
-                    <div class="ui  segment">
-                        <h3 class="ui dividing header">
+                    <div class="ui segment">
                             <div class="ui breadcrumb">
                                 <a class="section" href="{{route('pages.homepage')}}">Home</a>
                                 <i class="right angle icon divider"></i>
                                 <a class="section {{$sub_category? '': 'active'}}" href="{{route('categories.show', $parent_category->slug)}}">{{$parent_category->title}}</a>
                                 @if($sub_category)
-                                <i class="right angle icon divider"></i>
-                                <div class="active section">{{$sub_category->title}}</div>
+                                    <i class="right angle icon divider"></i>
+                                    <div class="active section">{{$sub_category->title}}</div>
                                 @endif
                             </div>
-                        </h3>
+                    </div>
+                    <div class="ui segment">
+                        <div class="ui advanced_filter accordion">
+                            <div class="title">
+                                <i class="dropdown icon"></i>
+                                Show advanced filter options
+                            </div>
+                            <div class="content">
+                                <div class="ui floating dropdown labeled icon button">
+                                    <i class="filter icon"></i>
+                                    <span class="text">Filter Posts</span>
+                                    <div class="menu">
+                                        <div class="ui icon search input">
+                                            <i class="search icon"></i>
+                                            <input type="text" placeholder="Search tags...">
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="header">
+                                            <i class="tags icon"></i>
+                                            Tag Label
+                                        </div>
+                                        <div class="scrolling menu">
+                                            <div class="item">
+                                                <div class="ui red empty circular label"></div>
+                                                Important
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui blue empty circular label"></div>
+                                                Announcement
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui black empty circular label"></div>
+                                                Cannot Fix
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui purple empty circular label"></div>
+                                                News
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui orange empty circular label"></div>
+                                                Enhancement
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui empty circular label"></div>
+                                                Change Declined
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui yellow empty circular label"></div>
+                                                Off Topic
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui pink empty circular label"></div>
+                                                Interesting
+                                            </div>
+                                            <div class="item">
+                                                <div class="ui green empty circular label"></div>
+                                                Discussion
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="ui floating labeled icon dropdown button">
+                                    <i class="sort icon"></i>
+                                    <span class="text">Filter</span>
+                                    <div class="menu">
+                                        <div class="header">
+                                            <i class="tags icon"></i>
+                                            Filter by tag
+                                        </div>
+                                        <div class="divider"></div>
+                                        <div class="item">
+                                            <i class="attention icon"></i>
+                                            Important
+                                        </div>
+                                        <div class="item">
+                                            <i class="comment icon"></i>
+                                            Announcement
+                                        </div>
+                                        <div class="item">
+                                            <i class="conversation icon"></i>
+                                            Discussion
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="ui  segment">
+
 
                         @if(count($items) < 1)
                             <div class="ui message">
@@ -86,25 +175,11 @@
                     </div>
                     @if(count($items) > 10)
 
-                        {{$items->links()}}
+
+
                         <div class="ui secondary segment">
-                            <div class="ui pagination menu">
-                                <a class="active item">
-                                    1
-                                </a>
-                                <div class="disabled item">
-                                    ...
-                                </div>
-                                <a class="item">
-                                    10
-                                </a>
-                                <a class="item">
-                                    11
-                                </a>
-                                <a class="item">
-                                    12
-                                </a>
-                            </div>
+                            {{$items->links()}}
+
                         </div>
                     @endif
                 </div>
@@ -113,4 +188,12 @@
     </div>
 
 
+@endsection
+
+@section('scripts')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.ui.advanced_filter.accordion').accordion();
+        });
+    </script>
 @endsection

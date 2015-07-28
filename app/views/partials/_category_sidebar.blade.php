@@ -6,33 +6,32 @@
     <div class="ui segment">
 
 
-        @if($sub_category)
 
-        <h4 class="header"><a href="{{route('categories.show', [$parent_category->slug])}}">{{$parent_category->title}}</a></h4>
 
-            <div class="ui link list">
+        {{--<h4 class="header"><a href="{{route('categories.show', [$parent_category->slug])}}">{{$parent_category->title}}</a></h4>--}}
 
-                @foreach($parent_category->children as $child )
+            {{--<div class="ui link list">--}}
 
-                    <a class="item {{$sub_category->id == $child->id ? 'active' : ''}}" href="{{route('categories.show', [$parent_category->slug, $child->slug])}}">
-                        <i class="right caret icon"></i>
-                       {{$child->title}}
-                    </a>
+                {{--@foreach($parent_category->children as $child )--}}
 
-                @endforeach
+                    {{--<a class="item {{$sub_category->id == $child->id ? 'active' : ''}}" href="{{route('categories.show', [$parent_category->slug, $child->slug])}}">--}}
+                        {{--<i class="right caret icon"></i>--}}
+                       {{--{{$child->title}}--}}
+                    {{--</a>--}}
 
-            </div>
+                {{--@endforeach--}}
 
-        @else
+            {{--</div>--}}
+
+        {{--@else--}}
             <div class="ui link list">
                 <div class="item active" href="">
                     {{$parent_category->title}}
                     <div class="link list">
                         @foreach($parent_category->children as $child )
 
-                            <a class="item" href="{{route('categories.show', [$parent_category->slug, $child->slug])}}">
+                            <a class="item " href="{{route('categories.show', [$parent_category->slug, $child->slug])}}">
                                 <i class="right caret icon"></i>
-
                                 {{$child->title}}
                             </a>
 
@@ -53,7 +52,6 @@
 
 
             </div>
-        @endif
 
 
     </div>

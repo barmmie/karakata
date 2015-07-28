@@ -1,8 +1,6 @@
 --Todo
 
-Category sidebar
 List items with
-    pagination
     sort
     filter
 Search

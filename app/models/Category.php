@@ -40,7 +40,8 @@ class Category extends \Kalnoy\Nestedset\Node {
 
     public function active_items()
     {
-        return $this->hasMany('Item')->where('status', Item::APPROVED_STATUS);
+        return $this->items();
+//            ->where('status', Item::APPROVED_STATUS);
     }
 
     public function nestedKeys() {
