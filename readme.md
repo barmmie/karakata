@@ -1,8 +1,5 @@
 --Todo
 
-List items with
-    sort
-    filter
 Search
 Messaging
 Single ad view

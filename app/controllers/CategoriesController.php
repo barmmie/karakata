@@ -11,6 +11,8 @@ class CategoriesController extends BaseController {
 
     public function show($category, $sub_category = null) {
 
+        $locations = Location::fetchAll();
+
         $parent_category = Category::where('slug', $category)->firstOrFail();
 
         if($sub_category) {
@@ -32,9 +34,13 @@ class CategoriesController extends BaseController {
             $items = $items->orderBy('amount', Input::get('price_sort', 'asc'));
         }
 
-        $items = $items->with('location', 'pictures', 'category')->paginate(15);
+        $items = $items->with('location', 'pictures', 'category');
 
-        return View::make('categories.show', compact('items', 'parent_category', 'sub_category'));
+        $item_count = $items->count();
+
+        $items = $items->paginate(10);
+
+        return View::make('categories.show', compact('items', 'parent_category', 'sub_category', 'locations', 'item_count'));
         
 
     }
