@@ -19,9 +19,8 @@ class CategoriesController extends \BaseController
 
     public function getIndex()
     {
-        $categories = Category::fetchTree();
 
-        return View::make("admin.categories.list")->with("categoriesData", $categories);
+        return View::make("admin.categories.list");
     }
 
 

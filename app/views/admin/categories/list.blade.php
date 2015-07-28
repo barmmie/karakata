@@ -58,7 +58,7 @@
 
 
     <script type="text/javascript">
-        var data = {{ $categoriesData }};
+        var data = {{ $categories }};
         var serverUrl = "{{ Request::url() }}";
 
         $(function () {

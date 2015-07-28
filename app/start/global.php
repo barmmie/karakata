@@ -86,5 +86,6 @@ App::down(function()
 
 require app_path().'/filters.php';
 require app_path().'/listeners.php';
+require app_path().'/composers.php';
 
 App::bind('Laracasts\Commander\CommandTranslator', 'Enclassified\Services\MyCommandTranslator');

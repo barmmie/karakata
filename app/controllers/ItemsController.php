@@ -10,19 +10,15 @@ class ItemsController extends BaseController {
 
     public function create()
     {
-        $categories = Category::fetchTree();
-        $locations = Location::fetchAll();
-        return View::make('items.create', compact('categories','locations'));
+        return View::make('items.create');
     }
 
     public function edit($id) {
 
         $item = Item::find($id);
 
-        $categories = Category::fetchTree();
-        $locations = Location::fetchAll();
 
-        return View::make('items.edit', compact('categories','locations', 'item'));
+        return View::make('items.edit', compact('item'));
     }
 
     public function store() {

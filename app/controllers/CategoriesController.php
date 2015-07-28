@@ -11,7 +11,6 @@ class CategoriesController extends BaseController {
 
     public function show($category, $sub_category = null) {
 
-        $locations = Location::fetchAll();
 
         $parent_category = Category::where('slug', $category)->firstOrFail();
 
