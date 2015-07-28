@@ -1,6 +1,5 @@
 --Todo
 
-Search
 Single ad view
 Messaging
 

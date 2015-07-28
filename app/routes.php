@@ -29,6 +29,20 @@ Route::group(['before'=> 'guest'], function(){
 
 Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 'uses' => 'CategoriesController@show']);
 
+
+
+
+Route::get('items/search', ['as' => 'items.search', 'uses' => 'ItemsController@search']);
+
+
+
+Route::get('terms-condition', ['as' => 'pages.terms', 'uses' => 'SessionsController@create']);
+
+
+Route::get('register/confirm/{token}', ['as' => 'users.confirm', 'uses' => 'UsersController@confirm']);
+
+Route::resource('users', 'UsersController');
+
 Route::group(['before'=> 'auth'], function(){
 
 
@@ -52,24 +66,12 @@ Route::group(['before'=> 'auth'], function(){
 });
 
 
-
-
-Route::get('terms-condition', ['as' => 'pages.terms', 'uses' => 'SessionsController@create']);
-
-
-Route::get('register/confirm/{token}', ['as' => 'users.confirm', 'uses' => 'UsersController@confirm']);
-
-Route::resource('users', 'UsersController');
-
-
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
     Route::resource('locations', 'LocationsController');
     Route::controller("categories", 'CategoriesController');
 });
 
-Route::get('test', function(){
 
-});
 
 
 

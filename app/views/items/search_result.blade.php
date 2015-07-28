@@ -6,7 +6,6 @@
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
-                @include('partials._category_sidebar')
 
 
 
@@ -15,17 +14,14 @@
             <div class="twelve wide column">
                 <div class="ui segments">
                     <div class="ui segment">
-                            <div class="ui breadcrumb">
-                                <a class="section" href="{{route('pages.homepage')}}">Home</a>
-                                <i class="right angle icon divider"></i>
-                                <a class="section {{$sub_category? '': 'active'}}" href="{{route('categories.show', $parent_category->slug)}}">{{$parent_category->title}}</a>
-                                @if($sub_category)
-                                    <i class="right angle icon divider"></i>
-                                    <div class="active section">{{$sub_category->title}}</div>
-                                @endif
-                                <i class="right arrow icon divider"></i>
-                                <div class="active section">{{$item_count}} result(s)</div>
-                            </div>
+                        <div class="ui breadcrumb">
+                            <a class="section" href="{{route('pages.homepage')}}">Home</a>
+                            <i class="right angle icon divider"></i>
+                            <div class="section"> Search : '{{Input::get('query')}}'</div>
+
+                            <i class="right arrow icon divider"></i>
+                            <div class="active section">{{$item_count}} result(s)</div>
+                        </div>
                     </div>
                     <div class="ui segment">
                         <div class="ui advanced_filter styled fluid accordion">
@@ -36,6 +32,7 @@
                             <div class="content {{Input::has('filtered') ?'active':''}}">
                                 <form action="" method="GET" class="ui form">
                                     {{Form::hidden('filtered', true)}}
+                                    {{Form::hidden('query', Input::get('query'))}}
                                     <div class="ui floating dropdown labeled icon button m-b-xs">
                                         {{Form::hidden('location_id', Input::get('location_id'))}}
                                         <i class="filter icon"></i>
@@ -52,10 +49,10 @@
                                             </div>
                                             <div class="scrolling menu">
                                                 @foreach($locations as $location)
-                                                <div class="item" data-value="{{$location->id}}">
-                                                    <i class="marker icon"></i>
-                                                    {{$location->name}}
-                                                </div>
+                                                    <div class="item" data-value="{{$location->id}}">
+                                                        <i class="marker icon"></i>
+                                                        {{$location->name}}
+                                                    </div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -108,7 +105,7 @@
                                 There are no currently no items in this category.
                                 @if(Input::has('filtered'))
                                     <p>Consider modifying your filters perhaps?</p>
-                                    @endif
+                                @endif
                             </div>
                         @else
                             <div class="ui divided items">
@@ -147,9 +144,9 @@
                                             </div>
                                             <div class="extra">
                                                 {{--<a class="ui right floated button" href="{{route('items.edit', $item->id)}}">--}}
-                                                    {{--<i class="pencil icon"></i>--}}
+                                                {{--<i class="pencil icon"></i>--}}
 
-                                                    {{--Edit--}}
+                                                {{--Edit--}}
                                                 {{--</a>--}}
                                                 {{--<div class="ui brown tag label"></div>--}}
 
@@ -164,15 +161,11 @@
 
 
                     </div>
-                    @if(count($items) > 9)
-
-
 
                         <div class="ui segment">
-                            {{$items->links()}}
+                            {{$items->appends(Input::all())->links()}}
 
                         </div>
-                    @endif
                 </div>
             </div>
         </div>

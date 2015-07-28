@@ -22,16 +22,9 @@ class CategoriesController extends BaseController {
             $ids = $parent_category->nestedKeys();
         }
 
-
         $items = Item::whereIn('category_id', $ids);
 
-        if(Input::has('location_id')) {
-            $items = $items->where('location_id', Input::get('location_id'));
-        }
-
-        if(Input::has('price_sort')) {
-            $items = $items->orderBy('amount', Input::get('price_sort', 'asc'));
-        }
+        $items->filtered(Input::all());
 
         $items = $items->with('location', 'pictures', 'category');
 

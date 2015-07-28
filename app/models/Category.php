@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: barmmie
  * Date: 7/22/15
  * Time: 11:57 AM
  */
-
-class Category extends \Kalnoy\Nestedset\Node {
+class Category extends \Kalnoy\Nestedset\Node
+{
     protected $fillable = array('title');
 
 
@@ -14,20 +15,20 @@ class Category extends \Kalnoy\Nestedset\Node {
     {
         parent::boot();
 
-        static::saved(function($category){
-            static::where('id',$category->id)
-            ->update(['slug' => $category->id.'-'.Str::slug($category->title, '-')]);
+        static::saved(function ($category) {
+            static::where('id', $category->id)
+                ->update(['slug' => $category->id . '-' . Str::slug($category->title, '-')]);
         });
 
-        static::deleted(function(){
+        static::deleted(function () {
             Cache::forget('categories_cache');
         });
 
-        static::updated(function(){
+        static::updated(function () {
             Cache::forget('categories_cache');
         });
 
-        static::created(function(){
+        static::created(function () {
             Cache::forget('categories_cache');
         });
 
@@ -44,7 +45,8 @@ class Category extends \Kalnoy\Nestedset\Node {
 //            ->where('status', Item::APPROVED_STATUS);
     }
 
-    public function nestedKeys() {
+    public function nestedKeys()
+    {
         $categories = $this->descendants()->lists('id');
 
         $categories[] = $this->getKey();
@@ -53,12 +55,13 @@ class Category extends \Kalnoy\Nestedset\Node {
 
     }
 
-    public static function fetchTree($fetchItemsCount = false) {
+    public static function fetchTree($fetchItemsCount = false)
+    {
 //        return Cache::rememberForever('categories_cache', function () {
 
         $cats = static::withoutRoot();
 
-        if($fetchItemsCount) {
+        if ($fetchItemsCount) {
             $cats = $cats->with('active_items');
         }
 
@@ -66,25 +69,28 @@ class Category extends \Kalnoy\Nestedset\Node {
 //        });
     }
 
-    public static function renameNode($id, $originalname, $name) {
+    public static function renameNode($id, $originalname, $name)
+    {
         return static::where("title", $originalname)
             ->where("id", $id)
             ->update(["title" => $name]);
     }
 
-    public static function addNode($title){
+    public static function addNode($title)
+    {
         $newCategory = new static(['title' => $title]);
 
         $rootCategory = static::root();
 
-        if ( $newCategory->appendTo($rootCategory)->save() ) {
+        if ($newCategory->appendTo($rootCategory)->save()) {
 
             return ["id" => $newCategory->id, "parent_id" => $rootCategory->parent_id];
         }
-        
+
     }
 
-    public static function removeNode($id, $title){
+    public static function removeNode($id, $title)
+    {
         try {
             $category = static::where("title", $title)
                 ->where("id", $id)
@@ -99,7 +105,8 @@ class Category extends \Kalnoy\Nestedset\Node {
 
     }
 
-    public static function moveNode($source, $dest, $direction, $parent_id){
+    public static function moveNode($source, $dest, $direction, $parent_id)
+    {
         // get source/target categories from DB
         $sourceCategory = static::find($source);
         $targetCategory = static::find($dest);
@@ -123,16 +130,17 @@ class Category extends \Kalnoy\Nestedset\Node {
         return $status;
     }
 
-    public static function createTestNodes(){
+    public static function createTestNodes()
+    {
         $cat1 = Category::addNode('Test');
         $cat2 = Category::addNode('Test 2');
         $cat3 = Category::addNode('test 3');
         $cat4 = Category::addNode('test 4');
 
 
-        Category::moveNode($cat2['id'], $cat1['id'], 'inside', $cat1['id'] );
-        Category::moveNode($cat3['id'], $cat1['id'], 'inside', $cat1['id'] );
-        Category::moveNode($cat4['id'], $cat2['id'], 'inside', $cat2['id'] );
+        Category::moveNode($cat2['id'], $cat1['id'], 'inside', $cat1['id']);
+        Category::moveNode($cat3['id'], $cat1['id'], 'inside', $cat1['id']);
+        Category::moveNode($cat4['id'], $cat2['id'], 'inside', $cat2['id']);
 
     }
 }

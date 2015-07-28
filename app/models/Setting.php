@@ -2,7 +2,8 @@
 
 use Cache;
 
-class Setting extends \Eloquent {
+class Setting extends \Eloquent
+{
 
     /**
      * The database table used by the model.
@@ -42,7 +43,8 @@ class Setting extends \Eloquent {
         });
     }
 
-    public static function createOrUpdate($data, $keys) {
+    public static function createOrUpdate($data, $keys)
+    {
         $record = self::where($keys)->first();
         if (is_null($record)) {
             return self::create($data);

@@ -38,4 +38,18 @@ class ItemsController extends BaseController {
     }
 
 
+    public function search() {
+
+        $items = Item::search(Input::get('query'))->filtered(Input::all());
+
+        $items = $items->with('location', 'pictures', 'category');
+
+        $item_count = $items->count();
+
+        $items = $items->paginate(10);
+
+        return View::make('items.search_result', compact('items', 'item_count'));
+    }
+
+
 }
