@@ -1,7 +1,11 @@
 <?php
 
+
+
 class Item extends \Eloquent
 {
+
+use \Laracasts\Commander\Events\EventGenerator;
 
     protected $softDeletes = true;
     const PENDING_STATUS = 1, REJECTED_STATUS = 2, APPROVED_STATUS = 3, SOLD_STATUS = 4;
@@ -46,9 +50,14 @@ class Item extends \Eloquent
         return $this->hasMany('Picture');
     }
 
-    public function likers()
+    public function favoriters()
     {
         return $this->belongsToMany('User');
+    }
+
+    public function owner() {
+
+        return $this->belongsTo('User', 'user_id');
     }
 
     public function mainThumbnail()
@@ -106,9 +115,9 @@ class Item extends \Eloquent
 
     public static function post($category_id, $type, $title, $description, $amount, $negotiable, $location_id, $email, $phone, $sellerName)
     {
-        return static::create(
+        $instance =  static::create(
             ['title' => $title,
-                'description' => $description,
+                'description' => e($description),
                 'category_id' => $category_id,
                 'location_id' => $location_id,
                 'type' => $type,
@@ -118,6 +127,20 @@ class Item extends \Eloquent
                 'phone' => $phone,
                 'seller_name' => $sellerName]
         );
+
+        $instance->raise(new \Enclassified\Item\Event\ItemWasPosted($instance));
+
+        return $instance;
+    }
+
+    public function approve() {
+        $this->status = self::APPROVED_STATUS;
+        $this->save();
+    }
+
+    public function reject() {
+        $this->status = self::REJECTED_STATUS;
+        $this->save();
     }
 
     public function attachPictures($picture_ids)

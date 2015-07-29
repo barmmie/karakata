@@ -39,7 +39,7 @@ class ItemsController extends BaseController {
 
     public function show($slug) {
         $item = Item::approved()->whereSlug($slug)
-                                ->with('category.parent', 'location', 'pictures')
+                                ->with('category', 'location', 'pictures', 'owner', 'favoriters')
                                 ->firstOrFail();
 
         return View::make('items.show', compact('item'));
@@ -58,6 +58,21 @@ class ItemsController extends BaseController {
         $items = $items->paginate(10);
 
         return View::make('items.search_result', compact('items', 'item_count'));
+    }
+
+    public function favorite($id) {
+
+        Auth::user()->favorites()->attach($id);
+
+        flashSuccess('Added to favorites');
+        return Redirect::back();
+    }
+
+    public function unfavorite($id) {
+        Auth::user()->favorites()->detach($id);
+
+        flashinfo('Removed from favorites');
+        return Redirect::back();
     }
 
 

@@ -5,10 +5,11 @@ Messaging
 
 Featured
 Post ad image fallback
+Update item
 
 
 More ads by this user
-Save ad
+Favorite ad
 Share ad
 Report abuse
 

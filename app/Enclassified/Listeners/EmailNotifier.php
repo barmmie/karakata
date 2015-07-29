@@ -23,4 +23,10 @@ class EmailNotifier extends EventListener {
     public function whenUserHasRegistered($userHasRegistered){
         $this->appMailer->sendConfirmationMail($userHasRegistered->user);
     }
+
+    public function whenItemWasPosted($itemWasPosted) {
+        $this->appMailer->sendMail($itemWasPosted->item->email, 'emails.new_item', ['item' => $itemWasPosted->item]);
+    }
+
+
 }

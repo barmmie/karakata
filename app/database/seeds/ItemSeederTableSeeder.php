@@ -26,10 +26,11 @@ class ItemSeederTableSeeder extends Seeder {
                     'negotiable' => $faker->boolean(),
                     'email' => $faker->email,
                     'phone' => $faker->phoneNumber,
-                    'seller_name' => $faker->phoneNumber,
+                    'seller_name' => $faker->name,
                     'user_id' => rand(1,10),
                     'slug' => \Str::slug($title, '-'),
-                    'status' => rand(1,4)
+                    'status' => rand(1,4),
+                    'created_at' => $faker->date('Y-m-d h:i:s')
                     ]);
             }
         }

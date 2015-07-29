@@ -11,7 +11,7 @@
             </a>
             <a class="item ">
                 Liked items
-                <div class="ui left label">{{Auth::user()->likedItems()->count()}}</div>
+                <div class="ui left label">{{Auth::user()->favorites()->count()}}</div>
             </a>
 
             <a class="item ">

@@ -46,6 +46,28 @@ class ItemsTest extends TestCase {
 
     }
 
+    /**
+     *
+     * @test
+     */
+
+    public function it_favorites_an_item() {
+        $user = TestDummy::create('User');
+        $item = TestDummy::create('Item');
+        $item->approve();
+
+        $this->verifiedLogin($user)
+            ->visit("items/{$item->slug}")
+            ->see('Add to favorites')
+            ->click('Add to favorites')
+            ->onPage("items/{$item->slug}")
+            ->see('Remove from favorites')
+            ->click('Remove form favorites')
+            ->onPage("items/{$item->slug}")
+            ->see('Add to favorites')
+        ;
+    }
+
 
 
 }

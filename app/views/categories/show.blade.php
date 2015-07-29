@@ -87,7 +87,9 @@
 
                                                     {{--Edit--}}
                                                 {{--</a>--}}
-                                                {{--<div class="ui brown tag label"></div>--}}
+                                                @if($item->negotiable)
+                                                    <div class="ui brown tag label">Negotiable</div>
+                                                @endif
 
                                             </div>
                                         </div>

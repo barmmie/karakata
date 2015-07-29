@@ -1,8 +1,11 @@
 <?php namespace Enclassified\Item\Command;
 
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class PostItemCommandHandler implements CommandHandler {
+
+    use DispatchableTrait;
 
     /**
      * Handle the command.
@@ -32,6 +35,7 @@ class PostItemCommandHandler implements CommandHandler {
             $result['message'] = $e->getMessage();
         }
 
+        $this->dispatchEventsFor($item);
 
         return $result;
     }

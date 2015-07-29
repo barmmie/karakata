@@ -24,6 +24,16 @@ class AppMailer {
         $this->mailer = $mailer;
     }
 
+    public function sendMail($to, $view, $data) {
+        $this->to = $to;
+
+        $this->view = $view;
+
+        $this->data = $data;
+
+        $this->deliver();
+    }
+
     public function sendConfirmationMail(\User $user) {
         $this->to = $user->email;
 
