@@ -37,10 +37,19 @@ class ItemsController extends BaseController {
         }
     }
 
+    public function show($slug) {
+        $item = Item::approved()->whereSlug($slug)
+                                ->with('category.parent', 'location', 'pictures')
+                                ->firstOrFail();
+
+        return View::make('items.show', compact('item'));
+
+    }
+
 
     public function search() {
 
-        $items = Item::search(Input::get('query'))->filtered(Input::all());
+        $items = Item::approved()->search(Input::get('query'))->filtered(Input::all());
 
         $items = $items->with('location', 'pictures', 'category');
 

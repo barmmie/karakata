@@ -34,8 +34,6 @@ Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 
 
 Route::get('items/search', ['as' => 'items.search', 'uses' => 'ItemsController@search']);
 
-
-
 Route::get('terms-condition', ['as' => 'pages.terms', 'uses' => 'SessionsController@create']);
 
 
@@ -64,6 +62,9 @@ Route::group(['before'=> 'auth'], function(){
     Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
 
 });
+
+Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsController@show']);
+
 
 
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){

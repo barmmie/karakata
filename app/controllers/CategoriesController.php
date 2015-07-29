@@ -22,7 +22,7 @@ class CategoriesController extends BaseController {
             $ids = $parent_category->nestedKeys();
         }
 
-        $items = Item::whereIn('category_id', $ids);
+        $items = Item::approved()->whereIn('category_id', $ids);
 
         $items->filtered(Input::all());
 

@@ -7,6 +7,8 @@ class ItemSeederTableSeeder extends Seeder {
 
 	public function run()
 	{
+
+        DB::table('items')->truncate();
 		$faker = Faker::create();
 
         $categories = Category::all();
@@ -16,7 +18,7 @@ class ItemSeederTableSeeder extends Seeder {
             {
                 $title = $faker->sentence;
                 DB::table('items')->insert(['title' => $title ,
-                    'description' => $faker->text,
+                    'description' => $faker->paragraphs(3, true),
                     'category_id' => $category->id,
                     'location_id' => rand(1,50),
                     'type' => $faker->randomElement(['personal','business']),

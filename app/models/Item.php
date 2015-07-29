@@ -13,14 +13,22 @@ class Item extends \Eloquent
         parent::boot();
 
         static::creating(function ($item) {
-            $item->status = static::PENDING_STATUS;
-            $item->user_id = Auth::id();
+
+            $item->slug = Str::slug($item->title, '-');
+
+            $item->status = self::PENDING_STATUS;
+            $item->user_id = Auth::user()->id;
+
         });
 
-        static::saved(function ($item) {
+        static::created(function($item){
+
             $item->slug = $item->id . '-' . Str::slug($item->title, '-');
             $item->save();
+
         });
+
+
     }
 
     public function location()
@@ -36,6 +44,11 @@ class Item extends \Eloquent
     public function pictures()
     {
         return $this->hasMany('Picture');
+    }
+
+    public function likers()
+    {
+        return $this->belongsToMany('User');
     }
 
     public function mainThumbnail()
@@ -70,6 +83,10 @@ class Item extends \Eloquent
                     ->orWhere('description', 'LIKE', "%{$searchKey}%");
     }
 
+    public function scopeApproved($query){
+        return $query->where('status', self::APPROVED_STATUS);
+    }
+
 
     public function scopeFiltered($query, $input)
     {
@@ -85,10 +102,7 @@ class Item extends \Eloquent
     }
 
 
-    public function likers()
-    {
-        return $this->belongsToMany('User');
-    }
+
 
     public static function post($category_id, $type, $title, $description, $amount, $negotiable, $location_id, $email, $phone, $sellerName)
     {

@@ -41,7 +41,7 @@ class Category extends \Kalnoy\Nestedset\Node
 
     public function active_items()
     {
-        return $this->items();
+        return $this->items()->approved();
 //            ->where('status', Item::APPROVED_STATUS);
     }
 
