@@ -5,13 +5,13 @@
         <h4 class="header">My items</h4>
 
         <div class="ui secondary pointing vertical side menu">
-            <a class="active teal item">
+            <a class=" item {{Route::is('dash.myitems')?' teal active':''}}" href="{{route('dash.myitems')}}">
                 My items
-                <div class="ui teal pointing left label">{{Auth::user()->items()->count()}}</div>
+                <div class="ui {{Route::is('dash.myitems')?' teal pointing left ':''}}  label">{{Auth::user()->items()->count()}}</div>
             </a>
-            <a class="item ">
+            <a class="item {{Route::is('dash.myfavorites')?' teal active':''}}" href="{{route('dash.myfavorites')}}">
                 Liked items
-                <div class="ui left label">{{Auth::user()->favorites()->count()}}</div>
+                <div class="ui {{Route::is('dash.myfavorites')?' teal pointing left':''}}  label">{{Auth::user()->favorites()->count()}}</div>
             </a>
 
             <a class="item ">

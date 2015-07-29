@@ -49,7 +49,17 @@ class UsersController extends \BaseController {
 	 */
 	public function show($id)
 	{
-		//
+		$user = User::findOrFail($id);
+
+        $items = $user->items();
+
+        $items = $items->with('location', 'pictures', 'category');
+
+        $item_count = $items->count();
+
+        $items = $items->paginate(10);
+
+        return View::make('users.items', compact('user', 'items'));
 	}
 
 	/**
@@ -128,5 +138,6 @@ class UsersController extends \BaseController {
 
         return Redirect::route('pages.homepage');
     }
+
 
 }

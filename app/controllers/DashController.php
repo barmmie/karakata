@@ -16,4 +16,17 @@ class DashController extends \BaseController {
 
         return View::make('dash.myitems', compact('items'));
     }
+
+    public function myfavorites() {
+
+        $items = Auth::user()->favorites();
+
+        $items = $items->with('location', 'pictures', 'category');
+
+        $item_count = $items->count();
+
+        $items = $items->paginate(10);
+
+        return View::make('dash.myfavorites', compact('items', 'item_count'));
+    }
 }

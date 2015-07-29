@@ -78,7 +78,7 @@
                                         <div class="item">
                                             <i class="user icon"></i>
                                             <div class="content">
-                                                <a class="header">More ads by this user</a>
+                                                <a class="header" href="{{route('users.items', $item->owner->id)}}">More ads from this user</a>
                                             </div>
                                         </div>
 
@@ -151,7 +151,7 @@
                     </div>
                     <div class="ui segment">
                         <h3 class="ui header">
-                            <img src="http://gravatar.com/{{md5($item->seller_email)}}" class="ui circular image">
+                            <img src="http://gravatar.com/avatar/{{md5($item->seller_email)}}?d=mm" class="ui circular image">
                             {{$item->seller_name}}
                             <div class="sub header">Location: {{$item->location->name}}</div>
                             <div class="sub header">Joined: {{$item->owner->created_at->format('M j, Y')}}</div>

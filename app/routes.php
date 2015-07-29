@@ -39,6 +39,8 @@ Route::get('terms-condition', ['as' => 'pages.terms', 'uses' => 'SessionsControl
 
 Route::get('register/confirm/{token}', ['as' => 'users.confirm', 'uses' => 'UsersController@confirm']);
 
+Route::get('users/{id}/items', ['as' => 'users.items', 'uses' => 'UsersController@show']);
+
 Route::resource('users', 'UsersController');
 
 Route::group(['before'=> 'auth'], function(){
@@ -53,8 +55,9 @@ Route::group(['before'=> 'auth'], function(){
     Route::get('items/{id}/unfavorite', ['as' => 'items.unfavorite', 'uses' => 'ItemsController@unfavorite']);
     Route::post('items/{id}', ['as' => 'items.update', 'uses' => 'ItemsController@update']);
 
-    Route::get('items/favorites', ['as' => 'dash.favorites', 'uses' => 'ItemsController@create']);
     Route::get('myitems', ['as' => 'dash.myitems', 'uses' => 'DashController@myitems']);
+    Route::get('myitems/favorites', ['as' => 'dash.myfavorites', 'uses' => 'DashController@myfavorites']);
+
 
     Route::get('profile', ['as' => 'users.profile', 'uses' => 'UsersController@edit']);
     Route::post('profile', ['as' => 'users.update_profile', 'uses' => 'UsersController@update']);

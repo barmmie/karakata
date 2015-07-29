@@ -24,7 +24,7 @@ class ItemSeederTableSeeder extends Seeder {
                     'type' => $faker->randomElement(['personal','business']),
                     'amount' => $faker->numberBetween(1200,4000),
                     'negotiable' => $faker->boolean(),
-                    'email' => $faker->email,
+                    'email' => $faker->freeEmail,
                     'phone' => $faker->phoneNumber,
                     'seller_name' => $faker->name,
                     'user_id' => rand(1,10),
