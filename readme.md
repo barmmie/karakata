@@ -21,3 +21,5 @@ Admin
 
 Handle errors
     Http/modelNotFound
+
+reduce admin_style
