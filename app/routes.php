@@ -15,6 +15,7 @@ Route::group(['before'=> 'guest'], function(){
 Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 'uses' => 'CategoriesController@show']);
 
 Route::get('items/search', ['as' => 'items.search', 'uses' => 'ItemsController@search']);
+Route::get('items/search', ['as' => 'pages.terms', 'uses' => 'ItemsController@search']);
 
 Route::get('register/confirm/{token}', ['as' => 'users.confirm', 'uses' => 'UsersController@confirm']);
 

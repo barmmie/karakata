@@ -12,6 +12,21 @@ class PostMessageCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
+        try {
+            $message = \Message::post($command->name, $command->email, $command->content, $command->item_id);
+            $result['success'] = true;
+            $result['message'] = 'Message posted successfully';
+
+            $this->dispatchEventsFor($message);
+
+
+        } catch(\Exception $e) {
+            $result['success'] = false;
+            $result['message'] = $e->getMessage();
+        }
+
+        return $result;
+
 
     }
 

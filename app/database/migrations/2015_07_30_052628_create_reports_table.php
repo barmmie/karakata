@@ -15,6 +15,9 @@ class CreateReportsTable extends Migration {
 		Schema::create('reports', function(Blueprint $table)
 		{
 			$table->increments('id');
+            $table->integer('item_id');
+            $table->text('message');
+            $table->boolean('read_status');
 			$table->timestamps();
 		});
 	}

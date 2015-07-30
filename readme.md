@@ -9,7 +9,6 @@ Update item
 confirm event based emails
 
 
-
 Admin
     approve items
     view items
@@ -23,6 +22,6 @@ Handle errors
 reduce admin_style
 
 Setting
+search location_id not filtering
 
 
-The grass ain’t always greener on the other side…The Grass is Greener Where You Water It.

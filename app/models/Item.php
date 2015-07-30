@@ -87,8 +87,22 @@ use \Laracasts\Commander\Events\EventGenerator;
 
 
     public function scopeSearch($query, $searchKey) {
-        return $query->where('title', 'LIKE', "%{$searchKey}%")
-                    ->orWhere('description', 'LIKE', "%{$searchKey}%");
+        $searchKeys = explode(' ', $searchKey);
+        
+        foreach($searchKeys as $index => $key) {
+            if($index == 0) {
+                $query =  $query->where('title', 'LIKE', "%{$key}%");
+
+            }else {
+                $query =  $query->orWhere('title', 'LIKE', "%{$key}%");
+
+            }
+
+            $query = $query->orWhere('description', 'LIKE', "%{$searchKey}%");
+
+        }
+
+        return $query;
     }
 
     public function scopeApproved($query){

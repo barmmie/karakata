@@ -227,8 +227,9 @@
         </div>
         <div class="content">
             <form class="ui sendmessage form">
-                <h4 class="ui dividing header">Give your feedback</h4>
                 <div class="ui error message"></div>
+
+                <h4 class="ui dividing header">Give your feedback</h4>
 
                 <div class="field">
                     <div class="two fields">
@@ -311,8 +312,8 @@
                             identifier: 'name',
                             rules: [
                                 {
-                                    type: 'empty',
-                                    prompt: 'Please enter your name'
+                                    type: 'length[3]',
+                                    prompt: 'Please enter a valid/longer name'
                                 }
                             ]
                         },
@@ -331,6 +332,10 @@
                                 {
                                     type: 'empty',
                                     prompt: 'Please enter your message content'
+                                },
+                                {
+                                    type: 'length[10]',
+                                    prompt: 'Enter at least 10 characters in your message content'
                                 }
                             ]
                         }
@@ -345,21 +350,29 @@
                 .modal({
                     onApprove: function () {
                         $sendform.form('validate form')
-                       if($sendform.form('is valid')) {
+
+                        if($sendform.form('is valid')) {
                            var form_values = $sendform.form('get values')
                            $sendform.addClass('loading')
                            $.ajax({
                                method: 'POST',
-                               url: {{route('messages.create')}},
+                               data: form_values,
+                               url: "{{route('messages.store')}}",
                                success: function(response) {
                                    $sendform.removeClass('loading')
 
+                                   alertify.success(response.message);
                                    return true;
 
                                },
-                               error: function(response) {
-
+                               error: function(xhr) {
+                                   $sendform.removeClass('loading')
+                                    alertify.error(xhr.responseJSON.message)
+                                   $sendform.form('add errors', [xhr.responseJSON.message]);
+                                   return false;
                                }
+                           }).done(function(){
+
                            })
                        }
 

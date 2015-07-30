@@ -55,6 +55,10 @@
 
 <script type="text/javascript">
     $(document).ready(function(){
+        $.ajaxSetup({
+            cache: false,
+            headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+        });
         $('.right.menu.open').on("click",function(e){
             e.preventDefault();
             $('.ui.vertical.navbar.menu').toggle();

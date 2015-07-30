@@ -36,4 +36,13 @@ class PostMessageCommand {
         $this->item_id = $item_id;
     }
 
+    public function rules()
+    {
+        return [
+            'name' => 'required',
+            'email' => 'required',
+            'content' => 'required'
+        ];
+    }
+
 }
