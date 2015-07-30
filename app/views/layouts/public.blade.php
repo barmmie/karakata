@@ -8,8 +8,6 @@
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
 
-
-    <!-- Site Properities -->
     <title>EnClassified</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">

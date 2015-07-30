@@ -2,7 +2,7 @@
 
 @section('styles')
     @if(count($item->pictures) > 0)
-    <link rel="stylesheet" href="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.css')}}"/>
+        <link rel="stylesheet" href="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.css')}}"/>
     @endif
 @endsection
 
@@ -46,31 +46,31 @@
                         </div>
 
 
-                            @if(count($item->pictures) > 0)
+                        @if(count($item->pictures) > 0)
 
 
-                                <ul class="bxslider">
+                            <ul class="bxslider">
 
-                                    @foreach($item->pictures as $picture)
-                                        <li class="ui fluid bordered rounded image">
-                                            <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
-                                            <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
-                                        </li>
-                                    @endforeach
-                                </ul>
+                                @foreach($item->pictures as $picture)
+                                    <li class="ui fluid bordered rounded image">
+                                        <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
+                                        <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                    </li>
+                                @endforeach
+                            </ul>
 
-                                <div id="bx-pager">
-                                    @foreach($item->pictures as $index => $picture)
-                                        <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}" /></a>
-                                    @endforeach
+                            <div id="bx-pager">
+                                @foreach($item->pictures as $index => $picture)
+                                    <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
+                                @endforeach
 
-                                </div>
-                            @else
+                            </div>
+                        @else
                             <div class="ui fluid bordered rounded image">
                                 <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
                                 <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
-                            @endif
-                        </div>
+                                @endif
+                            </div>
 
 
 
@@ -78,87 +78,99 @@
 
 
 
-                        <h4 class="ui horizontal divider header">
-                            <i class="tag icon"></i>
-                            Description
-                        </h4>
+                            <h4 class="ui horizontal divider header">
+                                <i class="tag icon"></i>
+                                Description
+                            </h4>
 
-                        <div class="ui content">
-                            <div class="ui stackable equal height stackable grid">
-                                <div class="ten wide column">
-                                    {{$item->description}}
-                                </div>
-
-                                <div class="six wide column">
-                                    <div class="ui message m-b-lg">
-                                        <ul class="ui list">
-                                            <div class="item">
-                                                <strong>Price:</strong> £ {{$item->amount}}
-                                            </div>
-                                            <div class="item">
-                                                <strong>Negotiable:</strong> <span><i class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
-                                            </div>
-                                            <div class="item">
-                                                <strong>Category:</strong> {{$item->category->title}}
-                                            </div>
-                                            <div class="item">
-                                                <strong>Location:</strong> <span><i class="marker icon"></i>{{$item->location->name}}</span>
-                                            </div>
-
-                                            <div class="item">
-                                                <strong>Posted by a/an:</strong> <span>{{($item->type == 'personal')? '<i class="user icon"></i>Individual' :  '<i class="suitcase icon"></i>Business'}}</span>
-                                            </div>
-                                        </ul>
+                            <div class="ui content">
+                                <div class="ui stackable equal height stackable grid">
+                                    <div class="ten wide column">
+                                        {{$item->description}}
                                     </div>
-                                    <div class="ui middle aligned divided list">
-                                        <div class="item">
-                                            <i class="user icon"></i>
-                                            <div class="content">
-                                                <a class="header" href="{{route('users.items', $item->owner->id)}}">More ads from this user</a>
-                                            </div>
-                                        </div>
 
-                                        @if(Auth::check() && $item->favoriters->contains(Auth::user()->id))
-                                            <div class="item">
-                                                <i class="red heart icon"></i>
-                                                <div class="content">
-                                                    <a class="header nag-login" href="{{route('items.unfavorite', $item->id)}}" data-content="Login required">
-                                                        Remove from favorites
-                                                    </a>
+                                    <div class="six wide column">
+                                        <div class="ui message m-b-lg">
+                                            <ul class="ui list">
+                                                <div class="item">
+                                                    <strong>Price:</strong> £ {{$item->amount}}
                                                 </div>
-                                            </div>
-                                        @else
+                                                <div class="item">
+                                                    <strong>Negotiable:</strong> <span><i
+                                                                class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
+                                                </div>
+                                                <div class="item">
+                                                    <strong>Category:</strong> {{$item->category->title}}
+                                                </div>
+                                                <div class="item">
+                                                    <strong>Location:</strong> <span><i
+                                                                class="marker icon"></i>{{$item->location->name}}</span>
+                                                </div>
+
+                                                <div class="item">
+                                                    <strong>Posted by a/an:</strong>
+                                                    <span>{{($item->type == 'personal')? '<i class="user icon"></i>Individual' :  '<i class="suitcase icon"></i>Business'}}</span>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                        <div class="ui middle aligned divided list">
                                             <div class="item">
-                                                <i class="heart icon"></i>
+                                                <i class="user icon"></i>
+
                                                 <div class="content">
-                                                    <a class="header nag-login" href="{{route('items.favorite', $item->id)}}" data-content="Login required">
-                                                        Add to favorites
-                                                    </a>
+                                                    <a class="header" href="{{route('users.items', $item->owner->id)}}">More
+                                                        ads from this user</a>
                                                 </div>
                                             </div>
 
-                                        @endif
+                                            @if(Auth::check() && $item->favoriters->contains(Auth::user()->id))
+                                                <div class="item">
+                                                    <i class="red heart icon"></i>
 
-                                        <div class="item">
-                                            <i class="warning sign icon"></i>
-                                            <div class="content">
-                                                <a class="header">Report abuse</a>
+                                                    <div class="content">
+                                                        <a class="header nag-login"
+                                                           href="{{route('items.unfavorite', $item->id)}}"
+                                                           data-content="Login required">
+                                                            Remove from favorites
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="item">
+                                                    <i class="heart icon"></i>
+
+                                                    <div class="content">
+                                                        <a class="header nag-login"
+                                                           href="{{route('items.favorite', $item->id)}}"
+                                                           data-content="Login required">
+                                                            Add to favorites
+                                                        </a>
+                                                    </div>
+                                                </div>
+
+                                            @endif
+
+                                            <div class="item">
+                                                <i class="warning sign icon"></i>
+
+                                                <div class="content">
+                                                    <a class="header report link">Report abuse</a>
+                                                </div>
                                             </div>
+
                                         </div>
+                                        <a class="header share-button">Share ad</a>
 
                                     </div>
-                                    <a class="header share-button">Share ad</a>
-
                                 </div>
                             </div>
-                        </div>
-
-                        </div>
-
 
                     </div>
 
+
                 </div>
+
+            </div>
             <div class="four wide column">
 
                 <div class="ui segments">
@@ -172,7 +184,7 @@
                             <div class="sub header">Location: {{$item->location->name}}</div>
                             <div class="sub header">Joined: {{$item->owner->created_at->format('M j, Y')}}</div>
                         </h3>
-                        <button class="fluid ui button toggle m-b-xs">
+                        <button class="fluid ui message button toggle m-b-xs">
                             <i class="mail icon"></i>
                             Send a message
                         </button>
@@ -189,17 +201,82 @@
                     </div>
                     <div class="ui segment">
                         <div class="ui list">
-                            <div class="item"> <i class="check circle icon"></i> Meet seller at a public place </div>
-                            <div class="item"> <i class="check circle icon"></i> Check the item before you buy</div>
-                            <div class="item"> <i class="check circle icon"></i> Pay only after collecting the item</div>
+                            <div class="item"><i class="check circle icon"></i> Meet seller at a public place</div>
+                            <div class="item"><i class="check circle icon"></i> Check the item before you buy</div>
+                            <div class="item"><i class="check circle icon"></i> Pay only after collecting the item</div>
                         </div>
                     </div>
                 </div>
 
             </div>
+        </div>
+
+
+    </div>
+    </div>
+
+
+
+    {{--Modals--}}
+
+    <div class="ui sendmessage modal">
+        <i class="grey close icon"></i>
+
+        <div class="header">
+            Sending a message to {{$item->seller_name}}
+        </div>
+        <div class="content">
+            <form class="ui sendmessage form">
+                <h4 class="ui dividing header">Give your feedback</h4>
+                <div class="ui error message"></div>
+
+                <div class="field">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Your name</label>
+                            {{Form::text('name', Auth::check()?Auth::user()->full_name:'')}}
+
+                        </div>
+                        <div class="field">
+                            <label>Your email</label>
+                            {{Form::text('email', Auth::check()?Auth::user()->email:'')}}
+
+                        </div>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Message</label>
+
+                    {{Form::textarea('content')}}
+                </div>
+                {{Form::hidden('item_id', $item->id)}}
+            </form>
+        </div>
+        <div class="actions">
+            <div class="ui button cancel">Cancel</div>
+            <div class="ui green button approve">Send</div>
+        </div>
+    </div>
+
+    <div class="ui report modal">
+        <i class="grey close icon"></i>
+
+        <div class="header">
+            Report this item
+        </div>
+        <div class="content">
+            <div class="ui form">
+                <h4 class="ui dividing header">Tell us what is wrong with the advert</h4>
+
+                <div class="field">
+                    <textarea></textarea>
+                </div>
+
             </div>
-
-
+        </div>
+        <div class="actions">
+            <div class="ui button cancel ">Cancel</div>
+            <div class="ui green button approve">Send</div>
         </div>
     </div>
 
@@ -208,7 +285,7 @@
 
 @section('scripts')
     @if(count($item->pictures) > 0)
-    <script src="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.js')}}"></script>
+        <script src="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.js')}}"></script>
     @endif
     <script src="{{asset('assets/share-button/build/share.min.js')}}"></script>
 
@@ -220,13 +297,81 @@
         @if(count($item->pictures) > 0)
 
         $('.bxslider').bxSlider({
-            adaptiveHeight:true,
+            adaptiveHeight: true,
             pagerCustom: '#bx-pager'
         });
 
         @endif
 
-        $('.ui.form').form();
+        var $sendform = $('.ui.sendmessage.form')
+
+        $sendform.form({
+                    fields: {
+                        name: {
+                            identifier: 'name',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Please enter your name'
+                                }
+                            ]
+                        },
+                        email: {
+                            identifier: 'email',
+                            rules: [
+                                {
+                                    type: 'email',
+                                    prompt: 'Please enter a valid email'
+                                }
+                            ]
+                        },
+                        content: {
+                            identifier: 'content',
+                            rules: [
+                                {
+                                    type: 'empty',
+                                    prompt: 'Please enter your message content'
+                                }
+                            ]
+                        }
+                    }
+                })
+        ;
+
+        $('.sendmessage.modal')
+                .modal('attach events', '.message.button', 'show')
+                .modal('setting', 'transition', 'fade up')
+                .modal('setting', 'autofocus', 'true')
+                .modal({
+                    onApprove: function () {
+                        $sendform.form('validate form')
+                       if($sendform.form('is valid')) {
+                           var form_values = $sendform.form('get values')
+                           $sendform.addClass('loading')
+                           $.ajax({
+                               method: 'POST',
+                               url: {{route('messages.create')}},
+                               success: function(response) {
+                                   $sendform.removeClass('loading')
+
+                                   return true;
+
+                               },
+                               error: function(response) {
+
+                               }
+                           })
+                       }
+
+                        return false;
+                    }
+                })
+        ;
+
+        $('.report.modal')
+                .modal('attach events', '.report.link', 'show')
+                .modal('setting', 'transition', 'fade up')
+        ;
 
         new Share(".share-button", {
             networks: {

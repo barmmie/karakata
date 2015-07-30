@@ -58,11 +58,11 @@ class Setting extends \Eloquent
      *
      * @var string
      */
-    public static function fetch($key)
+    public static function fetch($key, $default='')
     {
         $settings = self::getSettingsArray();
 
-        return $settings[$key];
+        return array_key_exists($key, $settings) ? $settings[$key] : $default;
     }
 
     /**
