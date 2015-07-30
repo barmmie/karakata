@@ -1,8 +1,12 @@
 @extends('layouts.public')
 
-@section('content')
-    @include('partials._search_cta')
+@section('styles')
+    @if(count($item->pictures) > 0)
+    <link rel="stylesheet" href="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.css')}}"/>
+    @endif
+@endsection
 
+@section('content')
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">
 
@@ -40,6 +44,38 @@
                                 <i class="teal marker icon"></i> {{$item->location->name}}
                             </div>
                         </div>
+
+
+                            @if(count($item->pictures) > 0)
+
+
+                                <ul class="bxslider">
+
+                                    @foreach($item->pictures as $picture)
+                                        <li class="ui fluid bordered rounded image">
+                                            <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
+                                            <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <div id="bx-pager">
+                                    @foreach($item->pictures as $index => $picture)
+                                        <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}" /></a>
+                                    @endforeach
+
+                                </div>
+                            @else
+                            <div class="ui fluid bordered rounded image">
+                                <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
+                                <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
+                            @endif
+                        </div>
+
+
+
+
+
 
 
                         <h4 class="ui horizontal divider header">
@@ -103,36 +139,16 @@
 
                                         @endif
 
-
-
-                                        <div class="item">
-                                            <i class="external share icon"></i>
-                                            <div class="content">
-                                                <a class="header">Share ad</a>
-                                                <div class="p-xs">
-                                                    <button class="ui circular facebook icon button">
-                                                        <i class="facebook icon"></i>
-                                                    </button>
-                                                    <button class="ui circular twitter icon button">
-                                                        <i class="twitter icon"></i>
-                                                    </button>
-                                                    <button class="ui circular linkedin icon button">
-                                                        <i class="linkedin icon"></i>
-                                                    </button>
-                                                    <button class="ui circular google plus icon button">
-                                                        <i class="google plus icon"></i>
-                                                    </button>
-                                                </div>
-
-                                            </div>
-                                        </div>
                                         <div class="item">
                                             <i class="warning sign icon"></i>
                                             <div class="content">
                                                 <a class="header">Report abuse</a>
                                             </div>
                                         </div>
+
                                     </div>
+                                    <a class="header share-button">Share ad</a>
+
                                 </div>
                             </div>
                         </div>
@@ -151,7 +167,7 @@
                     </div>
                     <div class="ui segment">
                         <h3 class="ui header">
-                            <img src="http://gravatar.com/avatar/{{md5($item->seller_email)}}?d=mm" class="ui circular image">
+                            <img src="{{gravatar($item->seller_email)}}" class="ui circular image">
                             {{$item->seller_name}}
                             <div class="sub header">Location: {{$item->location->name}}</div>
                             <div class="sub header">Joined: {{$item->owner->created_at->format('M j, Y')}}</div>
@@ -191,12 +207,34 @@
 @endsection
 
 @section('scripts')
+    @if(count($item->pictures) > 0)
+    <script src="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.js')}}"></script>
+    @endif
+    <script src="{{asset('assets/share-button/build/share.min.js')}}"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 
+        @if(count($item->pictures) > 0)
+
+        $('.bxslider').bxSlider({
+            adaptiveHeight:true,
+            pagerCustom: '#bx-pager'
+        });
+
+        @endif
+
         $('.ui.form').form();
+
+        new Share(".share-button", {
+            networks: {
+                facebook: {
+                    app_id: "abc123"
+                }
+            }
+        });
 
 
     </script>

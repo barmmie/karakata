@@ -74,6 +74,15 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
     Route::controller("categories", 'CategoriesController');
 });
 
+Route::get('test', function(){
+    $img = Image::make(file_get_contents('http://www.anti.to/wp-content/plugins/ecommerce-product-catalog/img/no-default-thumbnail.png'));
+
+    dd(image_type_to_extension(exif_imagetype('http://www.anti.to/wp-content/plugins/ecommerce-product-catalog/img/no-default-thumbnail.png')));
+    var_dump($img);
+
+    return $img->response('jpg', 70);
+});
+
 
 
 

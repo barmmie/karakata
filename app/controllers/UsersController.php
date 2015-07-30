@@ -51,7 +51,7 @@ class UsersController extends \BaseController {
 	{
 		$user = User::findOrFail($id);
 
-        $items = $user->items();
+        $items = $user->items()->approved();
 
         $items = $items->with('location', 'pictures', 'category');
 
@@ -59,7 +59,7 @@ class UsersController extends \BaseController {
 
         $items = $items->paginate(10);
 
-        return View::make('users.items', compact('user', 'items'));
+        return View::make('users.show', compact('user', 'items', 'item_count'));
 	}
 
 	/**

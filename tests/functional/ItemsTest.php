@@ -24,9 +24,10 @@ class ItemsTest extends TestCase {
             $this->verifiedLogin()
                 ->visit('items/new')
                 ->submitForm('Create my ad', $item)
-                ->seeInDatabase('items', $item)
-                ->visit('/myitems')
-                ->see($item['title'])
+                ->seeInDatabase('items', $item);
+
+                $this->visit('/myitems')
+                    ->see($item['title'])
             ;
     }
 
@@ -52,8 +53,11 @@ class ItemsTest extends TestCase {
      */
 
     public function it_favorites_an_item() {
+        $user1 = TestDummy::create('User');
         $user = TestDummy::create('User');
         $item = TestDummy::create('Item');
+        $item->user_id = $user1->id;
+        $item->save();
         $item->approve();
 
         $this->verifiedLogin($user)

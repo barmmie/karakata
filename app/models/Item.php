@@ -19,9 +19,8 @@ use \Laracasts\Commander\Events\EventGenerator;
         static::creating(function ($item) {
 
             $item->slug = Str::slug($item->title, '-');
-
             $item->status = self::PENDING_STATUS;
-            $item->user_id = Auth::user()->id;
+//            $item->user_id = Auth::id()?;
 
         });
 
@@ -63,7 +62,7 @@ use \Laracasts\Commander\Events\EventGenerator;
     public function mainThumbnail()
     {
 
-        return count($this->pictures) ? $this->pictures->first()->thumbnail_src : 'images/item/tp/Image00002.jpg';
+        return count($this->pictures) ? $this->pictures->first()->thumbnail_src : 'images/no-image-default-thumb.jpg';
     }
 
     public function isApproved()
@@ -125,7 +124,9 @@ use \Laracasts\Commander\Events\EventGenerator;
                 'negotiable' => $negotiable,
                 'email' => $email,
                 'phone' => $phone,
-                'seller_name' => $sellerName]
+                'seller_name' => $sellerName,
+                'user_id' => Auth::user()->id
+            ]
         );
 
         $instance->raise(new \Enclassified\Item\Event\ItemWasPosted($instance));

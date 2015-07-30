@@ -18,8 +18,8 @@ class Picture extends \Eloquent
         $image_src = $uploadPath . $file_name;
         $thumbnail_src = "{$uploadPath}thumb_{$file_name}";
 
-        $imagedata->fit(400, 400)->save(public_path() . $image_src);
-        $imagedata->fit(200, 200)->save(public_path() . $thumbnail_src);
+        $imagedata->fit(800, 400)->save(public_path() . $image_src);
+        $imagedata->fit(320, 240)->save(public_path() . $thumbnail_src);
 
         $picture = static::create([
             'image_src' => $image_src,

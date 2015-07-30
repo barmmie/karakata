@@ -37,3 +37,8 @@ function divide_array($array, $segmentCount) {
 
     return $outputArray;
 }
+
+function gravatar($email) {
+    return "http://gravatar.com/avatar/".md5($email)."?d=mm";
+
+}

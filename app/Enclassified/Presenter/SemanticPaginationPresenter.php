@@ -24,7 +24,7 @@ class SemanticPaginationPresenter extends Presenter {
     {
         $rel = is_null($rel) ? '' : ' rel="'.$rel.'"';
 
-        return  "<a href='{$url}' {$rel} class='active item'>{$page}</a>";
+        return  "<a href='{$url}' {$rel} class='item'>{$page}</a>";
 
     }
 

@@ -27,7 +27,7 @@ $factory('Item', [
     'type' => $faker->randomElement(['business','personal']),
     'email' => $faker->email,
     'seller_name' => $faker->name,
-    'phone' => $faker->phoneNumber
+    'phone' => $faker->phoneNumber,
 ]);
 
 $factory('Category', function($faker){
