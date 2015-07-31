@@ -5,7 +5,7 @@ class Message extends \Eloquent {
     use \Laracasts\Commander\Events\EventGenerator;
 
 
-	protected $fillable = ['item_id', 'name', 'email', 'content'];
+	protected $fillable = ['item_id', 'name', 'email', 'content', 'ip_address', 'read_status'];
 
     public function item() {
 
@@ -25,7 +25,7 @@ class Message extends \Eloquent {
             ]
         );
 
-        $instance->raise(new MessageHasBeenPosted($instance));
+        $instance->raise(new \Enclassified\Message\Event\MessageHasBeenPosted($instance));
         return $instance;
     }
 

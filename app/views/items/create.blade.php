@@ -267,6 +267,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name=token]').attr("content")
                     },
+                    forceFallback: true,
                     acceptedFiles : 'image/*',
                     dictDefaultMessage: 'Add more photos and sell even faster',
                     maxfilesexceeded: function(file, rt) {
@@ -288,13 +289,13 @@
                 });
 
 
-            dropzone.on('removedfile', function(file){
-                if(file.isServerProcessed) {
-                    //remove file._uuid from
-                    //$("input[name='pictures_id[]']").val()
-                    Form.removeFileFromPicturesArray(file)
-                }
-            });
+//            dropzone.on('removedfile', function(file){
+//                if(file.isServerProcessed) {
+//                    //remove file._uuid from
+//                    //$("input[name='pictures_id[]']").val()
+//                    Form.removeFileFromPicturesArray(file)
+//                }
+//            });
 
             $('.classy-editor').ClassyEdit();
 

@@ -22,4 +22,13 @@ class ReportItemCommand {
         $this->item_id = $item_id;
     }
 
+    public function rules()
+    {
+        return [
+            'content' => 'required',
+            'item_id' => 'required',
+            'test' => 'true'
+        ];
+    }
+
 }

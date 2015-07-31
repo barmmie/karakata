@@ -1,8 +1,11 @@
 <?php namespace Enclassified\Report\Command;
 
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class ReportItemCommandHandler implements CommandHandler {
+
+    use DispatchableTrait;
 
     /**
      * Handle the command.
@@ -12,7 +15,20 @@ class ReportItemCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
+        try {
+            $report = \Report::post( $command->content, $command->item_id);
+            $result['success'] = true;
+            $result['message'] = 'Your report was received and is being looked into';
 
+            $this->dispatchEventsFor($report);
+
+
+        } catch(\Exception $e) {
+            $result['success'] = false;
+            $result['message'] = $e->getMessage();
+        }
+
+        return $result;
     }
 
 }

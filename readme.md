@@ -1,7 +1,7 @@
 --Todo
 
 Messaging
-Report abuse
+
 
 Featured
 Post ad image fallback
@@ -14,6 +14,7 @@ Admin
     view items
     view users
     analytics
+    View abuse reports
 
 
 Handle errors

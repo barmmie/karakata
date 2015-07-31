@@ -25,7 +25,7 @@ class EmailNotifier extends EventListener {
     }
 
     public function whenMessageHasBeenPosted($messagePosted){
-        $this->appMailer->sendMail($messagePosted->$message->item->owner->email, 'emails.item_message',['posted_message' => $messagePosted->$messagePosted]);
+//        $this->appMailer->sendMail($messagePosted->message->item->owner->email, 'emails.item_message',['posted_message' => $messagePosted->message]);
     }
 
     public function whenItemWasPosted($itemWasPosted) {

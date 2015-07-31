@@ -18,6 +18,7 @@ class CreateReportsTable extends Migration {
             $table->integer('item_id');
             $table->text('message');
             $table->boolean('read_status');
+            $table->string('ip_address');
 			$table->timestamps();
 		});
 	}

@@ -52,9 +52,13 @@ App::error(function(Exception $exception, $code)
 });
 
 App::error(function(Enclassified\Exceptions\ValidationFailedException $exception){
-    return Redirect::back()
-        ->withInput()
-        ->withErrors($exception->getErrors());
+
+    if(Request::ajax())
+         return Response::json($exception->getErrors(), 400);
+    else
+        return Redirect::back()
+            ->withInput()
+            ->withErrors($exception->getErrors());
 });
 
 /*

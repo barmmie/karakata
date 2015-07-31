@@ -32,7 +32,14 @@ class ReportsController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+        $result = $this->execute('Enclassified\Report\Command\ReportItemCommand');
+
+        if($result['success']) {
+            return Response::json($result, 200);
+        } else {
+            return Response::json($result, 400);
+
+        }
 	}
 
 	/**

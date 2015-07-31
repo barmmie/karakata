@@ -27,6 +27,7 @@ class CreateItemsTable extends Migration {
             $table->integer('category_id');
             $table->integer('user_id');
             $table->integer('status');
+            $table->string('ip_address');
             $table->boolean('negotiable')->default(true);
             $table->softDeletes();
 			$table->timestamps();

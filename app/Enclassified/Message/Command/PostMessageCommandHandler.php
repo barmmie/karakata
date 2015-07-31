@@ -1,9 +1,11 @@
 <?php namespace Enclassified\Message\Command;
 
 use Laracasts\Commander\CommandHandler;
+use Laracasts\Commander\Events\DispatchableTrait;
 
 class PostMessageCommandHandler implements CommandHandler {
 
+    use DispatchableTrait;
     /**
      * Handle the command.
      *

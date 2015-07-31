@@ -20,6 +20,7 @@ use \Laracasts\Commander\Events\EventGenerator;
 
             $item->slug = Str::slug($item->title, '-');
             $item->status = self::PENDING_STATUS;
+            $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
 //            $item->user_id = Auth::id()?;
 
         });
@@ -87,8 +88,9 @@ use \Laracasts\Commander\Events\EventGenerator;
 
 
     public function scopeSearch($query, $searchKey) {
+        $searchKey = removeCommonWords(strtolower($searchKey));
         $searchKeys = explode(' ', $searchKey);
-        
+
         foreach($searchKeys as $index => $key) {
             if($index == 0) {
                 $query =  $query->where('title', 'LIKE', "%{$key}%");
@@ -98,7 +100,7 @@ use \Laracasts\Commander\Events\EventGenerator;
 
             }
 
-            $query = $query->orWhere('description', 'LIKE', "%{$searchKey}%");
+            $query = $query->orWhere('description', 'LIKE', "%{$key}%");
 
         }
 

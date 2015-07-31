@@ -13,7 +13,7 @@ class MessageHasBeenPosted {
 
     public $message;
     public function __construct($message) {
-        $this->message;
+        $this->message = $message;
     }
 
 }

@@ -24,6 +24,7 @@ Route::get('users/{id}/items', ['as' => 'users.items', 'uses' => 'UsersControlle
 Route::resource('users', 'UsersController');
 
 Route::post('messages', ['as'=>'messages.store', 'uses'=> 'MessagesController@store']);
+Route::post('reports', ['as'=>'reports.store', 'uses'=> 'ReportsController@store']);
 
 Route::group(['before'=> 'auth'], function(){
 

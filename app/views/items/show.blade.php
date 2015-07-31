@@ -266,14 +266,14 @@
             Report this item
         </div>
         <div class="content">
-            <div class="ui form">
+            <form class="ui report form">
                 <h4 class="ui dividing header">Tell us what is wrong with the advert</h4>
-
+                <div class="ui error message"></div>
+                {{Form::hidden('item_id', $item->id)}}
                 <div class="field">
-                    <textarea></textarea>
+                    <textarea name="content"></textarea>
                 </div>
-
-            </div>
+            </form>
         </div>
         <div class="actions">
             <div class="ui button cancel ">Cancel</div>
@@ -305,6 +305,7 @@
         @endif
 
         var $sendform = $('.ui.sendmessage.form')
+        var $reportform = $('.ui.report.form')
 
         $sendform.form({
                     fields: {
@@ -343,48 +344,98 @@
                 })
         ;
 
-        $('.sendmessage.modal')
-                .modal('attach events', '.message.button', 'show')
+        $reportform.form({
+            fields: {
+                content: {
+                    identifier: 'content',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: 'Please enter your message content'
+                        },
+                        {
+                            type: 'length[10]',
+                            prompt: 'Enter at least 10 characters in your message content'
+                        }
+                    ]
+                }
+            }
+        })
+        ;
+
+        $messageModal = $('.sendmessage.modal');
+        $reportModal = $('.report.modal');
+                $messageModal.modal('attach events', '.message.button', 'show')
+                                .modal('setting', 'transition', 'fade up')
+                                .modal('setting', 'autofocus', 'true')
+                                .modal({
+                                    onApprove: function () {
+                                        $sendform.form('validate form')
+
+                                        if($sendform.form('is valid')) {
+                                           var form_values = $sendform.form('get values')
+                                           $sendform.addClass('loading')
+                                           $.ajax({
+                                               method: 'POST',
+                                               data: form_values,
+                                               url: "{{route('messages.store')}}",
+                                               success: function(response) {
+                                                   $sendform.removeClass('loading')
+
+                                                   alertify.success(response.message);
+                                                   $sendform.form('reset');
+                                                   $messageModal.modal('hide');
+
+                                               },
+                                               error: function(xhr) {
+                                                   $sendform.removeClass('loading')
+                                                    alertify.error(xhr.responseJSON.message)
+                                                   $sendform.form('add errors', [xhr.responseJSON.message]);
+                                                   return false;
+                                               }
+                                           })
+                                       }
+
+                                        return false;
+                                    }
+                                })
+        ;
+
+        $reportModal.modal('attach events', '.report.link', 'show')
                 .modal('setting', 'transition', 'fade up')
                 .modal('setting', 'autofocus', 'true')
                 .modal({
                     onApprove: function () {
-                        $sendform.form('validate form')
+                        $reportform.form('validate form')
 
-                        if($sendform.form('is valid')) {
-                           var form_values = $sendform.form('get values')
-                           $sendform.addClass('loading')
-                           $.ajax({
-                               method: 'POST',
-                               data: form_values,
-                               url: "{{route('messages.store')}}",
-                               success: function(response) {
-                                   $sendform.removeClass('loading')
+                        if($reportform.form('is valid')) {
+                            var form_values = $reportform.form('get values')
+                            $reportform.addClass('loading')
+                            $.ajax({
+                                method: 'POST',
+                                data: form_values,
+                                url: "{{route('reports.store')}}",
+                                success: function(response) {
+                                    $reportform.removeClass('loading')
+                                    $reportform.form('reset')
+                                    alertify.success(response.message);
+                                    $reportModal.modal('hide');
 
-                                   alertify.success(response.message);
-                                   return true;
-
-                               },
-                               error: function(xhr) {
-                                   $sendform.removeClass('loading')
+                                },
+                                error: function(xhr) {
+                                    $reportform.removeClass('loading')
                                     alertify.error(xhr.responseJSON.message)
-                                   $sendform.form('add errors', [xhr.responseJSON.message]);
-                                   return false;
-                               }
-                           }).done(function(){
-
-                           })
-                       }
+                                    $reportform.form('add errors', [xhr.responseJSON.message]);
+                                    return false;
+                                }
+                            })
+                        }
 
                         return false;
                     }
                 })
         ;
 
-        $('.report.modal')
-                .modal('attach events', '.report.link', 'show')
-                .modal('setting', 'transition', 'fade up')
-        ;
 
         new Share(".share-button", {
             networks: {
