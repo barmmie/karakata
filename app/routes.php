@@ -54,6 +54,7 @@ Route::group(['before'=> 'auth'], function(){
     Route::post('password', ['as' => 'users.update_password', 'uses' => 'UsersController@updatePassword']);
 
     Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
+    Route::delete('pictures', ['as' => 'pictures.destroy', 'uses' => 'PicturesController@destroy']);
 
 });
 
@@ -67,6 +68,11 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
 });
 
+
+Route::get('test', function(){
+    $categories = Item::featured(6)->get();
+    return $categories;
+});
 
 
 

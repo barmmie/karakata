@@ -16,7 +16,9 @@
 
             <a class="item {{Route::is('dash.mymessages')?' teal active':''}}" href="{{route('dash.mymessages')}}">
                 Messages
-                <div class="ui {{Route::is('dash.mymessages')?' teal pointing left':'red circular'}}  label">{{$unread_message_count}}</div>
+                @if($unread_message_count > 0)
+                    <div class="ui {{Route::is('dash.mymessages')?' teal pointing left':'red circular'}}  label">{{$unread_message_count}}</div>
+                @endif
 
             </a>
         </div>

@@ -1,11 +1,5 @@
 --Todo
 
-
-Featured
-
-
-Update item
-
 confirm event based emails
 
 Admin
@@ -14,9 +8,6 @@ Admin
     view users
     analytics
     View abuse reports
-
-Handle errors
-    Http/modelNotFound
 
 reduce admin_style
 

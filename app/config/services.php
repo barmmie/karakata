@@ -28,4 +28,11 @@ return array(
 		'secret' => '',
 	),
 
+    'airbrake' => [
+        'api_key' => '79f128d5637494dadaef2bc7857c7b79',
+        'host' => 'powerful-lowlands-1202.herokuapp.com',
+          'port'    => 443,
+          'secure'  => true
+    ]
+
 );

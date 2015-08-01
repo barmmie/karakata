@@ -10,8 +10,7 @@
 		"artdarek/oauth-4-laravel": "dev-master",
       "laracasts/commander": "~1.0",
       "kalnoy/nestedset": "1.1.*",
-      "airbrake/airbrake-php": "dev-master"
-
+      "rigor789/airbrake-laravel": "0.2"
 
 
 	},

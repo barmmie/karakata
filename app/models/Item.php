@@ -24,6 +24,12 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         });
 
+        static::updating(function($item){
+            $item->slug = $item->id . '-' . Str::slug($item->title, '-');
+            $item->status = self::PENDING_STATUS;
+            $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
+        });
+
         static::created(function($item){
 
             $item->slug = $item->id . '-' . Str::slug($item->title, '-');
@@ -49,6 +55,11 @@ use \Laracasts\Commander\Events\EventGenerator;
         return $this->hasMany('Picture');
     }
 
+    public function picture()
+    {
+        return $this->hasOne('Picture');
+    }
+
     public function favoriters()
     {
         return $this->belongsToMany('User');
@@ -62,7 +73,7 @@ use \Laracasts\Commander\Events\EventGenerator;
     public function mainThumbnail()
     {
 
-        return count($this->pictures) ? $this->pictures->first()->thumbnail_src : 'images/no-image-default-thumb.jpg';
+        return $this->picture()->thumbnail_src ? : 'images/no-image-default-thumb.jpg';
     }
 
     public function isApproved()
@@ -108,7 +119,12 @@ use \Laracasts\Commander\Events\EventGenerator;
 
     public function scopeFeatured($query, $limit = 3, $exclude = [])
     {
-        $query = $query->whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `products`)', [$limit])->orderByRaw('RAND()')->limit($limit);
+        $query = $query->whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `items`)', [$limit])
+                        ->orderByRaw('RAND()')
+                        ->with('pictures')
+                        ->with('location')
+                        ->approved()
+                        ->limit($limit);
         if (!empty($exclude)) {
             $query = $query->whereNotIn('id', $exclude);
         }
@@ -144,7 +160,7 @@ use \Laracasts\Commander\Events\EventGenerator;
                 'category_id' => $category_id,
                 'location_id' => $location_id,
                 'type' => $type,
-                'amount' => $amount,
+                'amount' =>  $amount,
                 'negotiable' => $negotiable,
                 'email' => $email,
                 'phone' => $phone,

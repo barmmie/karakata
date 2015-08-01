@@ -69,6 +69,25 @@ class Category extends \Kalnoy\Nestedset\Node
 //        });
     }
 
+    public function scopePopular($query, $limit = 6)
+    {
+        return $query
+                    ->select('categories.title', 'categories.slug as slug', 'parentcat.slug as parent_slug', DB::raw('count(items.category_id) as item_count'))
+                    ->join('items', function($join)
+                    {
+                        $join->on('categories.id', '=', 'items.category_id')
+                                ->where('categories.parent_id', '<>', 1)
+                                ->where('items.status', '=', Item::APPROVED_STATUS);
+                    })
+                    ->join('categories as parentcat', function($join){
+                        $join->on('categories.parent_id' , '=', 'parentcat.id');
+                    })
+                    ->groupBy('categories.id')
+                    ->orderBy('item_count', 'desc')
+                    ->limit($limit)
+            ;
+    }
+
     public static function renameNode($id, $originalname, $name)
     {
         return static::where("title", $originalname)

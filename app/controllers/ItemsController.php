@@ -14,11 +14,28 @@ class ItemsController extends BaseController {
     }
 
     public function edit($id) {
-
-        $item = Item::find($id);
-
+        $item = Item::where('id',$id)
+                        ->where('user_id', Auth::user()->id)
+                        ->with('pictures')
+                        ->firstOrFail();
 
         return View::make('items.edit', compact('item'));
+    }
+
+    public function update($id) {
+        $result = $this->execute('Enclassified\Item\Command\UpdateItemCommand', Input::all() + ['id' => $id]);
+
+        if($result['success']) {
+            $item = $result['payload'];
+
+            flashSuccess($result['message'], 'Item will need to be re-verified before being approved');
+
+            return Redirect::route('dash.myitems');
+        } else {
+            flashError($result['message']);
+            return Redirect::back()->withInput();
+
+        }
     }
 
     public function store() {

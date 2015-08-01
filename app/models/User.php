@@ -44,7 +44,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function items()
     {
-        return $this->hasMany('Item')->orderBy('items.created_at', 'desc');
+        return $this->hasMany('Item')->orderBy('items.updated_at', 'desc');
     }
 
     public function favorites()

@@ -49,6 +49,18 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 App::error(function(Exception $exception, $code)
 {
 	Log::error($exception);
+
+//    if(true)
+//    {
+//        $config = new Airbrake\Configuration(Config::get('services.airbrake.api_key'),
+//            array(
+//                'async' => true,
+//                'environmentName' => App::environment(),
+//                'url' => Request::url()
+//            ));
+//        $client = new Airbrake\Client($config);
+//        $client->notifyOnException($exception);
+//    }
 });
 
 App::error(function(Enclassified\Exceptions\ValidationFailedException $exception){
@@ -60,6 +72,12 @@ App::error(function(Enclassified\Exceptions\ValidationFailedException $exception
             ->withInput()
             ->withErrors($exception->getErrors());
 });
+
+App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception){
+    flashError('Page/Item not found', 'The page you tried to access does not exist or has been removed');
+    return Request::header('referer') ? Redirect::back() : Redirect::route('pages.homepage');
+});
+
 
 /*
 |--------------------------------------------------------------------------
@@ -93,3 +111,9 @@ require app_path().'/listeners.php';
 require app_path().'/composers.php';
 
 App::bind('Laracasts\Commander\CommandTranslator', 'Enclassified\Services\MyCommandTranslator');
+
+App::setLocale(Session::get('lang', 'en'));
+
+error_reporting(0);
+@ini_set('display_errors', 0);
+
