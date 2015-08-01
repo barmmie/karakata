@@ -2,12 +2,9 @@
 
 Messaging
 
-
 Featured
-Post ad image fallback
 Update item
 confirm event based emails
-
 
 Admin
     approve items
@@ -16,11 +13,12 @@ Admin
     analytics
     View abuse reports
 
-
 Handle errors
     Http/modelNotFound
 
 reduce admin_style
+
+Google Adsense
 
 Setting
 search location_id not filtering

@@ -82,6 +82,7 @@ class PostItemCommand {
      */
     public function __construct($title, $description, $type, $category_id, $location_id, $amount, $negotiable, $email, $phone, $seller_name, $pictures_id = [], $multipart_upload = false, $files = null)
     {
+
         $this->title = $title;
         $this->description = $description;
         $this->type = $type;

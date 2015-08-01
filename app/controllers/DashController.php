@@ -29,4 +29,12 @@ class DashController extends \BaseController {
 
         return View::make('dash.myfavorites', compact('items', 'item_count'));
     }
+
+    public function mymessages() {
+        $messages = Auth::user()->messages()->with('item')->paginate(10);
+
+        dd(count($messages));
+
+        return View::make('dash.mymessages', compact('messages'));
+    }
 }

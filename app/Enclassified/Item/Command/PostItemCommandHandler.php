@@ -16,18 +16,23 @@ class PostItemCommandHandler implements CommandHandler {
     public function handle($command)
     {
 
-        dd($command);
-
         try {
             $item = \Item::post($command->category_id, $command->type, $command->title, $command->description, $command->amount, $command->negotiable,  $command->location_id, $command->email, $command->phone, $command->seller_name);
 
             if($command->multipart_upload) {
+
+                foreach($command->uploaded_files as $file){
+                    \Picture::upload($file, $item->id);
+                }
 
             } else {
                 $pictures_id = explode(',',$command->pictures_id);
 
                 $item->attachPictures($pictures_id);
             }
+
+            $this->dispatchEventsFor($item);
+
 
             $result['success'] = true;
             $result['message'] = "Item '{$command->title}' was been posted successfully";
@@ -37,7 +42,6 @@ class PostItemCommandHandler implements CommandHandler {
             $result['message'] = $e->getMessage();
         }
 
-        $this->dispatchEventsFor($item);
 
         return $result;
     }

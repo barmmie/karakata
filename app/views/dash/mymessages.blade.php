@@ -14,39 +14,31 @@
                 <div class="ui segments">
                     <div class="ui  segment">
                         <h3 class="ui dividing header">
-                            <i class="red heart icon"></i>
-                            My favorite items
+                            <i class="mail icon"></i>
+                            My messages
                         </h3>
 
-                        @if(count($items) < 1)
+                        @if(count($messages) < 1)
                             <div class="ui message">
-                                You haven't favorited any item.
+                                You currently have no message on any of your items.
                             </div>
 
                         @else
                             <div class="ui divided items">
 
-                                @foreach($items as $item)
+                                @foreach($messages as $message)
                                     <div class="item">
-
-                                        <div class="ui small bordered rounded image">
-                                            <a class="ui brown ribbon label">£ {{$item->amount}}</a>
-
-                                            <a class="ui right corner label">
-                                                <i class="camera icon"></i>
-                                                <i class=" corner icon">{{count($item->pictures)}}</i>
-                                            </a>
-                                            <img src="{{asset($item->mainThumbnail())}}">
+                                        <div class="image">
+                                            <img src="{{asset($message->item->mainThumbnail())}}">
                                         </div>
                                         <div class="content">
-
-                                            <a class="header" href="{{route('items.show', $item->slug)}}">{{$item->title}}</a>
+                                            <a class="header">{{$message->item->title}}</a>
                                             <div class="meta">
-                                            <span class="date m-b-xs">
-                                                <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
+                                            <span class="date">
+                                                <i class="teal calendar icon"></i> {{$message->created_at->format('M j, Y g:i A')}}
                                             </span>
 
-                                            <span class="category m-b-xs">
+                                            <span class="category">
                                                 <i class="minus icon"></i>{{$item->category->title}}<i class="minus icon"></i>
                                             </span>
                                              <span class="location">
@@ -58,15 +50,23 @@
                                                 <p></p>
                                             </div>
                                             <div class="extra">
-                                                <a class="ui right floated red small button" href="{{route('items.unfavorite', $item->id)}}">
-                                                <i class="cancel icon"></i>
+                                                <a class="ui right floated button" href="{{route('items.edit', $item->id)}}">
+                                                    <i class="pencil icon"></i>
 
-                                                Remove from favorite
+                                                    Edit
                                                 </a>
-                                                @if($item->negotiable)
-                                                    <div class="ui brown tag label">Negotiable</div>
+                                                <div class="ui brown tag label">£ {{$item->amount}}</div>
+                                                @if($item->isApproved())
+                                                    <div class="ui green label">APPROVED</div>
                                                 @endif
 
+                                                @if($item->isPending())
+                                                    <div class="ui yellow label">PENDING APPROVAL</div>
+                                                @endif
+
+                                                @if($item->isRejected())
+                                                    <div class="ui red label">REJECTED</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -78,10 +78,10 @@
 
 
                     </div>
-
                     <div class="ui segment">
-                        {{$items->links()}}
+                        {{$messages->links()}}
                     </div>
+
                 </div>
             </div>
         </div>

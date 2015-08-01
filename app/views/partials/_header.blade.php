@@ -18,7 +18,15 @@
 
                     <div class="item p-r-none">
                         <div class="ui buttons">
-                            <a class="ui button" href="{{route('dash.myitems')}}">{{Auth::user()->full_name}}</a>
+
+
+                            <a class="ui button" href="{{route('dash.myitems')}}">
+                                @if($unread_message_count > 0)
+                                    <div class=" ui red label">{{$unread_message_count}}</div>
+                                @endif
+
+                                {{Auth::user()->full_name}}
+                            </a>
                             <div class="ui floating dropdown icon button">
                                 <i class="dropdown icon"></i>
                                 <div class="menu">

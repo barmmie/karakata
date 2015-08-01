@@ -2,10 +2,10 @@
 
 class Picture extends \Eloquent
 {
-    protected $fillable = ['image_src', 'thumbnail_src'];
+    protected $fillable = ['image_src', 'thumbnail_src', 'item_id'];
 
 
-    public static function upload($file)
+    public static function upload($file, $item_id = 0)
     {
         $type = $file->getClientOriginalExtension();
 
@@ -23,7 +23,8 @@ class Picture extends \Eloquent
 
         $picture = static::create([
             'image_src' => $image_src,
-            'thumbnail_src' => $thumbnail_src
+            'thumbnail_src' => $thumbnail_src,
+            'item_id' => $item_id
         ]);
 
         return $picture;

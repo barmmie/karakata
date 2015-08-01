@@ -44,7 +44,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function items()
     {
-        return $this->hasMany('Item');
+        return $this->hasMany('Item')->orderBy('items.created_at', 'desc');
     }
 
     public function favorites()
@@ -54,9 +54,13 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function messages()
     {
-        return $this->hasManyThrough('Message', 'Item');
+        return $this->hasManyThrough('Message', 'Item')->orderBy('messages.created_at', 'desc');
     }
 
+    public function unreadMessages()
+    {
+        return $this->messages()->where('read_status', false);
+    }
 
     public static function register($full_name, $email, $password, $phone)
     {
@@ -84,6 +88,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     public function isVerified()
     {
 
-        return $this->verified === '1';
+        return (bool)$this->verified;
     }
 }

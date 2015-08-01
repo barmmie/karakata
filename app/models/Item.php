@@ -9,7 +9,7 @@ use \Laracasts\Commander\Events\EventGenerator;
 
     protected $softDeletes = true;
     const PENDING_STATUS = 1, REJECTED_STATUS = 2, APPROVED_STATUS = 3, SOLD_STATUS = 4;
-    protected $fillable = ['title', 'description', 'category_id', 'email', 'phone', 'seller_name', 'location_id', 'negotiable', 'type', 'amount', 'status', 'slug'];
+    protected $fillable = ['title', 'description', 'category_id', 'email', 'phone', 'seller_name', 'location_id', 'negotiable', 'type', 'amount', 'status', 'slug', 'user_id'];
 
 
     public static function boot()
@@ -21,7 +21,6 @@ use \Laracasts\Commander\Events\EventGenerator;
             $item->slug = Str::slug($item->title, '-');
             $item->status = self::PENDING_STATUS;
             $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
-//            $item->user_id = Auth::id()?;
 
         });
 
@@ -104,6 +103,15 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         }
 
+        return $query;
+    }
+
+    public function scopeFeatured($query, $limit = 3, $exclude = [])
+    {
+        $query = $query->whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `products`)', [$limit])->orderByRaw('RAND()')->limit($limit);
+        if (!empty($exclude)) {
+            $query = $query->whereNotIn('id', $exclude);
+        }
         return $query;
     }
 

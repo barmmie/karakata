@@ -14,8 +14,10 @@
                 <div class="ui {{Route::is('dash.myfavorites')?' teal pointing left':''}}  label">{{Auth::user()->favorites()->count()}}</div>
             </a>
 
-            <a class="item ">
+            <a class="item {{Route::is('dash.mymessages')?' teal active':''}}" href="{{route('dash.mymessages')}}">
                 Messages
+                <div class="ui {{Route::is('dash.mymessages')?' teal pointing left':''}}  label">{{$unread_message_count}}</div>
+
             </a>
         </div>
 

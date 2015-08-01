@@ -85,7 +85,7 @@
                         <label for="">Photos</label>
                         <div id="myDropZone" class="dropzone">
                             <div class="fallback">
-                                <input name="files" type="file" multiple />
+                                <input name="files[]" type="file" multiple />
                                 <input name="multipart_upload" type="hidden" value="1" />
                                 <p>Choose images you want to attach to the item</p>
                             </div>
@@ -267,7 +267,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name=token]').attr("content")
                     },
-                    forceFallback: true,
+
                     acceptedFiles : 'image/*',
                     dictDefaultMessage: 'Add more photos and sell even faster',
                     maxfilesexceeded: function(file, rt) {
@@ -289,13 +289,13 @@
                 });
 
 
-//            dropzone.on('removedfile', function(file){
-//                if(file.isServerProcessed) {
-//                    //remove file._uuid from
-//                    //$("input[name='pictures_id[]']").val()
-//                    Form.removeFileFromPicturesArray(file)
-//                }
-//            });
+            dropzone.on('removedfile', function(file){
+                if(file.isServerProcessed) {
+                    //remove file._uuid from
+                    //$("input[name='pictures_id[]']").val()
+                    Form.removeFileFromPicturesArray(file)
+                }
+            });
 
             $('.classy-editor').ClassyEdit();
 

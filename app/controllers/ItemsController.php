@@ -22,6 +22,7 @@ class ItemsController extends BaseController {
     }
 
     public function store() {
+
        $result =  $this->execute('Enclassified\Item\Command\PostItemCommand');
 
         if($result['success']) {
