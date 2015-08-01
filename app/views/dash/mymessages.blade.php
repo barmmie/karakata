@@ -12,11 +12,21 @@
 
             <div class="twelve wide column">
                 <div class="ui segments">
-                    <div class="ui  segment">
-                        <h3 class="ui dividing header">
+                    <div class="ui segment">
+                        <h3 class="ui header">
                             <i class="mail icon"></i>
                             My messages
                         </h3>
+                    </div>
+                    <div class="ui segment">
+                        <div class="ui pointing secondary menu">
+                            <a class="item {{$message_filter==null?'active':''}}" href="{{route('dash.mymessages')}}">All</a>
+                            <a class="item {{$message_filter=='read'?'active':''}}" href="{{route('dash.mymessages', 'read')}}">Read messages</a>
+                            <a class="item {{$message_filter=='unread'?'active':''}}" href="{{route('dash.mymessages', 'unread')}}">Unread messages</a>
+                        </div>
+                    </div>
+                    <div class="ui  segment">
+
 
                         @if(count($messages) < 1)
                             <div class="ui message">
@@ -34,40 +44,26 @@
                                         <div class="content">
                                             <a class="header">{{$message->item->title}}</a>
                                             <div class="meta">
-                                            <span class="date">
+                                                <span><strong>FROM:</strong></span>
+
+                                            <span class="category">
+                                                <i class="user icon"></i>{{$message->name}}
+                                            </span>
+
+                                                 <span class="location">
+                                                <i class="mail icon"></i>{{$message->email}}
+                                            </span>
+
+                                                <span class="date">
                                                 <i class="teal calendar icon"></i> {{$message->created_at->format('M j, Y g:i A')}}
                                             </span>
 
-                                            <span class="category">
-                                                <i class="minus icon"></i>{{$item->category->title}}<i class="minus icon"></i>
-                                            </span>
-                                             <span class="location">
-                                                <i class="teal marker icon"></i>{{$item->location->name}}
-                                            </span>
 
                                             </div>
                                             <div class="description">
-                                                <p></p>
+                                                <p>{{$message->content}}</p>
                                             </div>
-                                            <div class="extra">
-                                                <a class="ui right floated button" href="{{route('items.edit', $item->id)}}">
-                                                    <i class="pencil icon"></i>
 
-                                                    Edit
-                                                </a>
-                                                <div class="ui brown tag label">£ {{$item->amount}}</div>
-                                                @if($item->isApproved())
-                                                    <div class="ui green label">APPROVED</div>
-                                                @endif
-
-                                                @if($item->isPending())
-                                                    <div class="ui yellow label">PENDING APPROVAL</div>
-                                                @endif
-
-                                                @if($item->isRejected())
-                                                    <div class="ui red label">REJECTED</div>
-                                                @endif
-                                            </div>
                                         </div>
                                     </div>
                                 @endforeach

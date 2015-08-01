@@ -30,11 +30,18 @@ class DashController extends \BaseController {
         return View::make('dash.myfavorites', compact('items', 'item_count'));
     }
 
-    public function mymessages() {
-        $messages = Auth::user()->messages()->with('item')->paginate(10);
+    public function mymessages($message_filter = null) {
+        $messages = Auth::user()->messages();
 
-        dd(count($messages));
+        if($message_filter && in_array($message_filter, ['read', 'unread'])) {
+            $messages->where('read_status', $message_filter=='read'? true:false );
+        }
 
-        return View::make('dash.mymessages', compact('messages'));
+        $messages = $messages->with('item')->paginate(10);
+
+        if($message_filter=='unread')
+            Message::markAsRead($messages);
+
+        return View::make('dash.mymessages', compact('messages', 'message_filter'));
     }
 }

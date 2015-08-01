@@ -29,4 +29,17 @@ class Message extends \Eloquent {
         return $instance;
     }
 
+    public static function markAsRead($messages)
+    {
+        $messageids = $messages->lists('id');
+
+        static::whereIn('id', $messageids)
+            ->update(['read_status' => true]);
+    }
+
+    public function isRead()
+    {
+        return (bool)$this->read_status;
+    }
+
 }

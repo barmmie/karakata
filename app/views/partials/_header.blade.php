@@ -22,7 +22,7 @@
 
                             <a class="ui button" href="{{route('dash.myitems')}}">
                                 @if($unread_message_count > 0)
-                                    <div class=" ui red label">{{$unread_message_count}}</div>
+                                    <div class=" ui circular red label">{{$unread_message_count}}</div>
                                 @endif
 
                                 {{Auth::user()->full_name}}

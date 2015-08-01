@@ -45,7 +45,7 @@ Route::group(['before'=> 'auth'], function(){
     Route::get('myitems', ['as' => 'dash.myitems', 'uses' => 'DashController@myitems']);
 
     Route::get('myitems/favorites', ['as' => 'dash.myfavorites', 'uses' => 'DashController@myfavorites']);
-    Route::get('mymessages', ['as' => 'dash.mymessages', 'uses' => 'DashController@mymessages']);
+    Route::get('mymessages/{read_status?}', ['as' => 'dash.mymessages', 'uses' => 'DashController@mymessages']);
 
     Route::get('profile', ['as' => 'users.profile', 'uses' => 'UsersController@edit']);
 

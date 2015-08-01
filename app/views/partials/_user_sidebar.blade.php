@@ -16,7 +16,7 @@
 
             <a class="item {{Route::is('dash.mymessages')?' teal active':''}}" href="{{route('dash.mymessages')}}">
                 Messages
-                <div class="ui {{Route::is('dash.mymessages')?' teal pointing left':''}}  label">{{$unread_message_count}}</div>
+                <div class="ui {{Route::is('dash.mymessages')?' teal pointing left':'red circular'}}  label">{{$unread_message_count}}</div>
 
             </a>
         </div>
@@ -27,7 +27,7 @@
     <div class="ui segment">
         <h4 class="header">Enclassified</h4>
         <div class="ui secondary pointing vertical side menu">
-            <a class="teal item" href="{{route('users.profile')}}">
+            <a class="teal item {{Route::is('users.profile')?' teal active':''}}" href="{{route('users.profile')}}">
                 <i class="user icon"></i>
                 Update profile
             </a>
