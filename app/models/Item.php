@@ -1,5 +1,6 @@
 <?php
 
+use Carbon\Carbon;
 
 
 class Item extends \Eloquent
@@ -101,20 +102,30 @@ use \Laracasts\Commander\Events\EventGenerator;
         $searchKey = removeCommonWords(strtolower($searchKey));
         $searchKeys = explode(' ', $searchKey);
 
-        foreach($searchKeys as $index => $key) {
-            if($index == 0) {
-                $query =  $query->where('title', 'LIKE', "%{$key}%");
+        $query =  $query->where('title', 'LIKE', "%{$searchKey}%");
 
-            }else {
-                $query =  $query->orWhere('title', 'LIKE', "%{$key}%");
-
-            }
-
-            $query = $query->orWhere('description', 'LIKE', "%{$key}%");
-
-        }
+//        foreach($searchKeys as $index => $key) {
+//            if($index == 0) {
+//                $query =  $query->where('title', 'LIKE', "%{$key}%");
+//
+//            }else {
+//                $query =  $query->orWhere('title', 'LIKE', "%{$key}%");
+//
+//            }
+//
+//            $query = $query->orWhere('description', 'LIKE', "%{$key}%");
+//
+//        }
 
         return $query;
+    }
+
+    public function scopeLatest($query, $limit = 3) {
+        return $query->approved()
+                    ->with('picture')
+                    ->with('location')
+                    ->limit($limit)
+                    ->orderBy('created_at', 'desc');
     }
 
     public function scopeFeatured($query, $limit = 3, $exclude = [])
@@ -122,8 +133,10 @@ use \Laracasts\Commander\Events\EventGenerator;
         $query = $query->whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `items`)', [$limit])
                         ->orderByRaw('RAND()')
                         ->with('pictures')
+                        ->with('picture')
                         ->with('location')
                         ->approved()
+                        ->where('created_at', '>=', Carbon::now()->subMonths(6) )
                         ->limit($limit);
         if (!empty($exclude)) {
             $query = $query->whereNotIn('id', $exclude);

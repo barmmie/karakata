@@ -3,7 +3,7 @@
         <div class="ui fixed padded secondary menu navbar page grid ">
             <a class="item" href="{{route('pages.homepage')}}">
                 <i class="circular inverted big teal shadowed search icon"></i>
-               <span class="ui large header  m-t-none">ENCLASSIFIED</span>
+               <span class="ui large header  m-t-none">{{Setting::get('site_name', 'Enclassified')}}</span>
 
             </a>
 
@@ -58,7 +58,7 @@
             <div class="item">
                 <i class="circular inverted teal search icon"></i>
 
-                <a href="{{route('pages.homepage')}}" class="brand">Enclassified</a>
+                <a href="{{route('pages.homepage')}}" class="brand">{{Setting::get('site_name', 'Enclassified')}}</a>
             </div>
 
             <div class="right menu open">

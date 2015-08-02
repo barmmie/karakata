@@ -4,15 +4,15 @@
 <div class="ui grid">
     <div id="owl-demo" class="owl-carousel m-t-lg m-b-lg">
     @foreach($featured_items as $item)
-        <div data-mh="featured-listing" class="item">
-            <div class="ui card">
+        <div class="item featured-listing">
+            <div class="ui card fullheight">
                 <div class="ui fluid image">
                     <a class="ui right corner label">
                         <i class="camera icon"></i>
                         <i class=" corner icon">{{count($item->pictures)}}</i>
 
                     </a>
-                    <img class="lazyOwl" data-src="{{asset($item->mainThumbnail())}}">
+                    <img src="{{asset($item->mainThumbnail())}}}}">
                 </div>
                 <div class="content">
 

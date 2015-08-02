@@ -10,7 +10,7 @@ class SettingTableSeeder extends Seeder {
     public function run()
     {
         foreach ($this->settings() as $setting) {
-            Setting::createOrUpdate($setting, ['name']);
+            Setting::set($setting['name'], $setting['value' ]);
         }
     }
 
@@ -19,16 +19,26 @@ class SettingTableSeeder extends Seeder {
         $faker = \Faker\Factory::create();
         return [
             [
-                'name' => 'Enclassife',
+                'name' => 'site_name',
                 'value' => 'Your Site Name',
+                'label' => 'Site name',
                 'description' => $faker->sentence(3),
             
             ],
             [
-                'name' => 'site_slogan',
+                'name' => 'site_description',
                 'value' => $faker->sentence(15),
-                'description' => $faker->sentence(3),
+                'label' => 'Site description',
+                'description' => 'A slogan for your company, useful for seo purposes',
             ],
+            [
+                'name' => 'currency',
+                'value' => '£',
+                'description' => 'Currency in which amount of things are displayed'
+            ],
+            [
+                'name' => 'currency'
+            ]
         ];
 
     }

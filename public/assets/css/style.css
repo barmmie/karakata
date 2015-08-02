@@ -58,3 +58,7 @@ body {
     width: 100%;
 }
 
+.ui.card.fullheight {
+    height: 100%;
+}
+

@@ -6,5 +6,5 @@ View::composers([
             'Enclassified\Composers\MessageComposer' => ['partials._user_sidebar', 'partials._header'],
             'Enclassified\Composers\FeaturedItemComposer' => ['widgets._featured_items' ],
             'Enclassified\Composers\PopularCategoryComposer' => ['widgets._popular_categories' ],
-            'Enclassified\Composers\LatestItemComposer' => ['widgets._latest_items' ],
+            'Enclassified\Composers\LatestItemComposer' => ['widgets._recent_items' ],
                 ]);

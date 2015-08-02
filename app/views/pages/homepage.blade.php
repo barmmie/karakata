@@ -68,63 +68,64 @@
                    @include('widgets._popular_categories')
                 </div>
                 <div class="ui segment padding-reset">
-                    <a href="http://google.com" class="ui medium image">
-                        <img src="{{asset('images/add2.jpg')}}">
-                    </a>
+                    @include('widgets._recent_items')
                 </div>
             </div>
         </div>
 
-    <div class="ui row ">
-        <div class="ui column ">
 
-            <div class="ui olive padded container">
-                <div class="ui four statistics">
-                    <div class="statistic">
-                        <div class="value">
-                            22
-                        </div>
-                        <div class="label">
-                            Saves
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="text value">
-                            Three<br>
-                            Thousand
-                        </div>
-                        <div class="label">
-                            Signups
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="value">
-                            <i class="plane icon"></i> 5
-                        </div>
-                        <div class="label">
-                            Flights
-                        </div>
-                    </div>
-                    <div class="statistic">
-                        <div class="value">
-                            <img src="/images/avatar/small/joe.jpg" class="ui circular inline image">
-                            42
-                        </div>
-                        <div class="label">
-                            Team Members
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
+
+        {{--<div class="teal row padding-reset m-b-n-lg">--}}
+            {{--<div class="column padding-reset">--}}
+
+                {{--<div class="ui olive p-lg container">--}}
+                    {{--<div class="ui four statistics">--}}
+                        {{--<div class="statistic">--}}
+                            {{--<div class="value">--}}
+                                {{--22--}}
+                            {{--</div>--}}
+                            {{--<div class="label">--}}
+                                {{--Saves--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="statistic">--}}
+                            {{--<div class="text value">--}}
+                                {{--Three<br>--}}
+                                {{--Thousand--}}
+                            {{--</div>--}}
+                            {{--<div class="label">--}}
+                                {{--Signups--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="statistic">--}}
+                            {{--<div class="value">--}}
+                                {{--<i class="plane icon"></i> 5--}}
+                            {{--</div>--}}
+                            {{--<div class="label">--}}
+                                {{--Flights--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                        {{--<div class="statistic">--}}
+                            {{--<div class="value">--}}
+                                {{--<img src="/images/avatar/small/joe.jpg" class="ui circular inline image">--}}
+                                {{--42--}}
+                            {{--</div>--}}
+                            {{--<div class="label">--}}
+                                {{--Team Members--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
+
+    {{--</div>--}}
 
 
 @endsection
 
 @section('scripts')
     <script src="{{asset('assets/js/owl.carousel.min.js')}}"></script>
+    <script src="{{asset('assets/matchHeight/jquery.matchHeight-min.js')}}"></script>
     <script>
         $(document).ready(function() {
 
@@ -133,6 +134,11 @@
                 lazyLoad : true,
                 navigation : true
             });
+
+                $('.item.featured-listing').matchHeight({
+                    byRow: true,
+                    property: 'height'
+                });
 
         });
     </script>

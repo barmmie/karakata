@@ -122,7 +122,9 @@ return array(
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
 
-        'DaveJamesMiller\Breadcrumbs\ServiceProvider',
+        'anlutro\LaravelSettings\ServiceProvider',
+        'rigor789\AirbrakeLaravel\AirbrakeServiceProvider',
+
         'Laracasts\Commander\CommanderServiceProvider',
         'Artdarek\OAuth\OAuthServiceProvider',
         'Intervention\Image\ImageServiceProvider',
@@ -200,7 +202,7 @@ return array(
         'Breadcrumbs' => 'DaveJamesMiller\Breadcrumbs\Facade',
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
         'Image' => 'Intervention\Image\Facades\Image',
-
+        'Setting' => 'anlutro\LaravelSettings\Facade',
                 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 

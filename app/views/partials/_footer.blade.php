@@ -1,5 +1,5 @@
-<div class="m-t-lg p-t-md">
-    <div class="ui inverted vertical segment">
+<div class="m-t-lg ">
+    <div class="ui inverted vertical segment p-t-md">
         <div class="ui container">
             <div class="ui stackable inverted divided equal height stackable grid">
                 <div class="three wide column">

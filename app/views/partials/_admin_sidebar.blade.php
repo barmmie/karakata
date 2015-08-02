@@ -2,7 +2,7 @@
     <a class="ui logo icon image" href="/">
         <i class="shadowed circular search icon "></i>
     </a>
-    <a href="/"><b>Enclassified</b></a>
+    <a href="/"><b>{{Setting::get('site_name', 'Enclassified')}}</b></a>
 </div>
 
 <div class="item" href="/introduction/getting-started.html">

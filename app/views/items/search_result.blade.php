@@ -7,7 +7,13 @@
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
 
+                <div class="ui segment">
+                    @include('widgets._popular_categories')
+                </div>
 
+                <div class="ui segment">
+                    @include('widgets._recent_items')
+                </div>
 
             </div>
 

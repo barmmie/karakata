@@ -62,6 +62,9 @@ Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsControlle
 
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
+    Route::get('settings', ['as'=> 'settings.edit', 'uses' => 'SettingsController@edit']);
+    Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
+
     Route::resource('locations', 'LocationsController');
 
     Route::controller("categories", 'CategoriesController');
@@ -70,8 +73,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
 
 Route::get('test', function(){
-    $categories = Item::featured(6)->get();
-    return $categories;
+    return Carbon\Carbon::now()->startOfYear();
 });
 
 

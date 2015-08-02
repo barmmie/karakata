@@ -6,7 +6,7 @@
                 <h2 class="ui teal center aligned icon header">
                     <i class="large lock icon"></i>
                     <div class="content">
-                        Log-in to your enclassified account
+                        Log-in to your {{Setting::get('site_name', 'Enclassified')}} account
                     </div>
                 </h2>
                     {{Form::open(['route' => 'sessions.store', 'class'=> 'ui form'])}}

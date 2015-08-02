@@ -7,7 +7,7 @@
                     <div class="ui segment">
                         <h3 class="ui dividing header">
                             <i class="add user icon"></i>
-                            Create an enclassified account it is free
+                            Create an {{Setting::get('site_name', 'Enclassified')}} account it is free
                         </h3>
                         @include('partials._form_errors')
 

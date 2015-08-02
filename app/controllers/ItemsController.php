@@ -67,7 +67,7 @@ class ItemsController extends BaseController {
 
     public function search() {
 
-        $items = Item::approved()->search(Input::get('query'))->filtered(Input::all());
+        $items = Item::approved()->filtered(Input::all())->search(Input::get('query'));
 
         $items = $items->with('location', 'pictures', 'category');
 

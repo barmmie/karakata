@@ -27,7 +27,7 @@
     </div>
 
     <div class="ui segment">
-        <h4 class="header">Enclassified</h4>
+        <h4 class="header">{{Setting::get('site_name', 'Enclassified')}}</h4>
         <div class="ui secondary pointing vertical side menu">
             <a class="teal item {{Route::is('users.profile')?' teal active':''}}" href="{{route('users.profile')}}">
                 <i class="user icon"></i>

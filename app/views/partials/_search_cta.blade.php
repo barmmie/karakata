@@ -27,13 +27,15 @@
                             <div class="eight wide field p-l-none">
 
                                 <div class="ui action input">
-                                    <select name="location_id" class="ui fluid search dropdown">
-                                        <option value="any">Any location</option>
-                                        @foreach($locations as $location)
-                                            <option value="{{$location->id}}"> <i class="marker icon"></i> {{$location->name}}</option>
 
-                                        @endforeach
-                                    </select>
+                                    {{Form::select('location_id', ['any' => 'Any location'] + $locations->lists('name', 'id') , Input::get('location_id'),  ['class' => 'ui fluid search dropdown'])}}
+                                    {{--<select name="location_id" class="ui fluid search dropdown">--}}
+                                        {{--<option value="any">Any location</option>--}}
+                                        {{--@foreach($locations as $location)--}}
+                                            {{--<option value="{{$location->id}}"> <i class="marker icon"></i> {{$location->name}}</option>--}}
+
+                                        {{--@endforeach--}}
+                                    {{--</select>--}}
                                     <button type="submit" class="ui teal button">
                                         Search
                                     </button>
