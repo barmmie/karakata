@@ -27,7 +27,7 @@
                     </a>
                     <div class="right floated">
                         <div class="ui teal label">
-                            £ {{$item->amount}}
+                            {{Setting::get('currency', '£')}} {{$item->amount}}
                         </div>
 
                     </div>

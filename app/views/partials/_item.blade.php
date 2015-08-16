@@ -1,7 +1,7 @@
 <div class="item">
 
     <div class="ui small bordered rounded image">
-        <a class="ui brown ribbon label">£ {{$item->amount}}</a>
+        <a class="ui brown ribbon label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
 
         <a class="ui right corner label">
             <i class="camera icon"></i>

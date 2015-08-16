@@ -76,28 +76,7 @@
         </div>
         <div class="article">
 
-
-            <div class="ui masthead vertical tab segment">
-                <div class="ui container">
-                    <div class="introduction">
-
-                        <h1 class="ui header">
-                            Dropdown
-
-                            <div class="sub header">
-
-
-                                A dropdown allows a user to select a value from a series of options
-                            </div>
-                        </h1>
-
-
-                    </div>
-
-                </div>
-            </div>
             @include('partials._message')
-
 
             @yield('content')
         </div>

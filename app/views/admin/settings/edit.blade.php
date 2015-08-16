@@ -21,8 +21,8 @@
                 </div>
 
             </div>
-           {{Form::open(['route' => 'settings.update', 'class' => 'ui form'])}}
             <div class="ui segment">
+                {{Form::open(['route' => 'settings.update', 'class' => 'ui form'])}}
 
                 <div class="ui  active tab segment" data-tab="first">
 
@@ -62,9 +62,9 @@
                 </div>
 
                 <button class="ui teal labeled icon button" tabindex="0" type="submit"><i class="save icon"></i> Save changes</button>
+                {{Form::close()}}
 
             </div>
-            {{Form::close()}}
         </div>
 
 

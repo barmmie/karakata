@@ -66,8 +66,6 @@
                             {{$items->appends(Input::all())->links()}}
 
                         </div>
-
-
                     @endif
                 </div>
             </div>

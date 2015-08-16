@@ -19,7 +19,6 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         static::creating(function ($item) {
 
-            $item->slug = Str::slug($item->title, '-');
             $item->status = self::PENDING_STATUS;
             $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
 

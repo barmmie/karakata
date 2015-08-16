@@ -11,9 +11,7 @@ Admin
 
 Google Adsense
 
-Setting
 search location_id not filtering
-
 
 Oauth login
 title/meta

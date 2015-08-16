@@ -55,7 +55,7 @@
 
                                                 Edit
                                             </a>
-                                            <div class="ui brown tag label">£ {{$item->amount}}</div>
+                                            <div class="ui brown tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</div>
                                             @if($item->isApproved())
                                             <div class="ui green label">APPROVED</div>
                                             @endif

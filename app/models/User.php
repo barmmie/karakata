@@ -13,8 +13,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     use UserTrait, RemindableTrait, EventGenerator;
 
-    const ADMIN_ROLE = 1;
-    const USER_ROLE = 2;
+    const ADMIN_ROLE = 1, USER_ROLE = 2;
+    const BANNED_STATUS = 1, ACTIVE_STATUS = 2;
 
     /**
      * The database table used by the model.
@@ -37,10 +37,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         parent::boot();
 
         static::creating(function ($user) {
+            $user->status = static::ACTIVE_STATUS;
             $user->confirmation_token = str_random(30);
         });
     }
-
 
     public function items()
     {
@@ -60,6 +60,44 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     public function unreadMessages()
     {
         return $this->messages()->where('read_status', false);
+    }
+
+    public function scopeSearch($query, $searchKey)
+    {
+        $query =  $query->where('full_name', 'LIKE', "%{$searchKey}%")
+                        ->orWhere('email', 'LIKE', "%{$searchKey}%")
+                        ->orWhere('phone', 'LIKE', "%{$searchKey}%");
+
+        return $query;
+
+    }
+
+    public function scopeActiveOnly($query)
+    {
+        $query =  $query->where('status', static::ACTIVE_STATUS);
+
+        return $query;
+    }
+
+    public function scopeBannedOnly($query)
+    {
+        $query =  $query->where('status', static::BANNED_STATUS);
+
+        return $query;
+    }
+
+    public function scopeVerifiedOnly($query)
+    {
+        $query =  $query->where('verified', true);
+
+        return $query;
+    }
+
+    public function scopeUnverifiedOnly($query)
+    {
+        $query =  $query->where('verified', false);
+
+        return $query;
     }
 
     public static function register($full_name, $email, $password, $phone)
@@ -89,5 +127,15 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
 
         return (bool)$this->verified;
+    }
+
+    public function isBanned()
+    {
+        return $this->status == static::BANNED_STATUS;
+    }
+
+    public function isActive()
+    {
+        return $this->status == static::ACTIVE_STATUS;
     }
 }

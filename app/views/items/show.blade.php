@@ -53,7 +53,7 @@
 
                                 @foreach($item->pictures as $picture)
                                     <li class="ui fluid bordered rounded image">
-                                        <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
+                                        <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
                                         <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
                                     </li>
                                 @endforeach
@@ -67,7 +67,7 @@
                             </div>
                         @else
                             <div class="ui fluid bordered rounded image">
-                                <a class="ui brown right ribbon big label">£ {{$item->amount}}</a>
+                                <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
                                 <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
                                 @endif
                             </div>
@@ -93,7 +93,7 @@
                                         <div class="ui message m-b-lg">
                                             <ul class="ui list">
                                                 <div class="item">
-                                                    <strong>Price:</strong> £ {{$item->amount}}
+                                                    <strong>Price:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
                                                 </div>
                                                 <div class="item">
                                                     <strong>Negotiable:</strong> <span><i

@@ -62,7 +62,10 @@ Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsControlle
 
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
+    Route::get('users/{status?}', ['as' => 'admin.users.index', 'uses' => 'UsersController@index']);
+
     Route::get('settings', ['as'=> 'settings.edit', 'uses' => 'SettingsController@edit']);
+
     Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
 
     Route::resource('locations', 'LocationsController');
