@@ -5,7 +5,7 @@
     <a href="/"><b>{{Setting::get('site_name', 'Enclassified')}}</b></a>
 </div>
 
-<a class="item" href="/introduction/new.html">
+<a class="item" href="{{route('pages.homepage')}}">
     <i class="sign out icon"></i>View frontend
 </a>
 

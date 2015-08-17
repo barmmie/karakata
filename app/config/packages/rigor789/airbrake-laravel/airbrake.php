@@ -5,7 +5,7 @@ return [
   /**
    * Should we send errors to Airbrake
    */
-  'enabled'             => true,
+  'enabled'             => false,
 
   /**
    * Airbrake API key
@@ -15,7 +15,7 @@ return [
   /**
    * Should we send errors async
    */
-  'async'               => false,
+  'async'               => true,
 
   /**
    * Which enviroments should be ingored? (ex. local)

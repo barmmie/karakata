@@ -62,6 +62,10 @@ Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsControlle
 
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
+    Route::get('users/{id}/verify', ['as' => 'admin.users.verify', 'uses' => 'UsersController@verify']);
+    Route::get('users/{id}/items', ['as' => 'admin.users.items', 'uses' => 'UsersController@items']);
+    Route::get('users/{id}/ban', ['as' => 'admin.users.ban', 'uses' => 'UsersController@ban']);
+    Route::get('users/{id}/activate', ['as' => 'admin.users.activate', 'uses' => 'UsersController@activate']);
     Route::get('users/{status?}', ['as' => 'admin.users.index', 'uses' => 'UsersController@index']);
 
     Route::get('settings', ['as'=> 'settings.edit', 'uses' => 'SettingsController@edit']);

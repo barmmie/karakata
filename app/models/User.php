@@ -123,6 +123,17 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         $this->save();
     }
 
+    public function ban() {
+        $this->status = static::BANNED_STATUS;
+        $this->save();
+    }
+
+    public function activate()
+    {
+        $this->status = static::ACTIVE_STATUS;
+        $this->save();
+    }
+
     public function isVerified()
     {
 

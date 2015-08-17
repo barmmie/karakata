@@ -73,7 +73,7 @@ use \Laracasts\Commander\Events\EventGenerator;
     public function mainThumbnail()
     {
 
-        return $this->picture()->thumbnail_src ? : 'images/no-image-default-thumb.jpg';
+        return $this->picture ? $this->picture->thumbnail_src : 'images/no-image-default-thumb.jpg';
     }
 
     public function isApproved()

@@ -33,50 +33,52 @@
 
             </div>
             <div class="ui segment">
-                <table class="ui striped table">
+                <table class="ui selectable stacked table">
                     <thead>
                     <tr>
+                        <th>Actions</th>
+
                         <th>Name</th>
                         <th>E-mail</th>
                         <th>Phone</th>
+                        <th>No of item(s)</th>
                         <th>Date Joined</th>
 
                         <th>Verified</th>
                         <th>Status</th>
-                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td>{{$user->full_name}}</td>
+                            <td><div class="ui icon top left pointing dropdown button">
+                                    <i class="wrench icon"></i>
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <div class="header">{{$user->full_name}} </div>
+                                        @if(! $user->isVerified())
+                                            <a href="{{route('admin.users.verify', $user->id)}}" class="item"><i class="green check icon"></i>Verify user email.</a>
+                                        @endif
+
+                                        @if($user->isActive())
+                                            <a href="{{route('admin.users.ban', $user->id)}}" class="item"> <i class="red ban icon"></i>Ban this user.</a>
+                                        @endif
+
+                                        @if($user->isBanned())
+                                            <a href="{{route('admin.users.activate', $user->id)}}" class="item">Activate user.</a>
+                                        @endif
+                                    </div>
+                                </div></td>
+                            <td>{{$user->full_name}}  </td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->phone}}</td>
-                            <td>{{$user->created_at->format('M j, Y g:i A')}}</td>
+                            <td><strong>{{count($user->items)}}</strong></td>
+                            <td>{{$user->created_at->format('M j, Y')}}</td>
                             <td>{{$user->isVerified()? '<div class="ui green label">Yes</div>': '<div class="ui yellow label">No</div>'}}</td>
                             <td>{{$user->isBanned()? '<div class="ui grey label">Banned</div>' : ''}}
                                 {{$user->isActive()? '<div class="ui blue label">Active</div>' : ''}}
                             </td>
-                            <td><div class="ui dropdown">
-                                    <div class="text">Actions</div>
-                                    <i class="dropdown icon"></i>
-                                    <div class="menu">
-                                        <div class="header">{{$user->full_name}}</div>
-                                        @if(! $user->isVerified())
-                                            <a class="item">Verify this user.</a>
-                                        @endif
 
-                                        @if($user->isActive())
-                                            <a class="item">Ban this user.</a>
-
-                                        @endif
-
-                                        @if($user->isBanned())
-                                            <a class="item">Remove ban.</a>
-
-                                        @endif
-                                    </div>
-                                </div></td>
                         </tr>
                     @endforeach
 
