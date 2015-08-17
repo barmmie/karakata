@@ -24,9 +24,13 @@
 
             </div>
             <div class="ui segment">
-                <div class="ui fluid input">
-                    <input type="text" placeholder="Search by name, email or phone"/>
-                </div>
+                <form action="" method="GET">
+                    <div class="ui fluid action input">
+                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="Search by name, email or phone"/>
+                        <button class="ui button" type="submit">Search</button>
+                    </div>
+                </form>
+
             </div>
             <div class="ui segment">
                 <table class="ui striped table">
@@ -34,6 +38,7 @@
                     <tr>
                         <th>Name</th>
                         <th>E-mail</th>
+                        <th>Phone</th>
                         <th>Date Joined</th>
 
                         <th>Verified</th>
@@ -46,6 +51,7 @@
                         <tr>
                             <td>{{$user->full_name}}</td>
                             <td>{{$user->email}}</td>
+                            <td>{{$user->phone}}</td>
                             <td>{{$user->created_at->format('M j, Y g:i A')}}</td>
                             <td>{{$user->isVerified()? '<div class="ui green label">Yes</div>': '<div class="ui yellow label">No</div>'}}</td>
                             <td>{{$user->isBanned()? '<div class="ui grey label">Banned</div>' : ''}}
@@ -79,7 +85,7 @@
 
             </div>
 
-            @if($users->total > $users->perPage)
+            @if($users->getTotal() > $users->getPerPage())
                 <div class="ui segment">
                     {{$users->appends(Input::all())->links()}}
                 </div>
