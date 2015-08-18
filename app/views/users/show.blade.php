@@ -9,7 +9,7 @@
                <div class="ui content">
                    <div class="ui card">
                        <div class="image">
-                           <img src="{{gravatar($user->email)}}">
+                           <img src="{{gravatar($user->email, 200)}}">
                        </div>
                        <div class="content">
                            <a class="header">{{$user->full_name}}</a>

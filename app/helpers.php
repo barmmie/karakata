@@ -38,8 +38,8 @@ function divide_array($array, $segmentCount) {
     return $outputArray;
 }
 
-function gravatar($email) {
-    return "http://gravatar.com/avatar/".md5($email)."?d=mm";
+function gravatar($email, $size = 80) {
+    return "http://gravatar.com/avatar/".md5($email)."?d=mm&s={$size}";
 
 }
 

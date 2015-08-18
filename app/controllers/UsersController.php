@@ -53,7 +53,7 @@ class UsersController extends \BaseController {
 
         $items = $user->items()->approved();
 
-        $items = $items->with('location', 'pictures', 'category');
+        $items = $items->with('location', 'picture', 'category');
 
         $item_count = $items->count();
 

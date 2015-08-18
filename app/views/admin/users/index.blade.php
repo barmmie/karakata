@@ -57,19 +57,29 @@
                                     <div class="menu">
                                         <div class="header">{{$user->full_name}} </div>
                                         @if(! $user->isVerified())
-                                            <a href="{{route('admin.users.verify', $user->id)}}" class="item"><i class="green check icon"></i>Verify user email.</a>
+                                            <a href="{{route('admin.users.verify', $user->id)}}" class="item">
+                                                <i class="green thumbs up icon"></i>
+                                                Verify user email.
+                                            </a>
                                         @endif
 
                                         @if($user->isActive())
-                                            <a href="{{route('admin.users.ban', $user->id)}}" class="item"> <i class="red ban icon"></i>Ban this user.</a>
+                                            <a href="{{route('admin.users.ban', $user->id)}}" class="item">
+                                                <i class="red ban icon"></i>
+                                                Ban this user.
+                                            </a>
                                         @endif
 
                                         @if($user->isBanned())
-                                            <a href="{{route('admin.users.activate', $user->id)}}" class="item">Activate user.</a>
+                                            <a href="{{route('admin.users.activate', $user->id)}}" class="item">
+                                                <i class="green check icon"></i>
+                                                Activate user.
+                                            </a>
                                         @endif
                                     </div>
-                                </div></td>
-                            <td>{{$user->full_name}}  </td>
+                                </div>
+                            </td>
+                            <td><a href="{{route('admin.users.items', $user->id)}}">{{$user->full_name}}</a>  </td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->phone}}</td>
                             <td><strong>{{count($user->items)}}</strong></td>

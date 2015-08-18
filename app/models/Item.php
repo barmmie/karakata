@@ -78,22 +78,22 @@ use \Laracasts\Commander\Events\EventGenerator;
 
     public function isApproved()
     {
-        return (int)$this->status === self::APPROVED_STATUS;
+        return (bool)($this->status == self::APPROVED_STATUS);
     }
 
     public function isPending()
     {
-        return (int)$this->status === self::PENDING_STATUS;
+        return (bool)($this->status == self::PENDING_STATUS);
     }
 
     public function isRejected()
     {
-        return (int)$this->status === self::REJECTED_STATUS;
+        return (bool)($this->status == self::REJECTED_STATUS);
     }
 
     public function isSold()
     {
-        return (int)$this->status === self::SOLD_STATUS;
+        return (bool)($this->status == self::SOLD_STATUS);
     }
 
 

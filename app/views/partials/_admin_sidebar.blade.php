@@ -17,7 +17,7 @@
            <i class="users icon"></i> Manage users
         </a>
 
-        <a class="item" href="/introduction/build-tools.html">
+        <a class="item" href="{{route('admin.items.index')}}">
             <i class="tags icon"></i>Manage posted items
         </a>
 

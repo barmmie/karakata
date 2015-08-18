@@ -30,11 +30,6 @@
             <p></p>
         </div>
         <div class="extra">
-            {{--<a class="ui right floated button" href="{{route('items.edit', $item->id)}}">--}}
-            {{--<i class="pencil icon"></i>--}}
-
-            {{--Edit--}}
-            {{--</a>--}}
             @if($item->negotiable)
                 <div class="ui brown tag label">Negotiable</div>
             @endif
