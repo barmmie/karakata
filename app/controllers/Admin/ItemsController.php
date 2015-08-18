@@ -16,11 +16,29 @@ class ItemsController extends \BaseController {
 
     }
 
-    public function index()
+    public function index($status = null)
     {
-        $items = Item::paginate(15);
+        $items = Item::orderBy('created_at', 'asc');
 
-        return View::make('admin.items.index', compact('items'));
+        switch ($status){
+            case 'pending':
+                $items->pendingOnly();
+                break;
+            case 'approved':
+                $items->approvedOnly();
+                break;
+            case 'rejected':
+                $items->rejectedOnly();
+                break;
+        }
+
+        if(Input::has('query')) {
+            $items->search(Input::get('query'));
+        }
+
+        $items = $items->paginate(15);
+
+        return View::make('admin.items.index', compact('items', 'status'));
     }
 
     public function approve($id) {

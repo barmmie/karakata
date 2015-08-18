@@ -26,7 +26,7 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         static::updating(function($item){
             $item->slug = $item->id . '-' . Str::slug($item->title, '-');
-            $item->status = self::PENDING_STATUS;
+//            $item->status = self::PENDING_STATUS;
             $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
         });
 
@@ -143,8 +143,16 @@ use \Laracasts\Commander\Events\EventGenerator;
         return $query;
     }
 
-    public function scopeApproved($query){
+    public function scopeApprovedOnly($query){
         return $query->where('status', self::APPROVED_STATUS);
+    }
+
+    public function scopePendingOnly($query){
+        return $query->where('status', self::PENDING_STATUS);
+    }
+
+    public function scopeRejectedOnly($query){
+        return $query->where('status', self::REJECTED_STATUS);
     }
 
 

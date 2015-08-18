@@ -68,7 +68,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
     Route::get('users/{id}/activate', ['as' => 'admin.users.activate', 'uses' => 'UsersController@activate']);
     Route::get('users/{status?}', ['as' => 'admin.users.index', 'uses' => 'UsersController@index']);
 
-    Route::get('items', ['as' => 'admin.items.index', 'uses' => 'ItemsController@index']);
+    Route::get('items/{status?}', ['as' => 'admin.items.index', 'uses' => 'ItemsController@index']);
     Route::get('items/{id}/approve', ['as' => 'admin.items.approve', 'uses' => 'ItemsController@approve']);
     Route::get('items/{id}/reject', ['as' => 'admin.items.reject', 'uses' => 'ItemsController@reject']);
     Route::get('items/{id}/delete', ['as' => 'admin.items.delete', 'uses' => 'ItemsController@delete']);
@@ -82,19 +82,4 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
     Route::controller("categories", 'CategoriesController');
 
 });
-
-
-Route::get('test', function(){
-    return Carbon\Carbon::now()->startOfYear();
-});
-
-
-
-
-
-
-
-
-
-
 
