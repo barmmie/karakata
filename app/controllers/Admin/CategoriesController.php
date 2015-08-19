@@ -34,7 +34,6 @@ class CategoriesController extends \BaseController
                 break;
 
             case "addCategory":
-
                 $status = Category::addNode($this->request->name);
                 return $status;
                 break;

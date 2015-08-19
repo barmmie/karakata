@@ -179,7 +179,7 @@
                     </div>
                     <div class="ui segment">
                         <h3 class="ui header">
-                            <img src="{{gravatar($item->seller_email)}}" class="ui circular image">
+                            <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
                             <div class="sub header">Location: {{$item->location->name}}</div>
                             <div class="sub header">Joined: {{$item->owner->created_at->format('M j, Y')}}</div>

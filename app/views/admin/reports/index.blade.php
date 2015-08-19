@@ -31,7 +31,7 @@
                         <div class="header">
 
                         </div>
-                        There are not reports here
+                        There are no reports here
                     </div>
                 @else
                     <div class="ui divided items">

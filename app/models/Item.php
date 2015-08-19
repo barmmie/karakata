@@ -151,6 +151,10 @@ use \Laracasts\Commander\Events\EventGenerator;
         return $query->where('status', self::APPROVED_STATUS);
     }
 
+    public function scopeApproved($query){
+        return $query->where('status', self::APPROVED_STATUS);
+    }
+
     public function scopePendingOnly($query){
         return $query->where('status', self::PENDING_STATUS);
     }

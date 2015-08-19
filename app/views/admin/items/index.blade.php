@@ -63,7 +63,7 @@
                                         </div>
                                         <div class="content">
 
-                                            <a class="header" href="{{route('items.show', $item->slug)}}">{{$item->title}}</a>
+                                            <a class="header" href="{{route('admin.items.show', $item->id)}}">{{$item->title}}</a>
                                             <div class="meta">
                                             <span class="date m-b-xs">
                                                 <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}

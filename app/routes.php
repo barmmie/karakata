@@ -69,7 +69,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
     Route::get('users/{status?}', ['as' => 'admin.users.index', 'uses' => 'UsersController@index']);
 
     Route::get('items/{status?}', ['as' => 'admin.items.index', 'uses' => 'ItemsController@index']);
-    Route::get('items/id/show', ['as' => 'admin.items.show', 'uses' => 'ItemsController@show']);
+    Route::get('items/{id}/show', ['as' => 'admin.items.show', 'uses' => 'ItemsController@show']);
     Route::get('items/{id}/approve', ['as' => 'admin.items.approve', 'uses' => 'ItemsController@approve']);
     Route::get('items/{id}/reject', ['as' => 'admin.items.reject', 'uses' => 'ItemsController@reject']);
     Route::get('items/{id}/delete', ['as' => 'admin.items.delete', 'uses' => 'ItemsController@delete']);

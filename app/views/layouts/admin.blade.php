@@ -108,7 +108,7 @@
     ;
 
     $('.confirm-delete').on('click', function(e){
-        return alertify.confirm('Are you sure?')
+        return confirm('Are you sure?');
     })
 </script>
 

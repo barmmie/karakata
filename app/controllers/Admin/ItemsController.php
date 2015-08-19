@@ -7,12 +7,17 @@
  */
 
 namespace Admin;
-use View, Input, Redirect, Item;
+use View, Input, Redirect, Item, Report, URL;
 
 class ItemsController extends \BaseController {
 
     public function show($id) {
-        $item = Item::findOrFail($id);
+        $item = Item::with('category', 'location', 'pictures', 'owner', 'favoriters')
+                    ->findOrFail($id);
+
+        $reports = Report::where('item_id', $id)->paginate(5);
+
+        return View::make('admin.items.show', compact('item', 'reports'));
 
     }
 
@@ -57,15 +62,19 @@ class ItemsController extends \BaseController {
 
     public function delete($id) {
         $item = Item::findOrFail($id);
+        $redirect_back = (URL::previous() == route('admin.items.show', $id)) ? false : true;
         try {
             $item->delete();
-            flashWarning('Item has been deleted', '');
+            flashInfo('Item has been deleted', '');
 
         } catch(\Exception $e) {
             flashError('Item could not be deleted', '');
         }
 
-        return Redirect::back();
+        if($redirect_back)
+            return Redirect::back();
+        else
+            return Redirect::route('admin.items.index');
     }
 
     public function reject($id) {

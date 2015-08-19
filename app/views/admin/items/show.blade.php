@@ -1,0 +1,237 @@
+@extends('layouts.admin')
+
+
+@section('content')
+    <div class="main ui container">
+        <div class="ui two column relaxed stackable grid">
+
+
+            <div class="ten wide column">
+                <div class="ui segments">
+
+                    <div class="ui padded segment">
+
+                        <h3 class="ui dividing header">
+                            {{$item->title}}
+                        </h3>
+
+                        <div class="ui horizontal list">
+                            <div class="item">
+                                <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
+                            </div>
+
+                            <div class="item">
+                                <i class="teal marker icon"></i> {{$item->location->name}}
+                            </div>
+                        </div>
+
+
+                        @if(count($item->pictures) > 0)
+
+
+                            <ul class="bxslider">
+
+                                @foreach($item->pictures as $picture)
+                                    <li class="ui fluid bordered rounded image">
+                                        <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                                        <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                    </li>
+                                @endforeach
+                            </ul>
+
+                            <div id="bx-pager">
+                                @foreach($item->pictures as $index => $picture)
+                                    <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
+                                @endforeach
+
+                            </div>
+                        @else
+                            <div class="ui fluid bordered rounded image">
+                                <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                                <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
+
+                            </div>
+
+                        @endif
+
+                            <div class="m-t-md">
+                                @if($item->negotiable)
+                                    <div class="ui brown tag label">Negotiable</div>
+                                @endif
+
+                                @if($item->isApproved())
+                                    <div class="ui blue label">Approved</div>
+                                @endif
+
+                                @if($item->isRejected())
+                                    <div class="ui orange label">Rejected</div>
+                                @endif
+
+                                @if($item->isPending())
+                                    <div class="ui grey label">Pending approval</div>
+                                @endif
+
+                            </div>
+
+
+
+
+
+
+
+                            <h4 class="ui horizontal divider header">
+                                <i class="tag icon"></i>
+                                Description
+                            </h4>
+
+                            <div class="ui content">
+                                <div class="ui stackable equal height stackable grid">
+                                    <div class="ten wide column">
+                                        {{$item->description}}
+                                    </div>
+
+                                    <div class="six wide column">
+                                        <div class="ui message m-b-lg">
+                                            <ul class="ui list">
+                                                <div class="item">
+                                                    <strong>Price:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
+                                                </div>
+                                                <div class="item">
+                                                    <strong>Negotiable:</strong> <span><i
+                                                                class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
+                                                </div>
+                                                <div class="item">
+                                                    <strong>Category:</strong> {{$item->category->title}}
+                                                </div>
+                                                <div class="item">
+                                                    <strong>Location:</strong> <span><i
+                                                                class="marker icon"></i>{{$item->location->name}}</span>
+                                                </div>
+
+                                                <div class="item">
+                                                    <strong>Posted by a/an:</strong>
+                                                    <span>{{($item->type == 'personal')? '<i class="user icon"></i>Individual' :  '<i class="suitcase icon"></i>Business'}}</span>
+                                                </div>
+                                            </ul>
+                                        </div>
+                                        <div class="ui middle aligned divided list">
+                                            <div class="item">
+                                                <i class="user icon"></i>
+
+                                                <div class="content">
+                                                    <a class="header" href="{{route('admin.users.items', $item->owner->id)}}">More
+                                                        ads from this user</a>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+            <div class="six wide column">
+
+                <div class="ui segments">
+                    <div class="ui secondary segment">
+                        <h4 class="header"> Seller contact</h4>
+                    </div>
+                    <div class="ui segment">
+                        <h3 class="ui header">
+                            <img src="{{gravatar($item->email)}}" class="ui circular image">
+                            {{$item->seller_name}}
+                            <div class="sub header m-b-xs"><strong>Location:</strong> {{$item->location->name}}</div>
+                            <div class="sub header m-b-xs"><strong>Joined</strong>: {{$item->owner->created_at->format('M j, Y')}}</div>
+                            <div class="sub header m-b-xs"><strong>Email:</strong> {{$item->email}}</div>
+                            <div class="sub header"><strong>Phone:</strong> {{$item->phone}}</div>
+                        </h3>
+                    </div>
+                </div>
+
+                <div class="ui segments">
+                    <div class="ui secondary segment">
+                        <h4 class="header">Actions</h4>
+                    </div>
+                    <div class="ui segment">
+                        @if(! $item->isRejected())
+                            <a href="{{route('admin.items.reject', $item->id)}}" class="ui fluid m-b-xs orange button">
+                                <i class="cancel icon"></i>
+
+                                Reject
+                            </a>
+                        @endif
+                        @if(! $item->isApproved())
+                            <a href="{{route('admin.items.approve', $item->id)}}" class="ui fluid m-b-xs primary button">
+                                <i class="check icon"></i>
+
+                                Approve
+                            </a>
+                        @endif
+                        <a href="{{route('admin.items.delete', $item->id)}}" class="ui fluid m-b-xs red button confirm-delete">
+                            <i class="trash icon"></i>
+
+                            Delete
+                        </a>
+
+                    </div>
+                </div>
+
+                <div class="ui segments">
+                    <div class="ui secondary segment">
+                        <h4 class="header"><i class="warning sign icon"></i>Abuse reports</h4>
+                    </div>
+                    <div class="ui segment">
+                        <div class="ui comments">
+                            @if(count($reports) < 1)
+                                No reports about this item
+                            @endif
+                            @foreach($reports as $report)
+                                <div class="comment">
+                                    <div class="content">
+                                        <a class="author">{{$report->ip_address}}</a>
+                                        <div class="metadata">
+                                            <div class="date">{{$report->created_at->diffForHumans()}}</div>
+                                            <div class="rating">
+                                                <i class="star icon"></i>
+                                                5 Faves
+                                            </div>
+                                        </div>
+                                        <div class="text">
+                                            {{$report->text}}
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                    @if($reports->getTotal() >  $reports->getPerPage())
+
+                    <div class="ui segment">
+
+                    </div>
+                    @endif
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+@endsection
+
+
+@section('scripts')
+    <script type="text/javascript">
+        $('.pointing .item')
+                .tab()
+        ;
+
+        $('.ui.dropdown').dropdown()
+    </script>
+
+@endsection
