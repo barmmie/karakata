@@ -23,12 +23,21 @@ class CreateItemsTable extends Migration {
             $table->string('email');
             $table->string('phone');
             $table->string('seller_name');
-            $table->integer('location_id');
-            $table->integer('category_id');
-            $table->integer('user_id');
+            $table->integer('location_id')->unsigned();
+            $table->integer('category_id')->unsigned();
+            $table->integer('user_id')->unsigned();
             $table->integer('status');
             $table->string('ip_address');
             $table->boolean('negotiable')->default(true);
+
+            $table->index('title');
+            $table->index('slug');
+            $table->index('location_id');
+            $table->index('user_id');
+
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->softDeletes();
 			$table->timestamps();
 		});

@@ -24,6 +24,9 @@ class CreateUsersTable extends Migration {
             $table->boolean('verified')->defaults(false);
 			$table->string('last_ip_address');
             $table->string('confirmation_token');
+            $table->index('email');
+            $table->index('phone');
+            $table->index('full_name');
             $table->rememberToken();
 			$table->timestamps();
 		});

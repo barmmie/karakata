@@ -36,9 +36,6 @@ class SettingTableSeeder extends Seeder {
                 'value' => '£',
                 'description' => 'Currency in which amount of things are displayed'
             ],
-            [
-                'name' => 'currency'
-            ]
         ];
 
     }

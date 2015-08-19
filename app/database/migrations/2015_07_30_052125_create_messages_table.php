@@ -18,10 +18,13 @@ class CreateMessagesTable extends Migration {
             $table->string('name');
             $table->string('email');
             $table->text('content');
-            $table->integer('item_id');
+            $table->integer('item_id')->unsigned();
+            $table->index('item_id');
             $table->string('ip_address');
             $table->boolean('read_status')->default(false);
-			$table->timestamps();
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+
+            $table->timestamps();
 		});
 	}
 

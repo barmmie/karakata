@@ -8,7 +8,7 @@ class ItemSeederTableSeeder extends Seeder {
 	public function run()
 	{
 
-        DB::table('items')->truncate();
+        DB::table('items')->delete();
 		$faker = Faker::create();
 
         $categories = Category::all();

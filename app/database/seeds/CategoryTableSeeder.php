@@ -12,7 +12,7 @@ class CategoryTableSeeder extends Seeder
 
     public function run()
     {
-        DB::table('categories')->truncate();
+        DB::table('categories')->delete();
 
         NestedSet::createRoot('categories', array(
             'title' => 'Root',

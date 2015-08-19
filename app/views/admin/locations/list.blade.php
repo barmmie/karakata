@@ -34,36 +34,36 @@
                     </div>
 
                 </div>
-                <div class="ui segments">
-                    <div class="ui segment">
-                        <h4 class="ui header">
-                            Add a location
-                        </h4>
-                    </div>
-                    <div class="ui segment">
-                        <div class="ui google search category">
-                            <div class="ui left icon input">
-                                <input class="prompt" type="text" placeholder="Search google">
-                                <i class="google icon"></i>
-                            </div>
-                        </div>
-                    </div>
+                {{--<div class="ui segments">--}}
+                    {{--<div class="ui segment">--}}
+                        {{--<h4 class="ui header">--}}
+                            {{--Add a location--}}
+                        {{--</h4>--}}
+                    {{--</div>--}}
+                    {{--<div class="ui segment">--}}
+                        {{--<div class="ui google search category">--}}
+                            {{--<div class="ui left icon fluid input">--}}
+                                {{--<input class="prompt" type="text" placeholder="Search google">--}}
+                                {{--<i class="google icon"></i>--}}
+                            {{--</div>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
 
-                    <div class="ui segment">
-                        <div class="ui card">
-                            <div class="content">
-                                <div class="header">Jenny Hess</div>
-                                <div class="description">
-                                    Jenny is a student studying Media Management at the New School
-                                </div>
-                            </div>
-                            <div class="ui bottom attached button">
-                                <i class="add icon"></i>
-                                Add Friend
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    {{--<div class="ui segment singlelocation" style="display: none;">--}}
+                        {{--<div class="ui card">--}}
+                            {{--<div class="content">--}}
+                                {{--<div class="header"> <i id="locationicon"></i> <span id="locationtext"></span></div>--}}
+                                {{--<div class="description" id="locationdescription">--}}
+
+                                {{--</div>--}}
+                            {{--</div>--}}
+                            {{--<a class="ui bottom attached button" id="addToLocation">--}}
+                                {{--<i class="add icon"></i>--}}
+                                {{--Add to my locations--}}
+                            {{--</a>--}}
+                        {{--</div>--}}
+                    {{--</div>--}}
+                {{--</div>--}}
             </div>
             <div class="ten wide column">
 
@@ -135,6 +135,10 @@
     <script src="{{asset('assets/vue-resource/dist/vue-resource.min.js')}}"></script>
 
     <script type="text/javascript">
+        $.ajaxSetup({
+            cache: false,
+//        headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+        });
         Vue.http.options.emulateJSON = true;
         Vue.http.headers.common['X-CSRF-TOKEN'] = $('meta[name=token]').attr("content");
 
@@ -144,7 +148,6 @@
 
             ready: function () {
             },
-
 
             data: {
 
@@ -446,6 +449,14 @@
                 }
             }
 
+            $singleLocationResult = $('.ui.segment.singlelocation');
+            $locationIcon = $('#locationicon');
+            $locationText = $('#locationtext');
+            $locationDesc = $('#locationdescription');
+
+            var singleLocationResult = {}
+
+            $addToLocation = $('#addToLocation');
 
             $.fn.search.settings.templates.category = function (response) {
                 var
@@ -512,10 +523,29 @@
                             .search({
                                 type: 'category',
                                 minCharacters: 3,
-                                onSelect: function (result, response) {
-                                    console.dir(result);
-                                    console.dir(response);
+                                onSelect: function (result) {
+                                    singleLocationResult ={
+                                        name: result.title,
+                                        latitude: result.latitude,
+                                        longitude: result.longitude,
+                                        parentName: result.country,
+                                        geonameid: result.id
+
+                                    }
+
+                                    $singleLocationResult.show()
+                                    $locationIcon.removeClass()
+                                    $locationIcon.addClass(result.icon + ' flag')
+                                    $locationText.html(result.title)
+                                    $locationDesc.html(
+                                            '<ul class="ui list">' +
+                                                    '<li><strong>Latitude:</strong> '+ result.latitude + '</li>'+
+                                                    '<li><strong>Longitude:</strong> '+ result.longitude + '</li>'+
+                                            '</ul>'
+                                    )
+
                                 },
+                                searchDelay:	500,
                                 apiSettings: {
                                     onResponse: function (googleResponse) {
                                         var response = {
@@ -543,7 +573,10 @@
                                                 title: item.formatted_address,
                                                 description: item.description,
                                                 latitude: GoogleParser.getLatitude(item),
-                                                longitude: GoogleParser.getLongitude(item)
+                                                longitude: GoogleParser.getLongitude(item),
+                                                icon: GoogleParser.getCountryShort(item),
+                                                country: GoogleParser.getCountry(item) || 'Unknown'
+
                                             });
                                         });
                                         return response;
@@ -551,6 +584,23 @@
                                     url: 'https://maps.googleapis.com/maps/api/geocode/json?address={query}'
                                 }
                             })
+
+            $addToLocation.on('click', function(e){
+                e.preventDefault()
+                $singleLocationResult.addClass('loader')
+                Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([singleLocationResult]), function(response) {
+                    alertify.success(singleLocationResult.name + ' added successfully');
+                    $countrySelectionButton.addClass('concelaled');
+                    $singleLocationResult.removeClass('loader')
+                    $singleLocationResult.hide()
+
+
+                    vm.refreshLocations()
+                }, function(errorResponse){
+                    console.dir(errorResponse)
+                    alertify.error(errorResponse.error)
+                })
+            })
         });
 
 

@@ -9,10 +9,11 @@ class ReportsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 300) as $index)
 		{
 			Report::create([
-
+                'message' => $faker->sentence,
+                'item_id' => rand(1,200)
 			]);
 		}
 	}

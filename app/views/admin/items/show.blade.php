@@ -25,34 +25,37 @@
                             </div>
                         </div>
 
+                        <div class="ui content">
+                            <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                            @if(count($item->pictures) > 0)
 
-                        @if(count($item->pictures) > 0)
+
+                                <ul class="bxslider">
+
+                                    @foreach($item->pictures as $picture)
+                                        <li class="ui fluid bordered rounded image">
+                                            <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                                            <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                        </li>
+                                    @endforeach
+                                </ul>
+
+                                <div id="bx-pager">
+                                    @foreach($item->pictures as $index => $picture)
+                                        <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
+                                    @endforeach
+
+                                </div>
+                            @else
+                                <div class="ui fluid bordered rounded image">
+                                    <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
+
+                                </div>
+
+                            @endif
+                        </div>
 
 
-                            <ul class="bxslider">
-
-                                @foreach($item->pictures as $picture)
-                                    <li class="ui fluid bordered rounded image">
-                                        <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
-                                        <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
-                                    </li>
-                                @endforeach
-                            </ul>
-
-                            <div id="bx-pager">
-                                @foreach($item->pictures as $index => $picture)
-                                    <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
-                                @endforeach
-
-                            </div>
-                        @else
-                            <div class="ui fluid bordered rounded image">
-                                <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
-                                <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
-
-                            </div>
-
-                        @endif
 
                             <div class="m-t-md">
                                 @if($item->negotiable)
@@ -198,11 +201,11 @@
                                             <div class="date">{{$report->created_at->diffForHumans()}}</div>
                                             <div class="rating">
                                                 <i class="star icon"></i>
-                                                5 Faves
+
                                             </div>
                                         </div>
                                         <div class="text">
-                                            {{$report->text}}
+                                            {{$report->message}}
                                         </div>
                                     </div>
                                 </div>

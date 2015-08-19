@@ -2,7 +2,10 @@
 
 @section('styles')
 
+
     <link rel="stylesheet" href="{{asset('assets/jqtree/jqtree.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/fontIconPicker/css/jquery.fonticonpicker.min.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/fontIconPicker/themes/grey-theme/jquery.fonticonpicker.grey.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/x-editable/dist/jquery-editable/css/jquery-editable.css')}}"/>
 
     <style>
@@ -33,6 +36,8 @@
                         Click on a category name below to modify it. Drag to make it a sub-category or modify its position
                     </div>
                     </h4>
+
+                    <input type="text" name="mytext" id="mytext" />
                 </div>
                 <div class="ui clearing segment ">
 
@@ -52,16 +57,29 @@
 
 @section('scripts')
     <script src="{{asset('assets/jqtree/tree.jquery.js')}}"></script>
+    <script src="{{asset('assets/fontIconPicker/jquery.fonticonpicker.js')}}"></script>
     <script src="{{asset('assets/poshytip/src/jquery.poshytip.min.js')}}"></script>
     <script src="{{asset('assets/x-editable/dist/jquery-editable/js/jquery-editable-poshytip.js')}}"></script>
 
 
 
     <script type="text/javascript">
+        $.ajaxSetup({
+            cache: false,
+            headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+        });
         var data = {{ $categories }};
         var serverUrl = "{{ Request::url() }}";
 
         $(function () {
+
+            $('#mytext').fontIconPicker({
+                source:    ['alarm', 'search', 'user', 'tag', 'help'],
+
+
+                emptyIcon: false,
+                hasSearch: true
+            });
 
             // configure spinner
             $spinner = {

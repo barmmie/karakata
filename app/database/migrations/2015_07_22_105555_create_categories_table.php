@@ -18,6 +18,9 @@ class CreateCategoriesTable extends Migration {
                 $table->increments('id');
                 $table->string('title');
                 $table->string('slug');
+                $table->string('icon');
+
+                $table->index('title');
                 $table->timestamps();
                 NestedSet::columns($table);
 

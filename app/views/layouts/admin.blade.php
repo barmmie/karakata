@@ -94,10 +94,7 @@
 @yield('scripts')
 
 <script type="text/javascript">
-    $.ajaxSetup({
-        cache: false,
-        headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
-    });
+
     $('.message .close')
             .on('click', function() {
                 $(this)

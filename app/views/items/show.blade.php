@@ -69,16 +69,18 @@
                             <div class="ui fluid bordered rounded image">
                                 <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
                                 <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
-                                @endif
                             </div>
 
+                        @endif
 
 
 
 
 
 
-                            <h4 class="ui horizontal divider header">
+
+
+                        <h4 class="ui horizontal divider header">
                                 <i class="tag icon"></i>
                                 Description
                             </h4>

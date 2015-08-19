@@ -9,10 +9,13 @@ class MessagesTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
-		foreach(range(1, 10) as $index)
+		foreach(range(1, 300) as $index)
 		{
 			Message::create([
-
+                'name' => $faker->name,
+                'email' => $faker->freeEmail,
+                'content' => $faker->sentence,
+                'item_id' => rand(1,200)
 			]);
 		}
 	}

@@ -15,11 +15,15 @@ class CreateReportsTable extends Migration {
 		Schema::create('reports', function(Blueprint $table)
 		{
 			$table->increments('id');
-            $table->integer('item_id');
+            $table->integer('item_id')->unsigned();
             $table->text('message');
             $table->boolean('read_status');
             $table->string('ip_address');
-			$table->timestamps();
+            $table->index('item_id');
+
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+
+            $table->timestamps();
 
 		});
 	}

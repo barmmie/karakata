@@ -10,7 +10,7 @@ class LocationsTableSeeder extends Seeder
     {
         $faker = Faker::create();
 
-        DB::table('locations')->truncate();
+        DB::table('locations')->delete();
 
         $locations = [
 

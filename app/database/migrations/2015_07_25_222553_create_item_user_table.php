@@ -16,7 +16,9 @@ class CreateItemUserTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('item_id');
+			$table->index('item_id');
 			$table->integer('user_id');
+			$table->index('user_id');
 			$table->timestamps();
 		});
 	}
