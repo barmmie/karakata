@@ -19,4 +19,29 @@ class Report extends \Eloquent {
         $instance->raise(new \Enclassified\Report\Event\ReportHasBeenRaised($instance));
         return $instance;
     }
+
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    public function scopeReadOnly($query)
+    {
+        return $query->where('read_status', true);
+    }
+
+    public function scopeUnreadOnly($query)
+    {
+        return $query->where('read_status', false);
+    }
+
+    public function markAsRead(){
+        $this->read_status = true;
+        $this->save();
+    }
+
+    public function markAsUnread(){
+        $this->read_status = false;
+        $this->save();
+    }
 }

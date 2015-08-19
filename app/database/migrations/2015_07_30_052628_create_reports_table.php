@@ -20,6 +20,7 @@ class CreateReportsTable extends Migration {
             $table->boolean('read_status');
             $table->string('ip_address');
 			$table->timestamps();
+
 		});
 	}
 

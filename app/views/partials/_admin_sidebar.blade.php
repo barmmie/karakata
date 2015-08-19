@@ -10,7 +10,7 @@
 </a>
 
 <div class="item">
-    <div class="header">Introduction</div>
+    <div class="header">Content</div>
     <div class="menu">
 
         <a class="item" href="{{route('admin.users.index')}}">
@@ -21,7 +21,7 @@
             <i class="tags icon"></i>Manage posted items
         </a>
 
-        <a class="item" href="/introduction/advanced-usage.html">
+        <a class="item" href="{{route('admin.reports.index')}}">
             <i class="warning circle icon"></i> Manage abuse reports
         </a>
 

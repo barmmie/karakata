@@ -70,6 +70,10 @@ use \Laracasts\Commander\Events\EventGenerator;
         return $this->belongsTo('User', 'user_id');
     }
 
+    public function reports() {
+        return $this->hasMany(Report::class);
+    }
+
     public function mainThumbnail()
     {
 
