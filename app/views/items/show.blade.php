@@ -9,8 +9,8 @@
     <meta property="twitter:title" content="{{$item->title}}"/>
     <meta property="og:type" content="{{$item->category->title}}"/>
     <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
-    <meta property="og:image" content="{{asset($item->picture->thumbnail_src)}}"/>
-    <meta property="twitter:image" content="{{asset($item->picture->thumbnail_src)}}"/>
+    <meta property="og:image" content="{{asset($item->mainThumbnail())}}"/>
+    <meta property="twitter:image" content="{{asset($item->mainThumbnail())}}"/>
     <meta property="og:description" content="{{str_limit($item->description, 100)}}" />
     <meta property="twitter:description" content="{{str_limit($item->description, 100)}}" />
 @endsection

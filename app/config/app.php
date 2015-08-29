@@ -124,6 +124,7 @@ return array(
 
         'anlutro\LaravelSettings\ServiceProvider',
         'rigor789\AirbrakeLaravel\AirbrakeServiceProvider',
+        'Roumen\Sitemap\SitemapServiceProvider',
 
         'Laracasts\Commander\CommanderServiceProvider',
         'Artdarek\OAuth\OAuthServiceProvider',

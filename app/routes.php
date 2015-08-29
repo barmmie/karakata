@@ -86,3 +86,5 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
 
 });
 
+Route::get('sitemap.xml', ['as' => 'sitemap', 'uses' => 'PageController@sitemap']);
+
