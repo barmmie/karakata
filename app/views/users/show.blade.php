@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    Items by  {{$user->full_name}}
+@endsection
+
 @section('content')
     @include('partials._search_cta')
 

@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Manage settings
+@endsection
+
 @section('content')
     <div class="main ui container">
         <div class="ui stackable two column grid" id="locationList">
@@ -34,36 +38,43 @@
                     </div>
 
                 </div>
-                {{--<div class="ui segments">--}}
-                    {{--<div class="ui segment">--}}
-                        {{--<h4 class="ui header">--}}
-                            {{--Add a location--}}
-                        {{--</h4>--}}
-                    {{--</div>--}}
-                    {{--<div class="ui segment">--}}
-                        {{--<div class="ui google search category">--}}
-                            {{--<div class="ui left icon fluid input">--}}
-                                {{--<input class="prompt" type="text" placeholder="Search google">--}}
-                                {{--<i class="google icon"></i>--}}
-                            {{--</div>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
+                <div class="ui segments">
+                    <div class="ui segment">
+                        <h4 class="ui header">
+                            Add a location manually
+                        </h4>
+                    </div>
+                    <div class="ui segment">
+                        <form class="ui locationform form" method="POST" action="">
 
-                    {{--<div class="ui segment singlelocation" style="display: none;">--}}
-                        {{--<div class="ui card">--}}
-                            {{--<div class="content">--}}
-                                {{--<div class="header"> <i id="locationicon"></i> <span id="locationtext"></span></div>--}}
-                                {{--<div class="description" id="locationdescription">--}}
+                            <div class="ui error message"></div>
+                            <div class="field">
+                                <label for="">Location name</label>
+                                <input type="text"  name="name" placeholder="Location name">
+                            </div>
 
-                                {{--</div>--}}
-                            {{--</div>--}}
-                            {{--<a class="ui bottom attached button" id="addToLocation">--}}
-                                {{--<i class="add icon"></i>--}}
-                                {{--Add to my locations--}}
-                            {{--</a>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-                {{--</div>--}}
+                            <div class="field">
+                                <label for="">Country name</label>
+                                <input type="text"  name="country" placeholder="Country">
+                            </div>
+
+
+                            <div class="field">
+                                <label for="">Longitude</label>
+                                <input type="text" name="longitude" placeholder="Longitude">
+                            </div>
+
+                            <div class="field">
+                                <label for="">Latitude</label>
+                                <input type="text" name="latitude" placeholder="Latitude">
+                            </div>
+
+                            <input type="submit"  class="ui blue submit button" value="Save location"/>
+
+                        </form>
+                    </div>
+
+                </div>
             </div>
             <div class="ten wide column">
 
@@ -209,6 +220,10 @@
                         this.currentPage = pageNumber
                     }
                 },
+
+                submitNewLocation: function(message, event) {
+                    event.preventDefault()
+                },
                 refreshLocations: function() {
                     this.locationsLoadingIndicator= true;
 
@@ -256,8 +271,7 @@
     <script type="text/javascript">
         $.ajaxSetup({ cache: false });
         $countrySelectionLoader = $('#countrySelectionLoader');
-        $countrySelectionText = $('#countrySelectionText');
-        $countrySelectionButton = $('#countrySelectionButton');
+        $countrySelectionText =  $('#countrySelectionText')
         var locations = [];
 
         $('.country.dropdown')
@@ -268,7 +282,7 @@
 
                         $countrySelectionLoader.addClass('active');
                         var jxhr = [];
-                        $.getJSON('http://api.geonames.org/childrenJSON?username=demo&geonameId=' + value, function(response){
+                        $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId=' + value, function(response){
 
                             if(response.status) {
                                 $countrySelectionText.html('No locations were found in ' + text)
@@ -280,7 +294,7 @@
                                 if(response.geonames.length > 0) {
                                     $.each(response.geonames, function(index, item){
                                         jxhr.push(
-                                                $.getJSON('http://api.geonames.org/childrenJSON?username=demo&geonameId='+ item.geonameId, function (locationResponse) {
+                                                $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId='+ item.geonameId, function (locationResponse) {
                                                     if(locationResponse.geonames) {
                                                         locations = $.merge(locations, locationResponse.geonames)
 
@@ -317,6 +331,63 @@
                     }
                 });
 
+
+
+        $('.ui.form').form({
+            fields: {
+                name: {
+                    identifier: 'name',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter your location name'
+                        }
+                },
+                parentName: {
+                    identifier: 'parentName',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter the country name'
+                        }
+                },
+                longitude: {
+                    identifier: 'longitude',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter the location longitude'
+                        }
+                },
+                latitude: {
+                    identifier: 'parentName',
+                    rules: [
+                        {
+                            type   : 'empty',
+                            prompt : 'Please enter the location latitude'
+                        }
+                }
+            }
+        })
+
+
+        $addToLocation.on('click', function(e){
+            e.preventDefault()
+            $singleLocationResult.addClass('loader')
+            Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([singleLocationResult]), function(response) {
+                alertify.success(singleLocationResult.name + ' added successfully');
+                $countrySelectionButton.addClass('concelaled');
+                $singleLocationResult.removeClass('loader')
+                $singleLocationResult.hide()
+
+
+                vm.refreshLocations()
+            }, function(errorResponse){
+                console.dir(errorResponse)
+                alertify.error(errorResponse.error)
+            })
+        })
+
         function parseLocationsData(locations) {
 
             locationdata = []
@@ -336,27 +407,6 @@
         }
 
 
-        $countrySelectionButton.on('click', function(e){
-            e.preventDefault();
-            if(locations.length > 0) {
-                $countrySelectionLoader.addClass('active');
-
-                Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify(parseLocationsData(locations)), function(response) {
-                    alertify.success(locations.length + 'locations added successfully');
-                    $countrySelectionText.html('');
-                    $countrySelectionButton.addClass('concelaled');
-                    $countrySelectionLoader.removeClass('active');
-                    cities = [];
-                    vm.refreshLocations()
-                }, function(errorResponse){
-                    console.dir(errorResponse)
-                    alertify.error(errorResponse.error)
-                })
-            } else {
-                $countrySelectionText.html('No locations were found in ' + text)
-
-            }
-        });
     </script>
     <script type="text/javascript">
 
@@ -449,158 +499,9 @@
                 }
             }
 
-            $singleLocationResult = $('.ui.segment.singlelocation');
-            $locationIcon = $('#locationicon');
-            $locationText = $('#locationtext');
-            $locationDesc = $('#locationdescription');
-
-            var singleLocationResult = {}
-
-            $addToLocation = $('#addToLocation');
-
-            $.fn.search.settings.templates.category = function (response) {
-                var
-                        html = '',
-                        escape = $.fn.search.settings.templates.escape
-                        ;
-                if (response.results !== undefined) {
-                    // each category
-                    $.each(response.results, function (index, category) {
-                        if (category.results !== undefined && category.results.length > 0) {
-                            html += ''
-                            + '<div class="category">'
-                            + '<div class="name">' + '<i class="' + category.icon + ' flag"></i>' + category.name + '</div>'
-                            ;
-                            // each item inside category
-                            $.each(category.results, function (index, result) {
-                                html += '<div class="result">';
-                                if (result.url) {
-                                    html += '<a href="' + result.url + '"></a>';
-                                }
-                                if (result.image !== undefined) {
-                                    result.image = escape(result.image);
-                                    html += ''
-                                    + '<div class="image">'
-                                    + ' <img src="' + result.image + '" alt="">'
-                                    + '</div>'
-                                    ;
-                                }
-                                html += '<div class="content">';
-                                if (result.price !== undefined) {
-                                    result.price = escape(result.price);
-                                    html += '<div class="price">' + result.price + '</div>';
-                                }
-                                if (result.title !== undefined) {
-                                    result.title = escape(result.title);
-                                    html += '<div class="title">' + result.title + '</div>';
-                                }
-                                if (result.description !== undefined) {
-                                    html += '<div class="description">' + result.description + '</div>';
-                                }
-                                html += ''
-                                + '</div>'
-                                + '</div>'
-                                ;
-                            });
-                            html += ''
-                            + '</div>'
-                            ;
-                        }
-                    });
-                    if (response.action) {
-                        html += ''
-                        + '<a href="' + response.action.url + '" class="action">'
-                        + response.action.text
-                        + '</a>';
-                    }
-                    return html;
-                }
-                return false;
-            },
 
 
-                    $('.ui.google.search')
-                            .search({
-                                type: 'category',
-                                minCharacters: 3,
-                                onSelect: function (result) {
-                                    singleLocationResult ={
-                                        name: result.title,
-                                        latitude: result.latitude,
-                                        longitude: result.longitude,
-                                        parentName: result.country,
-                                        geonameid: result.id
 
-                                    }
-
-                                    $singleLocationResult.show()
-                                    $locationIcon.removeClass()
-                                    $locationIcon.addClass(result.icon + ' flag')
-                                    $locationText.html(result.title)
-                                    $locationDesc.html(
-                                            '<ul class="ui list">' +
-                                                    '<li><strong>Latitude:</strong> '+ result.latitude + '</li>'+
-                                                    '<li><strong>Longitude:</strong> '+ result.longitude + '</li>'+
-                                            '</ul>'
-                                    )
-
-                                },
-                                searchDelay:	500,
-                                apiSettings: {
-                                    onResponse: function (googleResponse) {
-                                        var response = {
-                                            results: {}
-                                        };
-                                        // translate github api response to work with search
-                                        $.each(googleResponse.results, function (index, item) {
-                                            var
-                                                    countryCategory = GoogleParser.getCountry(item) || 'Unknown',
-                                                    maxResults = 8
-                                                    ;
-                                            if (index >= maxResults) {
-                                                return false;
-                                            }
-                                            // create new countryCategory category
-                                            if (response.results[countryCategory] === undefined) {
-                                                response.results[countryCategory] = {
-                                                    name: countryCategory,
-                                                    icon: GoogleParser.getCountryShort(item),
-                                                    results: []
-                                                };
-                                            }
-                                            // add result to category
-                                            response.results[countryCategory].results.push({
-                                                title: item.formatted_address,
-                                                description: item.description,
-                                                latitude: GoogleParser.getLatitude(item),
-                                                longitude: GoogleParser.getLongitude(item),
-                                                icon: GoogleParser.getCountryShort(item),
-                                                country: GoogleParser.getCountry(item) || 'Unknown'
-
-                                            });
-                                        });
-                                        return response;
-                                    },
-                                    url: 'https://maps.googleapis.com/maps/api/geocode/json?address={query}'
-                                }
-                            })
-
-            $addToLocation.on('click', function(e){
-                e.preventDefault()
-                $singleLocationResult.addClass('loader')
-                Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([singleLocationResult]), function(response) {
-                    alertify.success(singleLocationResult.name + ' added successfully');
-                    $countrySelectionButton.addClass('concelaled');
-                    $singleLocationResult.removeClass('loader')
-                    $singleLocationResult.hide()
-
-
-                    vm.refreshLocations()
-                }, function(errorResponse){
-                    console.dir(errorResponse)
-                    alertify.error(errorResponse.error)
-                })
-            })
         });
 
 

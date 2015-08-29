@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
+@section('title')
+    Manage items
+@endsection
 
 @section('content')
     <div class="main ui container">

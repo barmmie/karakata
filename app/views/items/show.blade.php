@@ -1,9 +1,45 @@
 @extends('layouts.public')
 
+@section('title')
+    Item - {{$item->title}}
+@endsection
+
+@section('meta')
+    <meta property="og:title" content="{{$item->title}}"/>
+    <meta property="twitter:title" content="{{$item->title}}"/>
+    <meta property="og:type" content="{{$item->category->title}}"/>
+    <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
+    <meta property="og:image" content="{{asset($item->picture->thumbnail_src)}}"/>
+    <meta property="twitter:image" content="{{asset($item->picture->thumbnail_src)}}"/>
+    <meta property="og:description" content="{{str_limit($item->description, 100)}}" />
+    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}" />
+@endsection
+
 @section('styles')
     @if(count($item->pictures) > 0)
         <link rel="stylesheet" href="{{asset('assets/bxslider-4/dist/jquery.bxslider.min.css')}}"/>
     @endif
+
+    <style>
+        #bx-pager {
+            text-align: center;
+            margin-top: -30px;
+        }
+
+        #bx-pager a {
+            margin: 0 3px;
+        }
+        #bx-pager a img {
+            padding: 3px;
+            width: 100px;
+            height: auto;
+            border: solid #ccc 1px;
+        }
+
+        #bx-pager a.active img {
+            border: solid #5280DD 1px;
+        }
+    </style>
 @endsection
 
 @section('content')
@@ -54,14 +90,14 @@
                                 @foreach($item->pictures as $picture)
                                     <li class="ui fluid bordered rounded image">
                                         <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
-                                        <img class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                        <img alt="{{$picture->title}}" class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
                                     </li>
                                 @endforeach
                             </ul>
 
                             <div id="bx-pager">
                                 @foreach($item->pictures as $index => $picture)
-                                    <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
+                                    <a data-slide-index="{{$index}}" href=""><img  class="" src="{{$picture->thumbnail_src}}"/></a>
                                 @endforeach
 
                             </div>
@@ -440,9 +476,10 @@
 
 
         new Share(".share-button", {
+            title: "Share - {{$item->title}}}",
             networks: {
                 facebook: {
-                    app_id: "abc123"
+                    app_id: "602752456409826"
                 }
             }
         });

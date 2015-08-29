@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('title')
+    Manage categories
+@endsection
+
 @section('styles')
 
 

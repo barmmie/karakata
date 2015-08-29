@@ -1,5 +1,10 @@
 @extends('layouts.public')
 
+
+@section('title')
+    Category - {{$parent_category->title}} {{$sub_category? "- $sub_category->title": ''}}
+@endsection
+
 @section('content')
     @include('partials._search_cta')
 

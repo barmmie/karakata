@@ -7,23 +7,16 @@
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
 
-    <link rel="image_src" type="image/jpeg" href="/images/logo.png">
-
-    <!-- Site Properities -->
     <meta name="generator" content="DocPad v6.78.1">
-    <title>Dropdown | Semantic UI</title>
-
-    <meta name="description" content="A dropdown allows a user to select a value from a series of options">
-    <meta name="keywords" content="html5, ui, library, framework, javascript">
-
-
+    <title>Admin | @yield('title')</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/css/admin_style.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/alertify.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/themes/semantic.min.css')}}"/>
     @yield('styles')
+    <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/css/admin_style.css')}}"/>
+
 
 </head>
 <body id="dash" class="pushable" ontouchstart="" cz-shortcut-listen="true">
@@ -46,7 +39,7 @@
         </a>
 
         <div class="item">
-            Dropdown
+            {{Setting::get('site_name')}}
         </div>
 
         <div class="right menu">

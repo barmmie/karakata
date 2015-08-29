@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    Edit item - {{$item->title}}
+@endsection
+
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/jquery.classyedit.css')}}"/>

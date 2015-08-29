@@ -1,11 +1,13 @@
 <div class="mast item">
-    <a class="ui logo icon image" href="/">
-        <i class="shadowed circular search icon "></i>
-    </a>
+    @if(Setting::get('logo_src')!='')
+        <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+    @else
+        <i class="circular inverted big teal shadowed search icon"></i>
+    @endif
     <a href="/"><b>{{Setting::get('site_name', 'Enclassified')}}</b></a>
 </div>
 
-<a class="item" href="{{route('pages.homepage')}}">
+<a class="item" target="_blank" href="{{route('pages.homepage')}}">
     <i class="sign out icon"></i>View frontend
 </a>
 

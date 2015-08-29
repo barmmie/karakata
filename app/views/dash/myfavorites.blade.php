@@ -1,4 +1,7 @@
 @extends('layouts.public')
+@section('title')
+    Dash - My favorite items
+@endsection
 
 @section('content')
     <div class="ui container p-t-lg">

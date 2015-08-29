@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    {{Setting::get('site_slogan')}}
+@endsection
+
 @section('styles')
     <link href="{{asset('assets/css/owl.carousel.css')}}" rel="stylesheet">
     <link href="{{asset('assets/css/owl.theme.css')}}" rel="stylesheet">
@@ -57,13 +61,17 @@
                    @include('widgets._featured_items')
                 </div>
 
+                @if(Setting::get('ad_leaderboard')!='')
+                    {{Setting::get('ad_leaderboard')}}
+                @endif
+
             </div>
             <div class="four wide column">
+                @if(Setting::get('ad_250')!='')
                 <div class="ui segment padding-reset">
-                    <a href="http://google.com" class="ui medium image">
-                        <img src="{{asset('images/site/app.jpg')}}">
-                    </a>
+                    {{Setting::get('ad_250')}}
                 </div>
+                @endif
                 <div class="ui segment">
                    @include('widgets._popular_categories')
                 </div>

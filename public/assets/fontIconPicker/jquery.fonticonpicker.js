@@ -693,6 +693,7 @@
 			} else {
 				this.iconPicker.find('.selected-icon').html('<i class="icon ' + (theIcon || 'fip-icon-block') + '"></i>');
 			}
+
 			// Set the value of the element and trigger change event
 			this.element.val((theIcon === '' ? this.settings.emptyIconValue : theIcon )).trigger('change');
 			if ( this.triggerEvent !== null ) {

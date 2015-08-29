@@ -107,19 +107,6 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         $query =  $query->where('title', 'LIKE', "%{$searchKey}%");
 
-//        foreach($searchKeys as $index => $key) {
-//            if($index == 0) {
-//                $query =  $query->where('title', 'LIKE', "%{$key}%");
-//
-//            }else {
-//                $query =  $query->orWhere('title', 'LIKE', "%{$key}%");
-//
-//            }
-//
-//            $query = $query->orWhere('description', 'LIKE', "%{$key}%");
-//
-//        }
-
         return $query;
     }
 
@@ -139,7 +126,7 @@ use \Laracasts\Commander\Events\EventGenerator;
                         ->with('picture')
                         ->with('location')
                         ->approved()
-                        ->where('created_at', '>=', Carbon::now()->subMonths(6) )
+//                        ->where('created_at', '>=', Carbon::now()->subMonths(6) )
                         ->limit($limit);
         if (!empty($exclude)) {
             $query = $query->whereNotIn('id', $exclude);

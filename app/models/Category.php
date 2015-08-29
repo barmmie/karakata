@@ -65,7 +65,7 @@ class Category extends \Kalnoy\Nestedset\Node
             $cats = $cats->with('active_items');
         }
 
-        return $cats->get(['id', 'title as label', '_lft', '_rgt', 'parent_id', 'slug'])->toTree();
+        return $cats->get(['id', 'icon', 'title as label', '_lft', '_rgt', 'parent_id', 'slug'])->toTree();
 //        });
     }
 

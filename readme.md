@@ -2,13 +2,7 @@
 
 confirm event based emails
 
-Admin
-    analytics
+category icon
 
-Google Adsense
-
-search location_id not filtering
-
-title/meta
 
 

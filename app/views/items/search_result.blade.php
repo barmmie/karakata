@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    Search for -   {{Input::get('query')}}
+@endsection
+
 @section('content')
     @include('partials._search_cta')
 
@@ -42,7 +46,7 @@
                                 <div class="header">
 
                                 </div>
-                                There are no currently no items in this category.
+                               Search for "<strong>{{Input::get('query')}}</strong>" yielded no result.
                                 @if(Input::has('filtered'))
                                     <p>Consider modifying your filters perhaps?</p>
                                 @endif

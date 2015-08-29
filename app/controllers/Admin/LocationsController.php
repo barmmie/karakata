@@ -44,7 +44,6 @@ class LocationsController extends \BaseController {
 	 */
 	public function store()
 	{
-        dd(Input::all());
         try {
            $result =  Location::bulkInsert(Input::all());
 

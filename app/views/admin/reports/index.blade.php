@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 
+@section('title')
+    Manage reports
+@endsection
+
 @section('content')
     <div class="main ui container">
 
@@ -8,7 +12,7 @@
 
             <div class="ui segment">
                 <h4 class="header">
-                    <i class="icon"></i> All Items
+                    <i class="warning icon"></i> Abuse reports
 
                 </h4>
 
@@ -51,7 +55,7 @@
                                 </div>
                                 <div class="content">
 
-                                    <a class="header" href="{{route('items.show', $report->item->slug)}}">{{$report->item->title}}</a>
+                                    <a class="header" href="{{route('admin.items.show', $report->item->id)}}">{{$report->item->title}}</a>
                                     <div class="meta">
                                             <span class="date m-b-xs">
                                                 <i class="teal calendar icon"></i> {{$report->item->created_at->format('M j, Y g:i A')}}
@@ -66,7 +70,8 @@
 
                                     </div>
                                     <div class="description">
-                                        <p></p>
+
+                                        <p> <i class="red warning icon "> </i> {{$report->message}}</p>
                                     </div>
                                     <div class="extra">
                                         @if($report->item->negotiable)

@@ -8,15 +8,16 @@
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
 
-    <title>{{Setting::get('site_name', 'Enclassified')}}</title>
+    <title>{{Setting::get('site_name', 'Enclassified')}} | @yield('title')</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
-    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
+
 
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/alertify.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/themes/semantic.min.css')}}"/>
     @yield('styles')
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
 
     <style type="text/css">
 
@@ -47,10 +48,12 @@
     <script type="text/javascript">
         $(document).ready(function(){
             $('.nag-login').popup();
-
         });
     </script>
 @endif
+
+
+{{Setting::get('analytics')}}
 
 
 <script type="text/javascript">

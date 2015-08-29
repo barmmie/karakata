@@ -1,5 +1,8 @@
 @extends('layouts.admin')
 
+@section('title')
+    Item - {{$item->title}}
+@endsection
 
 @section('content')
     <div class="main ui container">
@@ -25,12 +28,9 @@
                             </div>
                         </div>
 
-                        <div class="ui content">
-                            <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
                             @if(count($item->pictures) > 0)
-
-
                                 <ul class="bxslider">
+                                    <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
 
                                     @foreach($item->pictures as $picture)
                                         <li class="ui fluid bordered rounded image">
@@ -39,23 +39,20 @@
                                         </li>
                                     @endforeach
                                 </ul>
-
                                 <div id="bx-pager">
-                                    @foreach($item->pictures as $index => $picture)
-                                        <a data-slide-index="{{$index}}" href=""><img src="{{$picture->thumb_src}}"/></a>
+                                    @foreach($item->pictures as $picture)
+                                        <a data-slide-index="" href=""><img src="{{$picture->thumbnail_src}}"/></a>
                                     @endforeach
 
                                 </div>
                             @else
                                 <div class="ui fluid bordered rounded image">
+                                    <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+
                                     <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
 
                                 </div>
-
                             @endif
-                        </div>
-
-
 
                             <div class="m-t-md">
                                 @if($item->negotiable)

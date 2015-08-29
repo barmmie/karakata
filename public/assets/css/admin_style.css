@@ -1703,7 +1703,6 @@ body.progress.animated .ui.progress .bar {
 
     /* Resize Main Container */
     #dash .main.container {
-        margin-right: 318px !important;
     }
 
     /* Resize TOC  */

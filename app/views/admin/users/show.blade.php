@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 
+@section('title')
+    User - {{$user->full_name}}
+@endsection
+
 @section('content')
     <div class="main ui container">
 

@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    Login
+@endsection
+
 @section('content')
         <div class="ui middle aligned center aligned text container p-t-lg">
             <div class="column">

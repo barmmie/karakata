@@ -1,5 +1,9 @@
 @extends('layouts.public')
 
+@section('title')
+    Dash - My items
+@endsection
+
 @section('content')
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">

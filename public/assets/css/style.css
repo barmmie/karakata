@@ -62,3 +62,11 @@ body {
     height: 100%;
 }
 
+.bx-next, .bx-prev {
+    z-index: 80 !important;
+}
+
+.ui.fixed.navbar.padded {
+    height: 70px;
+}
+

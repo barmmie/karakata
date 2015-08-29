@@ -1,3 +1,4 @@
+@if(count($featured_items))
 <h2 class="ui dividing header">
     Featured listing
 </h2>
@@ -12,7 +13,7 @@
                         <i class=" corner icon">{{count($item->pictures)}}</i>
 
                     </a>
-                    <img src="{{asset($item->mainThumbnail())}}}}">
+                    <img src="{{asset($item->mainThumbnail())}}">
                 </div>
                 <div class="content">
 
@@ -40,3 +41,5 @@
 
     </div>
 </div>
+
+    @endif

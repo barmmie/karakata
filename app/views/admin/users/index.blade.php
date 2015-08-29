@@ -1,6 +1,10 @@
 @extends('layouts.admin')
 
 
+@section('title')
+    Manage users
+@endsection
+
 @section('content')
     <div class="main ui container">
 
