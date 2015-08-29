@@ -23,24 +23,6 @@ class PageController extends \BaseController {
         $lastWeek = new Carbon('last week');
         $lastMonth = new Carbon('last month');
 
-        $routeCollection = Route::getRoutes();
-
-        $dynamicReg = "/{\\S*}/"; //used for omitting dynamic urls that have {} in uri
-
-        foreach ($routeCollection as $route) {
-
-            if(!preg_match($dynamicReg,$route->getUri())
-//                && !blacklisted($route->getUri())
-                && in_array('GET',$route->getMethods())
-                && (isset($route->getAction()['index']) && $route->getAction()['index']!==false)
-            ){
-
-                $sitemap->add(URL::to($route->getUri()), $lastWeek , '1.0', 'daily');
-
-            }
-
-        }
-
         $items = Item::approved()->get();
 
         foreach($items as $item) {

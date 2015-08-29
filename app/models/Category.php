@@ -8,7 +8,7 @@
  */
 class Category extends \Kalnoy\Nestedset\Node
 {
-    protected $fillable = array('title');
+    protected $fillable = array('title', 'icon');
 
 
     public static function boot()
@@ -18,18 +18,6 @@ class Category extends \Kalnoy\Nestedset\Node
         static::saved(function ($category) {
             static::where('id', $category->id)
                 ->update(['slug' => $category->id . '-' . Str::slug($category->title, '-')]);
-        });
-
-        static::deleted(function () {
-            Cache::forget('categories_cache');
-        });
-
-        static::updated(function () {
-            Cache::forget('categories_cache');
-        });
-
-        static::created(function () {
-            Cache::forget('categories_cache');
         });
 
     }
@@ -57,8 +45,6 @@ class Category extends \Kalnoy\Nestedset\Node
 
     public static function fetchTree($fetchItemsCount = false)
     {
-//        return Cache::rememberForever('categories_cache', function () {
-
         $cats = static::withoutRoot();
 
         if ($fetchItemsCount) {
@@ -66,7 +52,6 @@ class Category extends \Kalnoy\Nestedset\Node
         }
 
         return $cats->get(['id', 'icon', 'title as label', '_lft', '_rgt', 'parent_id', 'slug'])->toTree();
-//        });
     }
 
     public function scopePopular($query, $limit = 6)
@@ -88,16 +73,15 @@ class Category extends \Kalnoy\Nestedset\Node
             ;
     }
 
-    public static function renameNode($id, $originalname, $name)
+    public static function renameNode($id, $name, $icon)
     {
-        return static::where("title", $originalname)
-            ->where("id", $id)
-            ->update(["title" => $name]);
+        return static::where("id", $id)
+            ->update(["title" => $name, "icon" => $icon]);
     }
 
-    public static function addNode($title)
+    public static function addNode($title, $icon)
     {
-        $newCategory = new static(['title' => $title]);
+        $newCategory = new static(['title' => $title, "icon" => $icon]);
 
         $rootCategory = static::root();
 

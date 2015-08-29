@@ -30,11 +30,12 @@ class CategoriesController extends \BaseController
 
         switch ($this->request->action) {
             case "renameCategory":
-                $status = Category::renameNode($this->request->id, $this->request->originalname, $this->request->name);
+                $status = Category::renameNode($this->request->id, $this->request->name, $this->request->icon);
                 break;
 
             case "addCategory":
-                $status = Category::addNode($this->request->name);
+                $status = Category::addNode($this->request->name, $this->request->icon);
+                DB::commit();
                 return $status;
                 break;
 
@@ -55,6 +56,9 @@ class CategoriesController extends \BaseController
         }
 
         DB::commit();
+
+
+
 
     }
 }

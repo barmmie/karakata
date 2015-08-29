@@ -19,8 +19,8 @@
             margin-bottom: 3px;
         }
 
-        li.jqtree_common{
-
+        span.jqtree-title{
+            border-bottom: dashed 1px #0088cc;
         }
 
         li.jqtree_common.jqtree-moving {
@@ -41,7 +41,7 @@
                     </div>
                     </h4>
 
-                    <input type="text" name="mytext" id="mytext" />
+
                 </div>
                 <div class="ui clearing segment ">
 
@@ -55,6 +55,46 @@
                 </div>
             </div>
 
+        <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+
+            </div>
+            <div class="content">
+                <form class="ui form">
+                    <h4 class="ui dividing header">Category details</h4>
+                    <div class="ui error message"></div>
+
+                    <div class="field">
+                        <div class="two fields">
+                            <input type="hidden" name="id"/>
+                            <input type="hidden" name="action"/>
+                            <div class="twelve wide field">
+                                <label for="">Name</label>
+                                <input type="text" name="name" placeholder="Category Name">
+                            </div>
+                            <div class="four wide field">
+                                <label for="">Icon</label>
+                                <input type="text" name="icon" id="myiconPicker" />
+                            </div>
+                        </div>
+                    </div>
+
+
+                </form>
+            </div>
+            <div class="actions">
+                <div class="ui default deny button">
+                    Close
+                </div>
+                <div class="ui positive right labeled icon button">
+                    Save
+                    <i class="checkmark icon"></i>
+                </div>
+
+            </div>
+        </div>
+
 
     </div>
 @endsection
@@ -62,9 +102,6 @@
 @section('scripts')
     <script src="{{asset('assets/jqtree/tree.jquery.js')}}"></script>
     <script src="{{asset('assets/fontIconPicker/jquery.fonticonpicker.js')}}"></script>
-    <script src="{{asset('assets/poshytip/src/jquery.poshytip.min.js')}}"></script>
-    <script src="{{asset('assets/x-editable/dist/jquery-editable/js/jquery-editable-poshytip.js')}}"></script>
-
 
 
     <script type="text/javascript">
@@ -77,40 +114,25 @@
 
         $(function () {
 
-            $('#mytext').fontIconPicker({
+            var iconPicker = $('#myiconPicker').fontIconPicker({
                 source:    ['alarm', 'search', 'user', 'tag', 'help'],
-
-
-                emptyIcon: false,
+                emptyIcon: true,
                 hasSearch: true
             });
 
-            // configure spinner
             $spinner = {
                 toggle: function() {
                     $('div.categorielist').toggleClass('loading disabled')
                 }
             };
 
-            // configure editable
-            $.fn.editableform.buttons = '<button type="submit" class="ui green icon button editable-submit"> <i class="save icon"></i> Save</button>'
-            + '<button type="button" class="ui yellow icon button editable-cancel"><i class="cancel icon "></i> Cancel</button>'
-            + '<button type="button" class="ui red icon button editable-delete"><i class="delete icon"></i> Delete</button>';
-            $.fn.editable.defaults.mode = 'inline';
+            $modal = $('.ui.modal')
 
-            $.fn.editableform.template = '<form class="form-inline editableform">'
-            +'<div class="control-group">'
-            +'<div><div class="ui input editable-input"></div><div class="editable-buttons"></div></div>'
-            +'<div class="editable-error-block"></div>'
-            +'</div>'
-            +'</form>'
-
-            // configure tree
             var $tree = $("#tree");
             var opts = {
                 data: data,
                 dragAndDrop: true,
-                autoOpen: true,
+                autoOpen: false,
                 selectable: false,
                 useContextMenu: false,
                 onCreateLi: function (node, $li) {
@@ -118,16 +140,17 @@
                     li
                             .attr("data-pk", node.id)
                             .attr("data-type", "text")
-                            .addClass("editable-click editable-container")
                             .attr("data-name", node.name)
+                            .attr("data-icon", node.icon)
+
+                    li.prepend('<i class="icon '+ node.icon +'"></i>')
+                    li.parent().append('<a class="node-delete" style="float: right;" data-pk="' + node.id +'"><i class="red big cancel icon "></i></a>')
                 }
             }
             function checkData() { if ($tree.find("ul").children().length === 0) $tree.html("You haven't setup any categories yet"); }
             $tree.bind("tree.init", checkData)
 
-            // initialize tree
             $tree.tree(opts)
-
             // move category
             $tree.bind("tree.move", function (e) {
                 $spinner.toggle();
@@ -156,63 +179,113 @@
 
             // add category
             $(".newCategory").click(function (e) {
-                e.preventDefault();
-                alertify.prompt("Category name:", '', function (e, str) {
-                    if (e) {
-                        $spinner.toggle();
-                        $.ajax(serverUrl, {
-                            type: "POST",
-                            data: {
-                                "action": "addCategory",
-                                "name": str
-                            },
-                            success: function (r) {
-                                $spinner.toggle();
-                                var root = $tree.tree("getTree");
-                                $tree.tree(
-                                        "appendNode", {
-                                            name: str,
-                                            id: r.id,
-                                            parent_id: r.parent_id
-                                        },
-                                        root
-                                );
-                                alertify.success("Category '" + str + "' has been added")
-                            },
-                            error: function (r) {
-                                $spinner.toggle();
-                                alertify.error(r.statusText);
-                            }
-                        });
-                    }
-                });
+
+                $('input[name="name"]').val('')
+                $('input[name="icon"]').val('')
+                $('input[name="id"]').val('')
+                $('input[name="action"]').val('addCategory')
+                iconPicker.refreshPicker()
+                $modal.find('div.header').html('New category')
+                showModal();
+
             }) // END add
 
-            // rename category
-            $tree.editable({
-                selector: "span.jqtree-title",
-                url: serverUrl,
-                params: function (params) {
-                    var data = {};
-                    data.action = "renameCategory";
-                    data.id = params.pk;
-                    data.name = params.value;
-                    data.originalname = params.name;
-                    return data;
-                },
-                success: function (r, v) {
-                    var node = $tree.tree("getNodeById", $(this).attr("data-pk"));
-                    node.name = v;
-                    $(this).editable("option", "name", v)
-                },
-                error: function (r) {
-                    alertify.error(r.statusText);
-                }
-            }) // END rename
+            $(document).on( "click", 'span.jqtree-title',function(e) {
 
+                $('input[name="name"]').val(this.dataset.name)
+                $('input[name="icon"]').val(this.dataset.icon)
+                $('input[name="id"]').val(this.dataset.pk)
+                $('input[name="action"]').val('renameCategory')
+                iconPicker.refreshPicker()
+                $modal.find('div.header').html('Edit category - ' + this.dataset.name)
+                showModal();
+            });
+
+            $catform = $('.ui.form')
+
+            $catform.form({
+                fields: {
+                    name: {
+                        identifier: 'name',
+                        rules: [
+                            {
+                                type: 'empty',
+                                prompt: 'Please enter your category name'
+                            }
+
+                        ]
+                    }
+
+                }
+            })
+            ;
+
+
+            function showModal()
+            {
+                $modal.modal('setting', 'transition', 'fade up')
+                        .modal('setting', 'autofocus', 'true')
+                        .modal({
+                            onApprove: function () {
+                                $catform.form('validate form')
+
+                                if($catform.form('is valid')) {
+                                    var form_values = $catform.form('get values')
+
+                                    $catform.addClass('loading')
+                                    $.ajax({
+                                        method: 'POST',
+                                        data: form_values,
+                                        url: serverUrl,
+                                        success: function(response) {
+                                            $catform.removeClass('loading')
+                                            $catform.form('reset');
+                                            $modal.modal('hide');
+
+                                            if(form_values.action == 'renameCategory') {
+
+                                                var node = $tree.tree("getNodeById", form_values.id);
+                                                $tree.tree('updateNode', node, form_values)
+                                                $tree.tree('scrollToNode', node);
+                                                alertify.success("Category '" + form_values.name + "' has been updated")
+
+
+                                            } else {
+                                                var root = $tree.tree("getTree");
+                                                $tree.tree(
+                                                        "appendNode", {
+                                                            name: form_values.name,
+                                                            id: response.id,
+                                                            icon: form_values.icon,
+                                                            parent_id: null
+                                                        },
+                                                        root
+                                                );
+                                                var node = $tree.tree('getNodeById', form_values.id);
+                                                $tree.tree('scrollToNode', node);
+                                                alertify.success("Category '" + form_values.name + "' has been added")
+                                            }
+
+                                        },
+                                        error: function(xhr) {
+                                            $catform.removeClass('loading')
+                                            alertify.error(xhr.responseJSON.message)
+                                            $catform.form('add errors', [xhr.responseJSON.message]);
+                                            return false;
+                                        }
+                                    })
+                                }
+
+                                return false;
+                            }
+                        })
+
+                        .modal('show');
+
+            }
             // delete category
-            $(document).on("click", ".editable-delete", function () {
-                var nodeId = $(this).closest(".jqtree-element").find("span:eq(0)").data("pk");
+            $(document).on("click", ".node-delete", function () {
+                var nodeId = $(this).data("pk");
                 var node = $tree.tree("getNodeById", nodeId)
 //                alertify.set({ buttonFocus: "cancel", buttonReverse: true });
                 alertify.confirm("Are you sure you want to delete this category?", function (e) {
@@ -229,6 +302,7 @@
                                 $spinner.toggle();
                                 $tree.tree("removeNode", node);
                                 checkData();
+                                alertify.success('Category has been removed')
                             },
                             error: function (r) {
                                 $spinner.toggle();
