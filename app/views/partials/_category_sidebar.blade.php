@@ -1,6 +1,6 @@
 <div class="ui segments">
     <div class="ui segment">
-        <h3 class="header">  Categories
+        <h3 class="header">  {{Lang::choice('words.category', 2)}}
         </h3>
     </div>
     <div class="ui segment">

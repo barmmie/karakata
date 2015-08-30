@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Category - {{$parent_category->title}} {{$sub_category? "- $sub_category->title": ''}}
+    {{Lang::choice('words.category', 1)}} - {{$parent_category->title}} {{$sub_category? "- $sub_category->title": ''}}
 @endsection
 
 @section('content')
@@ -26,7 +26,7 @@
                 <div class="ui segments">
                     <div class="ui segment">
                             <div class="ui breadcrumb">
-                                <a class="section" href="{{route('pages.homepage')}}">Home</a>
+                                <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                                 <i class="right angle icon divider"></i>
                                 <a class="section {{$sub_category? '': 'active'}}" href="{{route('categories.show', $parent_category->slug)}}">{{$parent_category->title}}</a>
                                 @if($sub_category)
@@ -34,13 +34,11 @@
                                     <div class="active section">{{$sub_category->title}}</div>
                                 @endif
                                 <i class="right arrow icon divider"></i>
-                                <div class="active section">{{$item_count}} result(s)</div>
+                                <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
                             </div>
                     </div>
                     <div class="ui segment">
                        @include('partials._items_filter')
-
-
                     </div>
 
                     <div class="ui padded segment">
@@ -51,10 +49,10 @@
                                 <div class="header">
 
                                 </div>
-                                There are no currently no items in this category.
+                                {{trans('phrases.category_no_items')}}
                                 @if(Input::has('filtered'))
-                                    <p>Consider modifying your filters perhaps?</p>
-                                    @endif
+                                    <p>{{trans('phrases.consider_modify_filter')}}</p>
+                                @endif
                             </div>
                         @else
                             <div class="ui divided items">
@@ -71,7 +69,7 @@
                     </div>
 
 
-                    @if($item_count > 10)
+                    @if($items->getTotal() > $items->getPerPage())
                         <div class="ui segment">
                             {{$items->links()}}
 

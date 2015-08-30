@@ -5,9 +5,11 @@
             @if(Route::is('pages.homepage'))
             <div class="p-md">
                 <h1 class="ui huge centered-text inverted header ">
-                    Buy what you want
-                    <div class="inverted sub header">Sell what you don't use.
-                        It's free and with no commission</div>
+                    {{trans('phrases.search_cta_heading')}}
+                    <div class="inverted sub header">
+                        {{trans('phrases.search_cta_subheading')}}
+
+                    </div>
                 </h1>
             </div>
             @endif
@@ -19,7 +21,7 @@
                             <div class="eight wide field p-r-none">
                                 <div class="ui right action left icon input">
                                     <i class="search icon"></i>
-                                    {{Form::text('query', Input::get('query'), ['placeholder'=>"What are you looking for"])}}
+                                    {{Form::text('query', Input::get('query'), ['placeholder'=>trans('phrases.search_cta_placeholder')])}}
                                     </div>
 
                             </div>
@@ -28,16 +30,10 @@
 
                                 <div class="ui action input">
 
-                                    {{Form::select('location_id', ['any' => 'Any location'] + $locations->lists('name', 'id') , Input::get('location_id'),  ['class' => 'ui fluid search dropdown'])}}
-                                    {{--<select name="location_id" class="ui fluid search dropdown">--}}
-                                        {{--<option value="any">Any location</option>--}}
-                                        {{--@foreach($locations as $location)--}}
-                                            {{--<option value="{{$location->id}}"> <i class="marker icon"></i> {{$location->name}}</option>--}}
+                                    {{Form::select('location_id', ['any' => trans('phrases.any_location')] + $locations->lists('name', 'id') , Input::get('location_id'),  ['class' => 'ui fluid search dropdown'])}}
 
-                                        {{--@endforeach--}}
-                                    {{--</select>--}}
                                     <button type="submit" class="ui teal button">
-                                        Search
+                                        {{trans('words.search')}}
                                     </button>
                                 </div>
 

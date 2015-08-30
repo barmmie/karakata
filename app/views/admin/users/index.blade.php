@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Manage users
+    {{trans('phrases.manage_users')}}
 @endsection
 
 @section('content')
@@ -10,28 +10,28 @@
 
         <div class="ui segments">
             <div class="ui segment">
-                <h4 class="ui header">Manage users
-                    <div class="sub header">
-                        Click on a category name below to modify it. Drag to make it a sub-category or modify its position
-                    </div>
+                <h4 class="ui header">
+                    {{trans('phrases.manage_users')}}
+
+
                 </h4>
             </div>
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a href="{{route('admin.users.index')}}" class="{{$status == null ? 'active' : ''}} item" >All</a>
-                    <a href="{{route('admin.users.index', 'unverified')}}" class="{{$status == 'unverified' ? 'active' : ''}} item" >Unverified only</a>
-                    <a href="{{route('admin.users.index', 'verified')}}" class="{{$status == 'verified' ? 'active' : ''}} item" >Verified only</a>
-                    <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >Active only</a>
-                    <a class="{{$status == 'banned' ? 'active' : ''}} item" href="{{route('admin.users.index', 'banned')}}" >Banned only</a>
+                    <a href="{{route('admin.users.index')}}" class="{{$status == null ? 'active' : ''}} item" >{{trans('words.all')}}</a>
+                    <a href="{{route('admin.users.index', 'unverified')}}" class="{{$status == 'unverified' ? 'active' : ''}} item" >{{trans('phrases.unverified_only')}}</a>
+                    <a href="{{route('admin.users.index', 'verified')}}" class="{{$status == 'verified' ? 'active' : ''}} item" >{{trans('phrases.verified_only')}}</a>
+                    <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >{{trans('phrases.acive_only')}}</a>
+                    <a class="{{$status == 'banned' ? 'active' : ''}} item" href="{{route('admin.users.index', 'banned')}}" >{{trans('phrases.banned_only')}}</a>
                 </div>
 
             </div>
             <div class="ui segment">
                 <form action="" method="GET">
                     <div class="ui fluid action input">
-                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="Search by name, email or phone"/>
-                        <button class="ui button" type="submit">Search</button>
+                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="{{trans('phrases.search_users')}}"/>
+                        <button class="ui button" type="submit">{{trans('words.search')}}</button>
                     </div>
                 </form>
 
@@ -40,16 +40,16 @@
                 <table class="ui selectable stacked table">
                     <thead>
                     <tr>
-                        <th>Actions</th>
+                        <th>{{trans('words.actions')}}</th>
 
-                        <th>Name</th>
-                        <th>E-mail</th>
-                        <th>Phone</th>
-                        <th>No of item(s)</th>
-                        <th>Date Joined</th>
+                        <th>{{trans('words.name')}}</th>
+                        <th>{{trans('words.email')}}</th>
+                        <th>{{trans('words.phone')}}</th>
+                        <th>{{trans('phrases.no_of_items')}}</th>
+                        <th>{{trans('phrases.joined_in')}}</th>
 
-                        <th>Verified</th>
-                        <th>Status</th>
+                        <th>{{trans('words.verified')}}</th>
+                        <th>{{trans('words.status')}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,21 +63,23 @@
                                         @if(! $user->isVerified())
                                             <a href="{{route('admin.users.verify', $user->id)}}" class="item">
                                                 <i class="green thumbs up icon"></i>
-                                                Verify user email.
+                                                {{trans('phrases.verify_user_email')}}
                                             </a>
                                         @endif
 
                                         @if($user->isActive())
                                             <a href="{{route('admin.users.ban', $user->id)}}" class="item">
                                                 <i class="red ban icon"></i>
-                                                Ban this user.
+                                                {{trans('phrases.ban_user')}}
+
                                             </a>
                                         @endif
 
                                         @if($user->isBanned())
                                             <a href="{{route('admin.users.activate', $user->id)}}" class="item">
                                                 <i class="green check icon"></i>
-                                                Activate user.
+                                                {{trans('phrases.activate_user')}}
+
                                             </a>
                                         @endif
                                     </div>
@@ -88,9 +90,9 @@
                             <td>{{$user->phone}}</td>
                             <td><strong>{{count($user->items)}}</strong></td>
                             <td>{{$user->created_at->format('M j, Y')}}</td>
-                            <td>{{$user->isVerified()? '<div class="ui green label">Yes</div>': '<div class="ui yellow label">No</div>'}}</td>
-                            <td>{{$user->isBanned()? '<div class="ui grey label">Banned</div>' : ''}}
-                                {{$user->isActive()? '<div class="ui blue label">Active</div>' : ''}}
+                            <td>{{$user->isVerified()? '<div class="ui green label">'.trans('words.yes').'</div>': '<div class="ui yellow label">'.trans('words.no').'</div>'}}</td>
+                            <td>{{$user->isBanned()? '<div class="ui grey label">'.trans('words.banned').'</div>' : ''}}
+                                {{$user->isActive()? '<div class="ui blue label">'.trans('words.active').'</div>' : ''}}
                             </td>
 
                         </tr>

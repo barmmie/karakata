@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Update profile
+    {{trans('phrases.update_profile')}}
 @endsection
 
 @section('content')
@@ -16,7 +16,7 @@
                     <div class="ui  segment">
                         <h3 class="ui dividing header">
                             <i class="user icon"></i>
-                            Update Profile
+                            {{trans('phrases.update_profile')}}
                         </h3>
 
                             {{Form::open(['route'=>'users.update_profile', 'class'=> 'ui profile form '])}}
@@ -25,19 +25,19 @@
                                 <div class="two fields">
 
                                     <div class="field">
-                                        <label>Full name</label>
+                                        <label>{{trans('words.full_name')}}</label>
 
                                         {{Form::text('full_name', $user->full_name)}}
                                     </div>
                                     <div class="field">
-                                        <label>Phone</label>
+                                        <label>{{trans('words.phone')}}</label>
 
                                         {{Form::text('phone', $user->phone)}}
                                     </div>
                                 </div>
                             </div>
                         <button class="ui teal button right labeled icon button" tabindex="0">
-                            <i class="right arrow icon"></i>Update my profile</button>
+                            <i class="right arrow icon"></i>{{trans('phrases.update_profile')}}</button>
 
                             {{Form::close()}}
 
@@ -45,12 +45,14 @@
                     <div class="ui secondary segment">
                         <h3 class="ui dividing header">
                             <i class="lock icon"></i>
-                            Update password
+                            {{trans('phrases.update_password')}}
                         </h3>
 
                         {{Form::open(['route'=>'users.update_password', 'class'=> 'ui profile form '])}}
                         <div class="field">
-                            <label>Current password</label>
+                            <label>
+                                {{trans('phrases.current_password')}}
+                            </label>
                             <div class="fields">
                                 <div class="twelve wide field">
                                     {{Form::password('current_password')}}
@@ -63,12 +65,14 @@
                             <div class="two fields">
 
                                 <div class="field">
-                                    <label>New password</label>
+                                    <label>                            {{trans('phrases.new_password')}}
+                                    </label>
 
                                     {{Form::password('new_password')}}
                                 </div>
                                 <div class="field">
-                                    <label>Confirm new password</label>
+                                    <label>                            {{trans('phrases.confirm_new_password')}}
+                                    </label>
 
                                     {{Form::password('confirm_new_password')}}
                                 </div>
@@ -76,7 +80,8 @@
                         </div>
 
                         <button class="ui brown button right labeled icon button" tabindex="0">
-                            <i class="right arrow icon"></i>Update my password</button>
+                            <i class="right arrow icon"></i>                            {{trans('phrases.update_password')}}
+                        </button>
 
                         {{Form::close()}}
                     </div>
@@ -98,11 +103,11 @@
                     rules: [
                         {
                             type: 'empty',
-                            prompt: 'Please enter your full name'
+                            prompt: '{{trans('validation.required', ['attribute' => 'name'])}}'
                         },
                         {
                             type: 'length[4]',
-                            prompt: 'Your full name should be at least 4 characters'
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'name', 'min' => 4])}}'
                         }
                     ]
                 },
@@ -111,11 +116,11 @@
                     rules: [
                         {
                             type: 'empty',
-                            prompt: 'Please enter a phone '
+                            prompt: '{{trans('validation.required', ['attribute' => 'phone number'])}}'
                         },
                         {
-                            type: 'length[4]',
-                            prompt: 'Enter a valid phone number'
+                            type: 'length[6]',
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'phone number', 'min' => 6])}}'
                         }
 
                     ]

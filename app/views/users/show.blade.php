@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Items by  {{$user->full_name}}
+    {{trans('phrases.items_by')}} {{$user->full_name}}
 @endsection
 
 @section('content')
@@ -18,14 +18,14 @@
                        <div class="content">
                            <a class="header">{{$user->full_name}}</a>
                            <div class="meta">
-                               <span class="date">Joined in {{$user->created_at->format('M, j Y')}}</span>
+                               <span class="date">{{trans('phrases.joined_in')}} {{$user->created_at->format('M, j Y')}}</span>
                            </div>
 
                        </div>
                        <div class="extra content">
                            <a>
                                <i class="file icon"></i>
-                               {{$item_count}} Items
+                               {{$item_count}} {{Lang::choice('words.item', $item_count)}}
                            </a>
                        </div>
                    </div>
@@ -49,7 +49,7 @@
 
                     <div class="ui segment">
                         <h4 class="header">
-                            <i class="icon"></i> Items by {{$user->full_name}}
+                            <i class="icon"></i> {{trans('phrases.items_by')}} {{$user->full_name}}
 
                         </h4>
 
@@ -63,7 +63,7 @@
                                 <div class="header">
 
                                 </div>
-                                This user currently has no items in this category.
+                               {{trans('phrases.user_has_no_items')}}
                             </div>
                         @else
                             <div class="ui divided items">

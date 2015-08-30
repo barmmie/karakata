@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Search for -   {{Input::get('query')}}
+    {{trans('words.search')}} -   {{Input::get('query')}}
 @endsection
 
 @section('content')
@@ -25,12 +25,12 @@
                 <div class="ui segments">
                     <div class="ui segment">
                         <div class="ui breadcrumb">
-                            <a class="section" href="{{route('pages.homepage')}}">Home</a>
+                            <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             <i class="right angle icon divider"></i>
-                            <div class="section"> Search : '{{Input::get('query')}}'</div>
+                            <div class="section"> {{trans('words.search')}} : '{{Input::get('query')}}'</div>
 
                             <i class="right arrow icon divider"></i>
-                            <div class="active section">{{$item_count}} result(s)</div>
+                            <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
                         </div>
                     </div>
                     <div class="ui segment">
@@ -46,9 +46,10 @@
                                 <div class="header">
 
                                 </div>
-                               Search for "<strong>{{Input::get('query')}}</strong>" yielded no result.
+                                {{trans('phrases.search_no_results', ['query' => Input::get('query') ])}}
+
                                 @if(Input::has('filtered'))
-                                    <p>Consider modifying your filters perhaps?</p>
+                                    <p>{{trans('phrases.consider_modify_filter')}}</p>
                                 @endif
                             </div>
                         @else

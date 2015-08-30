@@ -1,7 +1,7 @@
 
 <div class="m-md">
     <h3 class="ui dividing header">
-        Recent items
+        {{trans('phrases.recent_items')}}
     </h3>
 </div>
 

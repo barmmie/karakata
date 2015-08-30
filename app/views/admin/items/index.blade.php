@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Manage items
+    {{trans('phrases.manage_items')}}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 
                     <div class="ui segment">
                         <h4 class="header">
-                            <i class="icon"></i> All Items
+                            <i class="icon"></i>     {{trans('phrases.manage_items')}}
 
                         </h4>
 
@@ -20,10 +20,10 @@
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a href="{{route('admin.items.index')}}" class="{{$status == null ? 'active' : ''}} item" >All</a>
-                    <a href="{{route('admin.items.index', 'pending')}}" class="{{$status == 'pending' ? 'active' : ''}} item" >Pending only</a>
-                    <a href="{{route('admin.items.index', 'approved')}}" class="{{$status == 'approved' ? 'active' : ''}} item" >Approved only</a>
-                    <a class="{{$status == 'rejected' ? 'active' : ''}} item" href="{{route('admin.items.index', 'rejected')}}" >Rejected only</a>
+                    <a href="{{route('admin.items.index')}}" class="{{$status == null ? 'active' : ''}} item" >{{trans('words.all')}}</a>
+                    <a href="{{route('admin.items.index', 'pending')}}" class="{{$status == 'pending' ? 'active' : ''}} item" >{{trans('phrases.pending_only')}}</a>
+                    <a href="{{route('admin.items.index', 'approved')}}" class="{{$status == 'approved' ? 'active' : ''}} item" >{{trans('phrases.approved_only')}}</a>
+                    <a class="{{$status == 'rejected' ? 'active' : ''}} item" href="{{route('admin.items.index', 'rejected')}}" >{{trans('phrases.rejected_only')}}</a>
                 </div>
 
             </div>
@@ -31,8 +31,8 @@
             <div class="ui segment">
                 <form action="" method="GET">
                     <div class="ui fluid action input">
-                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="Search by title, email"/>
-                        <button class="ui button" type="submit">Search</button>
+                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="{{trans('phrases.search_item_copy')}}"/>
+                        <button class="ui button" type="submit">{{trans('words.search')}}</button>
                     </div>
                 </form>
 
@@ -46,7 +46,7 @@
                                 <div class="header">
 
                                 </div>
-                                There are not items here
+                                {{trans('phrases.no_items_here')}}
                             </div>
                         @else
                             <div class="ui divided items">
@@ -85,19 +85,19 @@
                                             </div>
                                             <div class="extra">
                                                 @if($item->negotiable)
-                                                    <div class="ui brown tag label">Negotiable</div>
+                                                    <div class="ui brown tag label">{{trans('words.negotiable')}}</div>
                                                 @endif
 
                                                 @if($item->isApproved())
-                                                    <div class="ui blue label">Approved</div>
+                                                    <div class="ui blue label">{{trans('words.approved')}}</div>
                                                 @endif
 
                                                 @if($item->isRejected())
-                                                    <div class="ui orange label">Rejected</div>
+                                                    <div class="ui orange label">{{trans('words.rejected')}}</div>
                                                 @endif
 
                                                 @if($item->isPending())
-                                                    <div class="ui grey label">Pending approval</div>
+                                                    <div class="ui grey label">{{trans('phrases.pending_approval')}}</div>
                                                 @endif
 
                                             </div>
@@ -106,20 +106,20 @@
                                                 <a href="{{route('admin.items.delete', $item->id)}}" class="ui right floated tiny red button confirm-delete">
                                                     <i class="trash icon"></i>
 
-                                                    Delete
+                                                    {{trans('words.delete')}}
                                                 </a>
                                                 @if(! $item->isRejected())
                                                     <a href="{{route('admin.items.reject', $item->id)}}" class="ui right floated tiny orange button">
                                                         <i class="cancel icon"></i>
 
-                                                        Reject
+                                                        {{trans('words.reject')}}
                                                     </a>
                                                 @endif
                                                 @if(! $item->isApproved())
                                                     <a href="{{route('admin.items.approve', $item->id)}}" class="ui right floated tiny primary button">
                                                         <i class="check icon"></i>
 
-                                                        Approve
+                                                        {{trans('words.approve')}}
                                                     </a>
                                                 @endif
                                             </div>

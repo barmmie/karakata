@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Messages - My messages
+    {{Lang::choic('words.message',2)}} - {{trans('phrases.my_messages')}}
 @endsection
 
 @section('content')
@@ -9,9 +9,6 @@
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
                 @include('partials._user_sidebar')
-
-
-
             </div>
 
             <div class="twelve wide column">
@@ -19,14 +16,14 @@
                     <div class="ui segment">
                         <h3 class="ui header">
                             <i class="mail icon"></i>
-                            My messages
+                            {{trans('phrases.my_messages')}}
                         </h3>
                     </div>
                     <div class="ui segment">
                         <div class="ui pointing secondary menu">
-                            <a class="item {{$message_filter==null?'active':''}}" href="{{route('dash.mymessages')}}">All</a>
-                            <a class="item {{$message_filter=='read'?'active':''}}" href="{{route('dash.mymessages', 'read')}}">Read messages</a>
-                            <a class="item {{$message_filter=='unread'?'active':''}}" href="{{route('dash.mymessages', 'unread')}}">Unread messages</a>
+                            <a class="item {{$message_filter==null?'active':''}}" href="{{route('dash.mymessages')}}">{{trans('words.all')}}</a>
+                            <a class="item {{$message_filter=='read'?'active':''}}" href="{{route('dash.mymessages', 'read')}}">{{trans('phrases.read_messages')}}</a>
+                            <a class="item {{$message_filter=='unread'?'active':''}}" href="{{route('dash.mymessages', 'unread')}}">{{trans('phrases.unread_messages')}}</a>
                         </div>
                     </div>
                     <div class="ui  segment">
@@ -34,7 +31,7 @@
 
                         @if(count($messages) < 1)
                             <div class="ui message">
-                                You currently have no message on any of your items.
+                                {{trans('phrases.user_no_messages')}}
                             </div>
 
                         @else
@@ -48,7 +45,7 @@
                                         <div class="content">
                                             <a class="header">{{$message->item->title}}</a>
                                             <div class="meta">
-                                                <span><strong>FROM:</strong></span>
+                                                <span><strong>{{trans('words.from')}}:</strong></span>
 
                                             <span class="category">
                                                 <i class="user icon"></i>{{$message->name}}

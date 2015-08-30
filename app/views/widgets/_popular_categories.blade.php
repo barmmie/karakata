@@ -1,6 +1,8 @@
 <div class="m-b-md">
     <h2 class="ui dividing header">
-        Popular categories
+
+        {{trans('phrases.popular_categories')}}
+
     </h2>
 </div>
 

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Edit item - {{$item->title}}
+    {{trans('phrases.update_item')}} - {{$item->title}}
 @endsection
 
 @section('styles')
@@ -19,7 +19,7 @@
                 <div class="ui segment">
                     <h3 class="ui dividing header">
                         <i class="add pencil icon"></i>
-                       Update item : {{$item->title}}
+                      {{trans('phrases.update_item')}} : {{$item->title}}
                     </h3>
                     @include('partials._form_errors')
 
@@ -30,10 +30,10 @@
 
                     <div class="two fields">
                         <div class="required field">
-                            <label for="">Item category</label>
+                            <label for="">{{Lang::choice('words.category', 1)}}</label>
                             <div class="category ui dropdown button">
                                 {{Form::hidden('category_id', $item->category_id)}}
-                                <span class="text">Choose a category</span>
+                                <span class="text">{{trans('phrases.choose_a_category')}}</span>
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
                                     @foreach($categories as $category)
@@ -57,17 +57,17 @@
 
 
                         <div class="required field">
-                            <label for="fruit">Ad type:</label>
+                            <label for="fruit">{{trans('phrases.ad_type')}}:</label>
 
-                            I am posting this as a/an
+                            {{trans('phrases.posting_as')}}
                             <div class="ui inline dropdown">
                                 {{Form::hidden('type', $item->type)}}
                                 <div class="text">today</div>
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
-                                    <div class="header">What user type</div>
-                                    <div class="active item" data-text="Individual" data-value="personal"><i class="male icon"></i> Individual</div>
-                                    <div class="item" data-text="Business" data-value="business"><i class="suitcase icon"></i> Business</div>
+                                    <div class="header">{{trans('phrases.posting_as')}}</div>
+                                    <div class="active item" data-text="{{trans('words.individual')}}" data-value="personal"><i class="male icon"></i> {{trans('words.individual')}}</div>
+                                    <div class="item" data-text="{{trans('words.business')}}" data-value="business"><i class="suitcase icon"></i> {{trans('words.business')}}</div>
                                 </div>
                             </div>
 
@@ -79,7 +79,7 @@
 
                     <div class="required field">
 
-                        <label>Ad title</label>
+                        <label>{{trans('words.title')}}</label>
                         {{Form::text('title', $item->title, ['placeholder'=> 'E.g Brand new google nexus 7 ', 'id'=>'title'])}}
 
 
@@ -87,7 +87,7 @@
 
 
                     <div class=" field">
-                        <label for="">Currently uploaded photos</label>
+                        <label for="">{{trans('phrases.currently_uploaded_photos')}}</label>
 
                         <div class="ui photos segment">
                             @if(count($item->pictures))
@@ -111,12 +111,12 @@
                     </div>
 
                     <div class="field">
-                        <label for="">Photos</label>
+                        <label for="">{{Lang::choice('words.photo', 2)}}</label>
                         <div id="myDropZone" class="dropzone">
                             <div class="fallback">
                                 <input name="files[]" type="file" multiple />
                                 <input name="multipart_upload" type="hidden" value="1" />
-                                <p>Choose images you want to attach to the item</p>
+                                <p>{{trans('phrases.choose_images')}}</p>
                             </div>
                         </div>
                         {{Form::hidden('pictures_id')}}
@@ -125,24 +125,24 @@
 
 
                     <div class="required field">
-                        <label>Description</label>
+                        <label>{{trans('words.description')}}</label>
                         {{Form::textarea('description', $item->description, ['class'=> 'classy-editor'])}}
                     </div>
 
                     <div class="two fields">
                         <div class="required ten wide   field">
-                            <label for="">Amount</label>
+                            <label for="">{{trans('words.amount')}}</label>
 
                             <div class="ui right action left icon input">
                                 <i class="currency icon "></i>
                                 {{Form::text('amount', $item->amount,  ['placeholder'=> 'Amount'])}}
                                 <div class="ui dropdown button">
                                     {{Form::hidden('negotiable', $item->negotiable)}}
-                                    <div class="text">Negotiable?</div>
+                                    <div class="text">{{trans('words.negotiable')}}?</div>
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
-                                        <div class="item" data-value="1">Negotiable</div>
-                                        <div class="item" data-value="0">Non-negotiable</div>
+                                        <div class="item" data-value="1">{{trans('words.negotiable')}}</div>
+                                        <div class="item" data-value="0">{{trans('words.non_negotiable')}}</div>
                                     </div>
                                 </div>
                             </div>
@@ -150,11 +150,11 @@
 
                         </div>
                         <div class="required six wide  field">
-                            <label for="">Location</label>
+                            <label for="">{{Lang::choice('words.location', 1)}}</label>
                             <div class="ui fluid search selection dropdown">
                                 {{Form::hidden('location_id', $item->location_id)}}
                                 <i class="dropdown icon"></i>
-                                <div class="default text">Select Country</div>
+                                <div class="default text">{{trans('phrases.select_location')}}</div>
                                 <div class="menu">
                                     @foreach($locations as $location)
 
@@ -170,23 +170,22 @@
                     <div class="ui accordion p-t-md p-b-md">
                         <div class="title">
                             <i class="icon dropdown"></i>
-                            I want to use a different contact details
-
+                            {{trans('phrases.use_different_contact')}}
                         </div>
                         <div class="content">
                             <div class="three fields">
                                 <div class="required field">
-                                    <label for="">Email</label>
+                                    <label for="">{{trans('words.email')}}</label>
                                     {{Form::text('email', $item->email)}}
 
                                 </div>
                                 <div class="required field">
-                                    <label for="">Seller name</label>
+                                    <label for="">{{trans('phrases.seller_name')}}</label>
                                     {{Form::text('seller_name', $item->seller_name)}}
                                 </div>
 
                                 <div class="required field">
-                                    <label for="">Phone</label>
+                                    <label for="">{{trans('words.phone')}}</label>
                                     {{Form::text('phone', $item->phone)}}
 
                                 </div>
@@ -199,39 +198,13 @@
                     </div>
 
                     <button class="ui teal button right labeled icon button" tabindex="0">
-                        <i class="right arrow icon"></i>Update this ad</button>
+                        <i class="right arrow icon"></i>{{trans('phrases.update_item')}}</button>
                     {{Form::close()}}
 
                 </div>
             </div>
             <div class="four wide column">
-                <div class="ui content p-md">
-                    <div class="ui center aligned icon header">
-                        <i class="orange circular icon picture">
-
-                        </i>
-                        Post a Free Classified
-                    </div>
-                    <p>                            Post your free online classified ads with us. Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                </div>
-
-                <div class="ui piled segment">
-                    <h4 class="ui header">HOW TO SELL QUICKLY?</h4>
-                    <div class="ui bulleted list">
-                        <div class="item">Gaining Access</div>
-                        <div class="item">Inviting Friends</div>
-                        <div class="item">
-                            <div>Benefits</div>
-                            <div class="list">
-                                <div class="item">Use Anywhere</div>
-                                <div class="item">Rebates</div>
-                                <div class="item">Discounts</div>
-                            </div>
-                        </div>
-                        <div class="item">Warranty</div>
-                    </div>
-                </div>
+                @include('partials._how_to_sell_buy')
             </div>
         </div>
     </div>
@@ -287,9 +260,9 @@
                 },
 
                 acceptedFiles : 'image/*',
-                dictDefaultMessage: 'Add more photos and sell even faster',
+                dictDefaultMessage: "{{trans('phrases.add_more_photos')}}",
                 maxfilesexceeded: function(file, rt) {
-                    alertify.warning('You can\'t upload more than 5 images')
+                    alertify.warning("{{trans('phrases.five_photos_upload_limit')}}")
                     this.removeFile(file);
                 },
                 success: function (file, response) {
@@ -301,7 +274,7 @@
                     Form.addFileToPicturesArray(file)
                 },
                 error: function (file, response) {
-                    alertify.warning('Could not upload ')
+                    alertify.warning("{{trans('phrases.could_not_upload')}}")
                     file.previewElement.classList.add("dz-error");
                 }
             });
@@ -334,11 +307,13 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter your title'
+                                prompt: '{{trans('validation.required', ['attribute' => 'title'])}}'
+
                             },
                             {
                                 type: 'length[10]',
-                                prompt: 'Your title should be at least 10 characters'
+                                prompt: '{{trans('validation.min.string', ['attribute' => 'title', 'min' => 10])}}'
+
                             }
                         ]
                     },
@@ -347,7 +322,8 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please choose a category'
+                                prompt: '{{trans('validation.required', ['attribute' => 'category'])}}'
+
                             }
 
                         ]
@@ -358,7 +334,8 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please choose a location'
+                                prompt: '{{trans('validation.required', ['attribute' => 'location'])}}'
+
                             }
 
                         ]
@@ -368,7 +345,8 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter the item amount'
+                                prompt: '{{trans('validation.required', ['attribute' => 'amount'])}}'
+
                             }
 
                         ]
@@ -379,11 +357,14 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter description'
+                                prompt: '{{trans('validation.required', ['attribute' => 'description'])}}'
+
+
                             },
                             {
                                 type: 'length[10]',
-                                prompt: 'Enter valid description, at least 10 characters'
+                                prompt: '{{trans('validation.min.string', ['attribute' => 'description', 'min' => 10])}}'
+
                             }
                         ]
                     },
@@ -392,7 +373,8 @@
                         rules: [
                             {
                                 type: 'email',
-                                prompt: 'Please enter a valid email'
+                                prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
+
                             }
                         ]
                     },
@@ -401,11 +383,13 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter the seller name'
+                                prompt: '{{trans('validation.required', ['attribute' => 'seller name'])}}'
+
                             },
                             {
                                 type: 'length[6]',
-                                prompt: 'Your seller name must be at least 6 characters'
+                                prompt: '{{trans('validation.min.string', ['attribute' => 'seller name', 'min' => 6])}}'
+
                             }
                         ]
                     },
@@ -414,12 +398,14 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter your phone'
+                                prompt: '{{trans('validation.required', ['attribute' => 'phone'])}}'
+
                             },
 
                             {
                                 type: 'length[6]',
-                                prompt: 'Enter a valid phone number'
+                                prompt: '{{trans('validation.min.string', ['attribute' => 'phone', 'min' => 6])}}'
+
                             }
                         ]
                     }

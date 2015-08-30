@@ -13,7 +13,7 @@
                 @if(Auth::check())
 
                         <a class="item p-r-none" href="{{route('sessions.destroy')}}">
-                            <i class="sign out icon "></i> Logout
+                            <i class="sign out icon "></i> {{trans('words.logout')}}
                         </a>
 
                     <div class="item p-r-none">
@@ -30,21 +30,21 @@
                             <div class="ui floating dropdown icon button">
                                 <i class="dropdown icon"></i>
                                 <div class="menu">
-                                    <a class="item" href="">Profile</a>
+                                    <a class="item" href="">{{trans('words.profile')}}</a>
 
                                 </div>
                             </div>
                         </div>
                     </div>
                 @else
-                     <a href="{{route('users.login')}}" class="item p-r-none">Login</a>
-                    <a href="{{route('users.register')}}" class="item p-r-none">Signup</a>
+                     <a href="{{route('users.login')}}" class="item p-r-none">{{trans('words.login')}}</a>
+                    <a href="{{route('users.register')}}" class="item p-r-none">{{trans('words.signup')}}</a>
                 @endif
 
                 <div class="item p-r-none">
-                    <a class="ui huge red icon button nag-login" href="{{route('items.new')}}" data-content="Login required">
+                    <a class="ui huge red icon button nag-login" href="{{route('items.new')}}" data-content="{{trans('phrases.login_required')}}">
                         <i class="icon money"></i>
-                        Sell your item
+                        {{trans('phrases.sell_your_item')}}
                     </a>
                 </div>
 
@@ -58,7 +58,7 @@
             <div class="item">
                 <i class="circular inverted teal search icon"></i>
 
-                <a href="{{route('pages.homepage')}}" class="brand">{{Setting::get('site_name', 'Enclassified')}}</a>
+                <a href="{{route('pages.homepage')}}" class="brand">{{Setting::get('site_name', 'Karakata')}}</a>
             </div>
 
             <div class="right menu open">
@@ -72,14 +72,14 @@
             <div class="m-t-lg p-t-lg">
                 @if(Auth::check())
                 @else
-                <a href="{{route('users.login')}}" class="item">Login</a>
-                <a href="{{route('users.register')}}" class="item">Signup</a>
+                <a href="{{route('users.login')}}" class="item">{{trans('words.login')}}</a>
+                <a href="{{route('users.register')}}" class="item">{{trans('words.login')}}</a>
 
                 @endif
                 <div class="item">
                     <a class="ui huge red button" href="{{route('items.new')}}">
                         <i class="icon money"></i>
-                        Sell your item
+                        {{trans('phrases.sell_your_item')}}
                     </a>
                 </div>
             </div>

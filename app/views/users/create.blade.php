@@ -1,7 +1,8 @@
 @extends('layouts.public')
 
 @section('title')
-    Creating account
+    {{trans('phrases.creating_account')}}
+
 @endsection
 
 @section('content')
@@ -11,7 +12,7 @@
                     <div class="ui segment">
                         <h3 class="ui dividing header">
                             <i class="add user icon"></i>
-                            Create an {{Setting::get('site_name', 'Enclassified')}} account it is free
+                            {{trans('phrases.create_account_copy', ['site_name' => Setting::get('site_name', 'Karakata')])}}
                         </h3>
                         @include('partials._form_errors')
 
@@ -20,20 +21,20 @@
                         <div class="ui error message"></div>
                             <div class="required field">
 
-                                        <label>Full Name</label>
+                                        <label>{{trans('words.full_name')}}</label>
                             {{Form::text('full_name', null, ['placeholder'=> 'Full Name'])}}
 
 
                             </div>
                             <div class="two fields">
                                 <div class="required field">
-                                    <label for="">Email</label>
+                                    <label for="">{{trans('words.email')}}</label>
                                     {{Form::email('email', null, ['placeholder'=> 'E-mail address'])}}
 
 
                                 </div>
                                 <div class="required field">
-                                    <label for="">Phone</label>
+                                    <label for="">{{trans('words.phone')}}</label>
                                     {{Form::text('phone', null, ['placeholder'=> 'Phone number'])}}
 
 
@@ -42,13 +43,13 @@
 
                             <div class="two fields">
                                 <div class="required field">
-                                    <label for="">Password</label>
+                                    <label for="">{{trans('words.password')}}</label>
                                     {{Form::password('password', ['placeholder'=> 'Password'])}}
 
 
                                 </div>
                                 <div class="required field">
-                                    <label for="">Confirm password</label>
+                                    <label for="">{{trans('words.confirm_password')}}</label>
                                     {{Form::password('confirm_password', ['placeholder'=> 'Confirm password'])}}
                                 </div>
                             </div>
@@ -58,18 +59,17 @@
                                 <div class="field">
                                     <div class="ui teal toggle checkbox">
                                         <input type="checkbox" name="terms" tabindex="0" class="hidden">
-                                        <label>I agree to the <a href="{{route('pages.terms')}}">Terms and
-                                                conditions</a></label>
+                                        <label>{{trans('phrases.agree_terms')}}</label>
                                     </div>
                                 </div>
                             </div>
                             <button class="ui teal button right labeled icon button" tabindex="0">
-                                <i class="right arrow icon"></i>Create my account</button>
+                                <i class="right arrow icon"></i>{{trans('phrases.create_my_account')}}</button>
                         {{Form::close()}}
-                        {{--<div class="ui bottom attached warning message">--}}
-                            {{--<i class="icon help"></i>--}}
-                            {{--Already signed up? <a href="#">Login here</a> instead.--}}
-                        {{--</div>--}}
+                        <div class="ui bottom attached info message">
+                            <i class="icon help"></i>
+                            {{trans('phrases.already_signed_up')}}
+                        </div>
                     </div>
                 </div>
                 <div class="four wide column">
@@ -121,11 +121,11 @@
                                 rules: [
                                     {
                                         type: 'empty',
-                                        prompt: 'Please enter your name'
+                                        prompt: '{{trans('validation.required', ['attribute' => 'name'])}}'
                                     },
                                     {
                                         type: 'length[4]',
-                                        prompt: 'Your full name should be at least 4 characters'
+                                        prompt: '{{trans('validation.min.string', ['attribute' => 'name', 'min' => 4])}}'
                                     }
                                 ]
                             },
@@ -135,11 +135,11 @@
                                 rules: [
                                     {
                                         type: 'empty',
-                                        prompt: 'Please enter phone number'
+                                        prompt: '{{trans('validation.required', ['attribute' => 'phone number'])}}'
                                     },
                                     {
                                         type: 'length[6]',
-                                        prompt: 'Enter valid phone number'
+                                        prompt: '{{trans('validation.min.string', ['attribute' => 'phone number', 'min' => 6])}}'
                                     }
                                 ]
                             },
@@ -148,7 +148,7 @@
                                 rules: [
                                     {
                                         type: 'email',
-                                        prompt: 'Please enter a valid email'
+                                        prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
                                     }
                                 ]
                             },
@@ -157,11 +157,11 @@
                                 rules: [
                                     {
                                         type: 'empty',
-                                        prompt: 'Please enter a password'
+                                        prompt: '{{trans('validation.required', ['attribute' => 'password'])}}'
                                     },
                                     {
                                         type: 'length[6]',
-                                        prompt: 'Your password must be at least 6 characters'
+                                        prompt: '{{trans('validation.min.string', ['attribute' => 'password', 'min' => 6])}}'
                                     }
                                 ]
                             },
@@ -170,15 +170,15 @@
                                 rules: [
                                     {
                                         type: 'empty',
-                                        prompt: 'Please confirm your chosen password'
+                                        prompt: '{{trans('validation.required', ['attribute' => 'confirm password'])}}'
                                     },
                                     {
                                         type: 'match[password]',
-                                        prompt: 'The two passwords do not match'
+                                        prompt: '{{trans('validation.confirmed', ['attribute' => 'password'])}}'
                                     },
                                     {
                                         type: 'length[6]',
-                                        prompt: 'Your password must be at least 6 characters'
+                                        prompt: '{{trans('validation.min.string', ['attribute' => 'password confirmation', 'min' => 6])}}'
                                     }
                                 ]
                             },
@@ -187,7 +187,7 @@
                                 rules: [
                                     {
                                         type: 'checked',
-                                        prompt: 'You must agree to the terms and conditions'
+                                        prompt: '{{trans('validation.accepted', ['attribute' => 'terms and conditions'])}}'
                                     }
                                 ]
                             }

@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Item - {{$item->title}}
+    {{Lang::choice('words.item',1)}} - {{$item->title}}
 @endsection
 
 @section('meta')
@@ -51,7 +51,7 @@
                 <div class="ui segments">
                     <div class="ui segment">
                         <div class="ui breadcrumb">
-                            <a class="section" href="{{route('pages.homepage')}}">Home</a>
+                            <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             @if($item->category->parent && $item->category->parent->id !=1)
                                 <i class="right angle icon divider"></i>
                                 <a class="section"
@@ -118,7 +118,7 @@
 
                         <h4 class="ui horizontal divider header">
                                 <i class="tag icon"></i>
-                                Description
+                                {{trans('words.description')}}
                             </h4>
 
                             <div class="ui content">
@@ -131,23 +131,23 @@
                                         <div class="ui message m-b-lg">
                                             <ul class="ui list">
                                                 <div class="item">
-                                                    <strong>Price:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
+                                                    <strong>{{trans('words.price')}}:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
                                                 </div>
                                                 <div class="item">
-                                                    <strong>Negotiable:</strong> <span><i
+                                                    <strong>{{trans('words.negotiable')}}:</strong> <span><i
                                                                 class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
                                                 </div>
                                                 <div class="item">
-                                                    <strong>Category:</strong> {{$item->category->title}}
+                                                    <strong>{{Lang::choice('words.category', 1)}}:</strong> {{$item->category->title}}
                                                 </div>
                                                 <div class="item">
-                                                    <strong>Location:</strong> <span><i
+                                                    <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
                                                                 class="marker icon"></i>{{$item->location->name}}</span>
                                                 </div>
 
                                                 <div class="item">
-                                                    <strong>Posted by a/an:</strong>
-                                                    <span>{{($item->type == 'personal')? '<i class="user icon"></i>Individual' :  '<i class="suitcase icon"></i>Business'}}</span>
+                                                    <strong>{{trans('phrases.posted_by')}}</strong>
+                                                    <span>{{($item->type == 'personal')? '<i class="user icon"></i>'.trans("words.individual") :  '<i class="suitcase icon"></i>'.trans("words.business")}}</span>
                                                 </div>
                                             </ul>
                                         </div>
@@ -156,8 +156,9 @@
                                                 <i class="user icon"></i>
 
                                                 <div class="content">
-                                                    <a class="header" href="{{route('users.items', $item->owner->id)}}">More
-                                                        ads from this user</a>
+                                                    <a class="header" href="{{route('users.items', $item->owner->id)}}">
+                                                        {{trans('phrases.more_ads_by_user')}}
+                                                    </a>
                                                 </div>
                                             </div>
 
@@ -168,8 +169,8 @@
                                                     <div class="content">
                                                         <a class="header nag-login"
                                                            href="{{route('items.unfavorite', $item->id)}}"
-                                                           data-content="Login required">
-                                                            Remove from favorites
+                                                           data-content="{{trans('phrases.login_required')}}">
+                                                            {{trans('phrases.remove_from_favorites')}}
                                                         </a>
                                                     </div>
                                                 </div>
@@ -180,8 +181,8 @@
                                                     <div class="content">
                                                         <a class="header nag-login"
                                                            href="{{route('items.favorite', $item->id)}}"
-                                                           data-content="Login required">
-                                                            Add to favorites
+                                                           data-content="{{trans('phrases.login_required')}}">
+                                                            {{trans('phrases.add_to_favorites')}}
                                                         </a>
                                                     </div>
                                                 </div>
@@ -192,12 +193,12 @@
                                                 <i class="warning sign icon"></i>
 
                                                 <div class="content">
-                                                    <a class="header report link">Report abuse</a>
+                                                    <a class="header report link">{{trans('phrases.report_abuse')}}</a>
                                                 </div>
                                             </div>
 
                                         </div>
-                                        <a class="header share-button">Share ad</a>
+                                        <a class="header share-button">{{trans('phrases.share_on_social')}}</a>
 
                                     </div>
                                 </div>
@@ -213,18 +214,18 @@
 
                 <div class="ui segments">
                     <div class="ui secondary segment">
-                        <h4 class="header">Contact seller</h4>
+                        <h4 class="header">{{trans('phrases.contact_seller')}}</h4>
                     </div>
                     <div class="ui segment">
                         <h3 class="ui header">
                             <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
-                            <div class="sub header">Location: {{$item->location->name}}</div>
-                            <div class="sub header">Joined: {{$item->owner->created_at->format('M j, Y')}}</div>
+                            <div class="sub header">{{Lang::choice('words.location',1)}}: {{$item->location->name}}</div>
+                            <div class="sub header">{{trans('phrases.joined_in')}}: {{$item->owner->created_at->format('M j, Y')}}</div>
                         </h3>
                         <button class="fluid ui message button toggle m-b-xs">
                             <i class="mail icon"></i>
-                            Send a message
+                            {{trans('phrases.send_a_message')}}
                         </button>
                         <button class="fluid ui yellow button">
                             <i class="phone icon"></i> {{$item->phone}}
@@ -246,6 +247,12 @@
                     </div>
                 </div>
 
+                @if(Setting::get('ad_250')!='')
+                    <div class="ui segment padding-reset">
+                        {{Setting::get('ad_250')}}
+                    </div>
+                @endif
+
             </div>
         </div>
 
@@ -261,30 +268,30 @@
         <i class="grey close icon"></i>
 
         <div class="header">
-            Sending a message to {{$item->seller_name}}
+            {{trans('phrases.send_a_message')}} => {{$item->seller_name}}
         </div>
         <div class="content">
             <form class="ui sendmessage form">
                 <div class="ui error message"></div>
 
-                <h4 class="ui dividing header">Give your feedback</h4>
+                <h4 class="ui dividing header">{{trans('phrases.give_your_feedback')}}</h4>
 
                 <div class="field">
                     <div class="two fields">
                         <div class="field">
-                            <label>Your name</label>
+                            <label>{{trans('words.name')}}</label>
                             {{Form::text('name', Auth::check()?Auth::user()->full_name:'')}}
 
                         </div>
                         <div class="field">
-                            <label>Your email</label>
+                            <label>{{trans('words.email')}}</label>
                             {{Form::text('email', Auth::check()?Auth::user()->email:'')}}
 
                         </div>
                     </div>
                 </div>
                 <div class="field">
-                    <label>Message</label>
+                    <label>{{Lang::choice('words.message', 1)}}</label>
 
                     {{Form::textarea('content')}}
                 </div>
@@ -292,8 +299,8 @@
             </form>
         </div>
         <div class="actions">
-            <div class="ui button cancel">Cancel</div>
-            <div class="ui green button approve">Send</div>
+            <div class="ui button cancel">{{trans('words.cancel')}}</div>
+            <div class="ui green button approve">{{trans('words.send')}}</div>
         </div>
     </div>
 
@@ -301,11 +308,11 @@
         <i class="grey close icon"></i>
 
         <div class="header">
-            Report this item
+            {{trans('phrases.report_abuse')}}
         </div>
         <div class="content">
             <form class="ui report form">
-                <h4 class="ui dividing header">Tell us what is wrong with the advert</h4>
+                <h4 class="ui dividing header">{{trans('phrases._report_abuse-copy')}}</h4>
                 <div class="ui error message"></div>
                 {{Form::hidden('item_id', $item->id)}}
                 <div class="field">
@@ -314,8 +321,8 @@
             </form>
         </div>
         <div class="actions">
-            <div class="ui button cancel ">Cancel</div>
-            <div class="ui green button approve">Send</div>
+            <div class="ui button cancel ">{{trans('words.cancel')}}</div>
+            <div class="ui green button approve">{{trans('words.send')}}</div>
         </div>
     </div>
 
@@ -352,7 +359,7 @@
                             rules: [
                                 {
                                     type: 'length[3]',
-                                    prompt: 'Please enter a valid/longer name'
+                                    prompt: '{{trans('validation.min.string', ['attribute' => 'name', 'min' => 3])}}'
                                 }
                             ]
                         },
@@ -361,7 +368,7 @@
                             rules: [
                                 {
                                     type: 'email',
-                                    prompt: 'Please enter a valid email'
+                                    prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
                                 }
                             ]
                         },
@@ -370,11 +377,12 @@
                             rules: [
                                 {
                                     type: 'empty',
-                                    prompt: 'Please enter your message content'
+                                    prompt: '{{trans('validation.required', ['attribute' => 'content'])}}'
                                 },
                                 {
                                     type: 'length[10]',
-                                    prompt: 'Enter at least 10 characters in your message content'
+                                    prompt: '{{trans('validation.min.string', ['attribute' => 'content', 'min' => 10])}}'
+
                                 }
                             ]
                         }
@@ -389,11 +397,12 @@
                     rules: [
                         {
                             type: 'empty',
-                            prompt: 'Please enter your message content'
+                            prompt: '{{trans('validation.required', ['attribute' => 'content'])}}'
                         },
                         {
                             type: 'length[10]',
-                            prompt: 'Enter at least 10 characters in your message content'
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'content', 'min' => 10])}}'
+
                         }
                     ]
                 }
@@ -476,7 +485,7 @@
 
 
         new Share(".share-button", {
-            title: "Share - {{$item->title}}}",
+            title: "{{trans('phrases.share_on_social')}} - {{$item->title}}}",
             networks: {
                 facebook: {
                     app_id: "602752456409826"

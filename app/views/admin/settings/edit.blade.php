@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-    App settings
+   {{trans('phrases.app_settings')}}
 @endsection
 
 
@@ -14,18 +14,16 @@
 
         <div class="ui segments">
             <div class="ui segment">
-                <h4 class="ui header">Manage Settings
-                    <div class="sub header">
-                        Click on a category name below to modify it. Drag to make it a sub-category or modify its position
-                    </div>
+                <h4 class="ui header">   {{trans('phrases.app_settings')}}
+
+
                 </h4>
             </div>
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a class="active item" data-tab="first">Site details</a>
-                    <a class="item" data-tab="second">Third party api/keys</a>
-                    <a class="item" data-tab="third">Third</a>
+                    <a class="active item" data-tab="first">{{trans('phrases.site_detail')}}</a>
+                    <a class="item" data-tab="second">{{trans('phrases.third_party_keys')}}</a>
                 </div>
 
             </div>
@@ -34,34 +32,34 @@
 
                 <div class="ui  active tab content p-md" data-tab="first">
 
-                        <h4 class="ui dividing header">Site details</h4>
+                        <h4 class="ui dividing header">{{trans('phrases.site_detail')}}</h4>
 
                     <div class="field">
                         <div class="two fields">
                             <div class="four wide field">
-                                <label for="">Site logo</label>
+                                <label for="">{{trans('phrases.site_logo')}}</label>
                                 <div id="myDropZone" class="dropzone">
                                     <div class="fallback">
                                         <input name="files" type="file" />
-                                        <p>Upload logo</p>
+                                        <p>{{trans('phrases.upload_logo')}}</p>
                                     </div>
                                 </div>
                                 {{Form::hidden('logo_src', Setting::get('logo_src'))}}
                             </div>
                             <div class="twelve wide field">
                                 <div class="field p-l-md">
-                                    <label>Site name</label>
+                                    <label>{{trans('phrases.site_name')}}</label>
                                     {{Form::text('site_name', Setting::get('site_name'))}}
                                 </div>
 
 
                                 <div class="field p-md">
-                                    <label for="">Slogan</label>
+                                    <label for="">{{trans('words.slogan')}}</label>
                                     {{Form::text('site_slogan', Setting::get('site_slogan'))}}
                                 </div>
 
                                 <div class="field p-md">
-                                    <label>Currency</label>
+                                    <label>{{trans('words.currency')}}</label>
 
                                     {{Form::text('currency', Setting::get('currency'))}}
                                 </div>
@@ -76,25 +74,26 @@
 
 
                         <div class="field">
-                            <label>Site description</label>
+                            <label>{{trans('phrases.site_description')}}</label>
                             {{Form::textarea('site_description', Setting::get('site_description'))}}
                         </div>
 
 
                 </div>
                 <div class="ui  tab content p-md" data-tab="second">
+                    <h4 class="ui dividing header">{{trans('phrases.third_party_key')}}</h4>
 
                     <div class="field">
                         <div class="two fields">
                             <div class="field">
-                                <label for="">250 wide Ad banner  </label>
+                                <label for="">{{trans('phrases.250_wide_banner')}}</label>
                                 {{Form::textarea('ad_250', Setting::get('ad_250'))}}
-                                <p>Ideally a 250 wide banner/ad</p>
+                                <p>Ideally a {{trans('phrases.250_wide_banner')}}</p>
                             </div>
                             <div class="field">
-                                <label for="">Leaderboard banner</label>
+                                <label for="">{{trans('phrases.leaderboard_banner')}}</label>
                                 {{Form::textarea('ad_leaderboard', Setting::get('ad_leaderboard'))}}
-                                <p>Ideally a Leaderboard wide banner/ad</p>
+                                <p>Ideally a {{trans('phrases.250_wide_banner')}}</p>
 
                             </div>
                         </div>
@@ -102,16 +101,13 @@
 
 
                     <div class="field">
-                        <label>Analytics code</label>
+                        <label>{{trans('phrases.analytics_code')}}</label>
                         {{Form::textarea('analytics', Setting::get('analytics'))}}
-                        <p>Paste your google analytics code here</p>
+                        <p>{{trans('phrases.paste_analytics_code')}}</p>
                     </div>
                 </div>
-                <div class="ui tab segment" data-tab="third">
-                    Third
-                </div>
 
-                <button class="ui teal labeled icon button" tabindex="0" type="submit"><i class="save icon"></i> Save changes</button>
+                <button class="ui teal labeled icon button" tabindex="0" type="submit"><i class="save icon"></i> {{trans('phrases.save_changes')}}</button>
                 {{Form::close()}}
 
             </div>
@@ -156,9 +152,9 @@
                 },
 
                 acceptedFiles: 'image/*',
-                dictDefaultMessage: 'Upload logo',
+                dictDefaultMessage: "{{trans('phrases.upload_logo')}}",
                 maxfilesexceeded: function (file, rt) {
-                    alertify.warning('Remove the current logo before uploading a new one')
+                    alertify.warning("{{trans('phrases.remove_logo_before_upload')}}")
                     this.removeFile(file);
                 },
                 success: function (file, response) {
@@ -171,7 +167,7 @@
 
                 },
                 error: function (file, response) {
-                    alertify.warning('Could not upload ')
+                    alertify.warning("{{trans('phrases.could_not_upload')}}")
                     file.previewElement.classList.add("dz-error");
                 }
             });

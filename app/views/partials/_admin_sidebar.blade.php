@@ -16,15 +16,15 @@
     <div class="menu">
 
         <a class="item" href="{{route('admin.users.index')}}">
-           <i class="users icon"></i> Manage users
+           <i class="users icon"></i> {{trans('phrases.manage_users')}}
         </a>
 
         <a class="item" href="{{route('admin.items.index')}}">
-            <i class="tags icon"></i>Manage posted items
+            <i class="tags icon"></i> {{trans('phrases.manage_posted_items')}}
         </a>
 
         <a class="item" href="{{route('admin.reports.index')}}">
-            <i class="warning circle icon"></i> Manage abuse reports
+            <i class="warning circle icon"></i> {{trans('phrases.manage_abuse_reports')}}
         </a>
 
 
@@ -36,19 +36,19 @@
     <div class="menu">
 
         <a class="item" href="{{route('settings.edit')}}">
-            <i class="settings icon"></i> App settings
+            <i class="settings icon"></i> {{trans('phrases.app_settings')}}
         </a>
 
         <a class="item" href="{{route('admin.locations.index')}}">
-            <i class="marker icon"></i> Manage locations
+            <i class="marker icon"></i> {{trans('phrases.manage_locations')}}
         </a>
 
         <a class="item" href="{{URL::action('Admin\CategoriesController@getIndex')}}">
-           <i class="sitemap icon"></i> Manage Categories
+           <i class="sitemap icon"></i> {{trans('phrases.manage_categories')}}
         </a>
 
     </div>
 </div>
-<a class="item" href="/introduction/new.html">
-    <i class="sign out icon"></i>Logout
+<a class="item" href="">
+    <i class="sign out icon"></i>{{trans('words.logout')}}
 </a>

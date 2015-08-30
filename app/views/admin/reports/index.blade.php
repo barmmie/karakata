@@ -2,7 +2,7 @@
 
 
 @section('title')
-    Manage reports
+    {{trans('phrases.manage_abuse_reports')}}
 @endsection
 
 @section('content')
@@ -12,7 +12,7 @@
 
             <div class="ui segment">
                 <h4 class="header">
-                    <i class="warning icon"></i> Abuse reports
+                    <i class="warning icon"></i>     {{trans('phrases.manage_abuse_reports')}}
 
                 </h4>
 
@@ -21,9 +21,9 @@
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a href="{{route('admin.reports.index', 'all')}}" class="{{$status == 'all' ? 'active' : ''}} item" >All</a>
-                    <a href="{{route('admin.reports.index', 'reviewed')}}" class="{{$status == 'reviewed' ? 'active' : ''}} item" >Reviewed only</a>
-                    <a href="{{route('admin.reports.index', 'unreviewed')}}" class="{{$status == 'unreviewed' ? 'active' : ''}} item" >Unreviewed only</a>
+                    <a href="{{route('admin.reports.index', 'all')}}" class="{{$status == 'all' ? 'active' : ''}} item" >{{trans('words.all')}}</a>
+                    <a href="{{route('admin.reports.index', 'reviewed')}}" class="{{$status == 'reviewed' ? 'active' : ''}} item" >{{trans('phrases.reviewed_only')}}</a>
+                    <a href="{{route('admin.reports.index', 'unreviewed')}}" class="{{$status == 'unreviewed' ? 'active' : ''}} item" >{{trans('phrases.unreviewed_only')}}</a>
                 </div>
 
             </div>
@@ -35,7 +35,7 @@
                         <div class="header">
 
                         </div>
-                        There are no reports here
+                        {{trans('phrases.no_reports_here')}}
                     </div>
                 @else
                     <div class="ui divided items">
@@ -75,19 +75,19 @@
                                     </div>
                                     <div class="extra">
                                         @if($report->item->negotiable)
-                                            <div class="ui brown tag label">Negotiable</div>
+                                            <div class="ui brown tag label">{{trans('words.negotiable')}}</div>
                                         @endif
 
                                         @if($report->item->isApproved())
-                                            <div class="ui blue label">Approved</div>
+                                            <div class="ui blue label">{{trans('words.approved')}}</div>
                                         @endif
 
                                         @if($report->item->isRejected())
-                                            <div class="ui orange label">Rejected</div>
+                                            <div class="ui orange label">{{trans('words.rejected')}}</div>
                                         @endif
 
                                         @if($report->item->isPending())
-                                            <div class="ui grey label">Pending approval</div>
+                                            <div class="ui grey label">{{trans('phrases.pending_approval')}}</div>
                                         @endif
 
                                     </div>
@@ -96,20 +96,20 @@
                                         <a href="{{route('admin.items.delete', $report->item->id)}}" class="ui right floated tiny red button confirm-delete">
                                             <i class="trash icon"></i>
 
-                                            Delete
+                                            {{trans('words.delete')}}
                                         </a>
                                         @if(! $report->item->isRejected())
                                             <a href="{{route('admin.items.reject', $report->item->id)}}" class="ui right floated tiny orange button">
                                                 <i class="cancel icon"></i>
 
-                                                Reject
+                                                {{trans('words.reject')}}
                                             </a>
                                         @endif
                                         @if(! $report->item->isApproved())
                                             <a href="{{route('admin.items.approve', $report->item->id)}}" class="ui right floated tiny primary button">
                                                 <i class="check icon"></i>
 
-                                                Approve
+                                                {{trans('words.approve')}}
                                             </a>
                                         @endif
                                     </div>

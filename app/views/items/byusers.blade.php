@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Items by  {{$user->full_name}}
+    {{Lang::choice('words.item', 1)}} - {{$user->full_name}}
 @endsection
 
 @section('content')
@@ -19,12 +19,12 @@
                 <div class="ui segments">
                     <div class="ui segment">
                         <div class="ui breadcrumb">
-                            <a class="section" href="{{route('pages.homepage')}}">Home</a>
+                            <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             <i class="right angle icon divider"></i>
-                            <div class="section"> Items by  <strong>{{$user->full_name}}</strong></div>
+                            <div class="section"> {{Lang::choice('words.item', 1)}}  <strong>{{$user->full_name}}</strong></div>
 
                             <i class="right arrow icon divider"></i>
-                            <div class="active section">{{$item_count}} result(s)</div>
+                            <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
                         </div>
                     </div>
                     <div class="ui segment">

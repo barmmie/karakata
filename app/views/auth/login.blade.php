@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Login
+    {{trans('words.login')}}
 @endsection
 
 @section('content')
@@ -29,17 +29,17 @@
                                 {{Form::password('password', ['placeholder'=>"Password"])}}
                             </div>
                         </div>
-                        <button type="submit" class="ui fluid large teal submit button">Signin</button>
+                        <button type="submit" class="ui fluid large teal submit button">    {{trans('words.login')}}
+                        </button>
                     </div>
 
                     <div class="ui error message"></div>
 
                 {{Form::close()}}
                 <div class="ui message">
-                    New to us? <a href="#">Sign Up</a>
+                   {{trans('phrases.new_user')}} <a href="#">{{trans('words.signup')}}</a>
                 </div>
             </div>
-
     </div>
 @endsection
 
@@ -58,7 +58,7 @@
                                 rules: [
                                     {
                                         type: 'email',
-                                        prompt: 'Please enter a valid email'
+                                        prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
                                     }
                                 ]
                             },
@@ -67,8 +67,8 @@
                                 rules: [
                                     {
                                         type: 'empty',
-                                        prompt: 'Please enter your password'
-                                    },
+                                        prompt: '{{trans('validation.required', ['attribute' => 'password'])}}'
+                                    }
                                 ]
                             }
                         }

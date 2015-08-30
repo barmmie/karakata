@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    Dash - My items
+    {{trans('words.dashboard')}} - {{trans('phrases.my_items')}}
 @endsection
 
 @section('content')
@@ -19,12 +19,13 @@
                 <div class="ui  segment">
                     <h3 class="ui dividing header">
                         <i class="folder icon"></i>
-                        My items
+                        {{trans('phrases.my_items')}}
                     </h3>
 
                     @if(count($items) < 1)
                         <div class="ui message">
-                            You currently have no active items for sale.
+                            {{trans('phrases.user_no_items')}}
+
                         </div>
 
                     @else
@@ -57,19 +58,19 @@
                                             <a class="ui right floated button" href="{{route('items.edit', $item->id)}}">
                                                 <i class="pencil icon"></i>
 
-                                                Edit
+                                                {{trans('words.edit')}}
                                             </a>
                                             <div class="ui brown tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</div>
                                             @if($item->isApproved())
-                                            <div class="ui green label">APPROVED</div>
+                                            <div class="ui green label">{{trans('words.approved')}}</div>
                                             @endif
 
                                             @if($item->isPending())
-                                            <div class="ui yellow label">PENDING APPROVAL</div>
+                                            <div class="ui yellow label">{{trans('phrases.pending_approval')}}</div>
                                             @endif
 
                                             @if($item->isRejected())
-                                            <div class="ui red label">REJECTED</div>
+                                            <div class="ui red label">{{trans('words.rejected')}}</div>
                                             @endif
                                         </div>
                                     </div>

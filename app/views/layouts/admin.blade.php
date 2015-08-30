@@ -27,7 +27,7 @@
 
 <div class="ui black big launch right attached fixed button">
     <i class="content icon"></i>
-    <span class="text">Menu</span>
+    <span class="text">{{trans('words.menu')}}</span>
 </div>
 
 
@@ -35,7 +35,7 @@
     <div class="ui container">
         <a class="launch icon item">
             <i class="content icon"></i>
-            Menu
+            {{trans('words.menu')}}
         </a>
 
         <div class="item">
@@ -98,7 +98,7 @@
     ;
 
     $('.confirm-delete').on('click', function(e){
-        return confirm('Are you sure?');
+        return confirm('{{trans('phrases.confirm_delete')}}");
     })
 </script>
 

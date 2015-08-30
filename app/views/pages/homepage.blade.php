@@ -18,7 +18,7 @@
                 <div class="ui segment ">
                     <div class="m-b-lg">
                         <h2 class="ui dividing header m-b-lg">
-                            Find classified ads worldwide
+                            {{Setting::get('site_slogan')}}
                         </h2>
                     </div>
 
@@ -29,7 +29,7 @@
                                     @foreach($category_list as $category)
                                     <div class="ui content m-b-md">
                                         <a class="ui teal header" href="{{route('categories.show', $category['slug'] )}}">
-                                            <i class="bordered inverted shadowed teal road icon"></i>
+                                            <i class="bordered inverted shadowed teal {{$category['icon']?:'search'}} icon"></i>
                                             <div class="content">
                                                 {{$category['label']}}
                                             </div>

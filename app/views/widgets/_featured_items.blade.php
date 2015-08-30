@@ -1,6 +1,6 @@
 @if(count($featured_items))
 <h2 class="ui dividing header">
-    Featured listing
+    {{trans('phrases.featured_items')}}
 </h2>
 <div class="ui grid">
     <div id="owl-demo" class="owl-carousel m-t-lg m-b-lg">

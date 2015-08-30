@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    Manage categories
+   {{trans('phrases.manage_categories')}}
 @endsection
 
 @section('styles')
@@ -35,9 +35,10 @@
 
             <div class="ui segments">
                 <div class="ui segment">
-                    <h4 class="ui header">Manage Categories
-                    <div class="sub header">
-                        Click on a category name below to modify it. Drag to make it a sub-category or modify its position
+                    <h4 class="ui header">   {{trans('phrases.manage_categories')}}
+
+                        <div class="sub header">
+                            {{trans('phrases.manage_categories_subheading')}}
                     </div>
                     </h4>
 
@@ -46,7 +47,7 @@
                 <div class="ui clearing segment ">
 
                     <button class="ui right floated icon button newCategory">
-                        <i class="icon add"></i> Add new category
+                        <i class="icon add"></i> {{trans('phrases.add_new_category')}}
                     </button>
 
                 </div>
@@ -62,7 +63,7 @@
             </div>
             <div class="content">
                 <form class="ui form">
-                    <h4 class="ui dividing header">Category details</h4>
+                    <h4 class="ui dividing header">{{trans('phrases.category_details')}}</h4>
                     <div class="ui error message"></div>
 
                     <div class="field">
@@ -70,11 +71,11 @@
                             <input type="hidden" name="id"/>
                             <input type="hidden" name="action"/>
                             <div class="twelve wide field">
-                                <label for="">Name</label>
+                                <label for="">{{trans('words.name')}}</label>
                                 <input type="text" name="name" placeholder="Category Name">
                             </div>
                             <div class="four wide field">
-                                <label for="">Icon</label>
+                                <label for="">{{trans('words.icon')}}</label>
                                 <input type="text" name="icon" id="myiconPicker" />
                             </div>
                         </div>
@@ -85,10 +86,10 @@
             </div>
             <div class="actions">
                 <div class="ui default deny button">
-                    Close
+                    {{trans('phrases.close')}}
                 </div>
                 <div class="ui positive right labeled icon button">
-                    Save
+                    {{trans('phrases.save')}}
                     <i class="checkmark icon"></i>
                 </div>
 
@@ -147,7 +148,7 @@
                     li.parent().append('<a class="node-delete" style="float: right;" data-pk="' + node.id +'"><i class="red big cancel icon "></i></a>')
                 }
             }
-            function checkData() { if ($tree.find("ul").children().length === 0) $tree.html("You haven't setup any categories yet"); }
+            function checkData() { if ($tree.find("ul").children().length === 0) $tree.html("{{trans('phrases.categories_not_setup')}}"); }
             $tree.bind("tree.init", checkData)
 
             $tree.tree(opts)
@@ -197,7 +198,7 @@
                 $('input[name="id"]').val(this.dataset.pk)
                 $('input[name="action"]').val('renameCategory')
                 iconPicker.refreshPicker()
-                $modal.find('div.header').html('Edit category - ' + this.dataset.name)
+                $modal.find('div.header').html("{{trans('phrases.edit_category')}} - " + this.dataset.name)
                 showModal();
             });
 
@@ -210,7 +211,8 @@
                         rules: [
                             {
                                 type: 'empty',
-                                prompt: 'Please enter your category name'
+                                prompt: '{{trans('validation.required', ['attribute' => 'name'])}}'
+
                             }
 
                         ]
@@ -288,7 +290,7 @@
                 var nodeId = $(this).data("pk");
                 var node = $tree.tree("getNodeById", nodeId)
 //                alertify.set({ buttonFocus: "cancel", buttonReverse: true });
-                alertify.confirm("Are you sure you want to delete this category?", function (e) {
+                alertify.confirm("{{trans('phrases.confirm_delete')}}", function (e) {
                     if (e) {
                         $spinner.toggle();
                         $.ajax(serverUrl, {
@@ -302,7 +304,7 @@
                                 $spinner.toggle();
                                 $tree.tree("removeNode", node);
                                 checkData();
-                                alertify.success('Category has been removed')
+                                alertify.success("{{trans('phrases.category_removed')}}")
                             },
                             error: function (r) {
                                 $spinner.toggle();

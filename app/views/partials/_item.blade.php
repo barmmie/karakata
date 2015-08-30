@@ -31,7 +31,7 @@
         </div>
         <div class="extra">
             @if($item->negotiable)
-                <div class="ui brown tag label">Negotiable</div>
+                <div class="ui brown tag label">{{trans('words.negotiable')}}</div>
             @endif
 
         </div>

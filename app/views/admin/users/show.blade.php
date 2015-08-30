@@ -2,7 +2,7 @@
 
 
 @section('title')
-    User - {{$user->full_name}}
+    {{Lang::choice('words.user', 1)}} - {{$user->full_name}}
 @endsection
 
 @section('content')
@@ -18,14 +18,14 @@
                             <div class="content">
                                 <a class="header">{{$user->full_name}}</a>
                                 <div class="meta">
-                                    <span class="date">Joined in {{$user->created_at->format('M, j Y')}}</span>
+                                    <span class="date">{{trans('phrases.joined_in')}} {{$user->created_at->format('M, j Y')}}</span>
                                 </div>
 
                             </div>
                             <div class="extra content">
                                 <a>
                                     <i class="file icon"></i>
-                                    {{$item_count}} Items
+                                    {{$item_count}} {{Lang::choice('words.item', $item_count)}}
                                 </a>
 
 
@@ -47,7 +47,7 @@
 
                         <div class="ui segment">
                             <h4 class="header">
-                                <i class="icon"></i> Items by {{$user->full_name}}
+                                <i class="icon"></i> {{trans('phrases.items_by')}} {{$user->full_name}}
 
                             </h4>
 
@@ -61,7 +61,7 @@
                                     <div class="header">
 
                                     </div>
-                                    This user currently has no items in this category.
+                                    {{trans('phrases.user_no_items')}}.
                                 </div>
                             @else
                                 <div class="ui divided items">
@@ -100,19 +100,19 @@
                                                 </div>
                                                 <div class="extra">
                                                     @if($item->negotiable)
-                                                        <div class="ui brown tag label">Negotiable</div>
+                                                        <div class="ui brown tag label">{{trans('words.negotiable')}}</div>
                                                     @endif
 
                                                     @if($item->isApproved())
-                                                        <div class="ui blue label">Approved</div>
+                                                        <div class="ui blue label">{{trans('words.approved')}}</div>
                                                     @endif
 
                                                     @if($item->isRejected())
-                                                        <div class="ui orange label">Rejected</div>
+                                                        <div class="ui orange label">{{trans('words.rejected')}}</div>
                                                     @endif
 
                                                     @if($item->isPending())
-                                                        <div class="ui grey label">Pending approval</div>
+                                                        <div class="ui grey label">{{trans('phrases.pending_approval')}}</div>
                                                     @endif
 
                                                 </div>
@@ -120,21 +120,19 @@
 
                                                     <a href="{{route('admin.items.delete', $item->id)}}" class="ui right floated tiny red button confirm-delete">
                                                         <i class="trash icon"></i>
-
-                                                        Delete
+                                                        {{trans('words.delete')}}
                                                     </a>
                                                     @if(! $item->isRejected())
                                                     <a href="{{route('admin.items.reject', $item->id)}}" class="ui right floated tiny orange button">
                                                         <i class="cancel icon"></i>
-
-                                                        Reject
+x
+                                                        {{trans('words.reject')}}
                                                     </a>
                                                     @endif
                                                     @if(! $item->isApproved())
                                                     <a href="{{route('admin.items.approve', $item->id)}}" class="ui right floated tiny primary button">
                                                         <i class="check icon"></i>
-
-                                                        Approve
+                                                        {{trans('words.approve')}}
                                                     </a>
                                                     @endif
                                                 </div>
