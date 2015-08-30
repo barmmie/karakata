@@ -1796,6 +1796,9 @@ body.progress.animated .ui.progress .bar {
 
 /* Remove Rail */
 @media only screen and (max-width: 992px) {
+    #dash .article {
+        margin-top: 40px;
+    }
 
     /* Remove Rail */
     #dash .main.container > .right.rail,

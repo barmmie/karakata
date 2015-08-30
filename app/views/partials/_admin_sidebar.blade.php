@@ -8,7 +8,10 @@
 </div>
 
 <a class="item" target="_blank" href="{{route('pages.homepage')}}">
-    <i class="sign out icon"></i>View frontend
+    <i class="sign out icon"></i>{{trans('phrases.view_frontend')}}
+</a>
+<a class="item" target="_blank" href="{{route('admin.dashboard')}}">
+    <i class="dashboard icon"></i> {{trans('phrases.admin_dashboard')}}
 </a>
 
 <div class="item">
@@ -49,6 +52,6 @@
 
     </div>
 </div>
-<a class="item" href="">
+<a class="item" href="{{route('sessions.destroy')}}">
     <i class="sign out icon"></i>{{trans('words.logout')}}
 </a>

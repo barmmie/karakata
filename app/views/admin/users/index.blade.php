@@ -22,7 +22,7 @@
                     <a href="{{route('admin.users.index')}}" class="{{$status == null ? 'active' : ''}} item" >{{trans('words.all')}}</a>
                     <a href="{{route('admin.users.index', 'unverified')}}" class="{{$status == 'unverified' ? 'active' : ''}} item" >{{trans('phrases.unverified_only')}}</a>
                     <a href="{{route('admin.users.index', 'verified')}}" class="{{$status == 'verified' ? 'active' : ''}} item" >{{trans('phrases.verified_only')}}</a>
-                    <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >{{trans('phrases.acive_only')}}</a>
+                    <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >{{trans('phrases.active_only')}}</a>
                     <a class="{{$status == 'banned' ? 'active' : ''}} item" href="{{route('admin.users.index', 'banned')}}" >{{trans('phrases.banned_only')}}</a>
                 </div>
 

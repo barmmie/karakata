@@ -149,4 +149,10 @@ class User extends Eloquent implements UserInterface, RemindableInterface
     {
         return $this->status == static::ACTIVE_STATUS;
     }
+
+    public function  isAdmin()
+    {
+        return $this->role == static::ADMIN_ROLE;
+
+    }
 }

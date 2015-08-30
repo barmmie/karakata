@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-    {{trans('phrases.manage_items')}}
+    {{trans('phrases.manage_posted_items')}}
 @endsection
 
 @section('content')
@@ -11,7 +11,7 @@
 
                     <div class="ui segment">
                         <h4 class="header">
-                            <i class="icon"></i>     {{trans('phrases.manage_items')}}
+                            <i class="icon"></i>     {{trans('phrases.manage_posted_items')}}
 
                         </h4>
 

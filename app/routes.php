@@ -12,6 +12,9 @@ Route::group(['before'=> 'guest'], function(){
 
 });
 
+Route::get('logout', ['as' => 'sessions.destroy', 'uses' => 'SessionsController@destroy']);
+
+
 Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 'uses' => 'CategoriesController@show']);
 
 Route::get('items/search', ['as' => 'items.search', 'uses' => 'ItemsController@search']);
@@ -28,7 +31,6 @@ Route::post('reports', ['as'=>'reports.store', 'uses'=> 'ReportsController@store
 
 Route::group(['before'=> 'auth'], function(){
 
-    Route::get('logout', ['as' => 'sessions.destroy', 'uses' => 'SessionsController@destroy']);
 
     Route::get('items/new', ['as' => 'items.new', 'uses' => 'ItemsController@create']);
 
@@ -60,7 +62,9 @@ Route::group(['before'=> 'auth'], function(){
 
 Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsController@show']);
 
-Route::group(['namespace' => 'Admin', 'prefix'=> 'admin'], function(){
+Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admin'], function(){
+
+    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'SettingsController@dashboard']);
 
     Route::get('users/{id}/verify', ['as' => 'admin.users.verify', 'uses' => 'UsersController@verify']);
     Route::get('users/{id}/items', ['as' => 'admin.users.items', 'uses' => 'UsersController@items']);

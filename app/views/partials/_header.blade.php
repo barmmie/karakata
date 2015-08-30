@@ -12,33 +12,42 @@
             <div class="right secondary menu">
                 @if(Auth::check())
 
-                        <a class="item p-r-none" href="{{route('sessions.destroy')}}">
+                    @if(Auth::user()->isAdmin())
+                        <a class="item" href="{{route('admin.dashboard')}}">
+                            <i class="sign out icon "></i> {{trans('phrases.admin_dashboard')}}
+                        </a>
+                    @else
+
+                        <a class="item" href="{{route('sessions.destroy')}}">
                             <i class="sign out icon "></i> {{trans('words.logout')}}
                         </a>
 
-                    <div class="item p-r-none">
-                        <div class="ui buttons">
+                        <div class="item">
+                            <div class="ui buttons">
 
 
-                            <a class="ui button" href="{{route('dash.myitems')}}">
-                                @if($unread_message_count > 0)
-                                    <div class=" ui circular red label">{{$unread_message_count}}</div>
-                                @endif
+                                <a class="ui button" href="{{route('dash.myitems')}}">
+                                    @if($unread_message_count > 0)
+                                        <div class=" ui circular red label">{{$unread_message_count}}</div>
+                                    @endif
 
-                                {{Auth::user()->full_name}}
-                            </a>
-                            <div class="ui floating dropdown icon button">
-                                <i class="dropdown icon"></i>
-                                <div class="menu">
-                                    <a class="item" href="">{{trans('words.profile')}}</a>
+                                    {{Auth::user()->full_name}}
+                                </a>
+                                <div class="ui floating dropdown icon button">
+                                    <i class="dropdown icon"></i>
+                                    <div class="menu">
+                                        <a class="item" href="">{{trans('words.profile')}}</a>
 
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+
+
                 @else
-                     <a href="{{route('users.login')}}" class="item p-r-none">{{trans('words.login')}}</a>
-                    <a href="{{route('users.register')}}" class="item p-r-none">{{trans('words.signup')}}</a>
+                     <a href="{{route('users.login')}}" class="item ">{{trans('words.login')}}</a>
+                    <a href="{{route('users.register')}}" class="item ">{{trans('words.signup')}}</a>
                 @endif
 
                 <div class="item p-r-none">

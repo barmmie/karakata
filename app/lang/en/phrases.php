@@ -110,6 +110,8 @@ return [
     'approved_only' => 'Approved only',
     'rejected_only' => 'Rejected only',
     'search_item_copy' => 'Search by title, email',
-    'abuse_reports' => 'Abuse reports'
+    'abuse_reports' => 'Abuse reports',
+    'admin_dashboard' => 'Admin dashboard',
+    'view_frontend' => 'View frontend'
 
 ];
