@@ -3,18 +3,26 @@
         <div class="ui container">
             <div class="ui stackable inverted divided equal height stackable grid">
                 <div class="three wide column">
-                    <h4 class="ui inverted header">About</h4>
+                    <h4 class="ui inverted header"></h4>
                     <div class="ui inverted link list">
-                        <a href="#" class="item">Sitemap</a>
-                        <a href="#" class="item">Contact Us</a>
-                        <a href="#" class="item">Religious Ceremonies</a>
-                        <a href="#" class="item">Gazebo Plans</a>
+                        <a href="{{route('pages.sitemap')}}" class="item">{{trans('words.sitemap')}}</a>
+                        <a href="{{route('pages.privacy_policy')}}" class="item">{{trans('phrases.privacy_policy')}}</a>
+                        <a href="{{route('pages.terms_conditions')}}" class="item">{{trans('phrases.terms_conditions')}}</a>
+                    </div>
+                </div>
+
+                <div class="three wide column">
+                    <h4 class="ui inverted header"></h4>
+                    <div class="ui inverted link list">
+                        <a href="{{route('pages.about')}}" class="item">{{trans('phrases.about_us')}}</a>
+                        <a href="{{route('users.login')}}" class="item">{{trans('words.login')}}</a>
+                        <a href="{{route('users.register')}}" class="item">{{trans('words.signup')}}</a>
                     </div>
                 </div>
 
                 <div class="ten wide column">
-                    <h4 class="ui inverted header">Footer Header</h4>
-                    <p>Extra space for a call to action inside the footer that could help re-engage users.</p>
+                    <h4 class="ui inverted header">{{Setting::get('site_name')}}</h4>
+                    <p>Copyright © 2015 . {{Setting::get('site_name')}}.</p>
                 </div>
             </div>
         </div>

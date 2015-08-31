@@ -98,7 +98,7 @@
     ;
 
     $('.confirm-delete').on('click', function(e){
-        return confirm('{{trans('phrases.confirm_delete')}}");
+        return confirm("{{trans('phrases.confirm_delete')}}");
     })
 </script>
 

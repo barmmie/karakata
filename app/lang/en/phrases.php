@@ -112,6 +112,22 @@ return [
     'search_item_copy' => 'Search by title, email',
     'abuse_reports' => 'Abuse reports',
     'admin_dashboard' => 'Admin dashboard',
-    'view_frontend' => 'View frontend'
+    'view_frontend' => 'View frontend',
+    'populate_from_country' => "Populate from a country",
+    'fetching_locations' => "Fetching major locations",
+    'add_them_to_locations' => "Add them to my locations",
+    'add_location_manually' => "Add them to my locations",
+    'select_country' => "Select Country",
+    'location_name' => 'Location name',
+    'location_country' => 'Location country',
+    'your_locations' => 'Your locations',
+    'filter_location' => 'Filter location',
+    'no_locations_setup' => 'No locations have been setup yet',
+    'locations_found_in' => 'Locations found in',
+    'no_locations_found_in' => 'No Locations found in',
+    'added_successfully' => 'Added successfully',
+    'privacy_policy' => 'Privacy policy',
+    'terms_conditions' => 'Terms and conditions',
+    'about_us' => 'About us'
 
 ];

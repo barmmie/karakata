@@ -1,26 +1,25 @@
 @extends('layouts.admin')
 
 @section('title')
-    Manage settings
+    {{trans('phrases.manage_locations')}}
 @endsection
 
 @section('content')
     <div class="main ui container">
         <div class="ui stackable two column grid" id="locationList">
             <div class="six wide column" >
-
                 <div class="ui segments">
-                    <div class="ui segment"><h4 class="ui header">Populate from a country</h4></div>
+                    <div class="ui segment"><h4 class="ui header">{{trans('phrases.populate_from_country')}}</h4></div>
                     <div class="ui segment" id="countrySelection">
                         <div class="ui inverted dimmer" id="countrySelectionLoader">
-                            <div class="ui indeterminate text loader">Fetching locations...</div>
+                            <div class="ui indeterminate text loader">{{trans('phrases.fetching_locations')}}...</div>
                         </div>
                             <div class="content">
                                     <div class="ui fluid search selection country dropdown">
                                         <input type="hidden" name="country">
                                         <i class="dropdown icon"></i>
 
-                                        <div class="default text">Select Country</div>
+                                        <div class="default text">{{trans('phrases.select_country')}}</div>
                                         @include('partials._country_list')
                                     </div>
 
@@ -31,7 +30,7 @@
 
                         <button class="ui concealed button " id="countrySelectionButton">
                             <i class="add icon"></i>
-                            Add them to my locations
+                            {{trans('phrases.add_them_to_locations')}}
                         </button>
 
 
@@ -41,7 +40,7 @@
                 <div class="ui segments">
                     <div class="ui segment">
                         <h4 class="ui header">
-                            Add a location manually
+                           {{trans('phrases.add_location_manually')}}
                         </h4>
                     </div>
                     <div class="ui segment">
@@ -49,24 +48,23 @@
 
                             <div class="ui error message"></div>
                             <div class="field">
-                                <label for="">Location name</label>
-                                <input type="text"  name="name" placeholder="Location name">
+                                <label for="">{{trans('phrases.location_name')}}</label>
+                                <input type="text"  name="name" placeholder="{{trans('phrases.location_name')}}">
                             </div>
 
                             <div class="field">
-                                <label for="">Country name</label>
-                                <input type="text"  name="country" placeholder="Country">
-                            </div>
-
-
-                            <div class="field">
-                                <label for="">Longitude</label>
-                                <input type="text" name="longitude" placeholder="Longitude">
+                                <label for="">{{trans('phrases.country_name')}}</label>
+                                <input type="text"  name="parentName" placeholder="{{trans('phrases.country_name')}}">
                             </div>
 
                             <div class="field">
-                                <label for="">Latitude</label>
-                                <input type="text" name="latitude" placeholder="Latitude">
+                                <label for="">{{trans('words.longitude')}}</label>
+                                <input type="text" name="longitude" placeholder="{{trans('words.longitude')}}">
+                            </div>
+
+                            <div class="field">
+                                <label for="">{{trans('words.latitude')}}</label>
+                                <input type="text" name="latitude" placeholder="{{trans('words.latitude')}}">
                             </div>
 
                             <input type="submit"  class="ui blue submit button" value="Save location"/>
@@ -81,13 +79,13 @@
                 <div class="ui segments" >
                     <div class="ui segment">
                         <h4 class="ui header">
-                            Your locations
+                           {{trans('phrases.your_locations')}}
                         </h4>
                     </div>
                     <div class="ui segment">
 
-                        <div class="ui left icon input">
-                            <input type="text" placeholder="Filter location..." v-model="searchKey">
+                        <div class="ui left icon fluid input">
+                            <input type="text" placeholder="{{trans('phrases.filter_location')}}..." v-model="searchKey">
                             <i class="marker icon"></i>
                         </div>
                     </div>
@@ -95,7 +93,7 @@
                         <div class="ui middle aligned divided list">
 
 
-                            <div class="item" v-repeat="location: locations| filterBy searchKey |paginate " track-by="id">
+                            <div class="item" v-repeat="location: locations|paginate | filterBy searchKey " track-by="id">
                                 <div class="right floated content">
                                     <button class="ui icon button" v-on="click:remove(this)"><i class="cancel icon"></i>
                                     </button>
@@ -116,7 +114,7 @@
                         </div>
 
                         <div class="ui warning message" v-show="locations.length < 1">
-                            <div class="header">No locations have been setup yet</div>
+                            <div class="header">{{trans('phrases.no_locations_setup')}}</div>
                         </div>
                     </div>
                     <div class="ui segment">
@@ -224,11 +222,14 @@
                 submitNewLocation: function(message, event) {
                     event.preventDefault()
                 },
+                remove: function(vars) {
+
+                },
                 refreshLocations: function() {
                     this.locationsLoadingIndicator= true;
 
                     this.$http.get("{{route('admin.locations.index')}}", function(data){
-//                        this.$set('locations', data);
+                        this.$set('locations', data);
                         this.locationsLoadingIndicator =  false
 
                     }, function(error){
@@ -272,6 +273,7 @@
         $.ajaxSetup({ cache: false });
         $countrySelectionLoader = $('#countrySelectionLoader');
         $countrySelectionText =  $('#countrySelectionText')
+        $countrySelectionButton =  $('#countrySelectionButton')
         var locations = [];
 
         $('.country.dropdown')
@@ -306,17 +308,17 @@
                                     $.when.apply($, jxhr).done(function() {
                                         $countrySelectionLoader.removeClass('active');
                                         if(locations.length > 0) {
-                                            $countrySelectionText.html(locations.length + ' locations were found in ' + text)
+                                            $countrySelectionText.html(locations.length + ' {{trans('phrases.locations_found_in')}} ' + text)
                                             $countrySelectionButton.removeClass('concealed');
 
                                         } else {
-                                            $countrySelectionText.html('No locations were found in ' + text)
+                                            $countrySelectionText.html('{{trans('phrases.no_locations_found_in')}}' + text)
 
                                         }
 
                                     });
                                 } else {
-                                    $countrySelectionText.html('No locations were found in ' + text)
+                                    $countrySelectionText.html('{{trans('phrases.no_locations_found_in')}} ' + text)
 
                                 }
 
@@ -331,61 +333,88 @@
                     }
                 });
 
+        $locationform = $('.ui.form');
+
+        $locationform.on('submit', function(e) {
+            e.preventDefault();
+
+        })
+
+        $countrySelectionButton.on('click', function(){
+            Vue.http.post("{{route('admin.locations.store')}}", parseLocationsData(locations), function(response) {
+                alertify.success('{{trans('phrases.added_successfully')}} ');
+                $locationform.removeClass('loading')
+                $locationform.form('reset')
+
+                vm.refreshLocations()
+            }, function(errorResponse){
+                $locationform.removeClass('loading')
+
+                alertify.error(errorResponse.error)
+            })
+        });
 
 
-        $('.ui.form').form({
+
+
+
+       $locationform.form({
+           onSuccess: function(test){
+               var form_values = $locationform.form('get values');
+               $countrySelectionLoader.addClass('active')
+               Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([form_values]), function(response) {
+                   alertify.success(form_values.name + ' {{trans('phrases.added_successfully')}} ');
+                   $locationform.removeClass('active')
+
+                   $locationform.form('reset')
+
+                   vm.refreshLocations()
+               }, function(errorResponse){
+                   $locationform.removeClass('active')
+
+                   alertify.error(errorResponse.error)
+               })
+
+           },
             fields: {
                 name: {
                     identifier: 'name',
                     rules: [
                         {
                             type   : 'empty',
-                            prompt : 'Please enter your location name'
+                            prompt: '{{trans('validation.required', ['attribute' => 'location name'])}}'
+
                         }
+                            ]
                 },
                 parentName: {
                     identifier: 'parentName',
                     rules: [
                         {
                             type   : 'empty',
-                            prompt : 'Please enter the country name'
+                            prompt: '{{trans('validation.required', ['attribute' => 'country name'])}}'
                         }
+                            ]
                 },
                 longitude: {
                     identifier: 'longitude',
                     rules: [
                         {
                             type   : 'empty',
-                            prompt : 'Please enter the location longitude'
+                            prompt: '{{trans('validation.required', ['attribute' => 'location longitude'])}}'
                         }
+                            ]
                 },
                 latitude: {
-                    identifier: 'parentName',
+                    identifier: 'latitude',
                     rules: [
                         {
                             type   : 'empty',
-                            prompt : 'Please enter the location latitude'
+                            prompt: '{{trans('validation.required', ['attribute' => 'location latitude'])}}'
                         }
+                    ]
                 }
             }
-        })
-
-
-        $addToLocation.on('click', function(e){
-            e.preventDefault()
-            $singleLocationResult.addClass('loader')
-            Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([singleLocationResult]), function(response) {
-                alertify.success(singleLocationResult.name + ' added successfully');
-                $countrySelectionButton.addClass('concelaled');
-                $singleLocationResult.removeClass('loader')
-                $singleLocationResult.hide()
-
-
-                vm.refreshLocations()
-            }, function(errorResponse){
-                console.dir(errorResponse)
-                alertify.error(errorResponse.error)
-            })
         })
 
         function parseLocationsData(locations) {

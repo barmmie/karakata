@@ -66,7 +66,7 @@
 
                     </div>
 
-                    @if($item_count > 10)
+                    @if($items->getTotal() > $items->getPerPage())
                         <div class="ui segment">
                             {{$items->appends(Input::all())->links()}}
 

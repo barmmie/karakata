@@ -13,7 +13,11 @@ Route::group(['before'=> 'guest'], function(){
 });
 
 Route::get('logout', ['as' => 'sessions.destroy', 'uses' => 'SessionsController@destroy']);
-
+Route::get('about', ['as' => 'pages.about', 'uses' => 'PageController@about']);
+Route::get('terms-conditions', ['as' => 'pages.terms_conditions', 'uses' => 'PageController@termsConditions']);
+Route::get('privacy-policy', ['as' => 'pages.privacy_policy', 'uses' => 'PageController@privacyPolicy']);
+Route::get('faq', ['as' => 'pages.faq', 'uses' => 'PageController@faq']);
+Route::get('sitemap.xml', ['as' => 'pages.sitemap', 'uses' => 'PageController@sitemap']);
 
 Route::get('categories/{category}/{sub_category?}', ['as' => 'categories.show', 'uses' => 'CategoriesController@show']);
 
@@ -90,5 +94,4 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
 
 });
 
-Route::get('sitemap.xml', ['as' => 'sitemap', 'uses' => 'PageController@sitemap']);
 

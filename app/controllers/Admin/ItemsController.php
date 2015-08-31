@@ -23,7 +23,7 @@ class ItemsController extends \BaseController {
 
     public function index($status = null)
     {
-        $items = Item::orderBy('created_at', 'asc');
+        $items = Item::orderBy('created_at', 'desc');
 
         switch ($status){
             case 'pending':

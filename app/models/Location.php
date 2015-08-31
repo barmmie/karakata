@@ -6,8 +6,14 @@ class Location extends \Eloquent
 
     public static function bulkInsert($locations)
     {
+        $now = Carbon\Carbon::now();
+        foreach( $locations as $index => $location ) {
+            $locations[$index]['created_at'] = $now->toDateTimeString();
+            $locations[$index]['updated_at'] = $now->toDateTimeString();
+        }
+
         return DB::table('locations')->
-        insert($locations);
+                        insert($locations);
     }
 
 

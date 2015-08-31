@@ -52,4 +52,9 @@ return [
     'icon' => 'Icon',
     'close' => 'Close',
     'save' => 'Save',
+    'country' => 'Country',
+    'longitude' => 'Longitude',
+    'latitude' => 'Latitude',
+    'sitemap' => 'Sitemap',
+    'faq' => 'Faq'
 ];

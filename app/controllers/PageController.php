@@ -43,4 +43,26 @@ class PageController extends \BaseController {
         return $sitemap->render('xml');
     }
 
+    public function about()
+    {
+        return View::make('pages.about');
+    }
+
+    public function faq()
+    {
+        return View::make('pages.faq');
+    }
+
+    public function privacyPolicy()
+    {
+        return View::make('pages.privacy_policy');
+
+    }
+
+    public function termsConditions()
+    {
+        return View::make('pages.terms-conditions');
+
+    }
+
 }

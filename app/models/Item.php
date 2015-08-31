@@ -107,7 +107,7 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         $query =  $query->where('title', 'LIKE', "%{$searchKey}%");
 
-        return $query;
+        return $query->orderBy('created_at', 'desc');
     }
 
     public function scopeLatest($query, $limit = 3) {

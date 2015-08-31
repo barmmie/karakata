@@ -13,8 +13,7 @@ class LocationsController extends \BaseController {
 	public function index()
 	{
 
-        $locations = Location::all();
-
+        $locations = Location::orderBy('created_at', 'DESC')->get();
 
         if(Request::ajax()) {
             return Response::json($locations);

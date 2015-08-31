@@ -5,7 +5,7 @@
     </h3>
 </div>
 
-<div class="ui column">
+<div class="ui column p-md">
     <div class="ui feed">
         @foreach($latest_items as $item)
             <div class="event">
