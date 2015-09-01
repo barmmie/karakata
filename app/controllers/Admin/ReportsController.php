@@ -19,10 +19,13 @@ class ReportsController extends \BaseController {
 
         switch ($status ) {
             case 'all':
+                break;
             case 'reviewed':
                 $reports->readOnly();
+                break;
             case 'unreviewed':
                 $reports->unreadOnly();
+                break;
         }
 
         $reports = $reports->paginate(15);
@@ -38,7 +41,7 @@ class ReportsController extends \BaseController {
             $report->markAsRead();
             flashSuccess('Report has been marked as reviewed');
         }catch(\Exception $e){
-            flashError('Report couldn not be marked as reviewed', $e->getMessage());
+            flashError('Report could not be marked as reviewed', $e->getMessage());
         }
 
         return Redirect::back();
@@ -51,7 +54,20 @@ class ReportsController extends \BaseController {
             $report->markAsUnread();
             flashSuccess('Report has been marked as unreviewed');
         }catch(\Exception $e){
-            flashError('Report couldn not be marked as unreviewed', $e->getMessage());
+            flashError('Report could not be marked as unreviewed', $e->getMessage());
+        }
+
+        return Redirect::back();
+    }
+
+    public function delete($id)
+    {
+        $report = Report::findOrFail($id);
+        try {
+            $report->delete();
+            flashSuccess('Report has been deleted');
+        }catch(\Exception $e){
+            flashError('Report could not be deleted', $e->getMessage());
         }
 
         return Redirect::back();

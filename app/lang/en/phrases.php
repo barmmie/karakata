@@ -142,6 +142,9 @@ return [
     'send_reminder' => 'Send reminder',
     'reset_password' => 'Reset password',
     'password_reset_successful' => 'Password reset was successful. Please proceed to login',
-    'deleted_successfully' => 'Deleted successfully'
+    'deleted_successfully' => 'Deleted successfully',
+    'no_reports_here' => 'No reports here',
+    'mark_as_reviewed' => 'Mark as reviewed',
+    'mark_as_unreviewed' => 'Mark as unreviewed'
 
 ];

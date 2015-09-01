@@ -86,6 +86,9 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
     Route::get('items/{id}/approve', ['as' => 'admin.items.approve', 'uses' => 'ItemsController@approve']);
     Route::get('items/{id}/reject', ['as' => 'admin.items.reject', 'uses' => 'ItemsController@reject']);
     Route::get('items/{id}/delete', ['as' => 'admin.items.delete', 'uses' => 'ItemsController@delete']);
+    Route::get('reports/{id}/delete', ['as' => 'admin.reports.delete', 'uses' => 'ReportsController@delete']);
+    Route::get('reports/{id}/reviewed', ['as' => 'admin.reports.reviewed', 'uses' => 'ReportsController@markAsReviewed']);
+    Route::get('reports/{id}/unreviewed', ['as' => 'admin.reports.unreviewed', 'uses' => 'ReportsController@markAsUnreviewed']);
 
     Route::get('reports/{status?}', ['as' => 'admin.reports.index', 'uses' => 'ReportsController@index']);
 

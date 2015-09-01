@@ -93,23 +93,23 @@
                                     </div>
                                     <div class="extra">
 
-                                        <a href="{{route('admin.items.delete', $report->item->id)}}" class="ui right floated tiny red button confirm-delete">
+                                        <a href="{{route('admin.reports.delete', $report->item->id)}}" class="ui right floated tiny red button confirm-delete">
                                             <i class="trash icon"></i>
 
                                             {{trans('words.delete')}}
                                         </a>
-                                        @if(! $report->item->isRejected())
-                                            <a href="{{route('admin.items.reject', $report->item->id)}}" class="ui right floated tiny orange button">
-                                                <i class="cancel icon"></i>
-
-                                                {{trans('words.reject')}}
-                                            </a>
-                                        @endif
-                                        @if(! $report->item->isApproved())
-                                            <a href="{{route('admin.items.approve', $report->item->id)}}" class="ui right floated tiny primary button">
+                                        @if(! $report->isReviewed())
+                                            <a href="{{route('admin.reports.reviewed', $report->id)}}" class="ui right floated tiny primary button">
                                                 <i class="check icon"></i>
 
-                                                {{trans('words.approve')}}
+                                                {{trans('phrases.mark_as_reviewed')}}
+                                            </a>
+                                        @endif
+                                        @if(! $report->isUnreviewed())
+                                            <a href="{{route('admin.reports.unreviewed', $report->id)}}" class="ui right floated tiny orange button">
+                                                <i class="cancel icon"></i>
+
+                                                {{trans('phrases.mark_as_unreviewed')}}
                                             </a>
                                         @endif
                                     </div>

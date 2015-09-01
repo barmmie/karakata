@@ -44,4 +44,15 @@ class Report extends \Eloquent {
         $this->read_status = false;
         $this->save();
     }
+
+    public function isReviewed()
+    {
+        return $this->read_status == true;
+
+    }
+
+    public function isUnreviewed()
+    {
+        return $this->read_status == false;
+    }
 }
