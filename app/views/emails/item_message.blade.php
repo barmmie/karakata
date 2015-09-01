@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>Password Reset - {{Setting::get('site_name')}}</title>
+    <title>New message received - {{Setting::get('site_name')}}</title>
 
 
     <style type="text/css">
@@ -113,28 +113,34 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        We received a request to reset ypur password, if this request did not originate from you ignore this message and know your account is secure
+                                        You received a message on your item - {{$posted_message->item->title}}
 
                                     </td>
+                                </tr>
+                                <tr>
+                                    <hr/>
                                 </tr>
                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        This link will expire in {{ Config::get('auth.reminder.expire', 60) }} minutes.
+
+                                        {{$posted_message->item->content}}
 
                                     </td>
+                                </tr>
+                                <tr>
+                                    <hr/>
                                 </tr>
                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                     <td class="content-block" itemprop="handler" itemscope
                                         itemtype="http://schema.org/HttpActionHandler"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        <a href=" {{ URL::to('password/reset', array($token)) }}"
+                                        <a href="{{route('items.show', $posted_message->item->slug)}}"
                                            class="btn-primary" itemprop="url"
-                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">
-                                            Reset my password
-                                        </a>
+                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">View the item
+                                            </a>
                                     </td>
                                 </tr>
                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -170,20 +176,3 @@
 </body>
 </html>
 
-
-
-
-<!DOCTYPE html>
-<html lang="en-US">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h2></h2>
-
-		<div>
-			.<br/>
-
-		</div>
-	</body>
-</html>

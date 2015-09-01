@@ -93,6 +93,7 @@ class AuthTest extends TestCase{
     protected function register(array $overrides) {
 
         $fields = TestDummy::attributesFor('User', $overrides);
+        $fields['password'] = 'password';
         $fields += ['confirm_password' => $fields['password'], 'terms' => 'on'];
 
         return $this->visit('/register')

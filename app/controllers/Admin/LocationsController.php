@@ -99,7 +99,12 @@ class LocationsController extends \BaseController {
 	 */
 	public function destroy($id)
 	{
-		//
+        $location = Location::findOrFail($id);
+
+        $location->delete();
+
+        return [];
+
 	}
 
 }

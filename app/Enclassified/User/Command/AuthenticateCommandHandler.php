@@ -38,7 +38,8 @@ class AuthenticateCommandHandler implements CommandHandler {
             \Auth::login($user);
             $result = ['success' => true, 'message'=> 'You are now logged in'];
 
-        } else {
+        }
+        else {
             $result = ['success' => false, 'message'=> 'Invalid credentials check and try again'];
 
         }

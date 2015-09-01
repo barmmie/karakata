@@ -23,7 +23,7 @@ class ItemsTest extends TestCase {
         $item = TestDummy::attributesFor('Item');
             $this->verifiedLogin()
                 ->visit('items/new')
-                ->submitForm('Create my ad', $item)
+                ->submitForm('Create my item', $item)
                 ->seeInDatabase('items', $item);
 
                 $this->visit('/myitems')
@@ -41,10 +41,7 @@ class ItemsTest extends TestCase {
 
         return $this->verifiedLogin()
             ->visit('items/new')
-            ->see('Post free classified');
-
-
-
+            ->see('Post a Free classified');
     }
 
     /**
@@ -58,9 +55,9 @@ class ItemsTest extends TestCase {
         Category::createTestNodes();
         $user1 = TestDummy::create('User');
         $user = TestDummy::create('User');
-        $item = TestDummy::create('Item');
-        $item->user_id = $user1->id;
-        $item->save();
+        $item_att = TestDummy::attributesFor('Item');
+
+        $item = Item::create($item_att + ['user_id'=> $user1->id]);
         $item->approve();
 
         $this->verifiedLogin($user)

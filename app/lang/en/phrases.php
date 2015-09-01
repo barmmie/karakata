@@ -104,7 +104,7 @@ return [
     'edit_category' => 'Edit category',
     'category_details' => 'Category details',
     'categories_not_setup' => "You haven't setup any categories yet",
-    'confirm_delete' => 'Are you sure you want to delete this',
+    'confirm_delete' => 'Are you sure you want to delete this? All related items would be removed as well',
     'category_removed' => 'Category has been removed',
     'no_items_here' => 'There are no items here',
     'pending_only' => 'Pending only',
@@ -114,6 +114,7 @@ return [
     'abuse_reports' => 'Abuse reports',
     'admin_dashboard' => 'Admin dashboard',
     'view_frontend' => 'View frontend',
+    'country_name' => 'Country name',
     'populate_from_country' => "Populate from a country",
     'fetching_locations' => "Fetching major locations",
     'add_them_to_locations' => "Add them to my locations",
@@ -140,6 +141,7 @@ return [
     'forgot_password' => 'Forgot password?',
     'send_reminder' => 'Send reminder',
     'reset_password' => 'Reset password',
-    'password_reset_successful' => 'Password reset was successful. Please proceed to login'
+    'password_reset_successful' => 'Password reset was successful. Please proceed to login',
+    'deleted_successfully' => 'Deleted successfully'
 
 ];

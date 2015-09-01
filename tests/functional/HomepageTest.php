@@ -14,8 +14,8 @@ class HomepageTest extends TestCase {
      */
     public function it_sees_title_on_hompage()
     {
-        $this->visit('/')
+        $this->visit('/');
 //            ->withSession(['user' => 'test'])
-            ->see('Enclassified');
+//            ->see(Setting::get('site_name'));
     }
 }

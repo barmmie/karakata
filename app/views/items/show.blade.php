@@ -268,7 +268,7 @@
         <i class="grey close icon"></i>
 
         <div class="header">
-            {{trans('phrases.send_a_message')}} => {{$item->seller_name}}
+            {{trans('phrases.send_a_message')}} <i class="arrow right icon"></i> {{$item->seller_name}}
         </div>
         <div class="content">
             <form class="ui sendmessage form">

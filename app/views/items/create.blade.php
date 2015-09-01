@@ -7,7 +7,6 @@
 @section('styles')
 
     <link rel="stylesheet" href="{{asset('assets/css/jquery.classyedit.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/css/jquery.select-dropdown.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/dropzone/dist/min/dropzone.min.css')}}"/>
 
 @endsection
@@ -51,17 +50,6 @@
                                     @endforeach
                                 </div>
                             </div>
-
-                            <select name="category_id" class="">
-                                @foreach($categories as $category)
-                                    <optgroup label="{{$category->label}}">
-                                        @foreach($category->children as $cat_child)
-                                        <option value="{{$cat_child->id}}">{{$cat_child->label}}</option>
-                                        @endforeach
-                                    </optgroup>
-                                @endforeach
-                            </select>
-
 
                         </div>
 
@@ -205,7 +193,6 @@
 
 @section('scripts')
     <script src="{{asset('assets/js/jquery.classyedit.js')}}"></script>
-    <script src="{{asset('assets/js/jquery.select-dropdown.js')}}"></script>
     <script src="{{asset('assets/dropzone/dist/min/dropzone.min.js')}}"></script>
     <script>
         $(document).ready(function () {

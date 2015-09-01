@@ -95,7 +95,7 @@
 
                             <div class="item" v-repeat="location: locations|paginate | filterBy searchKey " track-by="id">
                                 <div class="right floated content">
-                                    <button class="ui icon button" v-on="click:remove(this)"><i class="cancel icon"></i>
+                                    <button class="ui icon button" v-on="click:remove(location)"><i class="cancel icon"></i>
                                     </button>
                                 </div>
                                 <i class="large marker middle aligned icon"></i>
@@ -218,11 +218,18 @@
                         this.currentPage = pageNumber
                     }
                 },
-
                 submitNewLocation: function(message, event) {
                     event.preventDefault()
                 },
-                remove: function(vars) {
+                remove: function(location) {
+                    this.locationsLoadingIndicator= true;
+
+
+                    this.$http.delete("{{route('admin.locations.index')}}/" + location.id, function(data){
+
+                        this.locationsLoadingIndicator= false;
+                        this.locations.splice(this.locations.indexOf(location), 1)
+                    })
 
                 },
                 refreshLocations: function() {

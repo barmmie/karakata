@@ -38,7 +38,7 @@ class TestCase extends IntegrationTest {
         return $this->visit('login')
             ->fill( $user->email, 'email')
             ->fill( $password, 'password')
-            ->press('Signin');
+            ->press('Login');
     }
 
     protected function verifiedLogin($user=null)
