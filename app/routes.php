@@ -12,6 +12,8 @@ Route::group(['before'=> 'guest'], function(){
 
 });
 
+Route::controller('password', 'RemindersController');
+
 Route::get('logout', ['as' => 'sessions.destroy', 'uses' => 'SessionsController@destroy']);
 Route::get('about', ['as' => 'pages.about', 'uses' => 'PageController@about']);
 Route::get('terms-conditions', ['as' => 'pages.terms_conditions', 'uses' => 'PageController@termsConditions']);

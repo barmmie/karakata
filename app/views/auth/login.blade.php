@@ -10,12 +10,14 @@
                 <h2 class="ui teal center aligned icon header">
                     <i class="large lock icon"></i>
                     <div class="content">
-                        Log-in to your {{Setting::get('site_name', 'Enclassified')}} account
+                        {{trans('phrases.sign_in_copy', ['site_name' => Setting::get('site_name', 'Karakata')])}}
+
                     </div>
                 </h2>
                     {{Form::open(['route' => 'sessions.store', 'class'=> 'ui form'])}}
                     <div class="ui stacked segment">
                         @include('partials._form_errors')
+                        <div class="ui error message"></div>
 
                         <div class="field">
                             <div class="ui left icon input">
@@ -33,11 +35,14 @@
                         </button>
                     </div>
 
-                    <div class="ui error message"></div>
 
                 {{Form::close()}}
                 <div class="ui message">
-                   {{trans('phrases.new_user')}} <a href="#">{{trans('words.signup')}}</a>
+                    <div class="ui header">
+                        {{trans('phrases.new_user')}} <a href="{{route('users.register')}}">{{trans('words.signup')}}</a>
+
+                    </div>
+                    <p>{{trans('phrases.forgot_password')}} <a href="{{URL::action('RemindersController@getRemind')}}">{{trans('phrases.reset_password')}}</a></p>
                 </div>
             </div>
     </div>

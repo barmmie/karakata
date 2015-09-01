@@ -4,9 +4,9 @@ confirm event based emails
 
 better logo upload
 
-password reset
+mark abuse report as reviewed
 
-category selector mobile fix
+remove location
 
 
 

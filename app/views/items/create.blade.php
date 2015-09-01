@@ -212,7 +212,6 @@
 
 
                 $('select[name="category_id"]').selectDropdown({
-                    animating: false,
                     animation: false
                 });
 

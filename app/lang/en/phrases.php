@@ -5,6 +5,7 @@ return [
     'featured_items' => "Featured items",
     'creating_account' => " Creating account",
     'create_account_copy' => " Create a :site_name account. It is free",
+    'sign_in_copy' => " Login to your :site_name account.",
     'agree_terms' => "I agree to the <a href='".route("pages.terms")."'>Terms and conditions</a>",
     'already_signed_up' => "Already signed up? <a href='".route("users.login")."'>Login here</a> instead.",
     'create_my_account' => "Create my account",
@@ -135,5 +136,10 @@ return [
     'error_occurred' => 'An error occurred',
     'items_by_time' => 'Items by time series',
     'items_by_location' => 'Items breakdown by location',
+    'password_reminder' => 'Password reminder',
+    'forgot_password' => 'Forgot password?',
+    'send_reminder' => 'Send reminder',
+    'reset_password' => 'Reset password',
+    'password_reset_successful' => 'Password reset was successful. Please proceed to login'
 
 ];

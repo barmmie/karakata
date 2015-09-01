@@ -59,5 +59,6 @@ return [
     'faq' => 'Faq',
     'month' => 'Month',
     'year' => 'Year',
-    'user' => 'User|Users'
+    'user' => 'User|Users',
+    'reset' => 'Reset'
 ];
