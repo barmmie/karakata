@@ -9,15 +9,21 @@ class MessagesTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
+        $messages = [];
+
 		foreach(range(1, 300) as $index)
 		{
-			Message::create([
+
+            $messages[] = [
                 'name' => $faker->name,
                 'email' => $faker->freeEmail,
                 'content' => $faker->sentence,
-                'item_id' => rand(1,200)
-			]);
+                'item_id' => rand(1,200),
+                'created_at' => $faker->dateTimeBetween("-5 months", "now")
+            ];
 		}
+
+        Message::insert($messages);
 	}
 
 }

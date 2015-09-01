@@ -68,9 +68,12 @@ Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsControlle
 
 Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admin'], function(){
 
-    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'SettingsController@dashboard']);
+    Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashController@dashboard']);
+    Route::get('dashboard/itemsByYear', ['as' => 'admin.items_by_year', 'uses' => 'DashController@itemsByYear']);
+    Route::get('dashboard/itemsByLocation', ['as' => 'admin.items_by_location', 'uses' => 'DashController@itemsByLocation']);
 
     Route::get('users/{id}/verify', ['as' => 'admin.users.verify', 'uses' => 'UsersController@verify']);
+    Route::post('admins', ['as' => 'admin.create', 'uses' => 'UsersController@storeAdmin']);
     Route::get('users/{id}/items', ['as' => 'admin.users.items', 'uses' => 'UsersController@items']);
     Route::get('users/{id}/ban', ['as' => 'admin.users.ban', 'uses' => 'UsersController@ban']);
     Route::get('users/{id}/activate', ['as' => 'admin.users.activate', 'uses' => 'UsersController@activate']);

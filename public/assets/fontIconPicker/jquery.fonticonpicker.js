@@ -59,14 +59,14 @@
 								 '</select>' +
 							 '</div>' +
 							 '<div class="fip-icons-container"></div>' +
-							 '<div class="selector-footer" style="display:none;">' +
-								 '<span class="selector-pages">1/2</span>' +
+							 '<div class="selector-footer" style="display:none; color:#000000;">' +
+								 '<strong><span class="selector-pages">1/2</span></strong>' +
 								 '<span class="selector-arrows">' +
 									 '<span class="selector-arrow-left" style="display:none;">' +
-										 '<i class="fip-icon-left-dir"></i>' +
+										 '<i class="icon arrow left"></i> Prev' +
 									 '</span>' +
 									 '<span class="selector-arrow-right">' +
-										 '<i class="fip-icon-right-dir"></i>' +
+										 'Next <i class="icon arrow right"></i>' +
 									 '</span>' +
 								 '</span>' +
 							 '</div>' +
@@ -361,7 +361,7 @@
 
 				// Set icon search to X to reset search
 				this.searchIcon.removeClass('fip-icon-search');
-				this.searchIcon.addClass('fip-icon-cancel');
+				this.searchIcon.addClass('fip-icon-cancel icon remove');
 
 				// Set this as a search
 				this.isSearch = true;
@@ -608,7 +608,7 @@
 			// Should empty icon be shown?
 			if (this.settings.emptyIcon) {
 				// Reset icon container HTML and prepend empty icon
-				this.iconContainer.html('<span class="fip-box"><i class="fip-icon-block" data-fip-value="fip-icon-block"></i></span>');
+				this.iconContainer.html('<span class="fip-box"><i class="red remove circle icon " data-fip-value="red remove circle icon"></i></span>');
 
 			// If not show an error when no icons are found
 			} else if (iconsPaged.length < 1) {

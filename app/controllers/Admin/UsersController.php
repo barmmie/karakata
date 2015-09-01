@@ -28,6 +28,10 @@ class UsersController extends \BaseController {
             case 'banned':
                 $users->bannedOnly();
                 break;
+
+            case 'admin':
+                $users->adminsOnly();
+                break;
         }
 
         if(Input::has('query')) {
@@ -96,6 +100,19 @@ class UsersController extends \BaseController {
         $items = $items->paginate(10);
 
         return View::make('admin.users.show', compact('user', 'items', 'item_count'));
+    }
+
+    public function storeAdmin()
+    {
+        try {
+            $user = $this->execute('Enclassified\User\Command\CreateAdminCommand');
+            flashSuccess('Admin created successfully');
+
+        } catch( \Exception $e) {
+            flashError('An error occured', $e->getMessage());
+        }
+
+        return Redirect::back();
     }
 
 }

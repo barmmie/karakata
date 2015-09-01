@@ -22,7 +22,7 @@
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a class="active item" data-tab="first">{{trans('phrases.site_detail')}}</a>
+                    <a class="active item" data-tab="first">{{trans('phrases.site_details')}}</a>
                     <a class="item" data-tab="second">{{trans('phrases.third_party_keys')}}</a>
                 </div>
 
@@ -32,7 +32,7 @@
 
                 <div class="ui  active tab content p-md" data-tab="first">
 
-                        <h4 class="ui dividing header">{{trans('phrases.site_detail')}}</h4>
+                        <h4 class="ui dividing header">{{trans('phrases.site_details')}}</h4>
 
                     <div class="field">
                         <div class="two fields">
@@ -81,7 +81,7 @@
 
                 </div>
                 <div class="ui  tab content p-md" data-tab="second">
-                    <h4 class="ui dividing header">{{trans('phrases.third_party_key')}}</h4>
+                    <h4 class="ui dividing header">{{trans('phrases.third_party_keys')}}</h4>
 
                     <div class="field">
                         <div class="two fields">

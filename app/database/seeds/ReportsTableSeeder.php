@@ -9,13 +9,20 @@ class ReportsTableSeeder extends Seeder {
 	{
 		$faker = Faker::create();
 
+        $reports = [];
+
 		foreach(range(1, 300) as $index)
 		{
-			Report::create([
+
+            $reports[] = [
                 'message' => $faker->sentence,
-                'item_id' => rand(1,200)
-			]);
+                'item_id' => rand(1,200),
+                'created_at' => $faker->dateTimeBetween("-5 months", "now")
+            ];
 		}
-	}
+
+        Report::insert($reports);
+
+    }
 
 }

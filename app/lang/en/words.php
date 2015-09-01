@@ -56,5 +56,8 @@ return [
     'longitude' => 'Longitude',
     'latitude' => 'Latitude',
     'sitemap' => 'Sitemap',
-    'faq' => 'Faq'
+    'faq' => 'Faq',
+    'month' => 'Month',
+    'year' => 'Year',
+    'user' => 'User|Users'
 ];

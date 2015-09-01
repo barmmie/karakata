@@ -14,11 +14,6 @@ use WebDriver\Exception;
 
 class SettingsController extends \BaseController {
 
-    public function dashboard()
-    {
-
-    }
-
     public function edit()
     {
         return View::make('admin.settings.edit');

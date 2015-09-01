@@ -20,7 +20,7 @@ class SettingTableSeeder extends Seeder {
         return [
             [
                 'name' => 'site_name',
-                'value' => 'Your Site Name',
+                'value' => 'Karakata',
                 'label' => 'Site name',
                 'description' => $faker->sentence(3),
             
@@ -32,10 +32,14 @@ class SettingTableSeeder extends Seeder {
                 'description' => 'A slogan for your company, useful for seo purposes',
             ],
             [
+                'name' => 'site_slogan',
+                'value' => "Buy what you wnat. Sell what you don't need. it's free"
+            ],
+            [
                 'name' => 'currency',
                 'value' => '£',
                 'description' => 'Currency in which amount of things are displayed'
-            ],
+            ]
         ];
 
     }

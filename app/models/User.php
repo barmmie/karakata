@@ -13,7 +13,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     use UserTrait, RemindableTrait, EventGenerator;
 
-    const ADMIN_ROLE = 1, USER_ROLE = 2;
+    const ADMIN_ROLE = 1, USER_ROLE = 2, SUPER_ADMIN_ROLE= 3;
     const BANNED_STATUS = 1, ACTIVE_STATUS = 2;
 
     /**
@@ -93,6 +93,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         return $query;
     }
 
+    public function scopeAdminsOnly($query)
+    {
+        $query =  $query->where('role', self::ADMIN_ROLE)
+                        ->orWhere('role', self::SUPER_ADMIN_ROLE);
+
+        return $query;
+    }
+
     public function scopeUnverifiedOnly($query)
     {
         $query =  $query->where('verified', false);
@@ -105,12 +113,26 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         $new_user = compact('full_name', 'email', 'phone');
 
         $instance = static::create($new_user + [
-                'password' => Hash::make('password'),
+                'password' => Hash::make($password),
                 'role' => static::USER_ROLE,
                 'last_ip_address' => IpRetriever::get_ip()
             ]);
 
         $instance->raise(new UserHasRegistered($instance));
+        return $instance;
+    }
+
+    public static function createAdmin($full_name, $email, $password)
+    {
+        $new_user = compact('full_name', 'email', 'phone');
+
+        $instance = static::create($new_user + [
+                'password' => Hash::make($password),
+                'verified' => true,
+                'role' => static::ADMIN_ROLE,
+                'last_ip_address' => IpRetriever::get_ip()
+            ]);
+
         return $instance;
     }
 
@@ -152,7 +174,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function  isAdmin()
     {
-        return $this->role == static::ADMIN_ROLE;
+        return in_array($this->role, [static::ADMIN_ROLE, static::SUPER_ADMIN_ROLE]) ;
 
     }
 }

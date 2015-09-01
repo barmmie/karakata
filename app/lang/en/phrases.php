@@ -80,7 +80,7 @@ return [
     'verified_only' => 'Verified only',
     'unverified_only' => 'UnVerified only',
     'search_users' => 'Search by name, email or phone ',
-    'no_of_items' => 'No. of items',
+    'no_of_items' => 'No. of items posted',
     'verify_user_email' => 'Verify user email',
     'ban_user' => 'Ban this user',
     'activate_user' => 'Activate user',
@@ -128,6 +128,12 @@ return [
     'added_successfully' => 'Added successfully',
     'privacy_policy' => 'Privacy policy',
     'terms_conditions' => 'Terms and conditions',
-    'about_us' => 'About us'
+    'about_us' => 'About us',
+    'admin_only' => 'Admin only',
+    'add_new_admin' => 'Add new admin',
+    'no_results' => 'No results were found',
+    'error_occurred' => 'An error occurred',
+    'items_by_time' => 'Items by time series',
+    'items_by_location' => 'Items breakdown by location',
 
 ];

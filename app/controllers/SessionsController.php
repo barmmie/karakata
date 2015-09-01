@@ -21,7 +21,12 @@ class SessionsController extends BaseController{
 
             flashSuccess('Authentication successful', $result['message']);
 
-            return Redirect::intended(route('pages.homepage'));
+            if(Auth::user()->isAdmin())
+            {
+                return Redirect::route('admin.dashboard');
+            } else {
+                return Redirect::intended(route('pages.homepage'));
+            }
 
         } else {
 

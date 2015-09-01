@@ -2,13 +2,11 @@
 
 confirm event based emails
 
-dashboard charts
+better logo upload
 
-manage admins/login
+password reset
 
 category selector mobile fix
-s
-add icon list category
 
 
 

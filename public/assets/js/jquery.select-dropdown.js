@@ -2,8 +2,8 @@
  *
  *	jQuery Dropdown
  *
- *	http://danewilliams.uk/projects/jquery-dropdown
- *	https://github.com/daneWilliams/jquery.dropdown
+ *	http://danewilliams.uk/projects/jquery-selectDropdown
+ *	https://github.com/daneWilliams/jquery.selectDropdown
  *
  *	================================================================
  *
@@ -24,7 +24,7 @@
 	 *
 	 *	================================================================ */
 
-	dropdown = function( elem, options ) {
+	selectDropdown = function( elem, options ) {
 
 		var self = this;
 
@@ -67,7 +67,7 @@
 
 		// Options
 		self.options  = options;
-		self.metadata = self.$elem.data('dropdown');
+		self.metadata = self.$elem.data('selectDropdown');
 
 		// Initialise
 		self.init();
@@ -81,7 +81,7 @@
 	 *
 	 *	================================================================ */
 
-	dropdown.prototype = {
+	selectDropdown.prototype = {
 
 
 		/**
@@ -114,24 +114,24 @@
 
 			}
 
-			// Build the dropdown
+			// Build the selectDropdown
 			self._buildDropdown();
 
-			// Populate the dropdown
+			// Populate the selectDropdown
 			self._populate();
 
 			// Bind events
 			self._bindEvents();
 
 			// Callback
-			self.$elem.trigger( 'dropdown-init', self );
+			self.$elem.trigger( 'selectDropdown-init', self );
 
 		},
 
 
 		/**
 		 *
-		 *	Open the dropdown
+		 *	Open the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -184,7 +184,7 @@
 
 				start.y = ( elem.toggleButton.outerHeight() / 2 );
 
-			} 
+			}
 
 			// Mobile?
 			var mobile = ( elem.menuWrapper.css( 'position' ) == 'fixed' ? true : false );
@@ -217,7 +217,7 @@
 			inst.animating = true;
 
 			// Update classes
-			elem.dropdown.addClass( cls.animating );
+			elem.selectDropdown.addClass( cls.animating );
 
 			// Animate
 			elem.menuWrapper.show().css( start );
@@ -234,7 +234,7 @@
 				inst.animating = false;
 
 				// Update classes
-				elem.dropdown.removeClass( cls.animating );
+				elem.selectDropdown.removeClass( cls.animating );
 
 				// Callback
 				self._afterOpen();
@@ -246,7 +246,7 @@
 
 		/**
 		 *
-		 *	Close the dropdown
+		 *	Close the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -299,7 +299,7 @@
 
 				finish.y = ( elem.toggleButton.outerHeight() / 2 );
 
-			} 
+			}
 
 			// Mobile?
 			var mobile = ( elem.menuWrapper.css( 'position' ) == 'fixed' ? true : false );
@@ -332,7 +332,7 @@
 			inst.animating = true;
 
 			// Update classes
-			elem.dropdown.addClass( cls.animating );
+			elem.selectDropdown.addClass( cls.animating );
 
 			// Animate
 			elem.menuWrapper.show().css( start );
@@ -349,7 +349,7 @@
 				inst.animating = false;
 
 				// Update classes
-				elem.dropdown.removeClass( cls.animating );
+				elem.selectDropdown.removeClass( cls.animating );
 
 				// Hide the menu
 				elem.menuWrapper.hide();
@@ -415,7 +415,7 @@
 			inst.animating = true;
 
 			// Update classes
-			elem.dropdown.addClass( cls.animating );
+			elem.selectDropdown.addClass( cls.animating );
 
 			// Animate
 			current.elem.transition({ x: '-100%' }, opt.speed );
@@ -425,7 +425,7 @@
 				inst.animating = false;
 
 				// Update classes
-				elem.dropdown.removeClass( cls.animating );
+				elem.selectDropdown.removeClass( cls.animating );
 
 				// Callback
 				self._afterOpenMenu( menu, current );
@@ -498,7 +498,7 @@
 			inst.animating = true;
 
 			// Update classes
-			elem.dropdown.addClass( cls.animating );
+			elem.selectDropdown.addClass( cls.animating );
 
 			// Animate
 			target.elem.transition({ x: 0 }, opt.speed );
@@ -508,7 +508,7 @@
 				inst.animating = false;
 
 				// Update classes
-				elem.dropdown.removeClass( cls.animating );
+				elem.selectDropdown.removeClass( cls.animating );
 
 				// Callback
 				self._afterCloseMenu( menu, target );
@@ -520,7 +520,7 @@
 
 		/**
 		 *
-		 *	Resize the dropdown
+		 *	Resize the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -557,7 +557,7 @@
 			resize.height.viewport = $(window).height();
 			resize.width.viewport  = $(window).width();
 
-			// Show the dropdown if needed
+			// Show the selectDropdown if needed
 			if ( !inst.open ) {
 
 				elem.menuWrapper.show().css({ opacity: 0 });
@@ -626,7 +626,7 @@
 
 		/**
 		 *
-		 *	Reset the dropdown
+		 *	Reset the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -686,7 +686,7 @@
 				if ( item.href )
 					window.location.href = item.href;
 
-				return; 
+				return;
 
 			}
 
@@ -757,7 +757,7 @@
 			// Update toggle text
 			if ( opt.autoToggle ) {
 
-				if ( !elem.dropdown.find( '.' + cls.core.selected ).length ) {
+				if ( !elem.selectDropdown.find( '.' + cls.core.selected ).length ) {
 
 					if ( opt.multiple )
 						self.toggleTextMulti();
@@ -777,7 +777,7 @@
 
 			}
 
-			// Close the dropdown
+			// Close the selectDropdown
 			if ( !opt.multiple ) {
 
 				self.close();
@@ -921,9 +921,9 @@
 
 				} else {
 
-					if ( elem.dropdown.find( '#' + item ).length ) {
+					if ( elem.selectDropdown.find( '#' + item ).length ) {
 
-						item = elem.dropdown.find( '#' + item );
+						item = elem.selectDropdown.find( '#' + item );
 
 					} else {
 
@@ -938,7 +938,7 @@
 			// Get from jQuery object
 			if ( item.jquery ) {
 
-				var uid = item.data( 'dropdown-uid' );
+				var uid = item.data( 'selectDropdown-uid' );
 
 				if ( !uid || !inst.items[ uid ] )
 					return false;
@@ -993,9 +993,9 @@
 
 				} else {
 
-					if ( elem.dropdown.find( '#' + menu ).length ) {
+					if ( elem.selectDropdown.find( '#' + menu ).length ) {
 
-						menu = elem.dropdown.find( '#' + menu );
+						menu = elem.selectDropdown.find( '#' + menu );
 
 					} else {
 
@@ -1010,7 +1010,7 @@
 			// Get from jQuery object
 			if ( menu.jquery ) {
 
-				var uid = menu.data( 'dropdown-uid' );
+				var uid = menu.data( 'selectDropdown-uid' );
 
 				if ( !uid || !inst.menus[ uid ] )
 					return false;
@@ -1252,14 +1252,14 @@
 			if ( text ) {
 
 				// Store the original
-				if ( !menu.elem.data('dropdown-title') )
-					menu.elem.data('dropdown-title', $title.html() );
+				if ( !menu.elem.data('selectDropdown-title') )
+					menu.elem.data('selectDropdown-title', $title.html() );
 
 				$title.html( text );
 
 			} else {
 
-				$title.html( menu.elem.data('dropdown-title') );
+				$title.html( menu.elem.data('selectDropdown-title') );
 
 			}
 
@@ -1280,14 +1280,14 @@
 			if ( text ) {
 
 				// Store the original
-				if ( !elem.toggleButton.data( 'dropdown-text' ) )
-					elem.toggleButton.data( 'dropdown-text', elem.toggleText.text() );
+				if ( !elem.toggleButton.data( 'selectDropdown-text' ) )
+					elem.toggleButton.data( 'selectDropdown-text', elem.toggleText.text() );
 
 				elem.toggleText.html( text );
 
 			} else {
 
-				elem.toggleText.html( elem.toggleButton.data( 'dropdown-text' ) );
+				elem.toggleText.html( elem.toggleButton.data( 'selectDropdown-text' ) );
 
 			}
 
@@ -1304,13 +1304,13 @@
 
 			var self = this;
 			var elem = self.elements;
-			var vals = elem.toggleButton.data( 'dropdown-text-multi' );
+			var vals = elem.toggleButton.data( 'selectDropdown-text-multi' );
 
 			if ( text ) {
 
 				// Store the original
-				if ( !elem.toggleButton.data( 'dropdown-text' ) )
-					elem.toggleButton.data( 'dropdown-text', elem.toggleText.text() );
+				if ( !elem.toggleButton.data( 'selectDropdown-text' ) )
+					elem.toggleButton.data( 'selectDropdown-text', elem.toggleText.text() );
 
 				// Check for values
 				if ( !vals )
@@ -1333,7 +1333,7 @@
 				// No values
 				if ( !vals ) {
 
-					var str = elem.toggleButton.data( 'dropdown-text' );
+					var str = elem.toggleButton.data( 'selectDropdown-text' );
 
 				} else {
 
@@ -1343,7 +1343,7 @@
 				}
 
 				// Store values
-				elem.toggleButton.data( 'dropdown-text-multi', vals );
+				elem.toggleButton.data( 'selectDropdown-text-multi', vals );
 
 				// Update
 				elem.toggleText.html( str );
@@ -1352,8 +1352,8 @@
 
 				vals = [];
 
-				elem.toggleButton.data( 'dropdown-text-multi', vals );
-				elem.toggleText.html( elem.toggleButton.data( 'dropdown-text' ) );
+				elem.toggleButton.data( 'selectDropdown-text-multi', vals );
+				elem.toggleText.html( elem.toggleButton.data( 'selectDropdown-text' ) );
 
 			}
 
@@ -1375,7 +1375,7 @@
 			    elem = self.elements;
 
 			// Toggle
-			self.$elem.on( 'dropdown-toggle', function() {
+			self.$elem.on( 'selectDropdown-toggle', function() {
 
 				if ( !inst.open )
 					self.open();
@@ -1389,25 +1389,25 @@
 
 				e.preventDefault();
 
-				self.$elem.trigger( 'dropdown-toggle' );
+				self.$elem.trigger( 'selectDropdown-toggle' );
 
 			});
 
-			// Open dropdown
-			elem.dropdown.on( 'open', function() {
+			// Open selectDropdown
+			elem.selectDropdown.on( 'open', function() {
 
 				self.open();
 
 			});
 
-			// Close dropdown
-			elem.dropdown.on( 'close', function() {
+			// Close selectDropdown
+			elem.selectDropdown.on( 'close', function() {
 
 				self.close();
 
 			});
 
-			elem.dropdown.on( 'click', '.' + cls.core.closeButton, function(e) {
+			elem.selectDropdown.on( 'click', '.' + cls.core.closeButton, function(e) {
 
 				e.preventDefault();
 
@@ -1415,18 +1415,18 @@
 
 			});
 
-			elem.dropdown.on( 'click', '.' + cls.core.menuItem, function(e) {
+			elem.selectDropdown.on( 'click', '.' + cls.core.menuItem, function(e) {
 
 				e.preventDefault();
 
-				var item = $(this).data( 'dropdown-uid' );
+				var item = $(this).data( 'selectDropdown-uid' );
 
 				self.select( item );
 
 			});
 
 			// Close menu
-			elem.dropdown.on( 'click', '.' + cls.core.backButton, function(e) {
+			elem.selectDropdown.on( 'click', '.' + cls.core.backButton, function(e) {
 
 				e.preventDefault();
 
@@ -1440,9 +1440,9 @@
 				$(document).on( 'mousedown', function(e) {
 
 					var $target   = $(e.target);
-					var $dropdown = $target.parents( '.' + cls.core.dropdown );
+					var $selectDropdown = $target.parents( '.' + cls.core.selectDropdown );
 
-					if ( !$dropdown.length ) {
+					if ( !$selectDropdown.length ) {
 
 						$( '.' + cls.core.open ).trigger( 'close' );
 						return;
@@ -1458,7 +1458,7 @@
 
 				$(window).resize(function() {
 
-					if ( inst.resizeTimeout ) 
+					if ( inst.resizeTimeout )
 						clearTimeout( inst.resizeTimeout );
 
 					inst.resizeTimeout = setTimeout(function() {
@@ -1476,7 +1476,7 @@
 
 				$(document).on( 'keypress', function(e) {
 
-					// Ignore this dropdown
+					// Ignore this selectDropdown
 					if ( !inst.open && !elem.toggleButton.is(':focus') )
 						return;
 
@@ -1542,7 +1542,7 @@
 
 							} else {
 
-								// Toggle dropdown
+								// Toggle selectDropdown
 								if ( elem.toggleButton.is(':focus') ) {
 
 									if ( !inst.open )
@@ -1560,7 +1560,7 @@
 						// Escape
 						case 27 :
 
-							// Close dropdown
+							// Close selectDropdown
 							if ( inst.open ) {
 
 								e.preventDefault();
@@ -1569,7 +1569,7 @@
 
 							}
 
-						break;	
+						break;
 
 						// Down
 						case 40:
@@ -1578,7 +1578,7 @@
 
 							var menu = self.getMenu();
 
-							// Open dropdown
+							// Open selectDropdown
 							if ( elem.toggleButton.is(':focus') && !inst.open ) {
 
 								self.open();
@@ -1650,7 +1650,7 @@
 
 							}
 
-						break;	
+						break;
 
 						// Up
 						case 38:
@@ -1704,7 +1704,7 @@
 
 							}
 
-						break;			 
+						break;
 
 					}
 
@@ -1718,7 +1718,7 @@
 
 		/**
 		 *
-		 *	Build the dropdown
+		 *	Build the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -1745,12 +1745,12 @@
 			var uid = self.getID();
 
 			self.instance.uid = uid;
-			elem.dropdown.data( 'dropdown-uid', uid );
+			elem.selectDropdown.data( 'selectDropdown-uid', uid );
 
 			// Build the structure
-			elem.overlay.appendTo( elem.dropdown );
+			elem.overlay.appendTo( elem.selectDropdown );
 
-			elem.menuWrapper.appendTo( elem.dropdown );
+			elem.menuWrapper.appendTo( elem.selectDropdown );
 			elem.menuContainer.appendTo( elem.menuWrapper );
 
 			elem.menuMask.prependTo( elem.menuWrapper );
@@ -1776,7 +1776,7 @@
 
 			}
 
-			elem.toggleButton.eq(0).appendTo( elem.dropdown );
+			elem.toggleButton.eq(0).appendTo( elem.selectDropdown );
 
 			// Toggle text
 			var toggleText = ( opt.toggleElem.text ? $( opt.toggleElem.text ) : false );
@@ -1809,12 +1809,12 @@
 			self.elements = elem;
 
 			// Add to page
-			self.$elem.hide().after( elem.dropdown );
+			self.$elem.hide().after( elem.selectDropdown );
 
 			// ID?
 			if ( self.$elem.attr('id') ) {
 
-				elem.dropdown.attr( 'id', self.$elem.attr('id') + '-dropdown' );
+				elem.selectDropdown.attr( 'id', self.$elem.attr('id') + '-selectDropdown' );
 
 			}
 
@@ -1877,7 +1877,7 @@
 			}
 
 			// Set ID
-			$item.data( 'dropdown-uid', item.uid );
+			$item.data( 'selectDropdown-uid', item.uid );
 
 			if ( item.id ) {
 
@@ -1946,7 +1946,7 @@
 			$backText.html( opt.backText );
 
 			// Set ID
-			$menu.data( 'dropdown-uid', menu.uid );
+			$menu.data( 'selectDropdown-uid', menu.uid );
 
 			if ( menu.id ) {
 
@@ -1954,7 +1954,7 @@
 
 			}
 
-			// Add to dropdown
+			// Add to selectDropdown
 			elem.menuContainer.append( $menu );
 
 			return $menu;
@@ -1964,7 +1964,7 @@
 
 		/**
 		 *
-		 *	Populate the dropdown
+		 *	Populate the selectDropdown
 		 *
 		 *	================================================================ */
 
@@ -2062,7 +2062,7 @@
 			if ( $parent )
 				return items;
 
-			// Add to dropdown
+			// Add to selectDropdown
 			self.addItem( items );
 
 		},
@@ -2094,7 +2094,7 @@
 					}
 				};
 
-				item = $.extend( {}, item, $this.data('dropdown') );
+				item = $.extend( {}, item, $this.data('selectDropdown') );
 
 				if ( !item.uid )
 					item.uid = self.getID();
@@ -2123,9 +2123,9 @@
 				}
 
 				// Check for text
-				if ( $this.data('dropdown-text') ) {
+				if ( $this.data('selectDropdown-text') ) {
 
-					item.text = $this.data('dropdown-text');
+					item.text = $this.data('selectDropdown-text');
 
 				}
 
@@ -2133,7 +2133,7 @@
 
 					var $text = $this.children('span');
 
-					if ( !$this.data('dropdown-text') ) {
+					if ( !$this.data('selectDropdown-text') ) {
 
 						item.text = $text.html();
 
@@ -2169,7 +2169,7 @@
 			if ( $parent )
 				return items;
 
-			// Add to dropdown
+			// Add to selectDropdown
 			self.addItem( items );
 
 		},
@@ -2177,7 +2177,7 @@
 
 		/**
 		 *
-		 *	Called before the dropdown is opened
+		 *	Called before the selectDropdown is opened
 		 *
 		 *	================================================================ */
 
@@ -2197,15 +2197,15 @@
 			// Set position
 			if ( resize.collision.position.y == 'top' ) {
 
-				elem.dropdown.removeClass( cls.below );
-				elem.dropdown.addClass( cls.above );
+				elem.selectDropdown.removeClass( cls.below );
+				elem.selectDropdown.addClass( cls.above );
 
 				inst.above = true;
 
 			} else {
 
-				elem.dropdown.removeClass( cls.above );
-				elem.dropdown.addClass( cls.below );
+				elem.selectDropdown.removeClass( cls.above );
+				elem.selectDropdown.addClass( cls.below );
 
 				inst.above = false;
 
@@ -2215,22 +2215,22 @@
 			self._scrollSelected( false, resize );
 
 			// Update classes
-			elem.dropdown.addClass( cls.opening );
+			elem.selectDropdown.addClass( cls.opening );
 
 			$('html').addClass( cls.pageOpening );
 
-			// Close any other dropdowns
+			// Close any other selectDropdowns
 			$( '.' + cls.core.open ).trigger( 'close' );
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-open', self );
+			self.$elem.trigger( 'selectDropdown-before-open', self );
 
 		},
 
 
 		/**
 		 *
-		 *	Called after the dropdown is opened
+		 *	Called after the selectDropdown is opened
 		 *
 		 *	================================================================ */
 
@@ -2246,8 +2246,8 @@
 			inst.open = true;
 
 			// Update classes
-			elem.dropdown.removeClass( cls.opening );
-			elem.dropdown.addClass( cls.open );
+			elem.selectDropdown.removeClass( cls.opening );
+			elem.selectDropdown.addClass( cls.open );
 
 			$('html').removeClass( cls.pageOpening ).addClass( cls.pageOpen );
 
@@ -2255,14 +2255,14 @@
 			elem.toggleButton.focus();
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-open', self );
+			self.$elem.trigger( 'selectDropdown-after-open', self );
 
 		},
 
 
 		/**
 		 *
-		 *	Called before the dropdown is closed
+		 *	Called before the selectDropdown is closed
 		 *
 		 *	================================================================ */
 
@@ -2277,7 +2277,7 @@
 			inst.closing = true;
 
 			// Update classes
-			elem.dropdown.addClass( cls.closing );
+			elem.selectDropdown.addClass( cls.closing );
 
 			$('html').addClass( cls.pageClosing );
 
@@ -2285,14 +2285,14 @@
 			self.focus( false );
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-close', self );
+			self.$elem.trigger( 'selectDropdown-before-close', self );
 
 		},
 
 
 		/**
 		 *
-		 *	Called after the dropdown is closed
+		 *	Called after the selectDropdown is closed
 		 *
 		 *	================================================================ */
 
@@ -2312,8 +2312,8 @@
 			}, 1 );
 
 			// Update classes
-			elem.dropdown.removeClass( cls.closing );
-			elem.dropdown.removeClass( cls.open );
+			elem.selectDropdown.removeClass( cls.closing );
+			elem.selectDropdown.removeClass( cls.open );
 
 			$('html').removeClass( cls.pageClosing ).removeClass( cls.pageOpen );
 
@@ -2327,7 +2327,7 @@
 			elem.menuWrapper.css({ height: '' });
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-close', self );
+			self.$elem.trigger( 'selectDropdown-after-close', self );
 
 		},
 
@@ -2359,7 +2359,7 @@
 			self._scrollSelected( target.uid, resize );
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-open-menu', [ target, current, self ] );
+			self.$elem.trigger( 'selectDropdown-before-open-menu', [ target, current, self ] );
 
 		},
 
@@ -2396,7 +2396,7 @@
 			current.elem.find( '.' + cls.core.menuList ).eq(0).css({ height: '' });
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-open-menu', [ target, current, self ] );
+			self.$elem.trigger( 'selectDropdown-after-open-menu', [ target, current, self ] );
 
 		},
 
@@ -2434,7 +2434,7 @@
 			}
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-close-menu', [ current, target, self ] );
+			self.$elem.trigger( 'selectDropdown-before-close-menu', [ current, target, self ] );
 
 		},
 
@@ -2488,14 +2488,14 @@
 			current.elem.find( '.' + cls.core.menuList ).eq(0).css({ height: '' });
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-close-menu', [ current, target, self ] );
+			self.$elem.trigger( 'selectDropdown-after-close-menu', [ current, target, self ] );
 
 		},
 
 
 		/**
 		 *
-		 *	Called before the dropdown is resized
+		 *	Called before the selectDropdown is resized
 		 *
 		 *	================================================================ */
 
@@ -2510,14 +2510,14 @@
 			inst.resizing = true;
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-resize', [ menu, resize, self ] );
+			self.$elem.trigger( 'selectDropdown-before-resize', [ menu, resize, self ] );
 
 		},
 
 
 		/**
 		 *
-		 *	Called after the dropdown is resized
+		 *	Called after the selectDropdown is resized
 		 *
 		 *	================================================================ */
 
@@ -2530,14 +2530,14 @@
 			inst.resizing = false;
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-resize', [ menu, resize, self ] );
+			self.$elem.trigger( 'selectDropdown-after-resize', [ menu, resize, self ] );
 
 		},
 
 
 		/**
 		 *
-		 *	Called before the dropdown is resized
+		 *	Called before the selectDropdown is resized
 		 *
 		 *	================================================================ */
 
@@ -2550,14 +2550,14 @@
 			inst.resetting = true;
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-reset', [ clear, target, current, self ] );
+			self.$elem.trigger( 'selectDropdown-before-reset', [ clear, target, current, self ] );
 
 		},
 
 
 		/**
 		 *
-		 *	Called before the dropdown is reset
+		 *	Called before the selectDropdown is reset
 		 *
 		 *	================================================================ */
 
@@ -2598,7 +2598,7 @@
 			current.elem.find( '.' + cls.core.menuList ).eq(0).css({ height: '' });
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-reset', [ clear, target, current, self ] );
+			self.$elem.trigger( 'selectDropdown-after-reset', [ clear, target, current, self ] );
 
 		},
 
@@ -2650,8 +2650,8 @@
 			};
 
 			var offset = {
-				x: elem.dropdown.offset().left,
-				y: elem.dropdown.offset().top
+				x: elem.selectDropdown.offset().left,
+				y: elem.selectDropdown.offset().top
 			};
 
 			// Get available space
@@ -2752,7 +2752,7 @@
 			if ( !menu )
 				return;
 
-			// Show the dropdown if needed
+			// Show the selectDropdown if needed
 			if ( !inst.open ) {
 
 				elem.menuWrapper.show().css({ opacity: 0 });
@@ -2818,7 +2818,7 @@
 			var self = this;
 
 			// Event
-			self.$elem.trigger( 'dropdown-before-select', [ item, previous, self ] );
+			self.$elem.trigger( 'selectDropdown-before-select', [ item, previous, self ] );
 
 		},
 
@@ -2834,7 +2834,7 @@
 			var self = this;
 
 			// Event
-			self.$elem.trigger( 'dropdown-after-select', [ item, previous, self ] );
+			self.$elem.trigger( 'selectDropdown-after-select', [ item, previous, self ] );
 
 		},
 
@@ -2995,7 +2995,7 @@
 			// Auto
 			autoClose: true,
 			autoToggle: true,
-			autoTitle: true,			
+			autoTitle: true,
 			autoResize: 300,
 
 			// Nesting
@@ -3030,13 +3030,13 @@
 			classes: {
 
 				//  Font Awesome icons
-				toggleIcon: 'fa fa-sort',
+				toggleIcon: 'icon sort',
 
-				backIcon: 'fa fa-arrow-left',
-				closeIcon: 'fa fa-remove',
+				backIcon: 'arrow left icon ',
+				closeIcon: 'remove icon',
 
-				iconPrev: 'fa fa-angle-left',
-				iconNext: 'fa fa-angle-right'
+				iconPrev: 'angle left icon',
+				iconNext: 'angle right icon'
 
 			},
 
@@ -3054,7 +3054,7 @@
 
 		templates: {
 
-			dropdown:      '<div />',
+			selectDropdown:      '<div />',
 			overlay:       '<div />',
 
 			// Menu
@@ -3101,72 +3101,72 @@
 
 		classes: {
 
-			dropdown:       'dropdown',
-			overlay:        'dropdown-overlay',
+			selectDropdown:       'selectDropdown',
+			overlay:        'selectDropdown-overlay',
 
 			// Menu
-			mainMenu:       'dropdown-main-menu',
-			menuObject:     'dropdown-menu',
-			menuWrapper:    'dropdown-menu-wrapper',
-			menuContainer:  'dropdown-menu-container',
-			menuHeader:     'dropdown-header',
-			menuTitle:      'dropdown-title',
-			menuHeading:    'dropdown-heading',
-			menuDivider:    'dropdown-divider',
-			menuMask:       'dropdown-mask',
-			menuParent:     'dropdown-parent',
-			menuChild:      'dropdown-child',
-			menuList:       'dropdown-list',
-			menuItem:       'dropdown-item',
+			mainMenu:       'selectDropdown-main-menu',
+			menuObject:     'selectDropdown-menu',
+			menuWrapper:    'selectDropdown-menu-wrapper',
+			menuContainer:  'selectDropdown-menu-container',
+			menuHeader:     'selectDropdown-header',
+			menuTitle:      'selectDropdown-title',
+			menuHeading:    'selectDropdown-heading',
+			menuDivider:    'selectDropdown-divider',
+			menuMask:       'selectDropdown-mask',
+			menuParent:     'selectDropdown-parent',
+			menuChild:      'selectDropdown-child',
+			menuList:       'selectDropdown-list',
+			menuItem:       'selectDropdown-item',
 
-			menuLink:       'dropdown-link',
-			menuText:       'dropdown-text',
-			menuAbove:      'dropdown-above',
+			menuLink:       'selectDropdown-link',
+			menuText:       'selectDropdown-text',
+			menuAbove:      'selectDropdown-above',
 
 			// Back
-			backButton:     'dropdown-back',
-			backText:       'dropdown-text',
-			backIcon:       'dropdown-icon',
+			backButton:     'selectDropdown-back',
+			backText:       'selectDropdown-text',
+			backIcon:       'selectDropdown-icon',
 
 			// Toggle
-			toggleButton:   'dropdown-toggle',
-			toggleText:     'dropdown-text',
-			toggleIcon:     'dropdown-icon',
+			toggleButton:   'selectDropdown-toggle',
+			toggleText:     'selectDropdown-text',
+			toggleIcon:     'selectDropdown-icon',
 
 			// Close
-			closeButton:    'dropdown-close',
-			closeText:      'dropdown-text',
-			closeIcon:      'dropdown-icon',
+			closeButton:    'selectDropdown-close',
+			closeText:      'selectDropdown-text',
+			closeIcon:      'selectDropdown-icon',
 
 			// Icons
-			iconPrev:       'dropdown-icon',
-			iconNext:       'dropdown-icon',
+			iconPrev:       'selectDropdown-icon',
+			iconNext:       'selectDropdown-icon',
 
 			// States
-			above:          'dropdown-above',
-			below:          'dropdown-below',
+			above:          'selectDropdown-above',
+			below:          'selectDropdown-below',
 
-			open:           'dropdown-open',
-			menuOpen:       'dropdown-menu-open',
-			closed:         'dropdown-closed',
-			disabled:       'dropdown-disabled',
+			open:           'selectDropdown-open',
+			menuOpen:       'selectDropdown-menu-open',
+			closed:         'selectDropdown-closed',
+			disabled:       'selectDropdown-disabled',
 
-			opening:        'dropdown-opening',
-			closing:        'dropdown-closing',
-			animating:      'dropdown-animating',
-			resize:         'dropdown-resizing',
-			loading:        'dropdown-loading',
-			menuOpening:    'dropdown-menu-opening',
-			menuClosing:    'dropdown-menu-closing',
+			opening:        'selectDropdown-opening',
+			closing:        'selectDropdown-closing',
+			animating:      'selectDropdown-animating',
+			resize:         'selectDropdown-resizing',
+			loading:        'selectDropdown-loading',
+			menuOpening:    'selectDropdown-menu-opening',
+			menuClosing:    'selectDropdown-menu-closing',
 
-			selected:       'dropdown-selected',
-			selectedParent: 'dropdown-parent-selected',
+			selected:       'selectDropdown-selected',
+			selectedParent: 'selectDropdown-parent-selected',
 
-			focused:        'dropdown-focus',
+			focused:        'selectDropdown-focus',
 
-			pageOpen:       'dropdown-open',
-			pageOpening:    'dropdown-opening',
-			pageClosing:    'dropdown-closing'
+			pageOpen:       'selectDropdown-open',
+			pageOpening:    'selectDropdown-opening',
+			pageClosing:    'selectDropdown-closing'
 
 		}
 
@@ -3180,7 +3180,7 @@
 	 *
 	 *	================================================================ */
 
-	$.fn.dropdown = function(options) {
+	$.fn.selectDropdown = function(options) {
 
 		var args = arguments;
 
@@ -3188,8 +3188,8 @@
 
 			return this.each( function() {
 
-				if ( !$.data( this, 'dw.plugin.dropdown' ) ) {
-					$.data( this, 'dw.plugin.dropdown', new dropdown(this, options) );
+				if ( !$.data( this, 'dw.plugin.selectDropdown' ) ) {
+					$.data( this, 'dw.plugin.selectDropdown', new selectDropdown(this, options) );
 				}
 
 			});
@@ -3200,16 +3200,16 @@
 
 			this.each( function() {
 
-				var instance = $.data( this, 'dw.plugin.dropdown' );
+				var instance = $.data( this, 'dw.plugin.selectDropdown' );
 
 				// Allow access to public methods
-				if ( instance instanceof dropdown && typeof instance[options] === 'function' ) {
+				if ( instance instanceof selectDropdown && typeof instance[options] === 'function' ) {
 					returns = instance[options].apply( instance, Array.prototype.slice.call( args, 1 ) );
 				}
 
 				// Allow instances to be destroyed via the 'destroy' method
 				if ( options === 'destroy' ) {
-					$.data( this, 'dw.plugin.dropdown', null );
+					$.data( this, 'dw.plugin.selectDropdown', null );
 				}
 
 			});
@@ -3222,7 +3222,7 @@
 
 
 	if ( !window.dw ) window.dw = {};
-	window.dw.dropdown = dropdown;
+	window.dw.selectDropdown = selectDropdown;
 
 
 })( jQuery, window, document );
@@ -3238,4 +3238,4 @@
 * http://github.com/rstacruz/jquery.transit
 */
 
-(function(t,e){if(typeof define==="function"&&define.amd){define(["jquery"],e)}else if(typeof exports==="object"){module.exports=e(require("jquery"))}else{e(t.jQuery)}})(this,function(t){t.transit={version:"0.9.12",propertyMap:{marginLeft:"margin",marginRight:"margin",marginBottom:"margin",marginTop:"margin",paddingLeft:"padding",paddingRight:"padding",paddingBottom:"padding",paddingTop:"padding"},enabled:true,useTransitionEnd:false};var e=document.createElement("div");var n={};function i(t){if(t in e.style)return t;var n=["Moz","Webkit","O","ms"];var i=t.charAt(0).toUpperCase()+t.substr(1);for(var r=0;r<n.length;++r){var s=n[r]+i;if(s in e.style){return s}}}function r(){e.style[n.transform]="";e.style[n.transform]="rotateY(90deg)";return e.style[n.transform]!==""}var s=navigator.userAgent.toLowerCase().indexOf("chrome")>-1;n.transition=i("transition");n.transitionDelay=i("transitionDelay");n.transform=i("transform");n.transformOrigin=i("transformOrigin");n.filter=i("Filter");n.transform3d=r();var a={transition:"transitionend",MozTransition:"transitionend",OTransition:"oTransitionEnd",WebkitTransition:"webkitTransitionEnd",msTransition:"MSTransitionEnd"};var o=n.transitionEnd=a[n.transition]||null;for(var u in n){if(n.hasOwnProperty(u)&&typeof t.support[u]==="undefined"){t.support[u]=n[u]}}e=null;t.cssEase={_default:"ease","in":"ease-in",out:"ease-out","in-out":"ease-in-out",snap:"cubic-bezier(0,1,.5,1)",easeInCubic:"cubic-bezier(.550,.055,.675,.190)",easeOutCubic:"cubic-bezier(.215,.61,.355,1)",easeInOutCubic:"cubic-bezier(.645,.045,.355,1)",easeInCirc:"cubic-bezier(.6,.04,.98,.335)",easeOutCirc:"cubic-bezier(.075,.82,.165,1)",easeInOutCirc:"cubic-bezier(.785,.135,.15,.86)",easeInExpo:"cubic-bezier(.95,.05,.795,.035)",easeOutExpo:"cubic-bezier(.19,1,.22,1)",easeInOutExpo:"cubic-bezier(1,0,0,1)",easeInQuad:"cubic-bezier(.55,.085,.68,.53)",easeOutQuad:"cubic-bezier(.25,.46,.45,.94)",easeInOutQuad:"cubic-bezier(.455,.03,.515,.955)",easeInQuart:"cubic-bezier(.895,.03,.685,.22)",easeOutQuart:"cubic-bezier(.165,.84,.44,1)",easeInOutQuart:"cubic-bezier(.77,0,.175,1)",easeInQuint:"cubic-bezier(.755,.05,.855,.06)",easeOutQuint:"cubic-bezier(.23,1,.32,1)",easeInOutQuint:"cubic-bezier(.86,0,.07,1)",easeInSine:"cubic-bezier(.47,0,.745,.715)",easeOutSine:"cubic-bezier(.39,.575,.565,1)",easeInOutSine:"cubic-bezier(.445,.05,.55,.95)",easeInBack:"cubic-bezier(.6,-.28,.735,.045)",easeOutBack:"cubic-bezier(.175, .885,.32,1.275)",easeInOutBack:"cubic-bezier(.68,-.55,.265,1.55)"};t.cssHooks["transit:transform"]={get:function(e){return t(e).data("transform")||new f},set:function(e,i){var r=i;if(!(r instanceof f)){r=new f(r)}if(n.transform==="WebkitTransform"&&!s){e.style[n.transform]=r.toString(true)}else{e.style[n.transform]=r.toString()}t(e).data("transform",r)}};t.cssHooks.transform={set:t.cssHooks["transit:transform"].set};t.cssHooks.filter={get:function(t){return t.style[n.filter]},set:function(t,e){t.style[n.filter]=e}};if(t.fn.jquery<"1.8"){t.cssHooks.transformOrigin={get:function(t){return t.style[n.transformOrigin]},set:function(t,e){t.style[n.transformOrigin]=e}};t.cssHooks.transition={get:function(t){return t.style[n.transition]},set:function(t,e){t.style[n.transition]=e}}}p("scale");p("scaleX");p("scaleY");p("translate");p("rotate");p("rotateX");p("rotateY");p("rotate3d");p("perspective");p("skewX");p("skewY");p("x",true);p("y",true);function f(t){if(typeof t==="string"){this.parse(t)}return this}f.prototype={setFromString:function(t,e){var n=typeof e==="string"?e.split(","):e.constructor===Array?e:[e];n.unshift(t);f.prototype.set.apply(this,n)},set:function(t){var e=Array.prototype.slice.apply(arguments,[1]);if(this.setter[t]){this.setter[t].apply(this,e)}else{this[t]=e.join(",")}},get:function(t){if(this.getter[t]){return this.getter[t].apply(this)}else{return this[t]||0}},setter:{rotate:function(t){this.rotate=b(t,"deg")},rotateX:function(t){this.rotateX=b(t,"deg")},rotateY:function(t){this.rotateY=b(t,"deg")},scale:function(t,e){if(e===undefined){e=t}this.scale=t+","+e},skewX:function(t){this.skewX=b(t,"deg")},skewY:function(t){this.skewY=b(t,"deg")},perspective:function(t){this.perspective=b(t,"px")},x:function(t){this.set("translate",t,null)},y:function(t){this.set("translate",null,t)},translate:function(t,e){if(this._translateX===undefined){this._translateX=0}if(this._translateY===undefined){this._translateY=0}if(t!==null&&t!==undefined){this._translateX=b(t,"px")}if(e!==null&&e!==undefined){this._translateY=b(e,"px")}this.translate=this._translateX+","+this._translateY}},getter:{x:function(){return this._translateX||0},y:function(){return this._translateY||0},scale:function(){var t=(this.scale||"1,1").split(",");if(t[0]){t[0]=parseFloat(t[0])}if(t[1]){t[1]=parseFloat(t[1])}return t[0]===t[1]?t[0]:t},rotate3d:function(){var t=(this.rotate3d||"0,0,0,0deg").split(",");for(var e=0;e<=3;++e){if(t[e]){t[e]=parseFloat(t[e])}}if(t[3]){t[3]=b(t[3],"deg")}return t}},parse:function(t){var e=this;t.replace(/([a-zA-Z0-9]+)\((.*?)\)/g,function(t,n,i){e.setFromString(n,i)})},toString:function(t){var e=[];for(var i in this){if(this.hasOwnProperty(i)){if(!n.transform3d&&(i==="rotateX"||i==="rotateY"||i==="perspective"||i==="transformOrigin")){continue}if(i[0]!=="_"){if(t&&i==="scale"){e.push(i+"3d("+this[i]+",1)")}else if(t&&i==="translate"){e.push(i+"3d("+this[i]+",0)")}else{e.push(i+"("+this[i]+")")}}}}return e.join(" ")}};function c(t,e,n){if(e===true){t.queue(n)}else if(e){t.queue(e,n)}else{t.each(function(){n.call(this)})}}function l(e){var i=[];t.each(e,function(e){e=t.camelCase(e);e=t.transit.propertyMap[e]||t.cssProps[e]||e;e=h(e);if(n[e])e=h(n[e]);if(t.inArray(e,i)===-1){i.push(e)}});return i}function d(e,n,i,r){var s=l(e);if(t.cssEase[i]){i=t.cssEase[i]}var a=""+y(n)+" "+i;if(parseInt(r,10)>0){a+=" "+y(r)}var o=[];t.each(s,function(t,e){o.push(e+" "+a)});return o.join(", ")}t.fn.transition=t.fn.transit=function(e,i,r,s){var a=this;var u=0;var f=true;var l=t.extend(true,{},e);if(typeof i==="function"){s=i;i=undefined}if(typeof i==="object"){r=i.easing;u=i.delay||0;f=typeof i.queue==="undefined"?true:i.queue;s=i.complete;i=i.duration}if(typeof r==="function"){s=r;r=undefined}if(typeof l.easing!=="undefined"){r=l.easing;delete l.easing}if(typeof l.duration!=="undefined"){i=l.duration;delete l.duration}if(typeof l.complete!=="undefined"){s=l.complete;delete l.complete}if(typeof l.queue!=="undefined"){f=l.queue;delete l.queue}if(typeof l.delay!=="undefined"){u=l.delay;delete l.delay}if(typeof i==="undefined"){i=t.fx.speeds._default}if(typeof r==="undefined"){r=t.cssEase._default}i=y(i);var p=d(l,i,r,u);var h=t.transit.enabled&&n.transition;var b=h?parseInt(i,10)+parseInt(u,10):0;if(b===0){var g=function(t){a.css(l);if(s){s.apply(a)}if(t){t()}};c(a,f,g);return a}var m={};var v=function(e){var i=false;var r=function(){if(i){a.unbind(o,r)}if(b>0){a.each(function(){this.style[n.transition]=m[this]||null})}if(typeof s==="function"){s.apply(a)}if(typeof e==="function"){e()}};if(b>0&&o&&t.transit.useTransitionEnd){i=true;a.bind(o,r)}else{window.setTimeout(r,b)}a.each(function(){if(b>0){this.style[n.transition]=p}t(this).css(l)})};var z=function(t){this.offsetWidth;v(t)};c(a,f,z);return this};function p(e,i){if(!i){t.cssNumber[e]=true}t.transit.propertyMap[e]=n.transform;t.cssHooks[e]={get:function(n){var i=t(n).css("transit:transform");return i.get(e)},set:function(n,i){var r=t(n).css("transit:transform");r.setFromString(e,i);t(n).css({"transit:transform":r})}}}function h(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}function b(t,e){if(typeof t==="string"&&!t.match(/^[\-0-9\.]+$/)){return t}else{return""+t+e}}function y(e){var n=e;if(typeof n==="string"&&!n.match(/^[\-0-9\.]+/)){n=t.fx.speeds[n]||t.fx.speeds._default}return b(n,"ms")}t.transit.getTransitionValue=d;return t});
+//(function(t,e){if(typeof define==="function"&&define.amd){define(["jquery"],e)}else if(typeof exports==="object"){module.exports=e(require("jquery"))}else{e(t.jQuery)}})(this,function(t){t.transit={version:"0.9.12",propertyMap:{marginLeft:"margin",marginRight:"margin",marginBottom:"margin",marginTop:"margin",paddingLeft:"padding",paddingRight:"padding",paddingBottom:"padding",paddingTop:"padding"},enabled:true,useTransitionEnd:false};var e=document.createElement("div");var n={};function i(t){if(t in e.style)return t;var n=["Moz","Webkit","O","ms"];var i=t.charAt(0).toUpperCase()+t.substr(1);for(var r=0;r<n.length;++r){var s=n[r]+i;if(s in e.style){return s}}}function r(){e.style[n.transform]="";e.style[n.transform]="rotateY(90deg)";return e.style[n.transform]!==""}var s=navigator.userAgent.toLowerCase().indexOf("chrome")>-1;n.transition=i("transition");n.transitionDelay=i("transitionDelay");n.transform=i("transform");n.transformOrigin=i("transformOrigin");n.filter=i("Filter");n.transform3d=r();var a={transition:"transitionend",MozTransition:"transitionend",OTransition:"oTransitionEnd",WebkitTransition:"webkitTransitionEnd",msTransition:"MSTransitionEnd"};var o=n.transitionEnd=a[n.transition]||null;for(var u in n){if(n.hasOwnProperty(u)&&typeof t.support[u]==="undefined"){t.support[u]=n[u]}}e=null;t.cssEase={_default:"ease","in":"ease-in",out:"ease-out","in-out":"ease-in-out",snap:"cubic-bezier(0,1,.5,1)",easeInCubic:"cubic-bezier(.550,.055,.675,.190)",easeOutCubic:"cubic-bezier(.215,.61,.355,1)",easeInOutCubic:"cubic-bezier(.645,.045,.355,1)",easeInCirc:"cubic-bezier(.6,.04,.98,.335)",easeOutCirc:"cubic-bezier(.075,.82,.165,1)",easeInOutCirc:"cubic-bezier(.785,.135,.15,.86)",easeInExpo:"cubic-bezier(.95,.05,.795,.035)",easeOutExpo:"cubic-bezier(.19,1,.22,1)",easeInOutExpo:"cubic-bezier(1,0,0,1)",easeInQuad:"cubic-bezier(.55,.085,.68,.53)",easeOutQuad:"cubic-bezier(.25,.46,.45,.94)",easeInOutQuad:"cubic-bezier(.455,.03,.515,.955)",easeInQuart:"cubic-bezier(.895,.03,.685,.22)",easeOutQuart:"cubic-bezier(.165,.84,.44,1)",easeInOutQuart:"cubic-bezier(.77,0,.175,1)",easeInQuint:"cubic-bezier(.755,.05,.855,.06)",easeOutQuint:"cubic-bezier(.23,1,.32,1)",easeInOutQuint:"cubic-bezier(.86,0,.07,1)",easeInSine:"cubic-bezier(.47,0,.745,.715)",easeOutSine:"cubic-bezier(.39,.575,.565,1)",easeInOutSine:"cubic-bezier(.445,.05,.55,.95)",easeInBack:"cubic-bezier(.6,-.28,.735,.045)",easeOutBack:"cubic-bezier(.175, .885,.32,1.275)",easeInOutBack:"cubic-bezier(.68,-.55,.265,1.55)"};t.cssHooks["transit:transform"]={get:function(e){return t(e).data("transform")||new f},set:function(e,i){var r=i;if(!(r instanceof f)){r=new f(r)}if(n.transform==="WebkitTransform"&&!s){e.style[n.transform]=r.toString(true)}else{e.style[n.transform]=r.toString()}t(e).data("transform",r)}};t.cssHooks.transform={set:t.cssHooks["transit:transform"].set};t.cssHooks.filter={get:function(t){return t.style[n.filter]},set:function(t,e){t.style[n.filter]=e}};if(t.fn.jquery<"1.8"){t.cssHooks.transformOrigin={get:function(t){return t.style[n.transformOrigin]},set:function(t,e){t.style[n.transformOrigin]=e}};t.cssHooks.transition={get:function(t){return t.style[n.transition]},set:function(t,e){t.style[n.transition]=e}}}p("scale");p("scaleX");p("scaleY");p("translate");p("rotate");p("rotateX");p("rotateY");p("rotate3d");p("perspective");p("skewX");p("skewY");p("x",true);p("y",true);function f(t){if(typeof t==="string"){this.parse(t)}return this}f.prototype={setFromString:function(t,e){var n=typeof e==="string"?e.split(","):e.constructor===Array?e:[e];n.unshift(t);f.prototype.set.apply(this,n)},set:function(t){var e=Array.prototype.slice.apply(arguments,[1]);if(this.setter[t]){this.setter[t].apply(this,e)}else{this[t]=e.join(",")}},get:function(t){if(this.getter[t]){return this.getter[t].apply(this)}else{return this[t]||0}},setter:{rotate:function(t){this.rotate=b(t,"deg")},rotateX:function(t){this.rotateX=b(t,"deg")},rotateY:function(t){this.rotateY=b(t,"deg")},scale:function(t,e){if(e===undefined){e=t}this.scale=t+","+e},skewX:function(t){this.skewX=b(t,"deg")},skewY:function(t){this.skewY=b(t,"deg")},perspective:function(t){this.perspective=b(t,"px")},x:function(t){this.set("translate",t,null)},y:function(t){this.set("translate",null,t)},translate:function(t,e){if(this._translateX===undefined){this._translateX=0}if(this._translateY===undefined){this._translateY=0}if(t!==null&&t!==undefined){this._translateX=b(t,"px")}if(e!==null&&e!==undefined){this._translateY=b(e,"px")}this.translate=this._translateX+","+this._translateY}},getter:{x:function(){return this._translateX||0},y:function(){return this._translateY||0},scale:function(){var t=(this.scale||"1,1").split(",");if(t[0]){t[0]=parseFloat(t[0])}if(t[1]){t[1]=parseFloat(t[1])}return t[0]===t[1]?t[0]:t},rotate3d:function(){var t=(this.rotate3d||"0,0,0,0deg").split(",");for(var e=0;e<=3;++e){if(t[e]){t[e]=parseFloat(t[e])}}if(t[3]){t[3]=b(t[3],"deg")}return t}},parse:function(t){var e=this;t.replace(/([a-zA-Z0-9]+)\((.*?)\)/g,function(t,n,i){e.setFromString(n,i)})},toString:function(t){var e=[];for(var i in this){if(this.hasOwnProperty(i)){if(!n.transform3d&&(i==="rotateX"||i==="rotateY"||i==="perspective"||i==="transformOrigin")){continue}if(i[0]!=="_"){if(t&&i==="scale"){e.push(i+"3d("+this[i]+",1)")}else if(t&&i==="translate"){e.push(i+"3d("+this[i]+",0)")}else{e.push(i+"("+this[i]+")")}}}}return e.join(" ")}};function c(t,e,n){if(e===true){t.queue(n)}else if(e){t.queue(e,n)}else{t.each(function(){n.call(this)})}}function l(e){var i=[];t.each(e,function(e){e=t.camelCase(e);e=t.transit.propertyMap[e]||t.cssProps[e]||e;e=h(e);if(n[e])e=h(n[e]);if(t.inArray(e,i)===-1){i.push(e)}});return i}function d(e,n,i,r){var s=l(e);if(t.cssEase[i]){i=t.cssEase[i]}var a=""+y(n)+" "+i;if(parseInt(r,10)>0){a+=" "+y(r)}var o=[];t.each(s,function(t,e){o.push(e+" "+a)});return o.join(", ")}t.fn.transition=t.fn.transit=function(e,i,r,s){var a=this;var u=0;var f=true;var l=t.extend(true,{},e);if(typeof i==="function"){s=i;i=undefined}if(typeof i==="object"){r=i.easing;u=i.delay||0;f=typeof i.queue==="undefined"?true:i.queue;s=i.complete;i=i.duration}if(typeof r==="function"){s=r;r=undefined}if(typeof l.easing!=="undefined"){r=l.easing;delete l.easing}if(typeof l.duration!=="undefined"){i=l.duration;delete l.duration}if(typeof l.complete!=="undefined"){s=l.complete;delete l.complete}if(typeof l.queue!=="undefined"){f=l.queue;delete l.queue}if(typeof l.delay!=="undefined"){u=l.delay;delete l.delay}if(typeof i==="undefined"){i=t.fx.speeds._default}if(typeof r==="undefined"){r=t.cssEase._default}i=y(i);var p=d(l,i,r,u);var h=t.transit.enabled&&n.transition;var b=h?parseInt(i,10)+parseInt(u,10):0;if(b===0){var g=function(t){a.css(l);if(s){s.apply(a)}if(t){t()}};c(a,f,g);return a}var m={};var v=function(e){var i=false;var r=function(){if(i){a.unbind(o,r)}if(b>0){a.each(function(){this.style[n.transition]=m[this]||null})}if(typeof s==="function"){s.apply(a)}if(typeof e==="function"){e()}};if(b>0&&o&&t.transit.useTransitionEnd){i=true;a.bind(o,r)}else{window.setTimeout(r,b)}a.each(function(){if(b>0){this.style[n.transition]=p}t(this).css(l)})};var z=function(t){this.offsetWidth;v(t)};c(a,f,z);return this};function p(e,i){if(!i){t.cssNumber[e]=true}t.transit.propertyMap[e]=n.transform;t.cssHooks[e]={get:function(n){var i=t(n).css("transit:transform");return i.get(e)},set:function(n,i){var r=t(n).css("transit:transform");r.setFromString(e,i);t(n).css({"transit:transform":r})}}}function h(t){return t.replace(/([A-Z])/g,function(t){return"-"+t.toLowerCase()})}function b(t,e){if(typeof t==="string"&&!t.match(/^[\-0-9\.]+$/)){return t}else{return""+t+e}}function y(e){var n=e;if(typeof n==="string"&&!n.match(/^[\-0-9\.]+/)){n=t.fx.speeds[n]||t.fx.speeds._default}return b(n,"ms")}t.transit.getTransitionValue=d;return t});

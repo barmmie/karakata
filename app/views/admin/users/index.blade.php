@@ -15,6 +15,13 @@
 
 
                 </h4>
+
+
+            </div>
+            <div class="ui clearing segment">
+                <button class="ui right floated icon button newAdmin">
+                    <i class="icon add"></i> {{trans('phrases.add_new_admin')}}
+                </button>
             </div>
             <div class="ui clearing segment ">
 
@@ -24,6 +31,7 @@
                     <a href="{{route('admin.users.index', 'verified')}}" class="{{$status == 'verified' ? 'active' : ''}} item" >{{trans('phrases.verified_only')}}</a>
                     <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >{{trans('phrases.active_only')}}</a>
                     <a class="{{$status == 'banned' ? 'active' : ''}} item" href="{{route('admin.users.index', 'banned')}}" >{{trans('phrases.banned_only')}}</a>
+                    <a class="{{$status == 'admin' ? 'active' : ''}} item" href="{{route('admin.users.index', 'admin')}}" >{{trans('phrases.admin_only')}}</a>
                 </div>
 
             </div>
@@ -60,28 +68,30 @@
                                     <i class="dropdown icon"></i>
                                     <div class="menu">
                                         <div class="header">{{$user->full_name}} </div>
-                                        @if(! $user->isVerified())
-                                            <a href="{{route('admin.users.verify', $user->id)}}" class="item">
-                                                <i class="green thumbs up icon"></i>
-                                                {{trans('phrases.verify_user_email')}}
-                                            </a>
-                                        @endif
 
-                                        @if($user->isActive())
-                                            <a href="{{route('admin.users.ban', $user->id)}}" class="item">
-                                                <i class="red ban icon"></i>
-                                                {{trans('phrases.ban_user')}}
+                                            @if(! $user->isVerified())
+                                                <a href="{{route('admin.users.verify', $user->id)}}" class="item">
+                                                    <i class="green thumbs up icon"></i>
+                                                    {{trans('phrases.verify_user_email')}}
+                                                </a>
+                                            @endif
 
-                                            </a>
-                                        @endif
+                                            @if($user->isActive())
+                                                <a href="{{route('admin.users.ban', $user->id)}}" class="item">
+                                                    <i class="red ban icon"></i>
+                                                    {{trans('phrases.ban_user')}}
 
-                                        @if($user->isBanned())
-                                            <a href="{{route('admin.users.activate', $user->id)}}" class="item">
-                                                <i class="green check icon"></i>
-                                                {{trans('phrases.activate_user')}}
+                                                </a>
+                                            @endif
 
-                                            </a>
-                                        @endif
+                                            @if($user->isBanned())
+                                                <a href="{{route('admin.users.activate', $user->id)}}" class="item">
+                                                    <i class="green check icon"></i>
+                                                    {{trans('phrases.activate_user')}}
+
+                                                </a>
+                                            @endif
+
                                     </div>
                                 </div>
                             </td>
@@ -110,6 +120,48 @@
             @endif
         </div>
 
+        <div class="ui modal">
+            <i class="close icon"></i>
+            <div class="header">
+                {{trans('phrases.add_new_admin')}}
+            </div>
+            <div class="content">
+                {{Form::open(['route' => 'admin.create', 'class' => 'ui form'])}}
+                    <div class="ui error message"></div>
+
+                    <div class="field">
+                        <label for="">{{trans('words.full_name')}}</label>
+                        <input type="text" name="full_name" placeholder="{{trans('words.full_name')}}">
+                    </div>
+                    <div class="field">
+
+                        <label for="">{{trans('words.email')}}</label>
+                        <input type="text" name="email" placeholder="{{trans('words.email')}}" />
+                    </div>
+
+                    <div class="field">
+
+                        <label for="">{{trans('words.password')}}</label>
+                        <input type="password" name="password" placeholder="{{trans('words.password')}}" />
+                    </div>
+
+                <button type="submit" class="ui positive right labeled icon button">
+                    {{trans('words.save')}}
+                    <i class="checkmark icon"></i>
+                </button>
+
+
+                {{Form::close()}}
+            </div>
+            <div class="actions">
+                <div class="ui default deny button">
+                    {{trans('words.close')}}
+                </div>
+
+
+            </div>
+        </div>
+
 
     </div>
 @endsection
@@ -122,6 +174,52 @@
         ;
 
         $('.ui.dropdown').dropdown()
+
+        $('.newAdmin').on('click', function(){
+            $('.ui.modal').
+                    modal('show')
+        })
+
+        $catform = $('.ui.form')
+
+        $catform.form({
+            fields: {
+                name: {
+                    identifier: 'full_name',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '{{trans('validation.required', ['attribute' => 'full name'])}}'
+
+                        }
+
+                    ]
+                },email: {
+                    identifier: 'email',
+                    rules: [
+                        {
+                            type: 'email',
+                            prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
+                        }
+                    ]
+                },
+                password: {
+                    identifier: 'password',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '{{trans('validation.required', ['attribute' => 'password'])}}'
+                        },
+                        {
+                            type: 'length[6]',
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'password', 'min' => 6])}}'
+                        }
+                    ]
+                },
+
+            }
+        })
+        ;
     </script>
 
 @endsection

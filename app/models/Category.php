@@ -79,7 +79,7 @@ class Category extends \Kalnoy\Nestedset\Node
             ->update(["title" => $name, "icon" => $icon]);
     }
 
-    public static function addNode($title, $icon)
+    public static function addNode($title, $icon = 'search')
     {
         $newCategory = new static(['title' => $title, "icon" => $icon]);
 
