@@ -102,4 +102,6 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
 
 });
 
+Route::get('install', ['as' => 'installers.create', 'uses' => 'AppController@install']);
+Route::post('install', ['as' => 'installers.store', 'uses' => 'AppController@store']);
 

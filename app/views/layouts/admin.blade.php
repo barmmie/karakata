@@ -7,7 +7,6 @@
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
 
-    <meta name="generator" content="DocPad v6.78.1">
     <title>Admin | @yield('title')</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
