@@ -15,7 +15,7 @@ class SessionsController extends BaseController{
     }
 
     public function store() {
-        $result = $this->execute('Enclassified\User\Command\AuthenticateCommand');
+        $result = $this->execute('Karakata\User\Command\AuthenticateCommand');
 
         if($result['success']) {
 

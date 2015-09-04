@@ -28,29 +28,27 @@ class AppController extends \BaseController
      */
     public function store()
     {
-        Event::fire('system.install');
-        $result = $this->olukoForm->save(Input::all());
+        try {
 
+            Event::fire('system.install');
 
-        if ($result['success']) {
-            Event::fire('user.signup', [
-                'email' => $result['mailData']['email'],
-                'userId' => $result['mailData']['userId'],
-                'activationCode' => $result['mailData']['activationCode']
-            ]);
+            $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
+            Auth::login($user);
 
-            // Success!
-            Session::flash('install.success', Input::all());
+            $settings = ['site_name', 'currency', 'site_slogan'];
 
-            return View::make('installers.success')
-                ->with('userDetails', Input::all());
+            foreach($settings as $setting)
+            {
+                Setting::set($setting,  Input::get($setting));
+            }
 
-        } else {
-            Session::flash('error', $result['message']);
-            return Redirect::route('installers.create')
-                ->withInput()
-                ->withErrors($this->olukoForm->errors());
+            return Response::json(['success' => 'Logged in successfully'], 200);
+
+        } catch(Exception $e) {
+            return Response::json(['error' => $e->getMessage()], 400);
         }
+
+
     }
 
     protected function getInstallationRequirements()

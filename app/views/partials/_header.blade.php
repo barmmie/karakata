@@ -7,7 +7,7 @@
                 @else
                 <i class="circular inverted big teal shadowed search icon"></i>
                 @endif
-               <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Enclassified')}}</span>
+               <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Karakata')}}</span>
             </a>
             <div class="right secondary menu">
                 @if(Auth::check())

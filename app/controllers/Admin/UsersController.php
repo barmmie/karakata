@@ -105,7 +105,7 @@ class UsersController extends \BaseController {
     public function storeAdmin()
     {
         try {
-            $user = $this->execute('Enclassified\User\Command\CreateAdminCommand');
+            $user = $this->execute('Karakata\User\Command\CreateAdminCommand');
             flashSuccess('Admin created successfully');
 
         } catch( \Exception $e) {

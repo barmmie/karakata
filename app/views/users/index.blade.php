@@ -1,1 +1,1 @@
-/vagrant/apps/enclassifiedd/app/views/users/index.blade.php
+/vagrant/apps/Karakatad/app/views/users/index.blade.php

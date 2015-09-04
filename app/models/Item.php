@@ -20,14 +20,14 @@ use \Laracasts\Commander\Events\EventGenerator;
         static::creating(function ($item) {
 
             $item->status = self::PENDING_STATUS;
-            $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
+            $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
 
         });
 
         static::updating(function($item){
             $item->slug = $item->id . '-' . Str::slug($item->title, '-');
 //            $item->status = self::PENDING_STATUS;
-            $item->ip_address = \Enclassified\Services\IpRetriever::get_ip();
+            $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
         });
 
         static::created(function($item){
@@ -184,7 +184,7 @@ use \Laracasts\Commander\Events\EventGenerator;
             ]
         );
 
-        $instance->raise(new \Enclassified\Item\Event\ItemWasPosted($instance));
+        $instance->raise(new \Karakata\Item\Event\ItemWasPosted($instance));
 
         return $instance;
     }

@@ -23,7 +23,7 @@ class ItemsController extends BaseController {
     }
 
     public function update($id) {
-        $result = $this->execute('Enclassified\Item\Command\UpdateItemCommand', Input::all() + ['id' => $id]);
+        $result = $this->execute('Karakata\Item\Command\UpdateItemCommand', Input::all() + ['id' => $id]);
 
         if($result['success']) {
             $item = $result['payload'];
@@ -40,7 +40,7 @@ class ItemsController extends BaseController {
 
     public function store() {
 
-       $result =  $this->execute('Enclassified\Item\Command\PostItemCommand');
+       $result =  $this->execute('Karakata\Item\Command\PostItemCommand');
 
         if($result['success']) {
             $item = $result['payload'];

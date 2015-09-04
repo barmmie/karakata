@@ -32,7 +32,7 @@ class ReportsController extends \BaseController {
 	 */
 	public function store()
 	{
-        $result = $this->execute('Enclassified\Report\Command\ReportItemCommand');
+        $result = $this->execute('Karakata\Report\Command\ReportItemCommand');
 
         if($result['success']) {
             return Response::json($result, 200);

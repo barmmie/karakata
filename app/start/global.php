@@ -63,7 +63,7 @@ App::error(function(Exception $exception, $code)
 //    }
 });
 
-App::error(function(Enclassified\Exceptions\ValidationFailedException $exception){
+App::error(function(Karakata\Exceptions\ValidationFailedException $exception){
 
     if(Request::ajax())
          return Response::json($exception->getErrors(), 400);
@@ -110,7 +110,7 @@ require app_path().'/filters.php';
 require app_path().'/listeners.php';
 require app_path().'/composers.php';
 
-App::bind('Laracasts\Commander\CommandTranslator', 'Enclassified\Services\MyCommandTranslator');
+App::bind('Laracasts\Commander\CommandTranslator', 'Karakata\Services\MyCommandTranslator');
 
 App::setLocale(Session::get('lang', 'en'));
 

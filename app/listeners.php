@@ -1,3 +1,5 @@
 <?php
 
-Event::listen('Enclassified.*', 'Enclassified\Listeners\EmailNotifier');
+Event::listen('Karakata.*', 'Karakata\Listeners\EmailNotifier');
+
+Event::subscribe('Karakata\Listeners\SystemListener');

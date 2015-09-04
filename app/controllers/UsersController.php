@@ -32,7 +32,7 @@ class UsersController extends \BaseController {
 	 */
 	public function store()
 	{
-        $user = $this->execute('Enclassified\User\Command\RegisterUserCommand');
+        $user = $this->execute('Karakata\User\Command\RegisterUserCommand');
 
         flashSuccess('Registration successful', "A confirmation email has been sent to {$user->email}. You need to click the link in the message to activate your account");
 
@@ -82,7 +82,7 @@ class UsersController extends \BaseController {
 	 */
 	public function update()
 	{
-        $result = $this->execute('Enclassified\User\Command\UpdateProfileCommand');
+        $result = $this->execute('Karakata\User\Command\UpdateProfileCommand');
 
         if($result['success']) {
             flashSuccess('Update Successful', $result['message']);
@@ -97,7 +97,7 @@ class UsersController extends \BaseController {
 
     public function updatePassword()
     {
-        $result = $this->execute('Enclassified\User\Command\UpdatePasswordCommand');
+        $result = $this->execute('Karakata\User\Command\UpdatePasswordCommand');
 
         if($result['success']) {
             flashSuccess('Password update Successful', $result['message']);

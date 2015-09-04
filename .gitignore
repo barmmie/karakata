@@ -8,8 +8,13 @@ composer.lock
 .DS_Store
 Thumbs.db
 /.idea/*
-.idea/enclassified.iml
-/app/storage
+.idea/Karakata.iml
+/app/storage/cache
+/app/storage/clockwork
+/app/storage/logs
+/app/storage/meta
+/app/storage/sessions
+/app/storage/views
 /public/uploads
 
 .idea/vcs.xml

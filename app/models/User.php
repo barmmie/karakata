@@ -4,9 +4,9 @@ use Illuminate\Auth\UserTrait;
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
-use Enclassified\User\Event\UserHasRegistered;
+use Karakata\User\Event\UserHasRegistered;
 use Laracasts\Commander\Events\EventGenerator;
-use Enclassified\Services\IpRetriever;
+use Karakata\Services\IpRetriever;
 
 class User extends Eloquent implements UserInterface, RemindableInterface
 {
@@ -122,14 +122,14 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         return $instance;
     }
 
-    public static function createAdmin($full_name, $email, $password)
+    public static function createAdmin($full_name, $email, $password, $superAdmin = false)
     {
         $new_user = compact('full_name', 'email', 'phone');
 
         $instance = static::create($new_user + [
                 'password' => Hash::make($password),
                 'verified' => true,
-                'role' => static::ADMIN_ROLE,
+                'role' => $superAdmin ? static::SUPER_ADMIN_ROLE :static::ADMIN_ROLE,
                 'last_ip_address' => IpRetriever::get_ip()
             ]);
 

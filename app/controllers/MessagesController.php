@@ -32,7 +32,7 @@ class MessagesController extends \BaseController {
 	 */
 	public function store()
 	{
-		$result = $this->execute('Enclassified\Message\Command\PostMessageCommand');
+		$result = $this->execute('Karakata\Message\Command\PostMessageCommand');
 
         if($result['success']) {
             return Response::json($result, 200);

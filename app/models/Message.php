@@ -19,13 +19,13 @@ class Message extends \Eloquent {
                 'email' => $sender_email,
                 'content' => e($content),
                 'item_id' => $item_id,
-                'ip_address' => \Enclassified\Services\IpRetriever::get_ip(),
+                'ip_address' => \Karakata\Services\IpRetriever::get_ip(),
                 'read_status' => false
 
             ]
         );
 
-        $instance->raise(new \Enclassified\Message\Event\MessageHasBeenPosted($instance));
+        $instance->raise(new \Karakata\Message\Event\MessageHasBeenPosted($instance));
         return $instance;
     }
 

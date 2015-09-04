@@ -8,7 +8,7 @@
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
 
-    <title>{{Setting::get('site_name', 'Enclassified')}} | @yield('title')</title>
+    <title>{{Setting::get('site_name', 'Karakata')}} | @yield('title')</title>
 
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
 

@@ -34,7 +34,7 @@
         "app/helpers.php"
       ],
       "psr-4": {
-        "Enclassified\\" : "app/Enclassified"
+        "Karakata\\" : "app/Karakata"
       }
 
 	},
