@@ -21,6 +21,8 @@ class SettingsController extends \BaseController {
 
     public function update()
     {
+
+        dd(Input::all());
         try {
             foreach(Input::all() as $key => $value) {
                 Setting::set($key, $value);

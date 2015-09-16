@@ -55,8 +55,6 @@
 
                         @endif
 
-
-
                     </div>
 
                     @if($item_count > 10)
@@ -64,8 +62,6 @@
                             {{$items->appends(Input::all())->links()}}
 
                         </div>
-
-
                     @endif
                 </div>
             </div>

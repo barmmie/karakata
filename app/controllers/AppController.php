@@ -5,18 +5,22 @@ use Illuminate\Filesystem\Filesystem;
 
 class AppController extends \BaseController
 {
-    protected $settingStore;
+    protected $installStore;
     protected $fileSystem;
 
     public function __construct()
     {
-        $this->fileSystem = new Filesystem;
-        $this->settingStore = new JsonSettingStore($this->fileSystem, storage_path() . '/installation.json');
+        $fileSystem = App::make('files');
+
+        $this->fileSystem = $fileSystem;
+
+        $this->installStore = new JsonSettingStore($fileSystem, storage_path() . '/installation.json');
     }
 
     public function install()
     {
-        $installation_requirements = $this->getInstallationRequirements();
+        $this->checkInstallation();
+        $installation_requirements = $this->gatherInstallationRequirements();
 
         return View::make('installation.create', $installation_requirements);
     }
@@ -28,9 +32,11 @@ class AppController extends \BaseController
      */
     public function store()
     {
+        $this->checkInstallation();
         try {
+            $seeds = ['CategoryTableSeeder'];
 
-            Event::fire('system.install');
+            Event::fire('system.install', ['seeds' => $seeds]);
 
             $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
             Auth::login($user);
@@ -51,7 +57,7 @@ class AppController extends \BaseController
 
     }
 
-    protected function getInstallationRequirements()
+    protected function gatherInstallationRequirements()
     {
         $default_database = Config::get('database.default');
         $db_name = Config::get("database.connections.{$default_database}.database");
@@ -64,7 +70,6 @@ class AppController extends \BaseController
             );
 
             $database = mysqli_select_db($connection, $db_name);
-
 
             $db_status = (boolean)$database;
 
@@ -82,6 +87,14 @@ class AppController extends \BaseController
         $conditions_satisfied = $db_status && $php_version_status && $curl_status && $storage_folder_write_status;
 
         return compact('db_name', 'db_status', 'php_version_status', 'curl_status', 'conditions_satisfied', 'mcrypt_status', 'storage_folder_write_status');
+    }
+
+    protected function checkInstallation()
+    {
+        if($this->installStore->get('is_installed')){
+            flashInfo('App has already been installed');
+            return Redirect::route('pages.homepage');
+        }
     }
 
 

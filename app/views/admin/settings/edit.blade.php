@@ -84,6 +84,46 @@
                     <h4 class="ui dividing header">{{trans('phrases.third_party_keys')}}</h4>
 
                     <div class="field">
+                        <label for="">Allow premium payment</label>
+                    </div>
+
+                    <div>
+
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">Paypal Currency</label>
+                                    {{Form::text('paypal_currency', Setting::get('paypal_currency', 'USD'))}}
+                                    <p>Example: USD, GBP</p>
+                                </div>
+                                <div class="field">
+                                    <label for="">Paypal Testing mode</label>
+                                    <div class="ui toggle checkbox {{Setting::get('paypal_test_mode', true) ? 'checked' : 'unchecked'}}">
+                                        {{Form::checkbox('paypal_test_mode', 1, Setting::get('paypal_test_mode', 0))}}
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">Paypal Client Id</label>
+                                    {{Form::text('paypal_client_id', Setting::get('paypal_client_id'))}}
+
+                                </div>
+                                <div class="field">
+                                    <label for="">Paypal Secret</label>
+                                    {{Form::text('paypal_secret', Setting::get('paypal_secret'))}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="field">
                         <div class="two fields">
                             <div class="field">
                                 <label for="">{{trans('phrases.250_wide_banner')}}</label>
@@ -105,6 +145,10 @@
                         {{Form::textarea('analytics', Setting::get('analytics'))}}
                         <p>{{trans('phrases.paste_analytics_code')}}</p>
                     </div>
+
+
+
+
                 </div>
 
                 <button class="ui teal labeled icon button" tabindex="0" type="submit"><i class="save icon"></i> {{trans('phrases.save_changes')}}</button>
@@ -127,6 +171,8 @@
 
             $('.pointing .item')
                     .tab()
+
+            $('.ui.checkbox').checkbox()
 
             Dropzone.autoDiscover = false;
 

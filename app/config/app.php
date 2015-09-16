@@ -125,11 +125,13 @@ return array(
         'anlutro\LaravelSettings\ServiceProvider',
         'rigor789\AirbrakeLaravel\AirbrakeServiceProvider',
         'Roumen\Sitemap\SitemapServiceProvider',
+        'Ignited\LaravelOmnipay\LaravelOmnipayServiceProvider',
+
 
         'Laracasts\Commander\CommanderServiceProvider',
         'Artdarek\OAuth\OAuthServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider'
+        'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 
     ),
@@ -204,6 +206,10 @@ return array(
         'OAuth' => 'Artdarek\OAuth\Facade\OAuth',
         'Image' => 'Intervention\Image\Facades\Image',
         'Setting' => 'anlutro\LaravelSettings\Facade',
+        'Omnipay' => 'Ignited\LaravelOmnipay\Facades\OmnipayFacade',
+
+
+
                 'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 
