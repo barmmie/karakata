@@ -24,6 +24,7 @@
                 <div class="ui pointing secondary menu">
                     <a class="active item" data-tab="first">{{trans('phrases.site_details')}}</a>
                     <a class="item" data-tab="second">{{trans('phrases.third_party_keys')}}</a>
+                    <a class="item" data-tab="third">{{trans('phrases.paypal_payment')}}</a>
                 </div>
 
             </div>
@@ -84,46 +85,6 @@
                     <h4 class="ui dividing header">{{trans('phrases.third_party_keys')}}</h4>
 
                     <div class="field">
-                        <label for="">Allow premium payment</label>
-                    </div>
-
-                    <div>
-
-
-                        <div class="field">
-                            <div class="two fields">
-                                <div class="field">
-                                    <label for="">Paypal Currency</label>
-                                    {{Form::text('paypal_currency', Setting::get('paypal_currency', 'USD'))}}
-                                    <p>Example: USD, GBP</p>
-                                </div>
-                                <div class="field">
-                                    <label for="">Paypal Testing mode</label>
-                                    <div class="ui toggle checkbox {{Setting::get('paypal_test_mode', true) ? 'checked' : 'unchecked'}}">
-                                        {{Form::checkbox('paypal_test_mode', 1, Setting::get('paypal_test_mode', 0))}}
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="field">
-                            <div class="two fields">
-                                <div class="field">
-                                    <label for="">Paypal Client Id</label>
-                                    {{Form::text('paypal_client_id', Setting::get('paypal_client_id'))}}
-
-                                </div>
-                                <div class="field">
-                                    <label for="">Paypal Secret</label>
-                                    {{Form::text('paypal_secret', Setting::get('paypal_secret'))}}
-
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="field">
                         <div class="two fields">
                             <div class="field">
                                 <label for="">{{trans('phrases.250_wide_banner')}}</label>
@@ -147,6 +108,64 @@
                     </div>
 
 
+
+
+                </div>
+
+                <div class="ui  tab content p-md" data-tab="third">
+                    <h4 class="ui dividing header">{{trans('phrases.paypal_payment')}}</h4>
+
+                    <div class="field">
+                        <label for="">Allow premium payment</label>
+                        {{Form::checkbox('allow_premium_payment', 1, Setting::get('allow_premium_payment'))}}
+                    </div>
+
+                    <div>
+
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">Amount for premium</label>
+                                    {{Form::text('premium_amount', Setting::get('premium_amount', 40))}}
+                                </div>
+                                <div class="field">
+                                    <label for="">No of days</label>
+                                    {{Form::text('premium_days', Setting::get('premium_days', 40))}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">Paypal Currency</label>
+                                    {{Form::text('paypal_currency', Setting::get('paypal_currency', 'USD'))}}
+                                    <p>Example: USD, GBP</p>
+                                </div>
+                                <div class="field">
+                                    <label for="">Paypal Testing mode</label>
+                                    {{Form::semanticCheckbox('paypal_test_mode', Setting::get('paypal_test_mode', '1'),  (Setting::get('paypal_test_mode', '1') == '1') ) }}
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">Paypal Client Id</label>
+                                    {{Form::text('paypal_client_id', Setting::get('paypal_client_id'))}}
+
+                                </div>
+                                <div class="field">
+                                    <label for="">Paypal Secret</label>
+                                    {{Form::text('paypal_secret', Setting::get('paypal_secret'))}}
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                 </div>

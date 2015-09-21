@@ -2,73 +2,91 @@
 
 class PaymentController extends Controller
 {
-    private $data;
 
-    public function getIndex()
+    public function displayItemReceipt($id)
     {
-        $this->data['product'] = 'Aurvana Platinum';
-        $this->Data['productImage'] = 'http://img.creative.com/images/products/large/pdt_21734.png.ashx?width=200';
-        $this->data['price'] = '299.00';
-        $this->data['currency'] = 'USD';
-        $this->data['description'] = 'Flagship Over-the-ear Bluetooth® Headset with NFC';
-        return View::make('payments.create', $this->data);
+
+        $item = Item::where('id',$id)
+                    ->where('user_id', Auth::user()->id)
+                    ->with('picture')
+                    ->firstOrFail();
+
+        if ($item->isRejected()) {
+            flashError('That item has been rejected', 'You can not pay for an item that has been rejected');
+            return Redirect::route('dash.myitems');
+        }
+
+        $data['product'] = trans('phrases.pay_for_premium').' on '.Setting::get('site_name');
+        $data['productImage'] = asset($item->mainThumbnail());
+        $data['price'] = Setting::get('premium_amount', '10.00');
+        $data['currency'] = Setting::get('paypal_currency', 'USD');
+        $data['description'] = "Premium placement of ad '{$item->title}'";
+
+        return View::make('payments.create', compact('item', 'data'));
     }
 
     public function postPayment()
     {
+
         $params = array(
-            'cancelUrl' => 'http://localhost/cancel_order',
-            'returnUrl' => 'http://localhost/payment_success',
+            'cancelUrl' => route('payments.cancel', Input::get('item_id')),
+            'returnUrl' => route('payments.success', Input::get('item_id')),
             'name' => Input::get('name'),
             'description' => Input::get('description'),
-            'amount' => Input::get('price'),
-            'currency' => Input::get('currency')
+            'amount' => Setting::get('premium_amount', '10.00'),
+            'currency' => Setting::get('paypal_currency', 'USD')
         );
 
         Session::put('params', $params);
         Session::save();
 
         $gateway = Omnipay::create('PayPal_Express');
-        $gateway->setClientId('{my id}');
-        $gateway->setSecret('{my secret}');
-        $gateway->setSignature('AiPC9BjkCyDFQXbSkoZcgqH3hpacASJcFfmT46nLMylZ2R-SV95AaVCq');
-        $gateway->setTestMode(true);
+        $gateway->setUsername('barmmie_api1.gmail.com');
+        $gateway->setPassword('K3WEH4SC4GE5JSD4');
+        $gateway->setSignature('AiPC9BjkCyDFQXbSkoZcgqH3hpacA.2GRnkxpeqk1Jyv4YGnkKsARgiT');
+        $gateway->setTestMode(false);
         $response = $gateway->purchase($params)->send();
+
         if ($response->isSuccessful()) {
-
-// payment was successful: update database
-            print_r($response);
+            //print_r($response);
         } elseif ($response->isRedirect()) {
-
-// redirect to offsite payment gateway
             $response->redirect();
         } else {
-// payment failed: display message to customer
+
             echo $response->getMessage();
         }
     }
 
-    public function getSuccessPayment()
+    public function cancel($id)
+    {
+        flashError('Transaction cancelled', 'Transaction was cancelled by user on app');
+        return Redirect::route('items.payment', $id);
+    }
+
+    public function success($id)
     {
         $gateway = Omnipay::create('PayPal_Express');
         $gateway->setUsername('paypal account');
         $gateway->setPassword('paypal password');
         $gateway->setSignature('AiPC9BjkCyDFQXbSkoZcgqH3hpacASJcFfmT46nLMylZ2R-SV95AaVCq');
-        $gateway->setTestMode(true);
+        $gateway->setTestMode(false);
 
         $params = Session::get('params');
         $response = $gateway->completePurchase($params)->send();
         $paypalResponse = $response->getData(); // this is the raw response object
 
         if (isset($paypalResponse['PAYMENTINFO_0_ACK']) && $paypalResponse['PAYMENTINFO_0_ACK'] === 'Success') {
-// Response
-// print_r($paypalResponse);
+
+            $item = Item::findOrFail($id);
+            $item->markAsPremium();
+
+            flashSuccess('Transaction successful', 'Item has now been marked as premium');
+            return Redirect::route('items.show', $item->slug);
 
         } else {
-
-//Failed transaction
+            flashError('Processing error', 'Could not process transaction');
+            return Redirect::route('items.payment', $id);
 
         }
-        return View::make('result');
     }
 }

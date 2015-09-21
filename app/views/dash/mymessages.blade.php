@@ -1,7 +1,7 @@
 @extends('layouts.public')
 
 @section('title')
-    {{Lang::choic('words.message',2)}} - {{trans('phrases.my_messages')}}
+    {{Lang::choice('words.message',2)}} - {{trans('phrases.my_messages')}}
 @endsection
 
 @section('content')

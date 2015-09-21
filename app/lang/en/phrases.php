@@ -145,6 +145,12 @@ return [
     'deleted_successfully' => 'Deleted successfully',
     'no_reports_here' => 'No reports here',
     'mark_as_reviewed' => 'Mark as reviewed',
-    'mark_as_unreviewed' => 'Mark as unreviewed'
+    'mark_as_unreviewed' => 'Mark as unreviewed',
+    'paypal_payment' => 'Paypal payment settings',
+    'pay_for_premium' => 'Pay for premium ad',
+    'update_item' => 'Update item',
+    'total_payable' => 'Total payable',
+    'powered_by' => 'Powered by',
+    'pay_now' => 'Pay now'
 
 ];

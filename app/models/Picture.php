@@ -5,11 +5,11 @@ class Picture extends \Eloquent
     protected $fillable = ['image_src', 'thumbnail_src', 'item_id'];
 
 
-    public static function upload($file, $item_id = 0)
+    public static function upload($file, $item_id = 0, $extension = null)
     {
-        $type = $file->getClientOriginalExtension();
+        $type = $extension?:$file->getClientOriginalExtension();
 
-        $imagedata = Image::make($file->getRealPath());
+        $imagedata = Image::make($file);
 
         $uploadPath = "/uploads/";
 

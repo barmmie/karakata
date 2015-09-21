@@ -9,9 +9,6 @@
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
                 @include('partials._user_sidebar')
-
-
-
             </div>
 
             <div class="twelve wide column">
@@ -52,13 +49,28 @@
 
                                         </div>
                                         <div class="description">
-                                            <p></p>
+
                                         </div>
                                         <div class="extra">
-                                            <a class="ui right floated button" href="{{route('items.edit', $item->id)}}">
+
+                                            <a class="ui right floated red tiny button" href="{{route('items.delete', $item->id)}}">
+                                                <i class="trash icon"></i>
+                                                {{trans('words.delete')}}
+                                            </a>
+
+                                            <a class="ui right floated yellow tiny button" href="{{route('items.edit', $item->id)}}">
                                                 <i class="pencil icon"></i>
 
                                                 {{trans('words.edit')}}
+                                            </a>
+
+                                            <a class="ui right floated animated fade button" href="{{route('items.payment', $item->id)}}">
+                                                <div class="visible content">
+                                                    <i class="paypal icon"></i>
+                                                    {{trans('phrases.pay_for_premium')}}</div>
+                                                <div class="hidden content">
+                                                    {{Setting::get('paypal_currency', 'USD')}}{{Setting::get('premium_amount', '10.00')}} for {{Setting::get('premium_days', '40')}} day(s)
+                                                </div>
                                             </a>
                                             <div class="ui brown tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</div>
                                             @if($item->isApproved())

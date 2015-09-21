@@ -22,12 +22,10 @@ class SettingsController extends \BaseController {
     public function update()
     {
 
-        dd(Input::all());
         try {
             foreach(Input::all() as $key => $value) {
                 Setting::set($key, $value);
             }
-
 
             flashSuccess('Settings have been updated successfully');
             return Redirect::back();
@@ -37,8 +35,6 @@ class SettingsController extends \BaseController {
                         ->withInput();
 
         }
-
-
 
     }
 

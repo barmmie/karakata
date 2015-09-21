@@ -15,6 +15,9 @@
     <div class="ui two column stackable grid container">
 
             <div class="eleven wide column">
+                <div class="ui segment">
+                    @include('widgets._featured_items')
+                </div>
                 <div class="ui segment ">
                     <div class="m-b-lg">
                         <h2 class="ui dividing header m-b-lg">
@@ -29,7 +32,7 @@
                                     @foreach($category_list as $category)
                                     <div class="ui content m-b-md">
                                         <a class="ui teal header" href="{{route('categories.show', $category['slug'] )}}">
-                                            <i class="bordered inverted shadowed teal {{$category['icon']?:'search'}} icon"></i>
+                                            <i class="bordered inverted shadowed teal huge {{$category['icon']?:'search'}} icon"></i>
                                             <div class="content">
                                                 {{$category['label']}}
                                             </div>
@@ -57,9 +60,7 @@
 
                     </div>
                 </div>
-                <div class="ui segment">
-                   @include('widgets._featured_items')
-                </div>
+
 
                 @if(Setting::get('ad_leaderboard')!='')
                     {{Setting::get('ad_leaderboard')}}

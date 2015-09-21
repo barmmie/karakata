@@ -49,3 +49,5 @@ function removeCommonWords($input){
 
     return preg_replace('/\b('.implode('|',$commonWords).')\b/','',$input);
 }
+
+

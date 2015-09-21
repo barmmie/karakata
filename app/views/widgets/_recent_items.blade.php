@@ -20,7 +20,7 @@
                     </div>
                 </div>
                 <div class="extra images">
-                    <a><img src="{{asset($item->mainThumbnail())}}"></a>
+                    <a><img src="{{asset($item->mainThumbnail())}}" alt="{{$item->title}}"></a>
                 </div>
                 <div class="meta">
                     <span class="like">

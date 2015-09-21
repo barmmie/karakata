@@ -1,3 +1,0 @@
---Todo
-
-better logo upload

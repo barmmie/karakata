@@ -20,76 +20,62 @@ class CategoryTableSeeder extends Seeder
 
 
         $cat_array = [
-            'Automobiles' => [
-                'Car parts & accessories',
-                'Campervans $ caravans',
-                'Motorbikes & scooters',
-                'Vans trucks & Plants',
+            'mobile | Mobile Phones - Tablets' => [
+                'mobile | Phones - Mobile Phones |moa',
+                'tablet | Tablets |moa',
+                'attach | Phone Accessories |moa',
             ],
-            'Services' => [
-                'Building, Home & Removals',
-                'Entertainment',
-                'Health & beauty',
-                'Miscellaneaous',
-                'Property & Shipping',
-                'Tax money & Visas',
-                'Telecoms and computers',
-                'Travel services and tours',
-                'Tuition and home lessons'
+            'building | Home Furniture Garden' => [
+                'keyboard | Office and Commercial|bfa',
+                'plug | Home Appliances|ppa',
+                'tree | Furniture|fua',
+                'rain | Decor - Garden - Accessories|hfa',
+                'leaf | Agriculture and Foodstuff|gra',
+            ],
 
+            'diamond | Fashion and Beauty' => [
+                'shop | Clothing and Shoes|cla',
+                'diamond | Watches - Jewelry - Accessories|jwa',
+                'heartbeat | Health and Beauty|haa',
+                'child | Babies and Kids|baa',
             ],
-            'For Sale' => [
-                'Audio & Stereo',
-                'Baby kids & stuff',
-                'CDs DVDs, Games & Books',
-                'Clothes, Footwear & accessories',
-                'Computers & software',
-                'Home & garden',
-                'Music & instrument',
-                'Office furniture & equipments',
-                'Phones, Mobile phones & laptops',
-                'Sports leisure travel',
-                'Tickets',
-                'Tv Dvd & Cameras',
-                'Video games & cameras',
-                'Video games & consoles',
+            'home | Real estate' => [
+                'cubes|Houses - Apartments for Rent|apa',
+                'map|  Parking and storage | prk',
+                'cubes|Houses - Apartments for Sale|rea',
+                'building outline|Office and Shops|off',
+                'travel|Temporary and Vacation Rentals|vac',
             ],
-            'Property' => [
-                'House for rent',
-                'House for sale',
-                'Apartments for rent',
-                'Apartments for sale',
-                'Farm ranches',
-                'Land',
-                'Vacation rentals',
-                'Commercial builidng'
-
-
+            'desktop|Electronics - Video|ela' => [
+                'desktop | Computers - Laptops|computers',
+                'game|Video Games - Consoles|vga',
+                'camera retro|Cameras and accessories|pha',
+                'film| TV - Audio - Video|ema',
             ],
-            'Pets' => [
-                'Pets for sale',
-                'Petsitters & dogwalkers',
-                'Pet equipments & accessories',
-                'Missing lost and found'
+            'car|Vehicles|' => [
+                'car|Cars|autos',
+                'shipping|Trucks - Commercial - Agricultural|hva',
+                'settings|Cars Accesories|pta',
+                'road|Other Vehicles',
             ],
-            'Jobs' => [
-                'Full-time jobs',
-                'Internet jobs',
-                'Learn and earn jobs',
-                'Manual labor jobs'
+            'music|Hobbies - Art - sports' => [
+                'Sporting goods - Bicycles|sga',
+                'unmute|Musical Instruments|msa',
+                'book|Books - CDs - DVDs|bka',
+                'game|Toys and Games|taa',
+                'write|Art - Collectibles|cba',
             ],
-            'Learning' => [
-                'Sports classes',
-                'Language classes',
-                'Personal fitness',
-                'Music lessons'
+            'suitcase|Jobs and Services' => [
+                'wizard|Services|crs',
+                'folder open outline| Offered Jobs|bus',
+                'student|Classes - Courses|lss',
+                'file text outline|Seeking Work - CVs|res',
             ],
-            'Community' => [
-                'Pets for sale',
-                'Petsitters & dogwalkers',
-                'Pet equipments & accessories',
-                'Missing lost and found'
-            ],
+            'paw|Pet' => [
+                'paw|Dogs - Cats|pet',
+                'linkify|Pet\'s Accessories|pas',
+                'bug|Other Animals',
+            ]
         ];
 
         foreach ($cat_array as $key => $categories) {
@@ -101,11 +87,12 @@ class CategoryTableSeeder extends Seeder
 
     protected function addChildren($categories, $parentTitle)
     {
-
-        $parent = Category::addNode($parentTitle);
+        $catgry = explode('|', $parentTitle);
+        $parent = Category::addNode(trim($catgry[1]), trim($catgry[0]));
 
         foreach ($categories as $category) {
-            $cat = Category::addNode($category);
+            $_catgry = explode('|', $category);
+            $cat = Category::addNode(trim($_catgry[1]), trim($_catgry[0]));
             Category::moveNode($cat['id'], $parent['id'], 'inside', $cat['parent_id']);
         }
     }

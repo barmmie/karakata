@@ -7,4 +7,5 @@ View::composers([
             'Karakata\Composers\FeaturedItemComposer' => ['widgets._featured_items' ],
             'Karakata\Composers\PopularCategoryComposer' => ['widgets._popular_categories' ],
             'Karakata\Composers\LatestItemComposer' => ['widgets._recent_items' ],
+            'Karakata\Composers\PremiumItemComposer' => ['widgets._premium_items' ],
                 ]);

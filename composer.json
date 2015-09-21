@@ -6,7 +6,6 @@
 	"require": {
 		"laravel/framework": "4.2.*",
 		 "intervention/image": "^2.2",
-		"davejamesmiller/laravel-breadcrumbs": "2.*",
 		"artdarek/oauth-4-laravel": "dev-master",
       "laracasts/commander": "~1.0",
       "kalnoy/nestedset": "1.1.*",

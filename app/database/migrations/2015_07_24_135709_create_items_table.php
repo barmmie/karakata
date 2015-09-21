@@ -28,6 +28,7 @@ class CreateItemsTable extends Migration {
             $table->integer('user_id')->unsigned();
             $table->integer('status');
             $table->string('ip_address');
+            $table->timestamp('premium_until')->nullable();
             $table->boolean('negotiable')->default(true);
 
             $table->index('title');

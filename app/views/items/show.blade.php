@@ -54,14 +54,11 @@
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             @if($item->category->parent && $item->category->parent->id !=1)
                                 <i class="right angle icon divider"></i>
-                                <a class="section"
-                                   href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
+                                <a class="section" href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
                             @endif
                             <i class="right angle icon divider"></i>
-                            <a class="section"
+                            <a class="section "
                                href="{{route('categories.show', $item->category->slug)}}">{{$item->category->title}}</a>
-
-
                         </div>
                     </div>
 
@@ -97,7 +94,7 @@
 
                             <div id="bx-pager">
                                 @foreach($item->pictures as $index => $picture)
-                                    <a data-slide-index="{{$index}}" href=""><img  class="" src="{{$picture->thumbnail_src}}"/></a>
+                                    <a data-slide-index="{{$index}}" href=""><img alt="{{$item->title}}" src="{{$picture->thumbnail_src}}"/></a>
                                 @endforeach
 
                             </div>

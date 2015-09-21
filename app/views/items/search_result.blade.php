@@ -15,7 +15,7 @@
                     @include('widgets._popular_categories')
                 </div>
 
-                <div class="ui segment">
+                <div class="ui segment ">
                     @include('widgets._recent_items')
                 </div>
 
@@ -38,7 +38,10 @@
 
                     </div>
 
-                    <div class="ui padded segment">
+                    @include('widgets._premium_items')
+
+
+                    <div class="ui purple padded segment">
 
 
                         @if(count($items) < 1)

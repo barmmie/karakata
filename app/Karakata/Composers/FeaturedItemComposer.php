@@ -12,7 +12,7 @@ namespace Karakata\Composers;
 class FeaturedItemComposer {
     public function compose($view){
 
-        $featured_items = \Item::featured(6)->get();
+        $featured_items = \Item::featured(8)->get();
 
         $view->with('featured_items', $featured_items);
     }

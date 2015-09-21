@@ -19,7 +19,6 @@ use \Laracasts\Commander\Events\EventGenerator;
 
         static::creating(function ($item) {
 
-            $item->status = self::PENDING_STATUS;
             $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
 
         });
@@ -27,7 +26,7 @@ use \Laracasts\Commander\Events\EventGenerator;
         static::updating(function($item){
             $item->slug = $item->id . '-' . Str::slug($item->title, '-');
 //            $item->status = self::PENDING_STATUS;
-            $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
+//            $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
         });
 
         static::created(function($item){
@@ -120,13 +119,13 @@ use \Laracasts\Commander\Events\EventGenerator;
 
     public function scopeFeatured($query, $limit = 3, $exclude = [])
     {
-        $query = $query->whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `items`)', [$limit])
+        $query = $query->premiumOnly()
+                        //whereRaw('RAND()<(SELECT ((?/COUNT(*))*10) FROM `items`)', [$limit])
                         ->orderByRaw('RAND()')
                         ->with('pictures')
                         ->with('picture')
                         ->with('location')
                         ->approved()
-//                        ->where('created_at', '>=', Carbon::now()->subMonths(6) )
                         ->limit($limit);
         if (!empty($exclude)) {
             $query = $query->whereNotIn('id', $exclude);
@@ -136,6 +135,10 @@ use \Laracasts\Commander\Events\EventGenerator;
 
     public function scopeApprovedOnly($query){
         return $query->where('status', self::APPROVED_STATUS);
+    }
+
+    public function scopePremiumOnly($query){
+        return $query->where('premium_until','>' ,Carbon::now());
     }
 
     public function scopeApproved($query){
@@ -180,6 +183,7 @@ use \Laracasts\Commander\Events\EventGenerator;
                 'email' => $email,
                 'phone' => $phone,
                 'seller_name' => $sellerName,
+                'status' => self::PENDING_STATUS,
                 'user_id' => Auth::user()->id
             ]
         );
@@ -209,5 +213,17 @@ use \Laracasts\Commander\Events\EventGenerator;
     public static function findByUserOrFail($id, $user_id = null)
     {
         $user_id = $user_id ?: Auth::id();
+    }
+
+    public function isPremium()
+    {
+        return (! is_null($this->premium_until)) && (Carbon::parse($this->premium_until)->diffInDays() < Setting::get('premium_days', 40)) ;
+    }
+
+    public function markAsPremium()
+    {
+        $this->status = self::APPROVED_STATUS;
+        $this->premium_until = Carbon::now()->addDays(Setting::get('premium_days', 40));
+        $this->save();
     }
 }

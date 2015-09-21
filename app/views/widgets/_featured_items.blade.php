@@ -13,11 +13,11 @@
                         <i class=" corner icon">{{count($item->pictures)}}</i>
 
                     </a>
-                    <img src="{{asset($item->mainThumbnail())}}">
+                    <img src="{{asset($item->mainThumbnail())}}" alt="{{$item->title}}">
                 </div>
                 <div class="content">
 
-                    <a class="small header">{{$item->title}}</a>
+                    <a class="small header" href="{{route('items.show', $item->slug)}}">{{$item->title}}</a>
 
 
                 </div>

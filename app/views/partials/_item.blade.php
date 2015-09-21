@@ -1,6 +1,6 @@
 <div class="item">
 
-    <div class="ui small bordered rounded image">
+    <div class="ui small real-bordered rounded image">
         <a class="ui brown ribbon label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
 
         <a class="ui right corner label">
@@ -8,9 +8,22 @@
             <i class=" corner icon">{{count($item->pictures)}}</i>
 
         </a>
-        <img src="{{asset($item->mainThumbnail())}}">
+
+        <img class="" src="{{asset($item->mainThumbnail())}}" alt="{{$item->title}}">
     </div>
+
     <div class="content">
+
+        @if($item->isPremium())
+
+        <div class="trap ribbon-wrap fl-right">
+            <div class="trap-ribbon">
+                <a href="#"><i class="inverted circular star icon"></i> Premium  </a>
+            </div>
+        </div>
+
+        @endif
+
 
         <a class="header" href="{{route('items.show', $item->slug)}}">{{$item->title}}</a>
         <div class="meta">

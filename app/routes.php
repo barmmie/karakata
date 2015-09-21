@@ -43,6 +43,12 @@ Route::group(['before'=> 'auth'], function(){
     Route::post('items/new', ['as' => 'items.store', 'uses' => 'ItemsController@store']);
 
     Route::get('items/{id}/edit', ['as' => 'items.edit', 'uses' => 'ItemsController@edit']);
+    Route::get('items/{id}/delete', ['as' => 'items.delete', 'uses' => 'ItemsController@delete']);
+    Route::get('items/{id}/payment', ['as' => 'items.payment', 'uses' => 'PaymentController@displayItemReceipt']);
+    Route::post('items/{id}/payment', ['as' => 'items.post_payment', 'uses' => 'PaymentController@postPayment']);
+
+    Route::get('items/{id}/payment_success', ['as' => 'payments.success', 'uses' => 'PaymentController@success']);
+    Route::get('items/{id}/payment_cancel', ['as' => 'payments.cancel', 'uses' => 'PaymentController@cancel']);
 
     Route::get('items/{id}/favorite', ['as' => 'items.favorite', 'uses' => 'ItemsController@favorite']);
 
@@ -100,6 +106,10 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
 
     Route::controller("categories", 'CategoriesController');
 
+});
+
+Route::get('test/{id}', function($id){
+    return Image::make('http://images03.olx-st.com/ui/53/59/93/1442503168_833260657_1.jpg')->fit(320, 240);
 });
 
 Route::get('install', ['as' => 'installers.create', 'uses' => 'AppController@install']);

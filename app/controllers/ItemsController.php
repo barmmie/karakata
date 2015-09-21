@@ -93,5 +93,24 @@ class ItemsController extends BaseController {
         return Redirect::back();
     }
 
+    public function delete($id)
+    {
+        try {
+            $item = Item::where('id',$id)
+                ->where('user_id', Auth::user()->id);
+
+            $item->delete();
+
+            flashInfo('Item has been deleted', 'Your item has been deleted successfully');
+        } catch(Exception $e) {
+            flashError('Item could not be deleted', $e->getMessage());
+
+        }
+
+        return Redirect::back();
+
+    }
+
+
 
 }

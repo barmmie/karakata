@@ -41,7 +41,10 @@
                        @include('partials._items_filter')
                     </div>
 
-                    <div class="ui padded segment">
+                    @include('widgets._premium_items')
+
+
+                    <div class="ui purple padded segment">
 
 
                         @if(count($items) < 1)
@@ -61,13 +64,9 @@
                                     @include('partials._item')
                                 @endforeach
                             </div>
-
                         @endif
 
-
-
                     </div>
-
 
                     @if($items->getTotal() > $items->getPerPage())
                         <div class="ui segment">
