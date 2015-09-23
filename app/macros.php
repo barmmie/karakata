@@ -6,7 +6,7 @@ Form::macro("semanticCheckbox", function($name, $value = 1, $checked = null, $op
     $string.=             $checked ? 'checked': 'unchecked';
     $string.=  "'>";
     $string.= '<input type="hidden" name="'.$name.'" value="0"/>';
-    $string.= Form::checkbox($name, $value);
+    $string.= Form::checkbox($name, $value, $checked);
     $string.= '</div>';
 
 

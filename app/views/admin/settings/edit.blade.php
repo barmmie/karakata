@@ -117,7 +117,7 @@
 
                     <div class="field">
                         <label for="">Allow premium payment</label>
-                        {{Form::checkbox('allow_premium_payment', 1, Setting::get('allow_premium_payment'))}}
+                        {{Form::semanticCheckbox('allow_premium_payment', '1', Setting::get('allow_premium_payment', '0'))}}
                     </div>
 
                     <div>
@@ -145,8 +145,7 @@
                                 </div>
                                 <div class="field">
                                     <label for="">Paypal Testing mode</label>
-                                    {{Form::semanticCheckbox('paypal_test_mode', Setting::get('paypal_test_mode', '1'),  (Setting::get('paypal_test_mode', '1') == '1') ) }}
-
+                                    {{Form::semanticCheckbox('paypal_test_mode', '1', (Setting::get('paypal_test_mode', '1')== '1') )}}
                                 </div>
                             </div>
                         </div>
@@ -154,16 +153,21 @@
                         <div class="field">
                             <div class="two fields">
                                 <div class="field">
-                                    <label for="">Paypal Client Id</label>
-                                    {{Form::text('paypal_client_id', Setting::get('paypal_client_id'))}}
+                                    <label for="">Paypal username</label>
+                                    {{Form::text('paypal_username', Setting::get('paypal_username'))}}
 
                                 </div>
                                 <div class="field">
-                                    <label for="">Paypal Secret</label>
-                                    {{Form::text('paypal_secret', Setting::get('paypal_secret'))}}
+                                    <label for="">Paypal password</label>
+                                    {{Form::text('paypal_password', Setting::get('paypal_password'))}}
 
                                 </div>
                             </div>
+                        </div>
+
+                        <div class="field">
+                            <label for="">Paypal signature</label>
+                            {{Form::text('paypal_signature', Setting::get('paypal_signature'))}}
                         </div>
                     </div>
 

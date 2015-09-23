@@ -15,9 +15,7 @@
     <div class="ui two column stackable grid container">
 
             <div class="eleven wide column">
-                <div class="ui segment">
-                    @include('widgets._featured_items')
-                </div>
+
                 <div class="ui segment ">
                     <div class="m-b-lg">
                         <h2 class="ui dividing header m-b-lg">
@@ -59,6 +57,10 @@
 
 
                     </div>
+                </div>
+
+                <div class="ui segment">
+                    @include('widgets._featured_items')
                 </div>
 
 

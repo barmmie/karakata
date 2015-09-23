@@ -96,7 +96,7 @@ return [
     'analytics_code' => 'Analytics code',
     'paste_analytics_code' => 'Paste your google analytics code',
     'leaderboard_banner' => 'Leader board banner',
-    '250_wide_banner' => 'Leader board banner',
+    '250_wide_banner' => '250 wide banner',
     'reviewed_only' => 'Reviewed only',
     'unreviewed_only' => 'UnReviewed only',
     'no_abuse_reports' => 'There are no abuse reports here',

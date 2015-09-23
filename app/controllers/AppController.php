@@ -33,6 +33,8 @@ class AppController extends \BaseController
     public function store()
     {
         $this->checkInstallation();
+
+
         try {
             $seeds = ['CategoryTableSeeder'];
 

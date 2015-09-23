@@ -11,6 +11,12 @@ class PaymentController extends Controller
                     ->with('picture')
                     ->firstOrFail();
 
+        if(Setting::get('allow_premium_payment', '0') == '0')
+        {
+            flashError('Payment not allowed on platform', 'Contact administrator to enable payment');
+            return Redirect::route('dash.myitems');
+        }
+
         if ($item->isRejected()) {
             flashError('That item has been rejected', 'You can not pay for an item that has been rejected');
             return Redirect::route('dash.myitems');

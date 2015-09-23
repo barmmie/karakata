@@ -64,6 +64,8 @@
                                                 {{trans('words.edit')}}
                                             </a>
 
+                                            @if(Setting::get('allow_premium_payment', '0') == '1'))
+
                                             <a class="ui right floated animated fade button" href="{{route('items.payment', $item->id)}}">
                                                 <div class="visible content">
                                                     <i class="paypal icon"></i>
@@ -72,6 +74,8 @@
                                                     {{Setting::get('paypal_currency', 'USD')}}{{Setting::get('premium_amount', '10.00')}} for {{Setting::get('premium_days', '40')}} day(s)
                                                 </div>
                                             </a>
+
+                                            @endif
                                             <div class="ui brown tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</div>
                                             @if($item->isApproved())
                                             <div class="ui green label">{{trans('words.approved')}}</div>
