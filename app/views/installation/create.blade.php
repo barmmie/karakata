@@ -59,7 +59,7 @@
                                 <div class="field ">
                                     <label>{{trans('words.currency')}}</label>
 
-                                    {{Form::text('currency', Setting::get('currency'))}}
+                                    {{Form::text('currency', Setting::get('currency', '$'))}}
                                 </div>
                             </div>
                         </div>
@@ -243,6 +243,16 @@
                                     {
                                         type: 'empty',
                                         prompt: '{{trans('validation.required', ['attribute' => 'password'])}}'
+                                    }
+                                ]
+                            },
+
+                            site_name: {
+                                identifier: 'site_name',
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: '{{trans('validation.required', ['attribute' => 'site name'])}}'
                                     }
                                 ]
                             }

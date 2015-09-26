@@ -2,6 +2,7 @@
 namespace Karakata\Listeners;
 
 use Artisan;
+use Config;
 use Illuminate\Filesystem\Filesystem;
 use \anlutro\LaravelSettings\JsonSettingStore;
 
@@ -27,6 +28,8 @@ class SystemListener {
 
     public function install($seeds)
     {
+
+
         Artisan::call('key:generate');
 
         Artisan::call('migrate');
@@ -38,13 +41,15 @@ class SystemListener {
         }
 
         $this->installStore->set('is_installed', true);
-        $this->installStore->set('current_version', true);
+        $this->installStore->set('current_version', Config::get('app.version'));
 
     }
 
     public function update()
     {
         Artisan::call('migrate');
+        $this->installStore->set('current_version', Config::get('app.version'));
+
     }
 
 }

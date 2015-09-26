@@ -36,7 +36,7 @@ class AppController extends \BaseController
 
 
         try {
-            $seeds = ['CategoryTableSeeder'];
+            $seeds = ['SettingTableSeeder','CategoryTableSeeder'];
 
             Event::fire('system.install', ['seeds' => $seeds]);
 
