@@ -65,20 +65,15 @@
                                     {{Form::text('currency', Setting::get('currency'))}}
                                 </div>
 
-
-
                             </div>
-
 
                         </div>
                     </div>
-
 
                         <div class="field">
                             <label>{{trans('phrases.site_description')}}</label>
                             {{Form::textarea('site_description', Setting::get('site_description'))}}
                         </div>
-
 
                 </div>
                 <div class="ui  tab content p-md" data-tab="second">
@@ -94,7 +89,7 @@
                             <div class="field">
                                 <label for="">{{trans('phrases.leaderboard_banner')}}</label>
                                 {{Form::textarea('ad_leaderboard', Setting::get('ad_leaderboard'))}}
-                                <p>Ideally a {{trans('phrases.250_wide_banner')}}</p>
+                                <p>Ideally a {{trans('phrases.leaderboard_banner')}}</p>
 
                             </div>
                         </div>
