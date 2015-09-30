@@ -82,14 +82,14 @@
                                     <label for="">Envato username</label>
                                     <div class="ui left icon input">
                                         <i class="user icon"></i>
-                                        {{Form::text('email', null, ['placeholder'=>"Envato username"])}}
+                                        {{Form::text('envato_username', null, ['placeholder'=>"Envato username"])}}
                                     </div>
                                 </div>
                                 <div class="field">
                                     <label for="">Envato purchase code</label>
                                     <div class="ui left icon input">
                                         <i class="key icon"></i>
-                                        {{Form::text('purchase_code', null, ['placeholder'=>"Purchase code"])}}
+                                        {{Form::text('envato_purchase_code', null, ['placeholder'=>"Purchase code"])}}
                                     </div>
                                 </div>
                             </div>
@@ -220,8 +220,7 @@
 
                                 error: function (r) {
 
-                                    $(this).removeClass('loading')
-                                    $spinner.toggle();
+                                    $form.removeClass('loading')
                                     alertify.error(r.statusText);
                                 }
 
@@ -253,6 +252,24 @@
                                     {
                                         type: 'empty',
                                         prompt: '{{trans('validation.required', ['attribute' => 'site name'])}}'
+                                    }
+                                ]
+                            },
+                            envato_username: {
+                                identifier: 'envato_username',
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: '{{trans('validation.required', ['attribute' => 'envato username'])}}'
+                                    }
+                                ]
+                            },
+                            envato_purchase_code: {
+                                identifier: 'envato_purchase_code',
+                                rules: [
+                                    {
+                                        type: 'empty',
+                                        prompt: '{{trans('validation.required', ['attribute' => 'envato purchase code'])}}'
                                     }
                                 ]
                             }

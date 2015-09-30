@@ -131,7 +131,6 @@ return array(
         'Laracasts\Commander\CommanderServiceProvider',
         'Artdarek\OAuth\OAuthServiceProvider',
         'Intervention\Image\ImageServiceProvider',
-        'Clockwork\Support\Laravel\ClockworkServiceProvider',
 
 
     ),
@@ -208,9 +207,6 @@ return array(
         'Setting' => 'anlutro\LaravelSettings\Facade',
         'Omnipay' => 'Ignited\LaravelOmnipay\Facades\OmnipayFacade',
 
-
-
-                'Clockwork' => 'Clockwork\Support\Laravel\Facade',
 
 
     ),
