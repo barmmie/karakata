@@ -8,11 +8,23 @@ Full support
 
 Name
 
-karakata_db
+
 Username
 
-06a3c4259f4f
+
 Password
 
-655118a8ca930b0a
+
 Create
+
+
+
+DB_HOST='localhost'
+DB_NAME='enclassified'
+DB_USER='root'
+DB_PASS='root'
+
+DB_HOST='localhost'
+DB_NAME='karakata_db'
+DB_USER='06a3c4259f4f'
+DB_PASS='655118a8ca930b0a'

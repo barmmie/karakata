@@ -30,6 +30,7 @@ if ($update) {
   exec('cd ' . $repo_dir . ' && GIT_WORK_TREE=' . $web_root_dir . ' ' . $git_bin_path  . ' checkout -f');
   shell_exec('cd ' . $web_root_dir . ' && composer5.4-sp install');
   shell_exec('cd ' . $web_root_dir . ' && php5.4-sp artisan migrate');
+    shell_exec('cd ' . $web_root_dir.' &&  echo "DB_HOST=\'localhost\' \\nDB_NAME=\'karakata_db\' \\nDB_USER=\'06a3c4259f4f\' \\nDB_PASS=\'655118a8ca930b0a\'" | cat > .env ');
 
   // Log the deployment
   $commit_hash = shell_exec('cd ' . $repo_dir . ' && ' . $git_bin_path  . ' rev-parse --short HEAD');

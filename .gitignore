@@ -16,6 +16,7 @@ Thumbs.db
 /app/storage/sessions
 /app/storage/views
 /public/uploads
+/karakata/*
 
 .idea/vcs.xml
 
@@ -24,3 +25,5 @@ Thumbs.db
 tests/logs/output.html
 
 .env
+
+*.zip

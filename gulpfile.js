@@ -29,7 +29,7 @@ gulp.task('live-monitor', function() {
 
 gulp.task('prepare-envato', function(){
 
-    return gulp.src(config.vendor_files)
+    return gulp.src(config.vendor_files, {base:'.'})
         .pipe(zip('karakata.zip'))
         .pipe(gulp.dest('./'))
 })
