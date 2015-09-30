@@ -1,9 +1,6 @@
-
-
 <IfModule mod_rewrite.c>
-AddType application/x-httpd-php55 .php 
     RewriteEngine on
 
-        RewriteCond %{REQUEST_URI} !^public
+    RewriteCond %{REQUEST_URI} !^public
     RewriteRule ^(.*)$ public/$1 [L]
 </IfModule>
