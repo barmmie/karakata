@@ -1,5 +1,4 @@
-<?php
-namespace Karakata\Listeners;
+<?php namespace Karakata\Listeners;
 
 use Artisan;
 use Config;

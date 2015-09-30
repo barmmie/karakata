@@ -50,6 +50,9 @@ class AppController extends \BaseController
                 Setting::set($setting,  Input::get($setting));
             }
 
+            $this->installStore->set('envato_username', Input::get('envato_username'));
+            $this->installStore->set('envato_purchase_code', Input::get('envato_purchase_code'));
+
             return Response::json(['success' => 'Logged in successfully'], 200);
 
         } catch(Exception $e) {
