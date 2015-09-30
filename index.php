@@ -18,7 +18,7 @@
 |
 */
 
-require __DIR__.'/../bootstrap/autoload.php';
+require __DIR__ . '/bootstrap/autoload.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -32,7 +32,7 @@ require __DIR__.'/../bootstrap/autoload.php';
 |
 */
 
-$app = require_once __DIR__.'/../bootstrap/start.php';
+$app = require_once __DIR__ . '/bootstrap/start.php';
 
 /*
 |--------------------------------------------------------------------------
@@ -45,5 +45,13 @@ $app = require_once __DIR__.'/../bootstrap/start.php';
 | and wonderful application we have whipped up for them.
 |
 */
+
+try {
+    $dotenv = new Dotenv\Dotenv(dirname(__DIR__.'/..'));
+    $dotenv->load();
+//    $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
+} catch (Exception $e) {
+    exit('Could not find a .env file.');
+}
 
 $app->run();

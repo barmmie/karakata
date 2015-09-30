@@ -22,3 +22,5 @@ Thumbs.db
 .idea/workspace.xml
 
 tests/logs/output.html
+
+.env

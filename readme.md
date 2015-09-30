@@ -1,6 +1,8 @@
+
 One click install
 Built in Seo optimization
 Manage stiings via Admin panel
+Works on shared hosting
 Payment and Ads
 Full support
 
