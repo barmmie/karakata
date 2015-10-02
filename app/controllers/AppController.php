@@ -19,7 +19,12 @@ class AppController extends \BaseController
 
     public function install()
     {
-        $this->checkInstallation();
+
+        if(Setting::get('is_installed', '0' == '1')){
+            flashInfo('App has already been installed');
+            return Redirect::route('pages.homepage');
+        }
+
         $installation_requirements = $this->gatherInstallationRequirements();
 
         return View::make('installation.create', $installation_requirements);
@@ -32,7 +37,10 @@ class AppController extends \BaseController
      */
     public function store()
     {
-        $this->checkInstallation();
+        if(Setting::get('is_installed', '0' == '1')){
+            flashInfo('App has already been installed');
+            return Redirect::route('pages.homepage');
+        };
 
 
         try {
@@ -98,10 +106,7 @@ class AppController extends \BaseController
 
     protected function checkInstallation()
     {
-        if($this->installStore->get('is_installed')){
-            flashInfo('App has already been installed');
-            return Redirect::route('pages.homepage');
-        }
+
     }
 
 
