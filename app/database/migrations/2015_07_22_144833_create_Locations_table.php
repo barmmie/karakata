@@ -20,6 +20,7 @@ class CreateLocationsTable extends Migration {
             $table->string('longitude');
             $table->string('parentName');
             $table->string('geonameid');
+            $table->index('name');
 			$table->timestamps();
 		});
 	}

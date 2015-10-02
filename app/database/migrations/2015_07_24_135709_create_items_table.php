@@ -31,9 +31,9 @@ class CreateItemsTable extends Migration {
             $table->timestamp('premium_until')->nullable();
             $table->boolean('negotiable')->default(true);
 
-            $table->index('title');
             $table->index('slug');
             $table->index('location_id');
+            $table->index('category_id');
             $table->index('user_id');
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
