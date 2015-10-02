@@ -30,7 +30,7 @@ class SystemListener {
     {
 
 
-        Artisan::call('key:generate');
+//        Artisan::call('key:generate');
 
         Artisan::call('migrate');
 

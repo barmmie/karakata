@@ -50,17 +50,14 @@ class AppController extends \BaseController
 
             $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
 
-            Auth::login($user, true);
+            \Auth::login($user, true);
 
-            $settings = ['site_name', 'currency', 'site_slogan'];
+            $settings = ['site_name', 'currency', 'site_slogan', 'envato_username', 'envato_purchase_code' ];
 
             foreach($settings as $setting)
             {
                 Setting::set($setting,  Input::get($setting));
             }
-
-            Setting::set('envato_username', Input::get('envato_username'));
-            setting::set('envato_purchase_code', Input::get('envato_purchase_code'));
 
             return Redirect::route('admin.dashboard');
 
