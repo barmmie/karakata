@@ -2,11 +2,11 @@
     <div class="computer tablet only row">
         <div class="ui fixed padded secondary menu navbar page grid ">
             <a class="item" href="{{route('pages.homepage')}}">
-                @if(Setting::get('logo_src')!='')
-                <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
-                @else
-                <i class="circular inverted big teal shadowed search icon"></i>
-                @endif
+                {{--@if(Setting::get('logo_src')!='')--}}
+                {{--<img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>--}}
+                {{--@else--}}
+                {{--<i class="circular inverted big teal shadowed search icon"></i>--}}
+                {{--@endif--}}
                <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Karakata')}}</span>
             </a>
             <div class="right secondary menu">

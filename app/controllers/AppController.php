@@ -41,7 +41,8 @@ class AppController extends \BaseController
             Event::fire('system.install', ['seeds' => $seeds]);
 
             $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
-            Auth::login($user);
+
+            Auth::login($user, true);
 
             $settings = ['site_name', 'currency', 'site_slogan'];
 
@@ -50,13 +51,14 @@ class AppController extends \BaseController
                 Setting::set($setting,  Input::get($setting));
             }
 
-            $this->installStore->set('envato_username', Input::get('envato_username'));
-            $this->installStore->set('envato_purchase_code', Input::get('envato_purchase_code'));
+            Setting::set('envato_username', Input::get('envato_username'));
+            setting::set('envato_purchase_code', Input::get('envato_purchase_code'));
 
-            return Response::json(['success' => 'Logged in successfully'], 200);
+            return Redirect::route('admin.dashboard');
 
         } catch(Exception $e) {
-            return Response::json(['error' => $e->getMessage()], 400);
+            flashError('An error occured while installing', $e->getMessage());
+            return Redirect::back();
         }
 
 

@@ -2,6 +2,7 @@
 
 use Artisan;
 use Config;
+use Setting;
 use Illuminate\Filesystem\Filesystem;
 use \anlutro\LaravelSettings\JsonSettingStore;
 
@@ -21,8 +22,8 @@ class SystemListener {
 
     public function subscribe($events)
     {
-        $events->listen('system.update', "Karakata/Listeners/SystemListener@update");
-        $events->listen('system.install', "Karakata/Listeners/SystemListener@install");
+        $events->listen('system.update', 'Karakata\Listeners\SystemListener@update');
+        $events->listen('system.install', 'Karakata\Listeners\SystemListener@install');
     }
 
     public function install($seeds)
@@ -35,19 +36,20 @@ class SystemListener {
 
         foreach($seeds as $seed)
         {
-            Artisan::call('db:seed', ['class' => $seed]);
+            Artisan::call('db:seed', ['--class' => $seed]);
 
         }
 
-        $this->installStore->set('is_installed', true);
-        $this->installStore->set('current_version', Config::get('app.version'));
+        Setting::set('is_installed', '1');
+        Setting::set('current_version', Config::get('app.version'));
+
 
     }
 
     public function update()
     {
         Artisan::call('migrate');
-        $this->installStore->set('current_version', Config::get('app.version'));
+        Setting::set('current_version', Config::get('app.version'));
 
     }
 

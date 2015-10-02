@@ -16,7 +16,6 @@ class SettingTableSeeder extends Seeder {
 
     private function settings()
     {
-        $faker = \Faker\Factory::create();
         return [
             [
                 'name' => 'site_name',
@@ -25,7 +24,7 @@ class SettingTableSeeder extends Seeder {
             ],
             [
                 'name' => 'site_description',
-                'value' => $faker->sentence(15),
+                'value' => 'lorem ipsum darelatu',
             ],
             [
                 'name' => 'site_slogan',
