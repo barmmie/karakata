@@ -1,4 +1,4 @@
-
+premium on item.show
 One click install
 Built in Seo optimization
 Manage stiings via Admin panel

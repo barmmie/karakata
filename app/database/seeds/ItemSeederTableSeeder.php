@@ -68,7 +68,7 @@ class ItemSeederTableSeeder extends Seeder
                     if ($res->getStatusCode() == 200) {
                         $results = $res->json()['data'];
 
-                        foreach ($results as $result) {
+                        foreach (array_chunk($results, 10) as $result) {
 
                             $id = $result['id'];
 
@@ -96,10 +96,8 @@ class ItemSeederTableSeeder extends Seeder
 
                                 ]);
 
-                                foreach ($data['images'] as $index => $image) {
+                                foreach (array_chunk($data['images'], 3) as  $image) {
 
-                                    if ($index > 5)
-                                        break;
                                     try {
                                         Picture::upload($image['url'], $item->id, 'jpg');
 
