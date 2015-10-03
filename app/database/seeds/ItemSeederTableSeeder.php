@@ -11,7 +11,6 @@ class ItemSeederTableSeeder extends Seeder
         DB::table('items')->delete();
         $faker = Faker\Factory::create();
 
-        $categories = Category::all()->toArray();
 
         $cat_array = [
             'Phones - Mobile Phones' => 219,
@@ -46,12 +45,14 @@ class ItemSeederTableSeeder extends Seeder
             'Other Vehicles' => 380
         ];
 
+        $categories = Category::whereIn('title', array_keys($cat_array))->get()->toArray();
+
+
         $client = new GuzzleHttp\Client();
 
         foreach (array_chunk($categories, 3) as $category_row) {
 
             foreach($category_row as $category) {
-                if (array_key_exists($category['title'], $cat_array)) {
 
                     try {
                         $res = $client->get('http://api-v2.olx.com/items',
@@ -98,18 +99,18 @@ class ItemSeederTableSeeder extends Seeder
 
                                         ]);
 
-                                        foreach (array_chunk($data['images'], 3) as  $image_row) {
-                                            foreach($image_row as $image) {
-                                                try {
-                                                    Picture::upload($image['url'], $item->id, 'jpg');
-
-                                                } catch(\Exception $e)
-                                                {
-
-                                                }
-                                            }
-
-                                        }
+//                                        foreach (array_chunk($data['images'], 3) as  $image_row) {
+//                                            foreach($image_row as $image) {
+//                                                try {
+//                                                    Picture::upload($image['url'], $item->id, 'jpg');
+//
+//                                                } catch(\Exception $e)
+//                                                {
+//
+//                                                }
+//                                            }
+//
+//                                        }
                                     }
 
                                 }
@@ -125,11 +126,7 @@ class ItemSeederTableSeeder extends Seeder
                     }
 
 
-                }
-
             }
-
-
 
         }
 
