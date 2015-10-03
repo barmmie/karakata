@@ -78,7 +78,7 @@ try {
 } catch (Exception $e) {
     exit('Could not find a .env file.');
 
-    
+
 }
 
 
