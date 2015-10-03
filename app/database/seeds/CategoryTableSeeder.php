@@ -32,6 +32,7 @@ class CategoryTableSeeder extends Seeder
                 'rain | Decor - Garden - Accessories|hfa',
                 'leaf | Agriculture and Foodstuff|gra',
             ],
+
             'diamond | Fashion and Beauty' => [
                 'shop | Clothing and Shoes|cla',
                 'diamond | Watches - Jewelry - Accessories|jwa',

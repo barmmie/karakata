@@ -1,17 +1,16 @@
 <?php
-
 /**
  * Created by PhpStorm.
  * User: barmmie
  * Date: 7/19/15
  * Time: 11:08 PM
  */
-class SettingTableSeeder extends Seeder
-{
+
+class SettingTableSeeder extends Seeder {
     public function run()
     {
         foreach ($this->settings() as $setting) {
-            Setting::set($setting['name'], $setting['value']);
+            Setting::set($setting['name'], $setting['value' ]);
         }
     }
 
@@ -19,13 +18,13 @@ class SettingTableSeeder extends Seeder
     {
         return [
             [
-                'name' => 'allow_premium_payment',
-                'value' => '0',
+                'name' => 'site_name',
+                'value' => 'Karakata',
 
             ],
             [
-                'name' => 'premium_amount',
-                'value' => 40,
+                'name' => 'site_description',
+                'value' => 'lorem ipsum darelatu',
             ],
             [
                 'name' => 'site_slogan',

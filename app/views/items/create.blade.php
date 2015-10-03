@@ -207,12 +207,6 @@
     <script>
         $(document).ready(function () {
 
-
-            $('select[name="category_id"]').selectDropdown({
-                animation: false
-            });
-
-
             var $picturesId = $("input[name='pictures_id']");
 
             Form = {
