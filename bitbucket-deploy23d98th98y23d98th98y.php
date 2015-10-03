@@ -28,7 +28,7 @@ if ($update) {
   // Do a git checkout to the web root
   echo exec('cd ' . $repo_dir . ' && ' . $git_bin_path  . ' fetch');
   echo exec('cd ' . $repo_dir . ' && GIT_WORK_TREE=' . $web_root_dir . ' ' . $git_bin_path  . ' checkout -f');
-  echo shell_exec('cd ' . $web_root_dir . ' && composer5.4-sp install');
+  echo shell_exec('cd ' . $web_root_dir . ' && composer5.4-sp install --dev');
   echo shell_exec('cd ' . $web_root_dir . ' && php5.4-sp artisan migrate --force');
     echo shell_exec('cd ' . $web_root_dir.' &&  echo "DB_HOST=\'localhost\' \\nDB_NAME=\'karakata_db\' \\nDB_USER=\'06a3c4259f4f\' \\nDB_PASS=\'655118a8ca930b0a\'" | cat > .env ');
 

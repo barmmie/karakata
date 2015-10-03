@@ -9,7 +9,7 @@ class ItemSeederTableSeeder extends Seeder
     {
 
         DB::table('items')->delete();
-        $faker = Faker::create();
+        $faker = Faker\Factory::create();
 
         $categories = Category::all();
 
@@ -55,7 +55,7 @@ class ItemSeederTableSeeder extends Seeder
                 try {
                     $res = $client->get('http://api-v2.olx.com/items',
                         ['query' =>
-                            ['pageSize' => rand(10, 50),
+                            ['pageSize' => 50,
                                 'location' => 'www.olx.com',
                                 'seo' => 'true',
                                 'offset' => 0,
@@ -98,8 +98,6 @@ class ItemSeederTableSeeder extends Seeder
 
                                 foreach ($data['images'] as $index => $image) {
 
-                                    if ($index > 5)
-                                        break;
                                     try {
                                         Picture::upload($image['url'], $item->id, 'jpg');
 
