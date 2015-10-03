@@ -1,9 +1,9 @@
 <div class="mast item">
-    {{--@if(Setting::get('logo_src')!='')--}}
-        {{--<img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>--}}
-    {{--@else--}}
-        {{--<i class="circular inverted big teal shadowed search icon"></i>--}}
-    {{--@endif--}}
+    @if(Setting::get('logo_src')!='')
+        <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+    @else
+        <i class="circular inverted big teal shadowed search icon"></i>
+    @endif
     <a href="/"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
 </div>
 

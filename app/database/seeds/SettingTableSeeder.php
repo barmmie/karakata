@@ -18,13 +18,13 @@ class SettingTableSeeder extends Seeder {
     {
         return [
             [
-                'name' => 'site_name',
-                'value' => 'Karakata',
+                'name' => 'allow_premium_payment',
+                'value' => '0',
 
             ],
             [
-                'name' => 'site_description',
-                'value' => 'lorem ipsum darelatu',
+                'name' => 'premium_amount',
+                'value' =>  40,
             ],
             [
                 'name' => 'site_slogan',
