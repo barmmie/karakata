@@ -1,3 +1,4 @@
+@if(count($premium_items) > 1)
 <div class="ui purple secondary segment">
 
 <div class="ui divided items">
@@ -7,4 +8,5 @@
 </div>
 
 </div>
+@endif
 

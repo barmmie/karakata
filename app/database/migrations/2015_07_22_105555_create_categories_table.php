@@ -21,6 +21,7 @@ class CreateCategoriesTable extends Migration {
                 $table->string('icon');
 
                 $table->index('title');
+                $table->index('slug');
                 $table->timestamps();
                 NestedSet::columns($table);
 

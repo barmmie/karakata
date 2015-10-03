@@ -46,12 +46,4 @@ $app = require_once __DIR__ . '/bootstrap/start.php';
 |
 */
 
-try {
-    $dotenv = new Dotenv\Dotenv(dirname(__DIR__.'/..'));
-    $dotenv->load();
-    $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
-} catch (Exception $e) {
-    exit('Could not find a .env file.');
-}
-
 $app->run();

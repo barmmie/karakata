@@ -19,7 +19,12 @@ class AppController extends \BaseController
 
     public function install()
     {
-        $this->checkInstallation();
+
+        if(Setting::get('is_installed', '0' == '1')){
+            flashInfo('App has already been installed');
+            return Redirect::route('pages.homepage');
+        }
+
         $installation_requirements = $this->gatherInstallationRequirements();
 
         return View::make('installation.create', $installation_requirements);
@@ -32,7 +37,10 @@ class AppController extends \BaseController
      */
     public function store()
     {
-        $this->checkInstallation();
+        if(Setting::get('is_installed', '0' == '1')){
+            flashInfo('App has already been installed');
+            return Redirect::route('pages.homepage');
+        };
 
 
         try {
@@ -41,22 +49,21 @@ class AppController extends \BaseController
             Event::fire('system.install', ['seeds' => $seeds]);
 
             $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
-            Auth::login($user);
 
-            $settings = ['site_name', 'currency', 'site_slogan'];
+            \Auth::login($user, true);
+
+            $settings = ['site_name', 'currency', 'site_slogan', 'envato_username', 'envato_purchase_code' ];
 
             foreach($settings as $setting)
             {
                 Setting::set($setting,  Input::get($setting));
             }
 
-            $this->installStore->set('envato_username', Input::get('envato_username'));
-            $this->installStore->set('envato_purchase_code', Input::get('envato_purchase_code'));
-
-            return Response::json(['success' => 'Logged in successfully'], 200);
+            return Redirect::route('admin.dashboard');
 
         } catch(Exception $e) {
-            return Response::json(['error' => $e->getMessage()], 400);
+            flashError('An error occured while installing', $e->getMessage());
+            return Redirect::back();
         }
 
 
@@ -96,10 +103,7 @@ class AppController extends \BaseController
 
     protected function checkInstallation()
     {
-        if($this->installStore->get('is_installed')){
-            flashInfo('App has already been installed');
-            return Redirect::route('pages.homepage');
-        }
+
     }
 
 

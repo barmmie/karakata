@@ -2,6 +2,7 @@ var gulp = require('gulp');
 var livereload = require('gulp-livereload');
 var zip = require('gulp-zip');
 var config = require('./build.config.json');
+var del = require('del');
 
 /**
  * task - 'default'
@@ -27,7 +28,11 @@ gulp.task('live-monitor', function() {
     gulp.watch('app/views/**/*.blade.php', ['laravel-views']);
 });
 
-gulp.task('prepare-envato', function(){
+gulp.task('clean-temp', function(){
+    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/sessions/**/*', 'app/storage/views/**/*' ])
+})
+
+gulp.task('prepare-envato', ['clean-temp'],  function(){
 
     return gulp.src(config.vendor_files, {base:'.'})
         .pipe(zip('karakata.zip'))

@@ -35,40 +35,40 @@
 
                         <h4 class="ui dividing header">{{trans('phrases.site_details')}}</h4>
 
-                    <div class="field">
-                        <div class="two fields">
-                            <div class="four wide field">
-                                <label for="">{{trans('phrases.site_logo')}}</label>
-                                <div id="myDropZone" class="dropzone">
-                                    <div class="fallback">
-                                        <input name="files" type="file" />
-                                        <p>{{trans('phrases.upload_logo')}}</p>
-                                    </div>
-                                </div>
-                                {{Form::hidden('logo_src', Setting::get('logo_src'))}}
-                            </div>
-                            <div class="twelve wide field">
-                                <div class="field p-l-md">
+                    {{--<div class="field">--}}
+                        {{--<div class="two fields">--}}
+                            {{--<div class="four wide field">--}}
+                                {{--<label for="">{{trans('phrases.site_logo')}}</label>--}}
+                                {{--<div id="myDropZone" class="dropzone">--}}
+                                    {{--<div class="fallback">--}}
+                                        {{--<input name="files" type="file" />--}}
+                                        {{--<p>{{trans('phrases.upload_logo')}}</p>--}}
+                                    {{--</div>--}}
+                                {{--</div>--}}
+                                {{--{{Form::hidden('logo_src', Setting::get('logo_src'))}}--}}
+                            {{--</div>--}}
+                            {{--<div class="twelve wide field">--}}
+                                <div class="field">
                                     <label>{{trans('phrases.site_name')}}</label>
                                     {{Form::text('site_name', Setting::get('site_name'))}}
                                 </div>
 
 
-                                <div class="field p-md">
+                                <div class="field">
                                     <label for="">{{trans('words.slogan')}}</label>
                                     {{Form::text('site_slogan', Setting::get('site_slogan'))}}
                                 </div>
 
-                                <div class="field p-md">
+                                <div class="field">
                                     <label>{{trans('words.currency')}}</label>
 
                                     {{Form::text('currency', Setting::get('currency'))}}
                                 </div>
 
-                            </div>
+                            {{--</div>--}}
 
-                        </div>
-                    </div>
+                        {{--</div>--}}
+                    {{--</div>--}}
 
                         <div class="field">
                             <label>{{trans('phrases.site_description')}}</label>

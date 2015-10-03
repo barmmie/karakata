@@ -198,34 +198,10 @@
 
             $form = $('.ui.form')
 
-            $form.on('submit', function(e) {
-                e.preventDefault();
-            })
-
             var installation_url = "{{route('installers.store')}}"
 
-
-
             $form.form({
-                        onSuccess: function(){
-                            $(this).addClass('loading')
-                            form_values = $(this).form('get values');
-                            $.ajax(installation_url, {
-                                method: "POST",
-                                data: form_values,
-                                success: function (d) {
-                                    alertify.success('Installation successful. Redirecting...')
-                                    window.location = '/'
-                                },
 
-                                error: function (r) {
-
-                                    $form.removeClass('loading')
-                                    alertify.error(r.statusText);
-                                }
-
-                            })
-                        },
                         fields: {
                             email: {
                                 identifier: 'email',

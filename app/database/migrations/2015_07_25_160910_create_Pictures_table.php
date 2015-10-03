@@ -17,7 +17,8 @@ class CreatePicturesTable extends Migration {
 			$table->increments('id');
             $table->integer('item_id');
             $table->string('image_src');
-            $table->string('thumbnail_src');
+            $table->string('item_id');
+            $table->index('thumbnail_src');
 			$table->timestamps();
 		});
 	}
