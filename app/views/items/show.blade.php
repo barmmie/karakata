@@ -11,8 +11,8 @@
     <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
     <meta property="og:image" content="{{asset($item->mainThumbnail())}}"/>
     <meta property="twitter:image" content="{{asset($item->mainThumbnail())}}"/>
-    <meta property="og:description" content="{{str_limit($item->description, 100)}}"/>
-    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}"/>
+    <meta property="og:description" content="{{str_limit($item->description, 100)}}" />
+    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}" />
 @endsection
 
 @section('styles')
@@ -29,7 +29,6 @@
         #bx-pager a {
             margin: 0 3px;
         }
-
         #bx-pager a img {
             padding: 3px;
             width: 100px;
@@ -49,19 +48,31 @@
 
 
             <div class="twelve wide column">
+
+
                 <div class="ui segments">
+
                     <div class="ui segment">
+                        @if($item->isPremium())
+
+                            <div class="trap ribbon-wrap fl-right">
+                                <div class="trap-ribbon">
+                                    <a href="#"><i class="inverted circular star icon"></i> Premium  </a>
+                                </div>
+                            </div>
+
+                        @endif
                         <div class="ui breadcrumb">
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             @if($item->category->parent && $item->category->parent->id !=1)
                                 <i class="right angle icon divider"></i>
-                                <a class="section"
-                                   href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
+                                <a class="section" href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
                             @endif
                             <i class="right angle icon divider"></i>
                             <a class="section "
                                href="{{route('categories.show', $item->category->slug)}}">{{$item->category->title}}</a>
                         </div>
+
                     </div>
 
                     <div class="ui padded segment">
@@ -70,15 +81,20 @@
                             {{$item->title}}
                         </h3>
 
-                        <div class="ui horizontal list">
-                            <div class="item">
-                                <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
-                            </div>
+                        <div class="p-b-md">
+                            <div class="ui horizontal list">
+                                <div class="item">
+                                    <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
+                                </div>
 
-                            <div class="item">
-                                <i class="teal marker icon"></i> {{$item->location->name}}
+                                <div class="item">
+                                    <i class="teal marker icon"></i> {{$item->location->name}}
+                                </div>
                             </div>
+                            <a style="float: right;" class="ui big m-b-md teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+
                         </div>
+
 
 
                         @if(count($item->pictures) > 0)
@@ -88,23 +104,19 @@
 
                                 @foreach($item->pictures as $picture)
                                     <li class="ui fluid bordered rounded image">
-                                        <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
-                                        <img alt="{{$picture->title}}" class="ui fluid bordered rounded image"
-                                             src="{{$picture->image_src}}">
+                                        <img alt="{{$picture->title}}" class="ui fluid bordered rounded image" src="{{asset($picture->image_src)}}">
                                     </li>
                                 @endforeach
                             </ul>
 
                             <div id="bx-pager">
                                 @foreach($item->pictures as $index => $picture)
-                                    <a data-slide-index="{{$index}}" href=""><img alt="{{$item->title}}"
-                                                                                  src="{{$picture->thumbnail_src}}"/></a>
+                                    <a data-slide-index="{{$index}}" href=""><img alt="{{$item->title}}" src="{{asset($picture->thumbnail_src)}}"/></a>
                                 @endforeach
 
                             </div>
                         @else
                             <div class="ui fluid bordered rounded image">
-                                <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
                                 <img style="max-height: 400px;" src="{{asset('images/no-image-default.png')}}" alt=""/>
                             </div>
 
@@ -132,16 +144,14 @@
                                     <div class="ui message m-b-lg">
                                         <ul class="ui list">
                                             <div class="item">
-                                                <strong>{{trans('words.price')}}
-                                                    :</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
+                                                <strong>{{trans('words.price')}}:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
                                             </div>
                                             <div class="item">
                                                 <strong>{{trans('words.negotiable')}}:</strong> <span><i
                                                             class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
                                             </div>
                                             <div class="item">
-                                                <strong>{{Lang::choice('words.category', 1)}}
-                                                    :</strong> {{$item->category->title}}
+                                                <strong>{{Lang::choice('words.category', 1)}}:</strong> {{$item->category->title}}
                                             </div>
                                             <div class="item">
                                                 <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
@@ -223,10 +233,8 @@
                         <h3 class="ui header">
                             <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
-                            <div class="sub header">{{Lang::choice('words.location',1)}}
-                                : {{$item->location->name}}</div>
-                            <div class="sub header">{{trans('phrases.joined_in')}}
-                                : {{$item->owner->created_at->format('M j, Y')}}</div>
+                            <div class="sub header">{{Lang::choice('words.location',1)}}: {{$item->location->name}}</div>
+                            <div class="sub header">{{trans('phrases.joined_in')}}: {{$item->owner->created_at->format('M j, Y')}}</div>
                         </h3>
                         <button class="fluid ui message button toggle m-b-xs">
                             <i class="mail icon"></i>
@@ -318,7 +326,6 @@
         <div class="content">
             <form class="ui report form">
                 <h4 class="ui dividing header">{{trans('phrases._report_abuse-copy')}}</h4>
-
                 <div class="ui error message"></div>
                 {{Form::hidden('item_id', $item->id)}}
                 <div class="field">
@@ -425,14 +432,14 @@
                     onApprove: function () {
                         $sendform.form('validate form')
 
-                        if ($sendform.form('is valid')) {
+                        if($sendform.form('is valid')) {
                             var form_values = $sendform.form('get values')
                             $sendform.addClass('loading')
                             $.ajax({
                                 method: 'POST',
                                 data: form_values,
                                 url: "{{route('messages.store')}}",
-                                success: function (response) {
+                                success: function(response) {
                                     $sendform.removeClass('loading')
 
                                     alertify.success(response.message);
@@ -440,7 +447,7 @@
                                     $messageModal.modal('hide');
 
                                 },
-                                error: function (xhr) {
+                                error: function(xhr) {
                                     $sendform.removeClass('loading')
                                     alertify.error(xhr.responseJSON.message)
                                     $sendform.form('add errors', [xhr.responseJSON.message]);
@@ -461,21 +468,21 @@
                     onApprove: function () {
                         $reportform.form('validate form')
 
-                        if ($reportform.form('is valid')) {
+                        if($reportform.form('is valid')) {
                             var form_values = $reportform.form('get values')
                             $reportform.addClass('loading')
                             $.ajax({
                                 method: 'POST',
                                 data: form_values,
                                 url: "{{route('reports.store')}}",
-                                success: function (response) {
+                                success: function(response) {
                                     $reportform.removeClass('loading')
                                     $reportform.form('reset')
                                     alertify.success(response.message);
                                     $reportModal.modal('hide');
 
                                 },
-                                error: function (xhr) {
+                                error: function(xhr) {
                                     $reportform.removeClass('loading')
                                     alertify.error(xhr.responseJSON.message)
                                     $reportform.form('add errors', [xhr.responseJSON.message]);

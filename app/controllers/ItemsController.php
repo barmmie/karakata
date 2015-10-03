@@ -31,7 +31,7 @@ class ItemsController extends BaseController
         if ($result['success']) {
             $item = $result['payload'];
 
-            flashSuccess($result['message'], 'Item will need to be re-verified before being approved');
+            flashSuccess($result['message'], '');
 
             return Redirect::route('dash.myitems');
         } else {
