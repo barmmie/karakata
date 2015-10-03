@@ -70,7 +70,7 @@ use \Laracasts\Commander\Events\EventGenerator;
     }
 
     public function reports() {
-        return $this->hasMany(Report::class);
+        return $this->hasMany('Report');
     }
 
     public function mainThumbnail()
