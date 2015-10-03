@@ -22,7 +22,7 @@ class Report extends \Eloquent {
 
     public function item()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo('Item');
     }
 
     public function scopeReadOnly($query)

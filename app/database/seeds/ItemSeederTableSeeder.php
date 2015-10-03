@@ -47,6 +47,8 @@ class ItemSeederTableSeeder extends Seeder
 
         $categories = Category::whereIn('title', array_keys($cat_array))->get()->toArray();
 
+        $images = [];
+
 
         $client = new GuzzleHttp\Client();
 
@@ -99,18 +101,12 @@ class ItemSeederTableSeeder extends Seeder
 
                                         ]);
 
-//                                        foreach (array_chunk($data['images'], 3) as  $image_row) {
-//                                            foreach($image_row as $image) {
-//                                                try {
-//                                                    Picture::upload($image['url'], $item->id, 'jpg');
-//
-//                                                } catch(\Exception $e)
-//                                                {
-//
-//                                                }
-//                                            }
-//
-//                                        }
+                                        foreach ($data['images'] as  $image) {
+
+                                            $images[$item->id][] = $image['url'];
+
+
+                                        }
                                     }
 
                                 }
@@ -127,6 +123,21 @@ class ItemSeederTableSeeder extends Seeder
 
 
             }
+
+        }
+
+        foreach(array_chunk($images, 2) as $images_row) {
+
+            foreach($images_row as $key => $item_images)
+
+                foreach($item_images as $image_url) {
+                    try {
+                        Picture::upload($image_url, $key, 'jpg');
+                    } catch(\Exception $e)
+                    {
+
+                    }
+                }
 
         }
 

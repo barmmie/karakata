@@ -21,6 +21,8 @@ class Picture extends \Eloquent
         $imagedata->fit(800, 400)->save(public_path() . $image_src);
         $imagedata->fit(320, 240)->save(public_path() . $thumbnail_src);
 
+        $imagedata->destroy();
+
         $picture = static::create([
             'image_src' => $image_src,
             'thumbnail_src' => $thumbnail_src,
