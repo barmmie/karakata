@@ -10,11 +10,15 @@
 class UserTableSeeder extends Seeder {
     public function run(){
         $faker = \Faker\Factory::create();
-        $user = User::register('Test user', 'test@gmail.com', 'password', '08089098090');
+        $admin = User::createAdmin('Test admin', 'admin@karakata.com', 'password', true);
+        $user = User::register('Test user', 'user@karakata.com', 'password', '08089998908098');
         $user->confirmEmail();
 
         foreach(range(1,40) as $index) {
-            User::register($faker->name, $faker->email, 'password', $faker->phoneNumber);
+            $user = User::register($faker->name, $faker->email, 'password', $faker->phoneNumber);
+            $user->confirmEmail();
         }
+
+
     }
 }
