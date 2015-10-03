@@ -68,45 +68,51 @@ class ItemSeederTableSeeder extends Seeder
                     if ($res->getStatusCode() == 200) {
                         $results = $res->json()['data'];
 
-                        foreach (array_chunk($results, 10) as $result) {
+                        foreach (array_chunk($results, 10) as $result_row) {
 
-                            $id = $result['id'];
+                            foreach($result_row as $result) {
+                                $id = $result['id'];
 
-                            $new_res = $client->get("http://api-v2.olx.com/items/$id");
+                                $new_res = $client->get("http://api-v2.olx.com/items/$id");
 
-                            if ($new_res->getStatusCode() == 200) {
-                                $data = $new_res->json();
+                                if ($new_res->getStatusCode() == 200) {
+                                    $data = $new_res->json();
 
 
-                                $item = Item::create([
-                                    'title' => $data['title'],
-                                    'description' => $data['description'],
-                                    'category_id' => $category->id,
-                                    'location_id' => rand(1, 14),
-                                    'type' => $faker->randomElement(['personal', 'business']),
-                                    'amount' => $data['price']['amount']? : $faker->numberBetween(200,4000),
-                                    'negotiable' => $faker->boolean(),
-                                    'email' => $faker->freeEmail,
-                                    'phone' => $faker->phoneNumber,
-                                    'seller_name' => $faker->name,
-                                    'user_id' => rand(1, 40),
-                                    'premium_until' => $faker->boolean(20) ? $faker->dateTimeBetween("now", "+2 months") : null,
-                                    'status' => rand(1, 4),
-                                    'created_at' => $faker->dateTimeBetween("-5 months", "now")
+                                    $item = Item::create([
+                                        'title' => $data['title'],
+                                        'description' => $data['description'],
+                                        'category_id' => $category->id,
+                                        'location_id' => rand(1, 14),
+                                        'type' => $faker->randomElement(['personal', 'business']),
+                                        'amount' => $data['price']['amount']? : $faker->numberBetween(200,4000),
+                                        'negotiable' => $faker->boolean(),
+                                        'email' => $faker->freeEmail,
+                                        'phone' => $faker->phoneNumber,
+                                        'seller_name' => $faker->name,
+                                        'user_id' => rand(1, 40),
+                                        'premium_until' => $faker->boolean(20) ? $faker->dateTimeBetween("now", "+2 months") : null,
+                                        'status' => rand(1, 4),
+                                        'created_at' => $faker->dateTimeBetween("-5 months", "now")
 
-                                ]);
+                                    ]);
 
-                                foreach (array_chunk($data['images'], 3) as  $image) {
+                                    foreach (array_chunk($data['images'], 3) as  $image_row) {
+                                        foreach($image_row as $image) {
+                                            try {
+                                                Picture::upload($image['url'], $item->id, 'jpg');
 
-                                    try {
-                                        Picture::upload($image['url'], $item->id, 'jpg');
+                                            } catch(\Exception $e)
+                                            {
 
-                                    } catch(\Exception $e)
-                                    {
+                                            }
+                                        }
 
                                     }
                                 }
+
                             }
+
 
 
                         }
