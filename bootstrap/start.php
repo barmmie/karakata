@@ -77,6 +77,8 @@ try {
     $dotenv->required(['DB_HOST', 'DB_NAME', 'DB_USER', 'DB_PASS']);
 } catch (Exception $e) {
     exit('Could not find a .env file.');
+
+    
 }
 
 
