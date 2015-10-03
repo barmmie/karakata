@@ -98,6 +98,8 @@ class ItemSeederTableSeeder extends Seeder
 
                                 foreach ($data['images'] as $index => $image) {
 
+                                    if ($index > 5)
+                                        break;
                                     try {
                                         Picture::upload($image['url'], $item->id, 'jpg');
 
