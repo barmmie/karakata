@@ -10,26 +10,27 @@
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
-               <div class="ui content">
-                   <div class="ui card">
-                       <div class="image">
-                           <img src="{{gravatar($user->email, 200)}}">
-                       </div>
-                       <div class="content">
-                           <a class="header">{{$user->full_name}}</a>
-                           <div class="meta">
-                               <span class="date">{{trans('phrases.joined_in')}} {{$user->created_at->format('M, j Y')}}</span>
-                           </div>
+                <div class="ui content">
+                    <div class="ui card">
+                        <div class="image">
+                            <img src="{{gravatar($user->email, 200)}}">
+                        </div>
+                        <div class="content">
+                            <a class="header">{{$user->full_name}}</a>
 
-                       </div>
-                       <div class="extra content">
-                           <a>
-                               <i class="file icon"></i>
-                               {{$item_count}} {{Lang::choice('words.item', $item_count)}}
-                           </a>
-                       </div>
-                   </div>
-               </div>
+                            <div class="meta">
+                                <span class="date">{{trans('phrases.joined_in')}} {{$user->created_at->format('M, j Y')}}</span>
+                            </div>
+
+                        </div>
+                        <div class="extra content">
+                            <a>
+                                <i class="file icon"></i>
+                                {{$item_count}} {{Lang::choice('words.item', $item_count)}}
+                            </a>
+                        </div>
+                    </div>
+                </div>
 
 
                 <div class="ui segment">
@@ -39,7 +40,6 @@
                 <div class="ui segment">
                     @include('widgets._recent_items')
                 </div>
-
 
 
             </div>
@@ -63,7 +63,7 @@
                                 <div class="header">
 
                                 </div>
-                               {{trans('phrases.user_has_no_items')}}
+                                {{trans('phrases.user_has_no_items')}}
                             </div>
                         @else
                             <div class="ui divided items">
@@ -74,7 +74,6 @@
                             </div>
 
                         @endif
-
 
 
                     </div>
@@ -96,7 +95,7 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 

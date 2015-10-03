@@ -9,9 +9,12 @@
 namespace Karakata\Report\Event;
 
 
-class ReportHasBeenRaised {
+class ReportHasBeenRaised
+{
     public $report;
-    public function __construct($report){
+
+    public function __construct($report)
+    {
         $this->report = $report;
     }
 }

@@ -8,16 +8,20 @@
 
 namespace Admin;
 
-use Input, Report, View, Redirect;
+use Input;
+use Redirect;
+use Report;
+use View;
 
-class ReportsController extends \BaseController {
+class ReportsController extends \BaseController
+{
 
 
     public function index($status = 'unreviewed')
     {
         $reports = Report::with('item')->orderBy('created_at', 'desc');
 
-        switch ($status ) {
+        switch ($status) {
             case 'all':
                 break;
             case 'reviewed':
@@ -40,7 +44,7 @@ class ReportsController extends \BaseController {
         try {
             $report->markAsRead();
             flashSuccess('Report has been marked as reviewed');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             flashError('Report could not be marked as reviewed', $e->getMessage());
         }
 
@@ -53,7 +57,7 @@ class ReportsController extends \BaseController {
         try {
             $report->markAsUnread();
             flashSuccess('Report has been marked as unreviewed');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             flashError('Report could not be marked as unreviewed', $e->getMessage());
         }
 
@@ -66,7 +70,7 @@ class ReportsController extends \BaseController {
         try {
             $report->delete();
             flashSuccess('Report has been deleted');
-        }catch(\Exception $e){
+        } catch (\Exception $e) {
             flashError('Report could not be deleted', $e->getMessage());
         }
 

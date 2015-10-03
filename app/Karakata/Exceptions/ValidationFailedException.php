@@ -1,4 +1,5 @@
 <?php namespace Karakata\Exceptions;
+
 /**
  * Created by PhpStorm.
  * User: barmmie
@@ -6,7 +7,8 @@
  * Time: 7:47 PM
  */
 
-class ValidationFailedException extends \Exception {
+class ValidationFailedException extends \Exception
+{
     protected $errors;
 
     function  __construct($message, \Illuminate\Support\MessageBag $errors)

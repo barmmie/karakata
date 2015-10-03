@@ -1,12 +1,14 @@
 <?php
 
-class Report extends \Eloquent {
+class Report extends \Eloquent
+{
 
     use \Laracasts\Commander\Events\EventGenerator;
-	protected $fillable = ['message', 'item_id', 'ip_address', 'read_status'];
+    protected $fillable = ['message', 'item_id', 'ip_address', 'read_status'];
 
 
-    public static function post($content, $item_id){
+    public static function post($content, $item_id)
+    {
         $instance = static::create(
             [
                 'message' => e($content),
@@ -17,6 +19,7 @@ class Report extends \Eloquent {
         );
 
         $instance->raise(new \Karakata\Report\Event\ReportHasBeenRaised($instance));
+
         return $instance;
     }
 
@@ -35,12 +38,14 @@ class Report extends \Eloquent {
         return $query->where('read_status', false);
     }
 
-    public function markAsRead(){
+    public function markAsRead()
+    {
         $this->read_status = true;
         $this->save();
     }
 
-    public function markAsUnread(){
+    public function markAsUnread()
+    {
         $this->read_status = false;
         $this->save();
     }

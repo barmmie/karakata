@@ -9,8 +9,9 @@
         <div class="column">
             <h2 class="ui teal center aligned icon header">
                 <i class="large lock icon"></i>
+
                 <div class="content">
-                   {{trans('phrases.forgot_password')}}
+                    {{trans('phrases.forgot_password')}}
                 </div>
             </h2>
 
@@ -24,13 +25,15 @@
 
                 <div class="field">
                     <label for="">{{trans('words.email')}}</label>
+
                     <div class="ui left icon input">
                         <i class="user icon"></i>
                         {{Form::email('email', null, ['placeholder'=>trans('words.email')])}}
                     </div>
                 </div>
 
-                <input type="submit" class="ui fluid large teal submit button" value="{{trans('phrases.send_reminder')}}">
+                <input type="submit" class="ui fluid large teal submit button"
+                       value="{{trans('phrases.send_reminder')}}">
             </div>
 
 

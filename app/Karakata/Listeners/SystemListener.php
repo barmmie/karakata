@@ -1,13 +1,14 @@
 <?php namespace Karakata\Listeners;
 
+use anlutro\LaravelSettings\JsonSettingStore;
 use Artisan;
 use Config;
-use Setting;
 use Illuminate\Filesystem\Filesystem;
-use \anlutro\LaravelSettings\JsonSettingStore;
+use Setting;
 
 
-class SystemListener {
+class SystemListener
+{
 
     protected $installStore;
     protected $fileSystem;
@@ -34,8 +35,7 @@ class SystemListener {
 
         Artisan::call('migrate');
 
-        foreach($seeds as $seed)
-        {
+        foreach ($seeds as $seed) {
             Artisan::call('db:seed', ['--class' => $seed]);
 
         }

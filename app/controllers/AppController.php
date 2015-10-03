@@ -1,7 +1,6 @@
 <?php
 
-use \anlutro\LaravelSettings\JsonSettingStore;
-use Illuminate\Filesystem\Filesystem;
+use anlutro\LaravelSettings\JsonSettingStore;
 
 class AppController extends \BaseController
 {
@@ -20,53 +19,15 @@ class AppController extends \BaseController
     public function install()
     {
 
-        if(Setting::get('is_installed', '0' == '1')){
+        if (Setting::get('is_installed', '0' == '1')) {
             flashInfo('App has already been installed');
+
             return Redirect::route('pages.homepage');
         }
 
         $installation_requirements = $this->gatherInstallationRequirements();
 
         return View::make('installation.create', $installation_requirements);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @return Response
-     */
-    public function store()
-    {
-        if(Setting::get('is_installed', '0' == '1')){
-            flashInfo('App has already been installed');
-            return Redirect::route('pages.homepage');
-        };
-
-
-        try {
-            $seeds = ['SettingTableSeeder','CategoryTableSeeder'];
-
-            Event::fire('system.install', ['seeds' => $seeds]);
-
-            $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
-
-            \Auth::login($user, true);
-
-            $settings = ['site_name', 'currency', 'site_slogan', 'envato_username', 'envato_purchase_code' ];
-
-            foreach($settings as $setting)
-            {
-                Setting::set($setting,  Input::get($setting));
-            }
-
-            return Redirect::route('admin.dashboard');
-
-        } catch(Exception $e) {
-            flashError('An error occured while installing', $e->getMessage());
-            return Redirect::back();
-        }
-
-
     }
 
     protected function gatherInstallationRequirements()
@@ -98,7 +59,48 @@ class AppController extends \BaseController
 
         $conditions_satisfied = $db_status && $php_version_status && $curl_status && $storage_folder_write_status;
 
-        return compact('db_name', 'db_status', 'php_version_status', 'curl_status', 'conditions_satisfied', 'mcrypt_status', 'storage_folder_write_status');
+        return compact('db_name', 'db_status', 'php_version_status', 'curl_status', 'conditions_satisfied',
+            'mcrypt_status', 'storage_folder_write_status');
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store()
+    {
+        if (Setting::get('is_installed', '0' == '1')) {
+            flashInfo('App has already been installed');
+
+            return Redirect::route('pages.homepage');
+        };
+
+
+        try {
+            $seeds = ['SettingTableSeeder', 'CategoryTableSeeder'];
+
+            Event::fire('system.install', ['seeds' => $seeds]);
+
+            $user = User::createAdmin('Super admin', Input::get('email'), Input::get('password'), true);
+
+            \Auth::login($user, true);
+
+            $settings = ['site_name', 'currency', 'site_slogan', 'envato_username', 'envato_purchase_code'];
+
+            foreach ($settings as $setting) {
+                Setting::set($setting, Input::get($setting));
+            }
+
+            return Redirect::route('admin.dashboard');
+
+        } catch (Exception $e) {
+            flashError('An error occured while installing', $e->getMessage());
+
+            return Redirect::back();
+        }
+
+
     }
 
     protected function checkInstallation()

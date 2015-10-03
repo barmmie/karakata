@@ -10,6 +10,7 @@
                 {{Form::hidden('location_id', Input::get('location_id'))}}
                 <i class="filter icon"></i>
                 <span class="text">{{trans('phrases.filter_by_location')}}</span>
+
                 <div class="menu">
                     <div class="ui icon search input">
                         <i class="search icon"></i>
@@ -34,6 +35,7 @@
                 {{Form::hidden('price_sort', Input::get('price_sort'))}}
                 <i class="sort icon"></i>
                 <span class="text">{{trans('phrases.sort_by')}}</span>
+
                 <div class="menu">
                     <div class="header">
                         <i class="currency icon"></i>
@@ -42,7 +44,7 @@
                     <div class="divider"></div>
                     <div class="item" data-value="asc">
                         <i class="sort ascending icon"></i>
-                       {{trans('phrases.price_lowest_first')}}
+                        {{trans('phrases.price_lowest_first')}}
                     </div>
                     <div class="item" data-value="desc">
                         <i class="sort descending icon"></i>

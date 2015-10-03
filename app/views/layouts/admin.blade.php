@@ -88,7 +88,7 @@
 <script type="text/javascript">
 
     $('.message .close')
-            .on('click', function() {
+            .on('click', function () {
                 $(this)
                         .closest('.message')
                         .transition('fade')
@@ -96,7 +96,7 @@
             })
     ;
 
-    $('.confirm-delete').on('click', function(e){
+    $('.confirm-delete').on('click', function (e) {
         return confirm("{{trans('phrases.confirm_delete')}}");
     })
 </script>

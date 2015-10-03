@@ -1,18 +1,15 @@
 <?php
 
-class Message extends \Eloquent {
+class Message extends \Eloquent
+{
 
     use \Laracasts\Commander\Events\EventGenerator;
 
 
-	protected $fillable = ['item_id', 'name', 'email', 'content', 'ip_address', 'read_status'];
+    protected $fillable = ['item_id', 'name', 'email', 'content', 'ip_address', 'read_status'];
 
-    public function item() {
-
-        return $this->belongsTo('Item');
-    }
-
-    public static function post($sender_name, $sender_email, $content, $item_id) {
+    public static function post($sender_name, $sender_email, $content, $item_id)
+    {
         $instance = static::create(
             [
                 'name' => $sender_name,
@@ -26,6 +23,7 @@ class Message extends \Eloquent {
         );
 
         $instance->raise(new \Karakata\Message\Event\MessageHasBeenPosted($instance));
+
         return $instance;
     }
 
@@ -35,6 +33,12 @@ class Message extends \Eloquent {
 
         static::whereIn('id', $messageids)
             ->update(['read_status' => true]);
+    }
+
+    public function item()
+    {
+
+        return $this->belongsTo('Item');
     }
 
     public function isRead()

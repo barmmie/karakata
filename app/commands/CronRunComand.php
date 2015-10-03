@@ -27,9 +27,9 @@
 # 4. Code your schedule inside the fire() function.
 # 3. Done. Now go push your cron logic into version control!
 use Illuminate\Console\Command;
-use Symfony\Component\Console\Input\InputOption;
-use Symfony\Component\Console\Input\InputArgument;
-class CronRunCommand extends Command {
+
+class CronRunCommand extends Command
+{
     /**
      * The console command name.
      *
@@ -60,6 +60,7 @@ class CronRunCommand extends Command {
      * @var string [HH:MM]
      */
     protected $runAt = '03:00';
+
     /**
      * Create a new command instance.
      *
@@ -70,6 +71,7 @@ class CronRunCommand extends Command {
         parent::__construct();
         $this->timestamp = time();
     }
+
     /**
      * Execute the console command.
      *
@@ -81,11 +83,11 @@ class CronRunCommand extends Command {
          * EXAMPLES
          */
         // You can use any of the available schedules and pass it an anonymous function
-        $this->everyFiveMinutes(function()
-        {
+        $this->everyFiveMinutes(function () {
             // In the function, you can use anything that you can use everywhere else in Laravel.
             // Like models:
-            $affectedRows = User::where('logged_in', true)->update(array('logged_in' => false)); // Not really useful, but possible
+            $affectedRows = User::where('logged_in',
+                true)->update(array('logged_in' => false)); // Not really useful, but possible
             // Or call artisan commands:
             Artisan::call('auth:clear-reminders');
             // You can append messages to the cron log like so:
@@ -93,64 +95,25 @@ class CronRunCommand extends Command {
         });
         // Another example:
         // Send the admin an email every day
-        $this->dailyAt('09:00', function()
-        {
+        $this->dailyAt('09:00', function () {
             // This uses the mailer class
-            Mail::send('hello', array(), function($message)
-            {
+            Mail::send('hello', array(), function ($message) {
                 $message->to('admin@mydomain.com', 'Cron Job')->subject('I am still running!');
             });
         });
         $this->finish();
     }
-    protected function finish()
-    {
-        // Write execution time and messages to the log
-        $executionTime = round(((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000), 3);
-        Log::info('Cron: execution time: ' . $executionTime . ' | ' . implode(', ', $this->messages));
-    }
+
     /**
      * AVAILABLE SCHEDULES
      */
     protected function everyFiveMinutes(callable $callback)
     {
-        if((int) date('i', $this->timestamp) % 5 === 0) call_user_func($callback);
+        if ((int)date('i', $this->timestamp) % 5 === 0) {
+            call_user_func($callback);
+        }
     }
-    protected function everyTenMinutes(callable $callback)
-    {
-        if((int) date('i', $this->timestamp) % 10 === 0) call_user_func($callback);
-    }
-    protected function everyFifteenMinutes(callable $callback)
-    {
-        if((int) date('i', $this->timestamp) % 15 === 0) call_user_func($callback);
-    }
-    protected function everyThirtyMinutes(callable $callback)
-    {
-        if((int) date('i', $this->timestamp) % 30 === 0) call_user_func($callback);
-    }
-    /**
-     * Called every full hour
-     */
-    protected function hourly(callable $callback)
-    {
-        if(date('i', $this->timestamp) === '00') call_user_func($callback);
-    }
-    /**
-     * Called every hour at the minute specified
-     *
-     * @param  integer $minute
-     */
-    protected function hourlyAt($minute, callable $callback)
-    {
-        if((int) date('i', $this->timestamp) === $minute) call_user_func($callback);
-    }
-    /**
-     * Called every day
-     */
-    protected function daily(callable $callback)
-    {
-        if(date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
-    }
+
     /**
      * Called every day at the 24h-format time specified
      *
@@ -158,80 +121,183 @@ class CronRunCommand extends Command {
      */
     protected function dailyAt($time, callable $callback)
     {
-        if(date('H:i', $this->timestamp) === $time) call_user_func($callback);
+        if (date('H:i', $this->timestamp) === $time) {
+            call_user_func($callback);
+        }
     }
+
+    protected function finish()
+    {
+        // Write execution time and messages to the log
+        $executionTime = round(((microtime(true) - $_SERVER['REQUEST_TIME_FLOAT']) * 1000), 3);
+        Log::info('Cron: execution time: ' . $executionTime . ' | ' . implode(', ', $this->messages));
+    }
+
+    protected function everyTenMinutes(callable $callback)
+    {
+        if ((int)date('i', $this->timestamp) % 10 === 0) {
+            call_user_func($callback);
+        }
+    }
+
+    protected function everyFifteenMinutes(callable $callback)
+    {
+        if ((int)date('i', $this->timestamp) % 15 === 0) {
+            call_user_func($callback);
+        }
+    }
+
+    protected function everyThirtyMinutes(callable $callback)
+    {
+        if ((int)date('i', $this->timestamp) % 30 === 0) {
+            call_user_func($callback);
+        }
+    }
+
+    /**
+     * Called every full hour
+     */
+    protected function hourly(callable $callback)
+    {
+        if (date('i', $this->timestamp) === '00') {
+            call_user_func($callback);
+        }
+    }
+
+    /**
+     * Called every hour at the minute specified
+     *
+     * @param  integer $minute
+     */
+    protected function hourlyAt($minute, callable $callback)
+    {
+        if ((int)date('i', $this->timestamp) === $minute) {
+            call_user_func($callback);
+        }
+    }
+
+    /**
+     * Called every day
+     */
+    protected function daily(callable $callback)
+    {
+        if (date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
+    }
+
     /**
      * Called every day at 12:00am and 12:00pm
      */
     protected function twiceDaily(callable $callback)
     {
-        if(date('h:i', $this->timestamp) === '12:00') call_user_func($callback);
+        if (date('h:i', $this->timestamp) === '12:00') {
+            call_user_func($callback);
+        }
     }
+
     /**
      * Called every weekday
      */
     protected function weekdays(callable $callback)
     {
         $days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-        if(in_array(date('D', $this->timestamp), $days) && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (in_array(date('D', $this->timestamp), $days) && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function mondays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Mon' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Mon' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function tuesdays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Tue' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Tue' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function wednesdays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Wed' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Wed' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function thursdays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Thu' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Thu' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function fridays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Fri' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Fri' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function saturdays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Sat' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Sat' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     protected function sundays(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Sun' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Sun' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     /**
      * Called once every week (basically the same as using sundays() above...)
      */
     protected function weekly(callable $callback)
     {
-        if(date('D', $this->timestamp) === 'Sun' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('D', $this->timestamp) === 'Sun' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     /**
      * Called once every week at the specified day and time
      *
-     * @param  string $day  [Three letter format (Mon, Tue, ...)]
+     * @param  string $day [Three letter format (Mon, Tue, ...)]
      * @param  string $time [HH:MM]
      */
     protected function weeklyOn($day, $time, callable $callback)
     {
-        if(date('D', $this->timestamp) === $day && date('H:i', $this->timestamp) === $time) call_user_func($callback);
+        if (date('D', $this->timestamp) === $day && date('H:i', $this->timestamp) === $time) {
+            call_user_func($callback);
+        }
     }
+
     /**
      * Called each month on the 1st
      */
     protected function monthly(callable $callback)
     {
-        if(date('d', $this->timestamp) === '01' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('d', $this->timestamp) === '01' && date('H:i', $this->timestamp) === $this->runAt) {
+            call_user_func($callback);
+        }
     }
+
     /**
      * Called each year on the 1st of January
      */
     protected function yearly(callable $callback)
     {
-        if(date('m', $this->timestamp) === '01' && date('d', $this->timestamp) === '01' && date('H:i', $this->timestamp) === $this->runAt) call_user_func($callback);
+        if (date('m', $this->timestamp) === '01' && date('d', $this->timestamp) === '01' && date('H:i',
+                $this->timestamp) === $this->runAt
+        ) {
+            call_user_func($callback);
+        }
     }
 }

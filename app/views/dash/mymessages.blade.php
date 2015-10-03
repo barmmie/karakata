@@ -21,9 +21,12 @@
                     </div>
                     <div class="ui segment">
                         <div class="ui pointing secondary menu">
-                            <a class="item {{$message_filter==null?'active':''}}" href="{{route('dash.mymessages')}}">{{trans('words.all')}}</a>
-                            <a class="item {{$message_filter=='read'?'active':''}}" href="{{route('dash.mymessages', 'read')}}">{{trans('phrases.read_messages')}}</a>
-                            <a class="item {{$message_filter=='unread'?'active':''}}" href="{{route('dash.mymessages', 'unread')}}">{{trans('phrases.unread_messages')}}</a>
+                            <a class="item {{$message_filter==null?'active':''}}"
+                               href="{{route('dash.mymessages')}}">{{trans('words.all')}}</a>
+                            <a class="item {{$message_filter=='read'?'active':''}}"
+                               href="{{route('dash.mymessages', 'read')}}">{{trans('phrases.read_messages')}}</a>
+                            <a class="item {{$message_filter=='unread'?'active':''}}"
+                               href="{{route('dash.mymessages', 'unread')}}">{{trans('phrases.unread_messages')}}</a>
                         </div>
                     </div>
                     <div class="ui  segment">
@@ -44,6 +47,7 @@
                                         </div>
                                         <div class="content">
                                             <a class="header">{{$message->item->title}}</a>
+
                                             <div class="meta">
                                                 <span><strong>{{trans('words.from')}}:</strong></span>
 
@@ -71,7 +75,6 @@
                             </div>
 
                         @endif
-
 
 
                     </div>

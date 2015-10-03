@@ -2,8 +2,8 @@
 <html>
 <head>
     <!-- Standard Meta -->
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
     <meta name="token" content="{{csrf_token()}}">
     @yield('meta')
@@ -43,7 +43,7 @@
 
 @if(Auth::guest())
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.nag-login').popup();
         });
     </script>
@@ -54,12 +54,12 @@
 
 
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document).ready(function () {
         $.ajaxSetup({
             cache: false,
-            headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+            headers: {'X-CSRF-TOKEN': $('meta[name=token]').attr("content")}
         });
-        $('.right.menu.open').on("click",function(e){
+        $('.right.menu.open').on("click", function (e) {
             e.preventDefault();
             $('.ui.vertical.navbar.menu').toggle();
         });
@@ -67,7 +67,7 @@
         $('.ui.dropdown').dropdown();
 
         $('.message .close')
-                .on('click', function() {
+                .on('click', function () {
                     $(this)
                             .closest('.message')
                             .transition('fade')

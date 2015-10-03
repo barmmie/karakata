@@ -1,32 +1,31 @@
-<?php 
+<?php
 
-return array( 
-	
-	/*
-	|--------------------------------------------------------------------------
-	| oAuth Config
-	|--------------------------------------------------------------------------
-	*/
+return array(
 
-	/**
-	 * Storage
-	 */
-	'storage' => 'Session', 
+    /*
+    |--------------------------------------------------------------------------
+    | oAuth Config
+    |--------------------------------------------------------------------------
+    */
 
-	/**
-	 * Consumers
-	 */
-	'consumers' => array(
+    /**
+     * Storage
+     */
+    'storage' => 'Session',
+    /**
+     * Consumers
+     */
+    'consumers' => array(
 
-		/**
-		 * Facebook
-		 */
+        /**
+         * Facebook
+         */
         'Facebook' => array(
-            'client_id'     => '',
+            'client_id' => '',
             'client_secret' => '',
-            'scope'         => array(),
-        ),		
+            'scope' => array(),
+        ),
 
-	)
+    )
 
 );

@@ -9,7 +9,9 @@
 namespace Karakata\Services;
 
 use Karakata\Exceptions\ValidationFailedException;
-class MyCommandValidator {
+
+class MyCommandValidator
+{
     /**
      * Validate a command
      *
@@ -19,14 +21,14 @@ class MyCommandValidator {
      */
     public function validate($command)
     {
-        if(method_exists($command, 'rules')) {
+        if (method_exists($command, 'rules')) {
 
             $rules = $command->rules();
 
-            if(!empty($rules)) {
-                $validator = \Validator::make((array) $command, $rules);
+            if (!empty($rules)) {
+                $validator = \Validator::make((array)$command, $rules);
 
-                if($validator->fails()) {
+                if ($validator->fails()) {
                     throw new ValidationFailedException('Form validation failed', $validator->getMessageBag());
                 }
             }

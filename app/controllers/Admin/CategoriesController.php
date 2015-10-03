@@ -1,6 +1,11 @@
 <?php namespace Admin;
 
-use Category, Request, View, DB, Input, App;
+use App;
+use Category;
+use DB;
+use Input;
+use Request;
+use View;
 
 
 class CategoriesController extends \BaseController
@@ -13,7 +18,9 @@ class CategoriesController extends \BaseController
             if (!Request::ajax() ||
                 !in_array($this->request->action, ["addCategory", "deleteCategory", "renameCategory", "moveCategory"])
                 //(\Validator::make(['name' => $this->request->name], ["name" => ["required", "regex:/^[\w\p{Cyrillic}\040,.-_']+$/u"]])->fails())
-            ) App::abort(405);
+            ) {
+                App::abort(405);
+            }
         }, ["on" => "post"]);
     }
 
@@ -36,6 +43,7 @@ class CategoriesController extends \BaseController
             case "addCategory":
                 $status = Category::addNode($this->request->name, $this->request->icon);
                 DB::commit();
+
                 return $status;
                 break;
 
@@ -46,7 +54,8 @@ class CategoriesController extends \BaseController
 
             case "moveCategory":
 
-                $status = Category::moveNode($this->request->id, $this->request->to, $this->request->direction, $this->request->parent_id);
+                $status = Category::moveNode($this->request->id, $this->request->to, $this->request->direction,
+                    $this->request->parent_id);
                 break;
         }
 
@@ -56,8 +65,6 @@ class CategoriesController extends \BaseController
         }
 
         DB::commit();
-
-
 
 
     }

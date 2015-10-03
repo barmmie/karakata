@@ -1,6 +1,7 @@
 <?php namespace Karakata\User\Command;
 
-class RegisterUserCommand {
+class RegisterUserCommand
+{
 
     /**
      * @var string
@@ -40,11 +41,12 @@ class RegisterUserCommand {
         $this->full_name = $full_name;
         $this->email = $email;
         $this->password = $password;
-        $this->confirm_password = $confirm_password  ;
+        $this->confirm_password = $confirm_password;
         $this->phone = $phone;
     }
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'full_name' => 'required',
             'email' => 'required|email|unique:users,email'

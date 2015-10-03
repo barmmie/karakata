@@ -9,9 +9,11 @@
 namespace Karakata\Composers;
 
 
-class LocationComposer {
+class LocationComposer
+{
 
-    public function compose($view) {
+    public function compose($view)
+    {
         $locations = \Location::fetchAll();
 
         $view->with('locations', $locations);

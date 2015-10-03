@@ -3,7 +3,8 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class UpdateItemCommandHandler implements CommandHandler {
+class UpdateItemCommandHandler implements CommandHandler
+{
 
     use DispatchableTrait;
 
@@ -18,28 +19,30 @@ class UpdateItemCommandHandler implements CommandHandler {
 
         try {
             $item = \Item::where('id', $command->id)
-                            ->where('user_id', \Auth::user()->id)->firstOrFail();
+                ->where('user_id', \Auth::user()->id)->firstOrFail();
 
 
-            $item->update(['category_id' => $command->category_id,
-                                    'type' => $command->type,
-                                    'title' => $command->title,
-                                    'description' => e($command->description),
-                                    'amount' => $command->amount,
-                                    'negotiable' => $command->negotiable,
-                                    'location_id' => $command->location_id,
-                                    'email' => $command->email,
-                                    'phone' => $command->phone,
-                                    'seller_name' => $command->seller_name]);
+            $item->update([
+                'category_id' => $command->category_id,
+                'type' => $command->type,
+                'title' => $command->title,
+                'description' => e($command->description),
+                'amount' => $command->amount,
+                'negotiable' => $command->negotiable,
+                'location_id' => $command->location_id,
+                'email' => $command->email,
+                'phone' => $command->phone,
+                'seller_name' => $command->seller_name
+            ]);
 
-            if($command->multipart_upload) {
+            if ($command->multipart_upload) {
 
-                foreach($command->uploaded_files as $file){
+                foreach ($command->uploaded_files as $file) {
                     \Picture::upload($file, $item->id);
                 }
 
             } else {
-                $pictures_id = explode(',',$command->pictures_id);
+                $pictures_id = explode(',', $command->pictures_id);
 
                 $item->attachPictures($pictures_id);
             }
@@ -50,7 +53,7 @@ class UpdateItemCommandHandler implements CommandHandler {
             $result['success'] = true;
             $result['message'] = "Item '{$command->title}' was been updated successfully";
             $result['payload'] = $item;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $result['success'] = false;
             $result['message'] = $e->getMessage();
         }

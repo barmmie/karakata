@@ -3,7 +3,8 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class PostItemCommandHandler implements CommandHandler {
+class PostItemCommandHandler implements CommandHandler
+{
 
     use DispatchableTrait;
 
@@ -17,16 +18,18 @@ class PostItemCommandHandler implements CommandHandler {
     {
 
         try {
-            $item = \Item::post($command->category_id, $command->type, $command->title, $command->description, $command->amount, $command->negotiable,  $command->location_id, $command->email, $command->phone, $command->seller_name);
+            $item = \Item::post($command->category_id, $command->type, $command->title, $command->description,
+                $command->amount, $command->negotiable, $command->location_id, $command->email, $command->phone,
+                $command->seller_name);
 
-            if($command->multipart_upload) {
+            if ($command->multipart_upload) {
 
-                foreach($command->uploaded_files as $file){
+                foreach ($command->uploaded_files as $file) {
                     \Picture::upload($file, $item->id);
                 }
 
             } else {
-                $pictures_id = explode(',',$command->pictures_id);
+                $pictures_id = explode(',', $command->pictures_id);
 
                 $item->attachPictures($pictures_id);
             }
@@ -37,7 +40,7 @@ class PostItemCommandHandler implements CommandHandler {
             $result['success'] = true;
             $result['message'] = "Item '{$command->title}' was been posted successfully";
             $result['payload'] = $item;
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $result['success'] = false;
             $result['message'] = $e->getMessage();
         }

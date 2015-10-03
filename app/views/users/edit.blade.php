@@ -12,79 +12,80 @@
             </div>
 
             <div class="twelve wide column">
-                    @include('partials._form_errors')
-                    <div class="ui  segment">
-                        <h3 class="ui dividing header">
-                            <i class="user icon"></i>
-                            {{trans('phrases.update_profile')}}
-                        </h3>
+                @include('partials._form_errors')
+                <div class="ui  segment">
+                    <h3 class="ui dividing header">
+                        <i class="user icon"></i>
+                        {{trans('phrases.update_profile')}}
+                    </h3>
 
-                            {{Form::open(['route'=>'users.update_profile', 'class'=> 'ui profile form '])}}
-                            <div class="ui error message"></div>
+                    {{Form::open(['route'=>'users.update_profile', 'class'=> 'ui profile form '])}}
+                    <div class="ui error message"></div>
+                    <div class="field">
+                        <div class="two fields">
+
                             <div class="field">
-                                <div class="two fields">
+                                <label>{{trans('words.full_name')}}</label>
 
-                                    <div class="field">
-                                        <label>{{trans('words.full_name')}}</label>
-
-                                        {{Form::text('full_name', $user->full_name)}}
-                                    </div>
-                                    <div class="field">
-                                        <label>{{trans('words.phone')}}</label>
-
-                                        {{Form::text('phone', $user->phone)}}
-                                    </div>
-                                </div>
+                                {{Form::text('full_name', $user->full_name)}}
                             </div>
-                        <button class="ui teal button right labeled icon button" tabindex="0">
-                            <i class="right arrow icon"></i>{{trans('phrases.update_profile')}}</button>
+                            <div class="field">
+                                <label>{{trans('words.phone')}}</label>
 
-                            {{Form::close()}}
-
-                    </div>
-                    <div class="ui secondary segment">
-                        <h3 class="ui dividing header">
-                            <i class="lock icon"></i>
-                            {{trans('phrases.update_password')}}
-                        </h3>
-
-                        {{Form::open(['route'=>'users.update_password', 'class'=> 'ui profile form '])}}
-                        <div class="field">
-                            <label>
-                                {{trans('phrases.current_password')}}
-                            </label>
-                            <div class="fields">
-                                <div class="twelve wide field">
-                                    {{Form::password('current_password')}}
-                                </div>
-
+                                {{Form::text('phone', $user->phone)}}
                             </div>
                         </div>
+                    </div>
+                    <button class="ui teal button right labeled icon button" tabindex="0">
+                        <i class="right arrow icon"></i>{{trans('phrases.update_profile')}}</button>
 
-                        <div class="field">
-                            <div class="two fields">
+                    {{Form::close()}}
 
-                                <div class="field">
-                                    <label>                            {{trans('phrases.new_password')}}
-                                    </label>
+                </div>
+                <div class="ui secondary segment">
+                    <h3 class="ui dividing header">
+                        <i class="lock icon"></i>
+                        {{trans('phrases.update_password')}}
+                    </h3>
 
-                                    {{Form::password('new_password')}}
-                                </div>
-                                <div class="field">
-                                    <label>                            {{trans('phrases.confirm_new_password')}}
-                                    </label>
+                    {{Form::open(['route'=>'users.update_password', 'class'=> 'ui profile form '])}}
+                    <div class="field">
+                        <label>
+                            {{trans('phrases.current_password')}}
+                        </label>
 
-                                    {{Form::password('confirm_new_password')}}
-                                </div>
+                        <div class="fields">
+                            <div class="twelve wide field">
+                                {{Form::password('current_password')}}
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="two fields">
+
+                            <div class="field">
+                                <label>                            {{trans('phrases.new_password')}}
+                                </label>
+
+                                {{Form::password('new_password')}}
+                            </div>
+                            <div class="field">
+                                <label>                            {{trans('phrases.confirm_new_password')}}
+                                </label>
+
+                                {{Form::password('confirm_new_password')}}
                             </div>
                         </div>
-
-                        <button class="ui brown button right labeled icon button" tabindex="0">
-                            <i class="right arrow icon"></i>                            {{trans('phrases.update_password')}}
-                        </button>
-
-                        {{Form::close()}}
                     </div>
+
+                    <button class="ui brown button right labeled icon button" tabindex="0">
+                        <i class="right arrow icon"></i>                            {{trans('phrases.update_password')}}
+                    </button>
+
+                    {{Form::close()}}
+                </div>
             </div>
         </div>
     </div>
@@ -130,4 +131,4 @@
 
     </script>
 
-    @endsection
+@endsection

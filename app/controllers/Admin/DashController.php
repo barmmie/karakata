@@ -7,9 +7,18 @@
  */
 
 namespace Admin;
-use View, Input, Redirect, Response, Item,DB, Carbon\Carbon, URL;
 
-class DashController extends \BaseController {
+use Carbon\Carbon;
+use DB;
+use Input;
+use Item;
+use Redirect;
+use Response;
+use URL;
+use View;
+
+class DashController extends \BaseController
+{
 
     public function dashboard()
     {
@@ -20,18 +29,22 @@ class DashController extends \BaseController {
         $categories_count = \Category::withoutRoot()->count();
 
 
-        return View::make('admin.dash.dashboard', compact('users_count', 'items_count', 'locations_count', 'categories_count'));
+        return View::make('admin.dash.dashboard',
+            compact('users_count', 'items_count', 'locations_count', 'categories_count'));
     }
 
     public function itemsByYear()
     {
 
-        $year = Input::has('year')? Input::get('year') : Carbon::now()->year;
+        $year = Input::has('year') ? Input::get('year') : Carbon::now()->year;
         $month = Input::has('month') ? Input::get('month') : Carbon::now()->month;
 
         $items = Item::where(DB::raw('YEAR(created_at)'), '=', $year)
             ->where(DB::raw('MONTH(created_at)'), '=', $month)
-            ->select([DB::Raw('count(items.id) as items_count'), DB::Raw('DATE_FORMAT(items.created_at, "%Y-%m-%d") day')])
+            ->select([
+                DB::Raw('count(items.id) as items_count'),
+                DB::Raw('DATE_FORMAT(items.created_at, "%Y-%m-%d") day')
+            ])
             ->groupBy('day')
             ->orderBy('items.created_at')
             ->get();

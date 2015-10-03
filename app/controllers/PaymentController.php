@@ -6,23 +6,24 @@ class PaymentController extends Controller
     public function displayItemReceipt($id)
     {
 
-        $item = Item::where('id',$id)
-                    ->where('user_id', Auth::user()->id)
-                    ->with('picture')
-                    ->firstOrFail();
+        $item = Item::where('id', $id)
+            ->where('user_id', Auth::user()->id)
+            ->with('picture')
+            ->firstOrFail();
 
-        if(Setting::get('allow_premium_payment', '0') == '0')
-        {
+        if (Setting::get('allow_premium_payment', '0') == '0') {
             flashError('Payment not allowed on platform', 'Contact administrator to enable payment');
+
             return Redirect::route('dash.myitems');
         }
 
         if ($item->isRejected()) {
             flashError('That item has been rejected', 'You can not pay for an item that has been rejected');
+
             return Redirect::route('dash.myitems');
         }
 
-        $data['product'] = trans('phrases.pay_for_premium').' on '.Setting::get('site_name');
+        $data['product'] = trans('phrases.pay_for_premium') . ' on ' . Setting::get('site_name');
         $data['productImage'] = asset($item->mainThumbnail());
         $data['price'] = Setting::get('premium_amount', '10.00');
         $data['currency'] = Setting::get('paypal_currency', 'USD');
@@ -66,6 +67,7 @@ class PaymentController extends Controller
     public function cancel($id)
     {
         flashError('Transaction cancelled', 'Transaction was cancelled by user on app');
+
         return Redirect::route('items.payment', $id);
     }
 
@@ -87,10 +89,12 @@ class PaymentController extends Controller
             $item->markAsPremium();
 
             flashSuccess('Transaction successful', 'Item has now been marked as premium');
+
             return Redirect::route('items.show', $item->slug);
 
         } else {
             flashError('Processing error', 'Could not process transaction');
+
             return Redirect::route('items.payment', $id);
 
         }

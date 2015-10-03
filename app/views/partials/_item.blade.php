@@ -16,23 +16,25 @@
 
         @if($item->isPremium())
 
-        <div class="trap ribbon-wrap fl-right">
-            <div class="trap-ribbon">
-                <a href="#"><i class="inverted circular star icon"></i> Premium  </a>
+            <div class="trap ribbon-wrap fl-right">
+                <div class="trap-ribbon">
+                    <a href="#"><i class="inverted circular star icon"></i> Premium </a>
+                </div>
             </div>
-        </div>
 
         @endif
 
 
         <a class="header" href="{{route('items.show', $item->slug)}}">{{$item->title}}</a>
+
         <div class="meta">
                                             <span class="date m-b-xs">
                                                 <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
                                             </span>
 
                                             <span class="category m-b-xs">
-                                                <i class="minus icon"></i>{{$item->category->title}}<i class="minus icon"></i>
+                                                <i class="minus icon"></i>{{$item->category->title}}<i
+                                                        class="minus icon"></i>
                                             </span>
                                              <span class="location">
                                                 <i class="teal marker icon"></i>{{$item->location->name}}

@@ -27,14 +27,16 @@
                         <div class="ui breadcrumb">
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             <i class="right angle icon divider"></i>
+
                             <div class="section"> {{trans('words.search')}} : '{{Input::get('query')}}'</div>
 
                             <i class="right arrow icon divider"></i>
+
                             <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
                         </div>
                     </div>
                     <div class="ui segment">
-                       @include('partials._items_filter')
+                        @include('partials._items_filter')
 
                     </div>
 
@@ -66,7 +68,6 @@
                         @endif
 
 
-
                     </div>
 
                     @if($items->getTotal() > $items->getPerPage())
@@ -85,7 +86,7 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 

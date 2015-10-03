@@ -3,9 +3,11 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class PostMessageCommandHandler implements CommandHandler {
+class PostMessageCommandHandler implements CommandHandler
+{
 
     use DispatchableTrait;
+
     /**
      * Handle the command.
      *
@@ -22,7 +24,7 @@ class PostMessageCommandHandler implements CommandHandler {
             $this->dispatchEventsFor($message);
 
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             $result['success'] = false;
             $result['message'] = $e->getMessage();
         }

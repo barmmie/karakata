@@ -7,13 +7,21 @@
  */
 
 namespace Admin;
-use View, Input, Redirect, Item, Report, URL;
 
-class ItemsController extends \BaseController {
+use Input;
+use Item;
+use Redirect;
+use Report;
+use URL;
+use View;
 
-    public function show($id) {
+class ItemsController extends \BaseController
+{
+
+    public function show($id)
+    {
         $item = Item::with('category', 'location', 'pictures', 'owner', 'favoriters')
-                    ->findOrFail($id);
+            ->findOrFail($id);
 
         $reports = Report::where('item_id', $id)->paginate(5);
 
@@ -25,7 +33,7 @@ class ItemsController extends \BaseController {
     {
         $items = Item::orderBy('created_at', 'desc');
 
-        switch ($status){
+        switch ($status) {
             case 'pending':
                 $items->pendingOnly();
                 break;
@@ -37,7 +45,7 @@ class ItemsController extends \BaseController {
                 break;
         }
 
-        if(Input::has('query')) {
+        if (Input::has('query')) {
             $items->search(Input::get('query'));
         }
 
@@ -46,13 +54,14 @@ class ItemsController extends \BaseController {
         return View::make('admin.items.index', compact('items', 'status'));
     }
 
-    public function approve($id) {
+    public function approve($id)
+    {
         $item = Item::findOrFail($id);
         try {
             $item->approve();
             flashSuccess('Item has been approved', '');
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             flashError('Item could not be approved', '');
         }
 
@@ -60,30 +69,33 @@ class ItemsController extends \BaseController {
 
     }
 
-    public function delete($id) {
+    public function delete($id)
+    {
         $item = Item::findOrFail($id);
         $redirect_back = (URL::previous() == route('admin.items.show', $id)) ? false : true;
         try {
             $item->delete();
             flashInfo('Item has been deleted', '');
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             flashError('Item could not be deleted', '');
         }
 
-        if($redirect_back)
+        if ($redirect_back) {
             return Redirect::back();
-        else
+        } else {
             return Redirect::route('admin.items.index');
+        }
     }
 
-    public function reject($id) {
+    public function reject($id)
+    {
         $item = Item::findOrFail($id);
         try {
             $item->reject();
             flashSuccess('Item has been rejected', '');
 
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             flashError('Item could not be rejected', '');
         }
 

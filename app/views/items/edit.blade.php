@@ -19,7 +19,7 @@
                 <div class="ui segment">
                     <h3 class="ui dividing header">
                         <i class="add pencil icon"></i>
-                      {{trans('phrases.update_item')}} : {{$item->title}}
+                        {{trans('phrases.update_item')}} : {{$item->title}}
                     </h3>
                     @include('partials._form_errors')
 
@@ -31,18 +31,22 @@
                     <div class="two fields">
                         <div class="required field">
                             <label for="">{{Lang::choice('words.category', 1)}}</label>
+
                             <div class="category ui dropdown button">
                                 {{Form::hidden('category_id', $item->category_id)}}
                                 <span class="text">{{trans('phrases.choose_a_category')}}</span>
                                 <i class="dropdown icon"></i>
+
                                 <div class="menu">
                                     @foreach($categories as $category)
                                         <div class="item">
                                             <i class="dropdown icon"></i>
                                             <span class="text">{{$category->label}}</span>
+
                                             <div class="menu">
                                                 @foreach($category->children as $cat_child)
-                                                    <div class="item" data-value="{{$cat_child->id}}">{{$cat_child->label}}</div>
+                                                    <div class="item"
+                                                         data-value="{{$cat_child->id}}">{{$cat_child->label}}</div>
                                                 @endforeach
                                             </div>
                                         </div>
@@ -55,7 +59,6 @@
                         </div>
 
 
-
                         <div class="required field">
                             <label for="fruit">{{trans('phrases.ad_type')}}:</label>
 
@@ -64,13 +67,16 @@
                                 {{Form::hidden('type', $item->type)}}
                                 <div class="text">today</div>
                                 <i class="dropdown icon"></i>
+
                                 <div class="menu">
                                     <div class="header">{{trans('phrases.posting_as')}}</div>
-                                    <div class="active item" data-text="{{trans('words.individual')}}" data-value="personal"><i class="male icon"></i> {{trans('words.individual')}}</div>
-                                    <div class="item" data-text="{{trans('words.business')}}" data-value="business"><i class="suitcase icon"></i> {{trans('words.business')}}</div>
+                                    <div class="active item" data-text="{{trans('words.individual')}}"
+                                         data-value="personal"><i class="male icon"></i> {{trans('words.individual')}}
+                                    </div>
+                                    <div class="item" data-text="{{trans('words.business')}}" data-value="business"><i
+                                                class="suitcase icon"></i> {{trans('words.business')}}</div>
                                 </div>
                             </div>
-
 
 
                         </div>
@@ -98,7 +104,8 @@
                                             <img class="ui tiny bordered image" src="{{$picture->thumbnail_src}}">
 
                                             <div class="m-t-xs center">
-                                                <a class="ui center aligned removephoto" href="" data-picture-id="{{$picture->id}}"><i class="cancel icon"></i></a>
+                                                <a class="ui center aligned removephoto" href=""
+                                                   data-picture-id="{{$picture->id}}"><i class="cancel icon"></i></a>
                                             </div>
                                         </div>
                                     @endforeach
@@ -112,16 +119,17 @@
 
                     <div class="field">
                         <label for="">{{Lang::choice('words.photo', 2)}}</label>
+
                         <div id="myDropZone" class="dropzone">
                             <div class="fallback">
-                                <input name="files[]" type="file" multiple />
-                                <input name="multipart_upload" type="hidden" value="1" />
+                                <input name="files[]" type="file" multiple/>
+                                <input name="multipart_upload" type="hidden" value="1"/>
+
                                 <p>{{trans('phrases.choose_images')}}</p>
                             </div>
                         </div>
                         {{Form::hidden('pictures_id')}}
                     </div>
-
 
 
                     <div class="required field">
@@ -140,6 +148,7 @@
                                     {{Form::hidden('negotiable', $item->negotiable)}}
                                     <div class="text">{{trans('words.negotiable')}}?</div>
                                     <i class="dropdown icon"></i>
+
                                     <div class="menu">
                                         <div class="item" data-value="1">{{trans('words.negotiable')}}</div>
                                         <div class="item" data-value="0">{{trans('words.non_negotiable')}}</div>
@@ -151,14 +160,17 @@
                         </div>
                         <div class="required six wide  field">
                             <label for="">{{Lang::choice('words.location', 1)}}</label>
+
                             <div class="ui fluid search selection dropdown">
                                 {{Form::hidden('location_id', $item->location_id)}}
                                 <i class="dropdown icon"></i>
+
                                 <div class="default text">{{trans('phrases.select_location')}}</div>
                                 <div class="menu">
                                     @foreach($locations as $location)
 
-                                        <div class="item" data-value="{{$location->id}}"><i class="marker icon"></i>{{$location->name}}</div>
+                                        <div class="item" data-value="{{$location->id}}"><i
+                                                    class="marker icon"></i>{{$location->name}}</div>
 
                                     @endforeach
 
@@ -192,7 +204,6 @@
                             </div>
 
 
-
                         </div>
 
                     </div>
@@ -223,23 +234,25 @@
 
             Form = {
 
-                getCurrentPicturesArray: function() {
+                getCurrentPicturesArray: function () {
                     current_pictures_array = []
 
                     var current_pictures_list = $picturesId.val();
 
-                    if(current_pictures_list!="") var current_pictures_array = current_pictures_list.split(',');
+                    if (current_pictures_list != "") var current_pictures_array = current_pictures_list.split(',');
 
-                    current_pictures_array = current_pictures_array.map(function(val){return parseInt(val)});
+                    current_pictures_array = current_pictures_array.map(function (val) {
+                        return parseInt(val)
+                    });
 
                     return current_pictures_array
                 },
-                addFileToPicturesArray: function(file) {
+                addFileToPicturesArray: function (file) {
                     var current_pictures_array = this.getCurrentPicturesArray();
                     current_pictures_array.push(file._uuid)
                     $picturesId.val(current_pictures_array)
                 },
-                removeFileFromPicturesArray: function(file) {
+                removeFileFromPicturesArray: function (file) {
                     var current_pictures_array = this.getCurrentPicturesArray();
                     current_pictures_array.sp
                     $picturesId.val(current_pictures_array)
@@ -251,7 +264,7 @@
             Dropzone.autoDiscover = false;
 
             dropzone = new Dropzone("div#myDropZone", {
-                url : "{{route('pictures.store')}}",
+                url: "{{route('pictures.store')}}",
                 addRemoveLinks: true,
                 maxFilesize: 3,
                 maxFiles: 5,
@@ -259,9 +272,9 @@
                     'X-CSRF-TOKEN': $('meta[name=token]').attr("content")
                 },
 
-                acceptedFiles : 'image/*',
+                acceptedFiles: 'image/*',
                 dictDefaultMessage: "{{trans('phrases.add_more_photos')}}",
-                maxfilesexceeded: function(file, rt) {
+                maxfilesexceeded: function (file, rt) {
                     alertify.warning("{{trans('phrases.five_photos_upload_limit')}}")
                     this.removeFile(file);
                 },
@@ -280,8 +293,8 @@
             });
 
 
-            dropzone.on('removedfile', function(file){
-                if(file.isServerProcessed) {
+            dropzone.on('removedfile', function (file) {
+                if (file.isServerProcessed) {
                     //remove file._uuid from
                     //$("input[name='pictures_id[]']").val()
                     Form.removeFileFromPicturesArray(file)
@@ -417,7 +430,7 @@
             var $photos_field = $('.photos')
 
 
-            $('.removephoto').on('click', function(e){
+            $('.removephoto').on('click', function (e) {
                 e.preventDefault();
                 $photos_field.addClass('loading');
 
@@ -430,22 +443,20 @@
                     method: 'DELETE',
                     data: form_values,
                     url: "{{route('pictures.destroy')}}",
-                    success: function(response) {
+                    success: function (response) {
                         $photos_field.removeClass('loading');
                         alertify.success(response.message);
 
                         $photoLink.parentElement.parentElement.remove()
 
                     },
-                    error: function(xhr) {
+                    error: function (xhr) {
                         $photos_field.removeClass('loading');
                         alertify.error(xhr.responseJSON.message)
                     }
                 })
 
             })
-
-
 
 
         });

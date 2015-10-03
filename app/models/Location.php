@@ -7,23 +7,22 @@ class Location extends \Eloquent
     public static function bulkInsert($locations)
     {
         $now = Carbon\Carbon::now();
-        foreach( $locations as $index => $location ) {
+        foreach ($locations as $index => $location) {
             $locations[$index]['created_at'] = $now->toDateTimeString();
             $locations[$index]['updated_at'] = $now->toDateTimeString();
         }
 
         return DB::table('locations')->
-                        insert($locations);
-    }
-
-
-    public function items()
-    {
-        return $this->hasMany('Item');
+        insert($locations);
     }
 
     public static function fetchAll()
     {
         return static::all(['id', 'name']);
+    }
+
+    public function items()
+    {
+        return $this->hasMany('Item');
     }
 }

@@ -12,7 +12,6 @@
             <div class="four wide column">
 
 
-
             </div>
 
             <div class="twelve wide column">
@@ -21,9 +20,12 @@
                         <div class="ui breadcrumb">
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             <i class="right angle icon divider"></i>
-                            <div class="section"> {{Lang::choice('words.item', 1)}}  <strong>{{$user->full_name}}</strong></div>
+
+                            <div class="section"> {{Lang::choice('words.item', 1)}}
+                                <strong>{{$user->full_name}}</strong></div>
 
                             <i class="right arrow icon divider"></i>
+
                             <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
                         </div>
                     </div>
@@ -73,7 +75,7 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 

@@ -1,6 +1,7 @@
 <?php namespace Karakata\Message\Command;
 
-class PostMessageCommand {
+class PostMessageCommand
+{
 
     /**
      * @var string

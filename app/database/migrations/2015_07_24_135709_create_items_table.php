@@ -3,22 +3,22 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateItemsTable extends Migration {
+class CreateItemsTable extends Migration
+{
 
-	/**
-	 * Run the migrations.
-	 *
-	 * @return void
-	 */
-	public function up()
-	{
-		Schema::create('items', function(Blueprint $table)
-		{
-			$table->increments('id');
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('items', function (Blueprint $table) {
+            $table->increments('id');
             $table->string('title');
             $table->text('description');
             $table->string('slug');
-            $table->enum('type',['business','personal']);
+            $table->enum('type', ['business', 'personal']);
             $table->string('amount');
             $table->string('email');
             $table->string('phone');
@@ -40,19 +40,19 @@ class CreateItemsTable extends Migration {
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('cascade');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->softDeletes();
-			$table->timestamps();
-		});
-	}
+            $table->timestamps();
+        });
+    }
 
 
-	/**
-	 * Reverse the migrations.
-	 *
-	 * @return void
-	 */
-	public function down()
-	{
-		Schema::drop('items');
-	}
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::drop('items');
+    }
 
 }

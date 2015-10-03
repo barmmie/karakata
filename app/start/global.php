@@ -13,10 +13,10 @@
 
 ClassLoader::addDirectories(array(
 
-	app_path().'/commands',
-	app_path().'/controllers',
-	app_path().'/models',
-	app_path().'/database/seeds',
+    app_path() . '/commands',
+    app_path() . '/controllers',
+    app_path() . '/models',
+    app_path() . '/database/seeds',
 
 ));
 
@@ -31,7 +31,7 @@ ClassLoader::addDirectories(array(
 |
 */
 
-Log::useFiles(storage_path().'/logs/laravel.log');
+Log::useFiles(storage_path() . '/logs/laravel.log');
 
 /*
 |--------------------------------------------------------------------------
@@ -46,9 +46,8 @@ Log::useFiles(storage_path().'/logs/laravel.log');
 |
 */
 
-App::error(function(Exception $exception, $code)
-{
-	Log::error($exception);
+App::error(function (Exception $exception, $code) {
+    Log::error($exception);
 
 //    if(true)
 //    {
@@ -63,18 +62,20 @@ App::error(function(Exception $exception, $code)
 //    }
 });
 
-App::error(function(Karakata\Exceptions\ValidationFailedException $exception){
+App::error(function (Karakata\Exceptions\ValidationFailedException $exception) {
 
-    if(Request::ajax())
-         return Response::json($exception->getErrors(), 400);
-    else
+    if (Request::ajax()) {
+        return Response::json($exception->getErrors(), 400);
+    } else {
         return Redirect::back()
             ->withInput()
             ->withErrors($exception->getErrors());
+    }
 });
 
-App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $exception){
+App::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $exception) {
     flashError('Page/Item not found', 'The page you tried to access does not exist or has been removed');
+
     return Request::header('referer') ? Redirect::back() : Redirect::route('pages.homepage');
 });
 
@@ -90,9 +91,8 @@ App::error(function(\Illuminate\Database\Eloquent\ModelNotFoundException $except
 |
 */
 
-App::down(function()
-{
-	return Response::make("Be right back!", 503);
+App::down(function () {
+    return Response::make("Be right back!", 503);
 });
 
 /*
@@ -106,10 +106,10 @@ App::down(function()
 |
 */
 
-require app_path().'/filters.php';
-require app_path().'/listeners.php';
-require app_path().'/composers.php';
-require app_path().'/macros.php';
+require app_path() . '/filters.php';
+require app_path() . '/listeners.php';
+require app_path() . '/composers.php';
+require app_path() . '/macros.php';
 
 App::bind('Laracasts\Commander\CommandTranslator', 'Karakata\Services\MyCommandTranslator');
 

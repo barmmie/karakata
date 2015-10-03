@@ -11,7 +11,8 @@ namespace Karakata\Services;
 
 use Laracasts\Commander\BasicCommandTranslator;
 
-class MyCommandTranslator extends BasicCommandTranslator {
+class MyCommandTranslator extends BasicCommandTranslator
+{
 
 
     public function toValidator($command)

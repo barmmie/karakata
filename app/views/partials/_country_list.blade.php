@@ -197,7 +197,6 @@
     <div class="item" data-value="2017370"><i class="ru flag"></i>Russia</div>
 
 
-
     <div class="item" data-value="49518"><i class="rw flag"></i>Rwanda</div>
 
     <div class="item" data-value="3370751"><i class="sh flag"></i>Saint Helena</div>
@@ -248,9 +247,6 @@
     <div class="item" data-value="690791"><i class="ua flag"></i>Ukraine</div>
     <div class="item" data-value="290557"><i class="ae flag"></i>United Arab Emirates
     </div>
-
-
-
 
 
     <div class="item" data-value="6252001"><i class="us flag"></i>United States</div>

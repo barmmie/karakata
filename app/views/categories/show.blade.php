@@ -18,27 +18,27 @@
                 </div>
 
 
-
-
             </div>
 
             <div class="twelve wide column">
                 <div class="ui segments">
                     <div class="ui segment">
-                            <div class="ui breadcrumb">
-                                <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
+                        <div class="ui breadcrumb">
+                            <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
+                            <i class="right angle icon divider"></i>
+                            <a class="section {{$sub_category? '': 'active'}}"
+                               href="{{route('categories.show', $parent_category->slug)}}">{{$parent_category->title}}</a>
+                            @if($sub_category)
                                 <i class="right angle icon divider"></i>
-                                <a class="section {{$sub_category? '': 'active'}}" href="{{route('categories.show', $parent_category->slug)}}">{{$parent_category->title}}</a>
-                                @if($sub_category)
-                                    <i class="right angle icon divider"></i>
-                                    <div class="active section">{{$sub_category->title}}</div>
-                                @endif
-                                <i class="right arrow icon divider"></i>
-                                <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
-                            </div>
+                                <div class="active section">{{$sub_category->title}}</div>
+                            @endif
+                            <i class="right arrow icon divider"></i>
+
+                            <div class="active section">{{$item_count}} {{Lang::choice('words.result', $item_count)}}</div>
+                        </div>
                     </div>
                     <div class="ui segment">
-                       @include('partials._items_filter')
+                        @include('partials._items_filter')
                     </div>
 
                     @include('widgets._premium_items')
@@ -84,7 +84,7 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 

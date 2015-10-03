@@ -3,12 +3,13 @@
         <div class="ui fixed padded secondary menu navbar page grid ">
             <a class="item" href="{{route('pages.homepage')}}">
                 @if(Setting::get('logo_src')!='')
-                <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+                    <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
                 @else
-                <i class="circular inverted big teal shadowed search icon"></i>
+                    <i class="circular inverted big teal shadowed search icon"></i>
                 @endif
-               <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Karakata')}}</span>
+                <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Karakata')}}</span>
             </a>
+
             <div class="right secondary menu">
                 @if(Auth::check())
 
@@ -33,8 +34,10 @@
 
                                     {{Auth::user()->full_name}}
                                 </a>
+
                                 <div class="ui floating dropdown icon button">
                                     <i class="dropdown icon"></i>
+
                                     <div class="menu">
                                         <a class="item" href="">{{trans('words.profile')}}</a>
 
@@ -46,12 +49,13 @@
 
 
                 @else
-                     <a href="{{route('users.login')}}" class="item ">{{trans('words.login')}}</a>
+                    <a href="{{route('users.login')}}" class="item ">{{trans('words.login')}}</a>
                     <a href="{{route('users.register')}}" class="item ">{{trans('words.signup')}}</a>
                 @endif
 
                 <div class="item p-r-none">
-                    <a class="ui huge red icon button nag-login" href="{{route('items.new')}}" data-content="{{trans('phrases.login_required')}}">
+                    <a class="ui huge red icon button nag-login" href="{{route('items.new')}}"
+                       data-content="{{trans('phrases.login_required')}}">
                         <i class="icon money"></i>
                         {{trans('phrases.sell_your_item')}}
                     </a>
@@ -81,8 +85,8 @@
             <div class="m-t-lg p-t-lg">
                 @if(Auth::check())
                 @else
-                <a href="{{route('users.login')}}" class="item">{{trans('words.login')}}</a>
-                <a href="{{route('users.register')}}" class="item">{{trans('words.login')}}</a>
+                    <a href="{{route('users.login')}}" class="item">{{trans('words.login')}}</a>
+                    <a href="{{route('users.register')}}" class="item">{{trans('words.login')}}</a>
 
                 @endif
                 <div class="item">

@@ -113,7 +113,8 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        We received a request to reset ypur password, if this request did not originate from you ignore this message and know your account is secure
+                                        We received a request to reset ypur password, if this request did not originate
+                                        from you ignore this message and know your account is secure
 
                                     </td>
                                 </tr>
@@ -156,7 +157,8 @@
                             <td class="aligncenter content-block"
                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;"
                                 align="center" valign="top">Follow <a href="{{route('pages.homepage')}}"
-                                                                      style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;">{{Setting::get('site_name')}}</a> .
+                                                                      style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;">{{Setting::get('site_name')}}</a>
+                                .
                             </td>
                         </tr>
                     </table>
@@ -171,19 +173,17 @@
 </html>
 
 
-
-
 <!DOCTYPE html>
 <html lang="en-US">
-	<head>
-		<meta charset="utf-8">
-	</head>
-	<body>
-		<h2></h2>
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<h2></h2>
 
-		<div>
-			.<br/>
+<div>
+    .<br/>
 
-		</div>
-	</body>
+</div>
+</body>
 </html>

@@ -1,11 +1,12 @@
 <?php namespace Karakata\User\Command;
 
-use Laracasts\Commander\CommandHandler;
-use User;
 use Auth;
 use Hash;
+use Laracasts\Commander\CommandHandler;
+use User;
 
-class UpdatePasswordCommandHandler implements CommandHandler {
+class UpdatePasswordCommandHandler implements CommandHandler
+{
 
     /**
      * Handle the command.
@@ -19,7 +20,7 @@ class UpdatePasswordCommandHandler implements CommandHandler {
         try {
             $user = User::find(Auth::id());
 
-            if(Hash::check($command->current_password, $user->password)) {
+            if (Hash::check($command->current_password, $user->password)) {
                 $user->password = Hash::make($command->new_password);
                 $user->save();
 
@@ -31,7 +32,7 @@ class UpdatePasswordCommandHandler implements CommandHandler {
             }
 
 
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $result['success'] = false;
             $result['message'] = $e->getMessage();
         }

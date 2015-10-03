@@ -9,10 +9,12 @@
 namespace Karakata\User\Event;
 
 
-class UserHasRegistered {
+class UserHasRegistered
+{
     public $user;
 
-    public function __construct(\User $user) {
+    public function __construct(\User $user)
+    {
         $this->user = $user;
     }
 }

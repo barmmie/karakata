@@ -1,6 +1,7 @@
 <?php namespace Karakata\Report\Command;
 
-class ReportItemCommand {
+class ReportItemCommand
+{
 
     /**
      * @var string

@@ -8,14 +8,19 @@
 
 namespace Admin;
 
-use User, View, Input, Redirect;
-class UsersController extends \BaseController {
+use Input;
+use Redirect;
+use User;
+use View;
+
+class UsersController extends \BaseController
+{
 
     public function index($status = null)
     {
         $users = User::with('items');
 
-        switch ($status){
+        switch ($status) {
             case 'active':
                 $users->activeOnly();
                 break;
@@ -34,7 +39,7 @@ class UsersController extends \BaseController {
                 break;
         }
 
-        if(Input::has('query')) {
+        if (Input::has('query')) {
             $users->search(Input::get('query'));
         }
 
@@ -50,9 +55,9 @@ class UsersController extends \BaseController {
 
         try {
             $user->confirmEmail();
-            flashSuccess("Verification successful","{$user->full_name} is now verified");
-        } catch(\Exception $e) {
-            flashError("{$user->full_name} could not be verified",$e->getMessage());
+            flashSuccess("Verification successful", "{$user->full_name} is now verified");
+        } catch (\Exception $e) {
+            flashError("{$user->full_name} could not be verified", $e->getMessage());
         }
 
         return Redirect::back();
@@ -64,8 +69,8 @@ class UsersController extends \BaseController {
 
         try {
             $user->ban();
-            flashInfo("Ban successful","{$user->full_name} is now banned from the app");
-        } catch(\Exception $e) {
+            flashInfo("Ban successful", "{$user->full_name} is now banned from the app");
+        } catch (\Exception $e) {
             flashError("{$user->full_name} could not be banned", $e->getMessage());
         }
 
@@ -78,8 +83,8 @@ class UsersController extends \BaseController {
 
         try {
             $user->activate();
-            flashSuccess("Activation successful","{$user->full_name} is now a active member of the community");
-        } catch(\Exception $e) {
+            flashSuccess("Activation successful", "{$user->full_name} is now a active member of the community");
+        } catch (\Exception $e) {
             flashError("{$user->full_name} could not be banned", $e->getMessage());
         }
 
@@ -108,7 +113,7 @@ class UsersController extends \BaseController {
             $user = $this->execute('Karakata\User\Command\CreateAdminCommand');
             flashSuccess('Admin created successfully');
 
-        } catch( \Exception $e) {
+        } catch (\Exception $e) {
             flashError('An error occured', $e->getMessage());
         }
 

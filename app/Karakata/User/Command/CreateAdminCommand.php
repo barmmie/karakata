@@ -1,6 +1,7 @@
 <?php namespace Karakata\User\Command;
 
-class CreateAdminCommand {
+class CreateAdminCommand
+{
 
     /**
      * @var string
@@ -34,7 +35,8 @@ class CreateAdminCommand {
 
     }
 
-    public function rules() {
+    public function rules()
+    {
         return [
             'full_name' => 'required',
             'email' => 'required|email|unique:users,email'

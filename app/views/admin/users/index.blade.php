@@ -26,19 +26,26 @@
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a href="{{route('admin.users.index')}}" class="{{$status == null ? 'active' : ''}} item" >{{trans('words.all')}}</a>
-                    <a href="{{route('admin.users.index', 'unverified')}}" class="{{$status == 'unverified' ? 'active' : ''}} item" >{{trans('phrases.unverified_only')}}</a>
-                    <a href="{{route('admin.users.index', 'verified')}}" class="{{$status == 'verified' ? 'active' : ''}} item" >{{trans('phrases.verified_only')}}</a>
-                    <a class="{{$status == 'active' ? 'active' : ''}} item" href="{{route('admin.users.index', 'active')}}" >{{trans('phrases.active_only')}}</a>
-                    <a class="{{$status == 'banned' ? 'active' : ''}} item" href="{{route('admin.users.index', 'banned')}}" >{{trans('phrases.banned_only')}}</a>
-                    <a class="{{$status == 'admin' ? 'active' : ''}} item" href="{{route('admin.users.index', 'admin')}}" >{{trans('phrases.admin_only')}}</a>
+                    <a href="{{route('admin.users.index')}}"
+                       class="{{$status == null ? 'active' : ''}} item">{{trans('words.all')}}</a>
+                    <a href="{{route('admin.users.index', 'unverified')}}"
+                       class="{{$status == 'unverified' ? 'active' : ''}} item">{{trans('phrases.unverified_only')}}</a>
+                    <a href="{{route('admin.users.index', 'verified')}}"
+                       class="{{$status == 'verified' ? 'active' : ''}} item">{{trans('phrases.verified_only')}}</a>
+                    <a class="{{$status == 'active' ? 'active' : ''}} item"
+                       href="{{route('admin.users.index', 'active')}}">{{trans('phrases.active_only')}}</a>
+                    <a class="{{$status == 'banned' ? 'active' : ''}} item"
+                       href="{{route('admin.users.index', 'banned')}}">{{trans('phrases.banned_only')}}</a>
+                    <a class="{{$status == 'admin' ? 'active' : ''}} item"
+                       href="{{route('admin.users.index', 'admin')}}">{{trans('phrases.admin_only')}}</a>
                 </div>
 
             </div>
             <div class="ui segment">
                 <form action="" method="GET">
                     <div class="ui fluid action input">
-                        <input type="text" name="query" value="{{Input::get('query')}}" placeholder="{{trans('phrases.search_users')}}"/>
+                        <input type="text" name="query" value="{{Input::get('query')}}"
+                               placeholder="{{trans('phrases.search_users')}}"/>
                         <button class="ui button" type="submit">{{trans('words.search')}}</button>
                     </div>
                 </form>
@@ -63,39 +70,41 @@
                     <tbody>
                     @foreach($users as $user)
                         <tr>
-                            <td><div class="ui icon top left pointing dropdown button">
+                            <td>
+                                <div class="ui icon top left pointing dropdown button">
                                     <i class="wrench icon"></i>
                                     <i class="dropdown icon"></i>
+
                                     <div class="menu">
                                         <div class="header">{{$user->full_name}} </div>
 
-                                            @if(! $user->isVerified())
-                                                <a href="{{route('admin.users.verify', $user->id)}}" class="item">
-                                                    <i class="green thumbs up icon"></i>
-                                                    {{trans('phrases.verify_user_email')}}
-                                                </a>
-                                            @endif
+                                        @if(! $user->isVerified())
+                                            <a href="{{route('admin.users.verify', $user->id)}}" class="item">
+                                                <i class="green thumbs up icon"></i>
+                                                {{trans('phrases.verify_user_email')}}
+                                            </a>
+                                        @endif
 
-                                            @if($user->isActive())
-                                                <a href="{{route('admin.users.ban', $user->id)}}" class="item">
-                                                    <i class="red ban icon"></i>
-                                                    {{trans('phrases.ban_user')}}
+                                        @if($user->isActive())
+                                            <a href="{{route('admin.users.ban', $user->id)}}" class="item">
+                                                <i class="red ban icon"></i>
+                                                {{trans('phrases.ban_user')}}
 
-                                                </a>
-                                            @endif
+                                            </a>
+                                        @endif
 
-                                            @if($user->isBanned())
-                                                <a href="{{route('admin.users.activate', $user->id)}}" class="item">
-                                                    <i class="green check icon"></i>
-                                                    {{trans('phrases.activate_user')}}
+                                        @if($user->isBanned())
+                                            <a href="{{route('admin.users.activate', $user->id)}}" class="item">
+                                                <i class="green check icon"></i>
+                                                {{trans('phrases.activate_user')}}
 
-                                                </a>
-                                            @endif
+                                            </a>
+                                        @endif
 
                                     </div>
                                 </div>
                             </td>
-                            <td><a href="{{route('admin.users.items', $user->id)}}">{{$user->full_name}}</a>  </td>
+                            <td><a href="{{route('admin.users.items', $user->id)}}">{{$user->full_name}}</a></td>
                             <td>{{$user->email}}</td>
                             <td>{{$user->phone}}</td>
                             <td><strong>{{count($user->items)}}</strong></td>
@@ -122,28 +131,29 @@
 
         <div class="ui modal">
             <i class="close icon"></i>
+
             <div class="header">
                 {{trans('phrases.add_new_admin')}}
             </div>
             <div class="content">
                 {{Form::open(['route' => 'admin.create', 'class' => 'ui form'])}}
-                    <div class="ui error message"></div>
+                <div class="ui error message"></div>
 
-                    <div class="field">
-                        <label for="">{{trans('words.full_name')}}</label>
-                        <input type="text" name="full_name" placeholder="{{trans('words.full_name')}}">
-                    </div>
-                    <div class="field">
+                <div class="field">
+                    <label for="">{{trans('words.full_name')}}</label>
+                    <input type="text" name="full_name" placeholder="{{trans('words.full_name')}}">
+                </div>
+                <div class="field">
 
-                        <label for="">{{trans('words.email')}}</label>
-                        <input type="text" name="email" placeholder="{{trans('words.email')}}" />
-                    </div>
+                    <label for="">{{trans('words.email')}}</label>
+                    <input type="text" name="email" placeholder="{{trans('words.email')}}"/>
+                </div>
 
-                    <div class="field">
+                <div class="field">
 
-                        <label for="">{{trans('words.password')}}</label>
-                        <input type="password" name="password" placeholder="{{trans('words.password')}}" />
-                    </div>
+                    <label for="">{{trans('words.password')}}</label>
+                    <input type="password" name="password" placeholder="{{trans('words.password')}}"/>
+                </div>
 
                 <button type="submit" class="ui positive right labeled icon button">
                     {{trans('words.save')}}
@@ -175,7 +185,7 @@
 
         $('.ui.dropdown').dropdown()
 
-        $('.newAdmin').on('click', function(){
+        $('.newAdmin').on('click', function () {
             $('.ui.modal').
                     modal('show')
         })
@@ -194,7 +204,7 @@
                         }
 
                     ]
-                },email: {
+                }, email: {
                     identifier: 'email',
                     rules: [
                         {

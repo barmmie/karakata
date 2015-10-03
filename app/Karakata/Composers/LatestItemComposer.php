@@ -9,9 +9,11 @@
 namespace Karakata\Composers;
 
 
-class LatestItemComposer {
+class LatestItemComposer
+{
 
-    public function compose($view){
+    public function compose($view)
+    {
         $latest_items = \Item::latest(4)->get();
         $view->with('latest_items', $latest_items);
     }

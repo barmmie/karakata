@@ -11,8 +11,8 @@
     <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
     <meta property="og:image" content="{{asset($item->mainThumbnail())}}"/>
     <meta property="twitter:image" content="{{asset($item->mainThumbnail())}}"/>
-    <meta property="og:description" content="{{str_limit($item->description, 100)}}" />
-    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}" />
+    <meta property="og:description" content="{{str_limit($item->description, 100)}}"/>
+    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}"/>
 @endsection
 
 @section('styles')
@@ -29,6 +29,7 @@
         #bx-pager a {
             margin: 0 3px;
         }
+
         #bx-pager a img {
             padding: 3px;
             width: 100px;
@@ -54,7 +55,8 @@
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             @if($item->category->parent && $item->category->parent->id !=1)
                                 <i class="right angle icon divider"></i>
-                                <a class="section" href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
+                                <a class="section"
+                                   href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
                             @endif
                             <i class="right angle icon divider"></i>
                             <a class="section "
@@ -87,14 +89,16 @@
                                 @foreach($item->pictures as $picture)
                                     <li class="ui fluid bordered rounded image">
                                         <a class="ui brown right ribbon big label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
-                                        <img alt="{{$picture->title}}" class="ui fluid bordered rounded image" src="{{$picture->image_src}}">
+                                        <img alt="{{$picture->title}}" class="ui fluid bordered rounded image"
+                                             src="{{$picture->image_src}}">
                                     </li>
                                 @endforeach
                             </ul>
 
                             <div id="bx-pager">
                                 @foreach($item->pictures as $index => $picture)
-                                    <a data-slide-index="{{$index}}" href=""><img alt="{{$item->title}}" src="{{$picture->thumbnail_src}}"/></a>
+                                    <a data-slide-index="{{$index}}" href=""><img alt="{{$item->title}}"
+                                                                                  src="{{$picture->thumbnail_src}}"/></a>
                                 @endforeach
 
                             </div>
@@ -114,92 +118,94 @@
 
 
                         <h4 class="ui horizontal divider header">
-                                <i class="tag icon"></i>
-                                {{trans('words.description')}}
-                            </h4>
+                            <i class="tag icon"></i>
+                            {{trans('words.description')}}
+                        </h4>
 
-                            <div class="ui content">
-                                <div class="ui stackable equal height stackable grid">
-                                    <div class="ten wide column">
-                                        {{$item->description}}
-                                    </div>
+                        <div class="ui content">
+                            <div class="ui stackable equal height stackable grid">
+                                <div class="ten wide column">
+                                    {{$item->description}}
+                                </div>
 
-                                    <div class="six wide column">
-                                        <div class="ui message m-b-lg">
-                                            <ul class="ui list">
-                                                <div class="item">
-                                                    <strong>{{trans('words.price')}}:</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
-                                                </div>
-                                                <div class="item">
-                                                    <strong>{{trans('words.negotiable')}}:</strong> <span><i
-                                                                class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
-                                                </div>
-                                                <div class="item">
-                                                    <strong>{{Lang::choice('words.category', 1)}}:</strong> {{$item->category->title}}
-                                                </div>
-                                                <div class="item">
-                                                    <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
-                                                                class="marker icon"></i>{{$item->location->name}}</span>
-                                                </div>
-
-                                                <div class="item">
-                                                    <strong>{{trans('phrases.posted_by')}}</strong>
-                                                    <span>{{($item->type == 'personal')? '<i class="user icon"></i>'.trans("words.individual") :  '<i class="suitcase icon"></i>'.trans("words.business")}}</span>
-                                                </div>
-                                            </ul>
-                                        </div>
-                                        <div class="ui middle aligned divided list">
+                                <div class="six wide column">
+                                    <div class="ui message m-b-lg">
+                                        <ul class="ui list">
                                             <div class="item">
-                                                <i class="user icon"></i>
+                                                <strong>{{trans('words.price')}}
+                                                    :</strong> {{Setting::get('currency', '£')}} {{$item->amount}}
+                                            </div>
+                                            <div class="item">
+                                                <strong>{{trans('words.negotiable')}}:</strong> <span><i
+                                                            class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
+                                            </div>
+                                            <div class="item">
+                                                <strong>{{Lang::choice('words.category', 1)}}
+                                                    :</strong> {{$item->category->title}}
+                                            </div>
+                                            <div class="item">
+                                                <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
+                                                            class="marker icon"></i>{{$item->location->name}}</span>
+                                            </div>
+
+                                            <div class="item">
+                                                <strong>{{trans('phrases.posted_by')}}</strong>
+                                                <span>{{($item->type == 'personal')? '<i class="user icon"></i>'.trans("words.individual") :  '<i class="suitcase icon"></i>'.trans("words.business")}}</span>
+                                            </div>
+                                        </ul>
+                                    </div>
+                                    <div class="ui middle aligned divided list">
+                                        <div class="item">
+                                            <i class="user icon"></i>
+
+                                            <div class="content">
+                                                <a class="header" href="{{route('users.items', $item->owner->id)}}">
+                                                    {{trans('phrases.more_ads_by_user')}}
+                                                </a>
+                                            </div>
+                                        </div>
+
+                                        @if(Auth::check() && $item->favoriters->contains(Auth::user()->id))
+                                            <div class="item">
+                                                <i class="red heart icon"></i>
 
                                                 <div class="content">
-                                                    <a class="header" href="{{route('users.items', $item->owner->id)}}">
-                                                        {{trans('phrases.more_ads_by_user')}}
+                                                    <a class="header nag-login"
+                                                       href="{{route('items.unfavorite', $item->id)}}"
+                                                       data-content="{{trans('phrases.login_required')}}">
+                                                        {{trans('phrases.remove_from_favorites')}}
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        @else
+                                            <div class="item">
+                                                <i class="heart icon"></i>
+
+                                                <div class="content">
+                                                    <a class="header nag-login"
+                                                       href="{{route('items.favorite', $item->id)}}"
+                                                       data-content="{{trans('phrases.login_required')}}">
+                                                        {{trans('phrases.add_to_favorites')}}
                                                     </a>
                                                 </div>
                                             </div>
 
-                                            @if(Auth::check() && $item->favoriters->contains(Auth::user()->id))
-                                                <div class="item">
-                                                    <i class="red heart icon"></i>
+                                        @endif
 
-                                                    <div class="content">
-                                                        <a class="header nag-login"
-                                                           href="{{route('items.unfavorite', $item->id)}}"
-                                                           data-content="{{trans('phrases.login_required')}}">
-                                                            {{trans('phrases.remove_from_favorites')}}
-                                                        </a>
-                                                    </div>
-                                                </div>
-                                            @else
-                                                <div class="item">
-                                                    <i class="heart icon"></i>
+                                        <div class="item">
+                                            <i class="warning sign icon"></i>
 
-                                                    <div class="content">
-                                                        <a class="header nag-login"
-                                                           href="{{route('items.favorite', $item->id)}}"
-                                                           data-content="{{trans('phrases.login_required')}}">
-                                                            {{trans('phrases.add_to_favorites')}}
-                                                        </a>
-                                                    </div>
-                                                </div>
-
-                                            @endif
-
-                                            <div class="item">
-                                                <i class="warning sign icon"></i>
-
-                                                <div class="content">
-                                                    <a class="header report link">{{trans('phrases.report_abuse')}}</a>
-                                                </div>
+                                            <div class="content">
+                                                <a class="header report link">{{trans('phrases.report_abuse')}}</a>
                                             </div>
-
                                         </div>
-                                        <a class="header share-button">{{trans('phrases.share_on_social')}}</a>
 
                                     </div>
+                                    <a class="header share-button">{{trans('phrases.share_on_social')}}</a>
+
                                 </div>
                             </div>
+                        </div>
 
                     </div>
 
@@ -217,8 +223,10 @@
                         <h3 class="ui header">
                             <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
-                            <div class="sub header">{{Lang::choice('words.location',1)}}: {{$item->location->name}}</div>
-                            <div class="sub header">{{trans('phrases.joined_in')}}: {{$item->owner->created_at->format('M j, Y')}}</div>
+                            <div class="sub header">{{Lang::choice('words.location',1)}}
+                                : {{$item->location->name}}</div>
+                            <div class="sub header">{{trans('phrases.joined_in')}}
+                                : {{$item->owner->created_at->format('M j, Y')}}</div>
                         </h3>
                         <button class="fluid ui message button toggle m-b-xs">
                             <i class="mail icon"></i>
@@ -310,6 +318,7 @@
         <div class="content">
             <form class="ui report form">
                 <h4 class="ui dividing header">{{trans('phrases._report_abuse-copy')}}</h4>
+
                 <div class="ui error message"></div>
                 {{Form::hidden('item_id', $item->id)}}
                 <div class="field">
@@ -344,47 +353,47 @@
             pagerCustom: '#bx-pager'
         });
 
-        @endif
+                @endif
 
-        var $sendform = $('.ui.sendmessage.form')
+                var $sendform = $('.ui.sendmessage.form')
         var $reportform = $('.ui.report.form')
 
         $sendform.form({
-                    fields: {
-                        name: {
-                            identifier: 'name',
-                            rules: [
-                                {
-                                    type: 'length[3]',
-                                    prompt: '{{trans('validation.min.string', ['attribute' => 'name', 'min' => 3])}}'
-                                }
-                            ]
-                        },
-                        email: {
-                            identifier: 'email',
-                            rules: [
-                                {
-                                    type: 'email',
-                                    prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
-                                }
-                            ]
-                        },
-                        content: {
-                            identifier: 'content',
-                            rules: [
-                                {
-                                    type: 'empty',
-                                    prompt: '{{trans('validation.required', ['attribute' => 'content'])}}'
-                                },
-                                {
-                                    type: 'length[10]',
-                                    prompt: '{{trans('validation.min.string', ['attribute' => 'content', 'min' => 10])}}'
-
-                                }
-                            ]
+            fields: {
+                name: {
+                    identifier: 'name',
+                    rules: [
+                        {
+                            type: 'length[3]',
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'name', 'min' => 3])}}'
                         }
-                    }
-                })
+                    ]
+                },
+                email: {
+                    identifier: 'email',
+                    rules: [
+                        {
+                            type: 'email',
+                            prompt: '{{trans('validation.email', ['attribute' => 'email'])}}'
+                        }
+                    ]
+                },
+                content: {
+                    identifier: 'content',
+                    rules: [
+                        {
+                            type: 'empty',
+                            prompt: '{{trans('validation.required', ['attribute' => 'content'])}}'
+                        },
+                        {
+                            type: 'length[10]',
+                            prompt: '{{trans('validation.min.string', ['attribute' => 'content', 'min' => 10])}}'
+
+                        }
+                    ]
+                }
+            }
+        })
         ;
 
         $reportform.form({
@@ -409,40 +418,40 @@
 
         $messageModal = $('.sendmessage.modal');
         $reportModal = $('.report.modal');
-                $messageModal.modal('attach events', '.message.button', 'show')
-                                .modal('setting', 'transition', 'fade up')
-                                .modal('setting', 'autofocus', 'true')
-                                .modal({
-                                    onApprove: function () {
-                                        $sendform.form('validate form')
+        $messageModal.modal('attach events', '.message.button', 'show')
+                .modal('setting', 'transition', 'fade up')
+                .modal('setting', 'autofocus', 'true')
+                .modal({
+                    onApprove: function () {
+                        $sendform.form('validate form')
 
-                                        if($sendform.form('is valid')) {
-                                           var form_values = $sendform.form('get values')
-                                           $sendform.addClass('loading')
-                                           $.ajax({
-                                               method: 'POST',
-                                               data: form_values,
-                                               url: "{{route('messages.store')}}",
-                                               success: function(response) {
-                                                   $sendform.removeClass('loading')
+                        if ($sendform.form('is valid')) {
+                            var form_values = $sendform.form('get values')
+                            $sendform.addClass('loading')
+                            $.ajax({
+                                method: 'POST',
+                                data: form_values,
+                                url: "{{route('messages.store')}}",
+                                success: function (response) {
+                                    $sendform.removeClass('loading')
 
-                                                   alertify.success(response.message);
-                                                   $sendform.form('reset');
-                                                   $messageModal.modal('hide');
+                                    alertify.success(response.message);
+                                    $sendform.form('reset');
+                                    $messageModal.modal('hide');
 
-                                               },
-                                               error: function(xhr) {
-                                                   $sendform.removeClass('loading')
-                                                    alertify.error(xhr.responseJSON.message)
-                                                   $sendform.form('add errors', [xhr.responseJSON.message]);
-                                                   return false;
-                                               }
-                                           })
-                                       }
+                                },
+                                error: function (xhr) {
+                                    $sendform.removeClass('loading')
+                                    alertify.error(xhr.responseJSON.message)
+                                    $sendform.form('add errors', [xhr.responseJSON.message]);
+                                    return false;
+                                }
+                            })
+                        }
 
-                                        return false;
-                                    }
-                                })
+                        return false;
+                    }
+                })
         ;
 
         $reportModal.modal('attach events', '.report.link', 'show')
@@ -452,21 +461,21 @@
                     onApprove: function () {
                         $reportform.form('validate form')
 
-                        if($reportform.form('is valid')) {
+                        if ($reportform.form('is valid')) {
                             var form_values = $reportform.form('get values')
                             $reportform.addClass('loading')
                             $.ajax({
                                 method: 'POST',
                                 data: form_values,
                                 url: "{{route('reports.store')}}",
-                                success: function(response) {
+                                success: function (response) {
                                     $reportform.removeClass('loading')
                                     $reportform.form('reset')
                                     alertify.success(response.message);
                                     $reportModal.modal('hide');
 
                                 },
-                                error: function(xhr) {
+                                error: function (xhr) {
                                     $reportform.removeClass('loading')
                                     alertify.error(xhr.responseJSON.message)
                                     $reportform.form('add errors', [xhr.responseJSON.message]);

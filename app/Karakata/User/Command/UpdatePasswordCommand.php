@@ -1,6 +1,7 @@
 <?php namespace Karakata\User\Command;
 
-class UpdatePasswordCommand {
+class UpdatePasswordCommand
+{
 
     /**
      * @var string
@@ -29,9 +30,10 @@ class UpdatePasswordCommand {
         $this->confirm_new_password = $confirm_new_password;
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
-            'current_password'=> 'required',
+            'current_password' => 'required',
             'new_password' => 'required',
             'confirm_new_password' => 'required'
         ];

@@ -11,15 +11,17 @@ namespace Karakata\Composers;
 use Auth;
 
 
-class MessageComposer {
+class MessageComposer
+{
 
     public function compose($view)
     {
-        if(Auth::check())
-            $unread_message_count =Auth::user()->unreadMessages()->count();
-        else
+        if (Auth::check()) {
+            $unread_message_count = Auth::user()->unreadMessages()->count();
+        } else {
             $unread_message_count = 0;
+        }
 
-        $view->with('unread_message_count',$unread_message_count);
+        $view->with('unread_message_count', $unread_message_count);
     }
 }

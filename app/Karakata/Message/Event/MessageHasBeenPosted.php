@@ -9,10 +9,13 @@
 namespace Karakata\Message\Event;
 
 
-class MessageHasBeenPosted {
+class MessageHasBeenPosted
+{
 
     public $message;
-    public function __construct($message) {
+
+    public function __construct($message)
+    {
         $this->message = $message;
     }
 

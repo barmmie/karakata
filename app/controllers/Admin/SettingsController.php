@@ -8,11 +8,15 @@
 
 namespace Admin;
 
-use Setting, Input, View, Redirect;
+use Input;
+use Redirect;
+use Setting;
+use View;
 use WebDriver\Exception;
 
 
-class SettingsController extends \BaseController {
+class SettingsController extends \BaseController
+{
 
     public function edit()
     {
@@ -24,16 +28,18 @@ class SettingsController extends \BaseController {
 
 
         try {
-            foreach(Input::all() as $key => $value) {
+            foreach (Input::all() as $key => $value) {
                 Setting::set($key, $value);
             }
 
             flashSuccess('Settings have been updated successfully');
+
             return Redirect::back();
-        } catch(Exception $e) {
+        } catch (Exception $e) {
             flashError('An error occured while saving', $e->getMessage());
+
             return Redirect::back()
-                        ->withInput();
+                ->withInput();
 
         }
 

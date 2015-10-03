@@ -7,26 +7,26 @@
 @section('content')
     <div class="main ui container">
         <div class="ui stackable two column grid" id="locationList">
-            <div class="six wide column" >
+            <div class="six wide column">
                 <div class="ui segments">
                     <div class="ui segment"><h4 class="ui header">{{trans('phrases.populate_from_country')}}</h4></div>
                     <div class="ui segment" id="countrySelection">
                         <div class="ui inverted dimmer" id="countrySelectionLoader">
                             <div class="ui indeterminate text loader">{{trans('phrases.fetching_locations')}}...</div>
                         </div>
-                            <div class="content">
-                                    <div class="ui fluid search selection country dropdown">
-                                        <input type="hidden" name="country">
-                                        <i class="dropdown icon"></i>
+                        <div class="content">
+                            <div class="ui fluid search selection country dropdown">
+                                <input type="hidden" name="country">
+                                <i class="dropdown icon"></i>
 
-                                        <div class="default text">{{trans('phrases.select_country')}}</div>
-                                        @include('partials._country_list')
-                                    </div>
-
-                                <div class="description p-sm" id="countrySelectionText">
-
-                                </div>
+                                <div class="default text">{{trans('phrases.select_country')}}</div>
+                                @include('partials._country_list')
                             </div>
+
+                            <div class="description p-sm" id="countrySelectionText">
+
+                            </div>
+                        </div>
 
                         <button class="ui concealed button " id="countrySelectionButton">
                             <i class="add icon"></i>
@@ -40,7 +40,7 @@
                 <div class="ui segments">
                     <div class="ui segment">
                         <h4 class="ui header">
-                           {{trans('phrases.add_location_manually')}}
+                            {{trans('phrases.add_location_manually')}}
                         </h4>
                     </div>
                     <div class="ui segment">
@@ -49,12 +49,12 @@
                             <div class="ui error message"></div>
                             <div class="field">
                                 <label for="">{{trans('phrases.location_name')}}</label>
-                                <input type="text"  name="name" placeholder="{{trans('phrases.location_name')}}">
+                                <input type="text" name="name" placeholder="{{trans('phrases.location_name')}}">
                             </div>
 
                             <div class="field">
                                 <label for="">{{trans('phrases.country_name')}}</label>
-                                <input type="text"  name="parentName" placeholder="{{trans('phrases.country_name')}}">
+                                <input type="text" name="parentName" placeholder="{{trans('phrases.country_name')}}">
                             </div>
 
                             <div class="field">
@@ -67,7 +67,7 @@
                                 <input type="text" name="latitude" placeholder="{{trans('words.latitude')}}">
                             </div>
 
-                            <input type="submit"  class="ui blue submit button" value="Save location"/>
+                            <input type="submit" class="ui blue submit button" value="Save location"/>
 
                         </form>
                     </div>
@@ -76,16 +76,17 @@
             </div>
             <div class="ten wide column">
 
-                <div class="ui segments" >
+                <div class="ui segments">
                     <div class="ui segment">
                         <h4 class="ui header">
-                           {{trans('phrases.your_locations')}}
+                            {{trans('phrases.your_locations')}}
                         </h4>
                     </div>
                     <div class="ui segment">
 
                         <div class="ui left icon fluid input">
-                            <input type="text" placeholder="{{trans('phrases.filter_location')}}..." v-model="searchKey">
+                            <input type="text" placeholder="{{trans('phrases.filter_location')}}..."
+                                   v-model="searchKey">
                             <i class="marker icon"></i>
                         </div>
                     </div>
@@ -93,9 +94,11 @@
                         <div class="ui middle aligned divided list">
 
 
-                            <div class="item" v-repeat="location: locations|paginate | filterBy searchKey " track-by="id">
+                            <div class="item" v-repeat="location: locations|paginate | filterBy searchKey "
+                                 track-by="id">
                                 <div class="right floated content">
-                                    <button class="ui icon button" v-on="click:remove(location)"><i class="cancel icon"></i>
+                                    <button class="ui icon button" v-on="click:remove(location)"><i
+                                                class="cancel icon"></i>
                                     </button>
                                 </div>
                                 <i class="large marker middle aligned icon"></i>
@@ -110,7 +113,7 @@
                             </div>
                         </div>
                         <div class="ui info message" v-show="resultCount < 1 && locations.length > 0">
-                            <div class="header">No results found </div>
+                            <div class="header">No results found</div>
                         </div>
 
                         <div class="ui warning message" v-show="locations.length < 1">
@@ -168,8 +171,8 @@
                 locationsLoadingIndicator: false
             },
             computed: {
-                incrementPageNumber: function(number) {
-                    if(number==='...') {
+                incrementPageNumber: function (number) {
+                    if (number === '...') {
                         return number;
                     } else {
                         return number + 1
@@ -206,7 +209,7 @@
                         } else {
                             pages.push(pageNumber);
                         }
-                        i ++;
+                        i++;
                     }
                     return pages;
                 }
@@ -214,38 +217,38 @@
             },
             methods: {
                 setPage: function (pageNumber) {
-                    if(pageNumber!=='...') {
+                    if (pageNumber !== '...') {
                         this.currentPage = pageNumber
                     }
                 },
-                submitNewLocation: function(message, event) {
+                submitNewLocation: function (message, event) {
                     event.preventDefault()
                 },
-                remove: function(location) {
-                    this.locationsLoadingIndicator= true;
+                remove: function (location) {
+                    this.locationsLoadingIndicator = true;
 
 
-                    this.$http.delete("{{route('admin.locations.index')}}/" + location.id, function(data){
+                    this.$http.delete("{{route('admin.locations.index')}}/" + location.id, function (data) {
 
-                        this.locationsLoadingIndicator= false;
+                        this.locationsLoadingIndicator = false;
                         this.locations.splice(this.locations.indexOf(location), 1)
                     })
 
                 },
-                refreshLocations: function() {
-                    this.locationsLoadingIndicator= true;
+                refreshLocations: function () {
+                    this.locationsLoadingIndicator = true;
 
-                    this.$http.get("{{route('admin.locations.index')}}", function(data){
+                    this.$http.get("{{route('admin.locations.index')}}", function (data) {
                         this.$set('locations', data);
-                        this.locationsLoadingIndicator =  false
+                        this.locationsLoadingIndicator = false
 
-                    }, function(error){
+                    }, function (error) {
                         this.locationsLoadingIndicator = false
 
                     })
                 },
                 calculatePageNumber: function (i, currentPage, paginationRange, totalPages) {
-                    var halfWay = Math.ceil(paginationRange/2);
+                    var halfWay = Math.ceil(paginationRange / 2);
                     if (i === paginationRange) {
                         return totalPages;
                     } else if (i === 1) {
@@ -277,10 +280,10 @@
     </script>
 
     <script type="text/javascript">
-        $.ajaxSetup({ cache: false });
+        $.ajaxSetup({cache: false});
         $countrySelectionLoader = $('#countrySelectionLoader');
-        $countrySelectionText =  $('#countrySelectionText')
-        $countrySelectionButton =  $('#countrySelectionButton')
+        $countrySelectionText = $('#countrySelectionText')
+        $countrySelectionButton = $('#countrySelectionButton')
         var locations = [];
 
         $('.country.dropdown')
@@ -291,20 +294,20 @@
 
                         $countrySelectionLoader.addClass('active');
                         var jxhr = [];
-                        $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId=' + value, function(response){
+                        $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId=' + value, function (response) {
 
-                            if(response.status) {
+                            if (response.status) {
                                 $countrySelectionText.html('No locations were found in ' + text)
                                 $countrySelectionLoader.removeClass('active');
 
 
                             } else {
 
-                                if(response.geonames.length > 0) {
-                                    $.each(response.geonames, function(index, item){
+                                if (response.geonames.length > 0) {
+                                    $.each(response.geonames, function (index, item) {
                                         jxhr.push(
-                                                $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId='+ item.geonameId, function (locationResponse) {
-                                                    if(locationResponse.geonames) {
+                                                $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId=' + item.geonameId, function (locationResponse) {
+                                                    if (locationResponse.geonames) {
                                                         locations = $.merge(locations, locationResponse.geonames)
 
                                                     }
@@ -312,9 +315,9 @@
                                         );
                                     })
 
-                                    $.when.apply($, jxhr).done(function() {
+                                    $.when.apply($, jxhr).done(function () {
                                         $countrySelectionLoader.removeClass('active');
-                                        if(locations.length > 0) {
+                                        if (locations.length > 0) {
                                             $countrySelectionText.html(locations.length + ' {{trans('phrases.locations_found_in')}} ' + text)
                                             $countrySelectionButton.removeClass('concealed');
 
@@ -332,8 +335,7 @@
                             }
 
 
-
-                        }).error(function(status){
+                        }).error(function (status) {
                             $countrySelectionLoader.removeClass('active');
                             alertify.error("Couldn't retrieve " + text + "'s location list")
                         });
@@ -342,19 +344,19 @@
 
         $locationform = $('.ui.form');
 
-        $locationform.on('submit', function(e) {
+        $locationform.on('submit', function (e) {
             e.preventDefault();
 
         })
 
-        $countrySelectionButton.on('click', function(){
-            Vue.http.post("{{route('admin.locations.store')}}", parseLocationsData(locations), function(response) {
+        $countrySelectionButton.on('click', function () {
+            Vue.http.post("{{route('admin.locations.store')}}", parseLocationsData(locations), function (response) {
                 alertify.success('{{trans('phrases.added_successfully')}} ');
                 $locationform.removeClass('loading')
                 $locationform.form('reset')
 
                 vm.refreshLocations()
-            }, function(errorResponse){
+            }, function (errorResponse) {
                 $locationform.removeClass('loading')
 
                 alertify.error(errorResponse.error)
@@ -362,61 +364,58 @@
         });
 
 
+        $locationform.form({
+            onSuccess: function (test) {
+                var form_values = $locationform.form('get values');
+                $countrySelectionLoader.addClass('active')
+                Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([form_values]), function (response) {
+                    alertify.success(form_values.name + ' {{trans('phrases.added_successfully')}} ');
+                    $locationform.removeClass('active')
 
+                    $locationform.form('reset')
 
+                    vm.refreshLocations()
+                }, function (errorResponse) {
+                    $locationform.removeClass('active')
 
-       $locationform.form({
-           onSuccess: function(test){
-               var form_values = $locationform.form('get values');
-               $countrySelectionLoader.addClass('active')
-               Vue.http.post("{{route('admin.locations.store')}}", JSON.stringify([form_values]), function(response) {
-                   alertify.success(form_values.name + ' {{trans('phrases.added_successfully')}} ');
-                   $locationform.removeClass('active')
+                    alertify.error(errorResponse.error)
+                })
 
-                   $locationform.form('reset')
-
-                   vm.refreshLocations()
-               }, function(errorResponse){
-                   $locationform.removeClass('active')
-
-                   alertify.error(errorResponse.error)
-               })
-
-           },
+            },
             fields: {
                 name: {
                     identifier: 'name',
                     rules: [
                         {
-                            type   : 'empty',
+                            type: 'empty',
                             prompt: '{{trans('validation.required', ['attribute' => 'location name'])}}'
 
                         }
-                            ]
+                    ]
                 },
                 parentName: {
                     identifier: 'parentName',
                     rules: [
                         {
-                            type   : 'empty',
+                            type: 'empty',
                             prompt: '{{trans('validation.required', ['attribute' => 'country name'])}}'
                         }
-                            ]
+                    ]
                 },
                 longitude: {
                     identifier: 'longitude',
                     rules: [
                         {
-                            type   : 'empty',
+                            type: 'empty',
                             prompt: '{{trans('validation.required', ['attribute' => 'location longitude'])}}'
                         }
-                            ]
+                    ]
                 },
                 latitude: {
                     identifier: 'latitude',
                     rules: [
                         {
-                            type   : 'empty',
+                            type: 'empty',
                             prompt: '{{trans('validation.required', ['attribute' => 'location latitude'])}}'
                         }
                     ]
@@ -427,7 +426,7 @@
         function parseLocationsData(locations) {
 
             locationdata = []
-            $.each(locations, function(index, location){
+            $.each(locations, function (index, location) {
                 locationdata.push({
                     name: location.name,
                     latitude: location.lat,
@@ -534,8 +533,6 @@
                     return place.geometry.location.F || place.geometry.location.lng;
                 }
             }
-
-
 
 
         });

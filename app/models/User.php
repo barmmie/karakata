@@ -1,19 +1,19 @@
 <?php
 
-use Illuminate\Auth\UserTrait;
-use Illuminate\Auth\UserInterface;
-use Illuminate\Auth\Reminders\RemindableTrait;
 use Illuminate\Auth\Reminders\RemindableInterface;
+use Illuminate\Auth\Reminders\RemindableTrait;
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\UserTrait;
+use Karakata\Services\IpRetriever;
 use Karakata\User\Event\UserHasRegistered;
 use Laracasts\Commander\Events\EventGenerator;
-use Karakata\Services\IpRetriever;
 
 class User extends Eloquent implements UserInterface, RemindableInterface
 {
 
     use UserTrait, RemindableTrait, EventGenerator;
 
-    const ADMIN_ROLE = 1, USER_ROLE = 2, SUPER_ADMIN_ROLE= 3;
+    const ADMIN_ROLE = 1, USER_ROLE = 2, SUPER_ADMIN_ROLE = 3;
     const BANNED_STATUS = 1, ACTIVE_STATUS = 2;
 
     /**
@@ -64,9 +64,9 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function scopeSearch($query, $searchKey)
     {
-        $query =  $query->where('full_name', 'LIKE', "%{$searchKey}%")
-                        ->orWhere('email', 'LIKE', "%{$searchKey}%")
-                        ->orWhere('phone', 'LIKE', "%{$searchKey}%");
+        $query = $query->where('full_name', 'LIKE', "%{$searchKey}%")
+            ->orWhere('email', 'LIKE', "%{$searchKey}%")
+            ->orWhere('phone', 'LIKE', "%{$searchKey}%");
 
         return $query;
 
@@ -74,36 +74,36 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function scopeActiveOnly($query)
     {
-        $query =  $query->where('status', static::ACTIVE_STATUS);
+        $query = $query->where('status', static::ACTIVE_STATUS);
 
         return $query;
     }
 
     public function scopeBannedOnly($query)
     {
-        $query =  $query->where('status', static::BANNED_STATUS);
+        $query = $query->where('status', static::BANNED_STATUS);
 
         return $query;
     }
 
     public function scopeVerifiedOnly($query)
     {
-        $query =  $query->where('verified', true);
+        $query = $query->where('verified', true);
 
         return $query;
     }
 
     public function scopeAdminsOnly($query)
     {
-        $query =  $query->where('role', self::ADMIN_ROLE)
-                        ->orWhere('role', self::SUPER_ADMIN_ROLE);
+        $query = $query->where('role', self::ADMIN_ROLE)
+            ->orWhere('role', self::SUPER_ADMIN_ROLE);
 
         return $query;
     }
 
     public function scopeUnverifiedOnly($query)
     {
-        $query =  $query->where('verified', false);
+        $query = $query->where('verified', false);
 
         return $query;
     }
@@ -119,6 +119,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
             ]);
 
         $instance->raise(new UserHasRegistered($instance));
+
         return $instance;
     }
 
@@ -129,7 +130,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         $instance = static::create($new_user + [
                 'password' => Hash::make($password),
                 'verified' => true,
-                'role' => $superAdmin ? static::SUPER_ADMIN_ROLE :static::ADMIN_ROLE,
+                'role' => $superAdmin ? static::SUPER_ADMIN_ROLE : static::ADMIN_ROLE,
                 'last_ip_address' => IpRetriever::get_ip()
             ]);
 
@@ -145,7 +146,8 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         $this->save();
     }
 
-    public function ban() {
+    public function ban()
+    {
         $this->status = static::BANNED_STATUS;
         $this->save();
     }
@@ -173,7 +175,7 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
     public function  isAdmin()
     {
-        return in_array($this->role, [static::ADMIN_ROLE, static::SUPER_ADMIN_ROLE]) ;
+        return in_array($this->role, [static::ADMIN_ROLE, static::SUPER_ADMIN_ROLE]);
 
     }
 }

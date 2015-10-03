@@ -3,9 +3,11 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class CreateAdminCommandHandler implements CommandHandler {
+class CreateAdminCommandHandler implements CommandHandler
+{
 
     use DispatchableTrait;
+
     /**
      * Handle the command.
      *
@@ -14,7 +16,7 @@ class CreateAdminCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
-        $user = \User::createAdmin($command->full_name, $command->email , $command->password );
+        $user = \User::createAdmin($command->full_name, $command->email, $command->password);
 
         return $user;
     }

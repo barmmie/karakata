@@ -3,9 +3,11 @@
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
-class RegisterUserCommandHandler implements CommandHandler {
+class RegisterUserCommandHandler implements CommandHandler
+{
 
     use DispatchableTrait;
+
     /**
      * Handle the command.
      *
@@ -14,7 +16,7 @@ class RegisterUserCommandHandler implements CommandHandler {
      */
     public function handle($command)
     {
-        $user = \User::register($command->full_name, $command->email , $command->password, $command->phone );
+        $user = \User::register($command->full_name, $command->email, $command->password, $command->phone);
         $this->dispatchEventsFor($user);
 
         return $user;

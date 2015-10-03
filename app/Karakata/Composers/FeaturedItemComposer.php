@@ -9,8 +9,10 @@
 namespace Karakata\Composers;
 
 
-class FeaturedItemComposer {
-    public function compose($view){
+class FeaturedItemComposer
+{
+    public function compose($view)
+    {
 
         $featured_items = \Item::featured(8)->get();
 

@@ -1,6 +1,7 @@
 <?php namespace Karakata\User\Command;
 
-class AuthenticateCommand {
+class AuthenticateCommand
+{
 
     /**
      * @var string
@@ -22,7 +23,8 @@ class AuthenticateCommand {
         $this->password = $password;
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'email' => 'required|email',
             'password' => 'required'

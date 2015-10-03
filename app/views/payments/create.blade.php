@@ -21,9 +21,11 @@
                         <div class="ui breadcrumb">
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
                             <i class="right angle icon divider"></i>
+
                             <div class="section"> {{$item->title}}</div>
 
                             <i class="right arrow icon divider"></i>
+
                             <div class="active section">{{trans('phrases.pay_for_premium')}}</div>
                         </div>
                     </div>
@@ -140,22 +142,24 @@
                                 {{Form::hidden('description', $data['description'])}}
                                 {{Form::hidden('price', $data['price'])}}
                                 {{Form::hidden('currency', $data['currency'])}}
-                            <div class="ui clearing secondary segment">
-                                <h4>Powered by</h4>
+                                <div class="ui clearing secondary segment">
+                                    <h4>Powered by</h4>
                                     <i class="huge blue paypal card icon"></i>
 
-                                <div class="ui right floated large buttons">
+                                    <div class="ui right floated large buttons">
 
 
-                                    <button type="submit" class="ui teal button"><i class="payment icon"></i> {{trans('phrases.pay_now')}}</button>
-                                    <div class="or"></div>
-                                    <a href="{{route('dash.myitems')}}" class="ui yellow button"><i class="cancel icon"></i>{{trans('words.cancel')}}</a>
+                                        <button type="submit" class="ui teal button"><i
+                                                    class="payment icon"></i> {{trans('phrases.pay_now')}}</button>
+                                        <div class="or"></div>
+                                        <a href="{{route('dash.myitems')}}" class="ui yellow button"><i
+                                                    class="cancel icon"></i>{{trans('words.cancel')}}</a>
+
+
+                                    </div>
 
 
                                 </div>
-
-
-                            </div>
                             </form>
 
 
@@ -174,7 +178,7 @@
 
 @section('scripts')
     <script type="text/javascript">
-        $(document).ready(function(){
+        $(document).ready(function () {
             $('.ui.advanced_filter.accordion').accordion();
         });
 

@@ -9,7 +9,8 @@
 namespace Karakata\Composers;
 
 
-class PremiumItemComposer {
+class PremiumItemComposer
+{
 
     public function compose($view)
     {

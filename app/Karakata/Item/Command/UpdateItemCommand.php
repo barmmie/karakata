@@ -1,7 +1,8 @@
 <?php namespace Karakata\Item\Command;
 
 
-class UpdateItemCommand {
+class UpdateItemCommand
+{
 
     /**
      * @var string
@@ -84,8 +85,22 @@ class UpdateItemCommand {
      * @param boolean multipart_upload
      * @param boolean file
      */
-    public function __construct($id, $title, $description, $type, $category_id, $location_id, $amount, $negotiable, $email, $phone, $seller_name, $pictures_id = [], $multipart_upload = false, $files = null)
-    {
+    public function __construct(
+        $id,
+        $title,
+        $description,
+        $type,
+        $category_id,
+        $location_id,
+        $amount,
+        $negotiable,
+        $email,
+        $phone,
+        $seller_name,
+        $pictures_id = [],
+        $multipart_upload = false,
+        $files = null
+    ) {
         $this->id = $id;
         $this->title = $title;
         $this->description = $description;
@@ -102,7 +117,8 @@ class UpdateItemCommand {
         $this->uploaded_files = $files;
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
             'category_id' => 'required',
             'title' => 'required|min:10',

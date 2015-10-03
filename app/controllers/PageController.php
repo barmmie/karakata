@@ -2,7 +2,8 @@
 
 use Carbon\Carbon;
 
-class PageController extends \BaseController {
+class PageController extends \BaseController
+{
 
     public function homepage()
     {
@@ -25,17 +26,18 @@ class PageController extends \BaseController {
 
         $items = Item::approved()->get();
 
-        foreach($items as $item) {
-            $sitemap->add(route('items.show',$item->slug), $item->created_at, '0.9', 'weekly');
+        foreach ($items as $item) {
+            $sitemap->add(route('items.show', $item->slug), $item->created_at, '0.9', 'weekly');
         }
 
         $categories = Category::fetchTree($fetchItemCount = false);
 
-        foreach($categories as $category) {
-            $sitemap->add(route('categories.show', $category['slug'] ), $category->created_at, '0.9', 'weekly');
+        foreach ($categories as $category) {
+            $sitemap->add(route('categories.show', $category['slug']), $category->created_at, '0.9', 'weekly');
 
-            foreach($category['children'] as $child) {
-                $sitemap->add( route('categories.show', [$category['slug'], $child['slug']]), $child->created_at, '0.9', 'weekly');
+            foreach ($category['children'] as $child) {
+                $sitemap->add(route('categories.show', [$category['slug'], $child['slug']]), $child->created_at, '0.9',
+                    'weekly');
 
             }
         }

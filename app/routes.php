@@ -2,13 +2,13 @@
 
 Route::get('/', ['as' => 'pages.homepage', 'uses' => 'PageController@homepage']);
 
-Route::group(['before'=> 'guest'], function(){
+Route::group(['before' => 'guest'], function () {
 
     Route::get('login', ['as' => 'users.login', 'uses' => 'SessionsController@create']);
 
     Route::post('login', ['as' => 'sessions.store', 'uses' => 'SessionsController@store']);
 
-    Route::get('register', ['as' =>'users.register', 'uses' => 'UsersController@create']);
+    Route::get('register', ['as' => 'users.register', 'uses' => 'UsersController@create']);
 
 });
 
@@ -32,10 +32,10 @@ Route::get('users/{id}/items', ['as' => 'users.items', 'uses' => 'UsersControlle
 
 Route::resource('users', 'UsersController');
 
-Route::post('messages', ['as'=>'messages.store', 'uses'=> 'MessagesController@store']);
-Route::post('reports', ['as'=>'reports.store', 'uses'=> 'ReportsController@store']);
+Route::post('messages', ['as' => 'messages.store', 'uses' => 'MessagesController@store']);
+Route::post('reports', ['as' => 'reports.store', 'uses' => 'ReportsController@store']);
 
-Route::group(['before'=> 'auth'], function(){
+Route::group(['before' => 'auth'], function () {
 
 
     Route::get('items/new', ['as' => 'items.new', 'uses' => 'ItemsController@create']);
@@ -74,11 +74,12 @@ Route::group(['before'=> 'auth'], function(){
 
 Route::get('items/{item_slug}', ['as' => 'items.show', 'uses' => 'ItemsController@show']);
 
-Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admin'], function(){
+Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|admin'], function () {
 
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashController@dashboard']);
     Route::get('dashboard/itemsByYear', ['as' => 'admin.items_by_year', 'uses' => 'DashController@itemsByYear']);
-    Route::get('dashboard/itemsByLocation', ['as' => 'admin.items_by_location', 'uses' => 'DashController@itemsByLocation']);
+    Route::get('dashboard/itemsByLocation',
+        ['as' => 'admin.items_by_location', 'uses' => 'DashController@itemsByLocation']);
 
     Route::get('users/{id}/verify', ['as' => 'admin.users.verify', 'uses' => 'UsersController@verify']);
     Route::post('admins', ['as' => 'admin.create', 'uses' => 'UsersController@storeAdmin']);
@@ -93,12 +94,14 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
     Route::get('items/{id}/reject', ['as' => 'admin.items.reject', 'uses' => 'ItemsController@reject']);
     Route::get('items/{id}/delete', ['as' => 'admin.items.delete', 'uses' => 'ItemsController@delete']);
     Route::get('reports/{id}/delete', ['as' => 'admin.reports.delete', 'uses' => 'ReportsController@delete']);
-    Route::get('reports/{id}/reviewed', ['as' => 'admin.reports.reviewed', 'uses' => 'ReportsController@markAsReviewed']);
-    Route::get('reports/{id}/unreviewed', ['as' => 'admin.reports.unreviewed', 'uses' => 'ReportsController@markAsUnreviewed']);
+    Route::get('reports/{id}/reviewed',
+        ['as' => 'admin.reports.reviewed', 'uses' => 'ReportsController@markAsReviewed']);
+    Route::get('reports/{id}/unreviewed',
+        ['as' => 'admin.reports.unreviewed', 'uses' => 'ReportsController@markAsUnreviewed']);
 
     Route::get('reports/{status?}', ['as' => 'admin.reports.index', 'uses' => 'ReportsController@index']);
 
-    Route::get('settings', ['as'=> 'settings.edit', 'uses' => 'SettingsController@edit']);
+    Route::get('settings', ['as' => 'settings.edit', 'uses' => 'SettingsController@edit']);
 
     Route::post('settings', ['as' => 'settings.update', 'uses' => 'SettingsController@update']);
 
@@ -108,7 +111,7 @@ Route::group(['namespace' => 'Admin', 'prefix'=> 'admin', 'before' => 'auth|admi
 
 });
 
-Route::get('test/{id}', function($id){
+Route::get('test/{id}', function ($id) {
     return Image::make('http://images03.olx-st.com/ui/53/59/93/1442503168_833260657_1.jpg')->fit(320, 240);
 });
 

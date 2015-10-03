@@ -7,7 +7,7 @@ class Picture extends \Eloquent
 
     public static function upload($file, $item_id = 0, $extension = null)
     {
-        $type = $extension?:$file->getClientOriginalExtension();
+        $type = $extension ?: $file->getClientOriginalExtension();
 
         $imagedata = Image::make($file);
 

@@ -28,7 +28,7 @@
                         </div>
                         <div class="statistic">
                             <div class=" value">
-                               <i class="file icon"></i> {{$items_count}}
+                                <i class="file icon"></i> {{$items_count}}
                             </div>
                             <div class="label">
                                 {{Lang::choice('words.item', $items_count)}}
@@ -103,7 +103,7 @@
         <div class="ui stackable two column grid">
             <div class="sixteen wide column">
 
-                <div class="ui segments" >
+                <div class="ui segments">
                     <div class="ui segment">
                         <h4 class="ui header">
                             {{trans('phrases.your_locations')}}
@@ -120,14 +120,13 @@
         </div>
 
 
-
     </div>
 @endsection
 
 @section('scripts')
     <script type="text/javascript">
 
-        $(document).ready(function(){
+        $(document).ready(function () {
 
             $('select.dropdown')
                     .dropdown();
@@ -139,13 +138,13 @@
 
             $.ajaxSetup({
                 cache: false,
-                headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+                headers: {'X-CSRF-TOKEN': $('meta[name=token]').attr("content")}
             });
 
             var items_by_year_url = "{{route('admin.items_by_year')}}";
             var items_by_location_url = "{{route('admin.items_by_location')}}";
 
-            var refreshItemsByYear = function() {
+            var refreshItemsByYear = function () {
                 $itemsByYearSegment.addClass('loading')
                 $.ajax(items_by_year_url, {
                     method: 'GET',
@@ -153,29 +152,36 @@
                         month: $monthDropdown.dropdown('get value'),
                         year: $yearDropdown.dropdown('get value')
                     },
-                    success: function(response) {
+                    success: function (response) {
                         $itemsByYearSegment.removeClass('loading')
 
-                        if( $.isEmptyObject(response))
-                        {
+                        if ($.isEmptyObject(response)) {
                             $itemsByYearSegment.html(
                                     "<div class='ui warning message'>" +
-                                    "<p>{{trans('phrases.no_results')}} in "+ $monthDropdown.dropdown('get text') +", "+ $yearDropdown.dropdown('get text')+"</p>" +
+                                    "<p>{{trans('phrases.no_results')}} in " + $monthDropdown.dropdown('get text') + ", " + $yearDropdown.dropdown('get text') + "</p>" +
                                     "</div>"
                             );
 
                         } else {
                             new Chartkick.LineChart("itemsByYear", response,
-                                    {"library": {"backgroundColor": "#eee", "chart": {"zoomType": "x"}, "legend": {"position": "top"}, "hAxis": {"title": "Time"}, "vAxis": {"title": "{{trans('phrases.no_of_items')}}"}}});
+                                    {
+                                        "library": {
+                                            "backgroundColor": "#eee",
+                                            "chart": {"zoomType": "x"},
+                                            "legend": {"position": "top"},
+                                            "hAxis": {"title": "Time"},
+                                            "vAxis": {"title": "{{trans('phrases.no_of_items')}}"}
+                                        }
+                                    });
 
                         }
 
                     },
-                    error: function() {
+                    error: function () {
                         $itemsByYearSegment.removeClass('loading')
                         $itemsByYearSegment.html(
                                 "<div class='ui warning message'>" +
-                                        "<p>{{trans('phrases.error_occurred')}}}</p>" +
+                                "<p>{{trans('phrases.error_occurred')}}}</p>" +
                                 "</div>"
                         );
 
@@ -184,7 +190,7 @@
                 });
             };
 
-            $filterItemByYear.on('click', function(e){
+            $filterItemByYear.on('click', function (e) {
                 e.preventDefault()
                 refreshItemsByYear();
 
@@ -192,16 +198,15 @@
 
             $itemsByLocationSegment = $('.ui.segment.itemsbylocation')
 
-            var refreshItemsByLocation = function() {
+            var refreshItemsByLocation = function () {
                 $itemsByLocationSegment.addClass('loading')
                 $.ajax(items_by_location_url, {
                     method: 'GET',
 
-                    success: function(response) {
+                    success: function (response) {
                         $itemsByLocationSegment.removeClass('loading')
 
-                        if( $.isEmptyObject(response))
-                        {
+                        if ($.isEmptyObject(response)) {
                             $itemsByLocationSegment.html(
                                     "<div class='ui warning message'>" +
                                     "<p>{{trans('phrases.no_results')}} " +
@@ -213,7 +218,7 @@
 
                         }
                     },
-                    error: function() {
+                    error: function () {
                         $itemsByLocationSegment.removeClass('loading')
                         $itemsByLocationSegment.html(
                                 "<div class='ui warning message'>" +
@@ -230,12 +235,7 @@
             refreshItemsByLocation();
 
 
-
-
-
-
-
         });
-       </script>
+    </script>
 
 @endsection

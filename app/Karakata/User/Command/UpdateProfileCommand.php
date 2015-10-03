@@ -1,6 +1,7 @@
 <?php namespace Karakata\User\Command;
 
-class UpdateProfileCommand {
+class UpdateProfileCommand
+{
 
     /**
      * @var string
@@ -22,9 +23,10 @@ class UpdateProfileCommand {
         $this->phone = $phone;
     }
 
-    public function rules(){
+    public function rules()
+    {
         return [
-            'full_name'=> 'required',
+            'full_name' => 'required',
             'phone' => 'required'
         ];
     }

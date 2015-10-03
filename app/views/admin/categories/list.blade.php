@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 
 @section('title')
-   {{trans('phrases.manage_categories')}}
+    {{trans('phrases.manage_categories')}}
 @endsection
 
 @section('styles')
@@ -9,7 +9,8 @@
 
     <link rel="stylesheet" href="{{asset('assets/jqtree/jqtree.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/fontIconPicker/css/jquery.fonticonpicker.min.css')}}"/>
-    <link rel="stylesheet" href="{{asset('assets/fontIconPicker/themes/grey-theme/jquery.fonticonpicker.grey.min.css')}}"/>
+    <link rel="stylesheet"
+          href="{{asset('assets/fontIconPicker/themes/grey-theme/jquery.fonticonpicker.grey.min.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/x-editable/dist/jquery-editable/css/jquery-editable.css')}}"/>
 
     <style>
@@ -19,7 +20,7 @@
             margin-bottom: 3px;
         }
 
-        span.jqtree-title{
+        span.jqtree-title {
             border-bottom: dashed 1px #0088cc;
         }
 
@@ -33,50 +34,53 @@
 @section('content')
     <div class="main ui container">
 
-            <div class="ui segments">
-                <div class="ui segment">
-                    <h4 class="ui header">   {{trans('phrases.manage_categories')}}
+        <div class="ui segments">
+            <div class="ui segment">
+                <h4 class="ui header">   {{trans('phrases.manage_categories')}}
 
-                        <div class="sub header">
-                            {{trans('phrases.manage_categories_subheading')}}
+                    <div class="sub header">
+                        {{trans('phrases.manage_categories_subheading')}}
                     </div>
-                    </h4>
+                </h4>
 
 
-                </div>
-                <div class="ui clearing segment ">
-
-                    <button class="ui right floated icon button newCategory">
-                        <i class="icon add"></i> {{trans('phrases.add_new_category')}}
-                    </button>
-
-                </div>
-                <div class="ui segment padded categorielist">
-                    <div id="tree"></div>
-                </div>
             </div>
+            <div class="ui clearing segment ">
+
+                <button class="ui right floated icon button newCategory">
+                    <i class="icon add"></i> {{trans('phrases.add_new_category')}}
+                </button>
+
+            </div>
+            <div class="ui segment padded categorielist">
+                <div id="tree"></div>
+            </div>
+        </div>
 
         <div class="ui modal">
             <i class="close icon"></i>
+
             <div class="header">
 
             </div>
             <div class="content">
                 <form class="ui form">
                     <h4 class="ui dividing header">{{trans('phrases.category_details')}}</h4>
+
                     <div class="ui error message"></div>
 
                     <div class="field">
                         <div class="two fields">
                             <input type="hidden" name="id"/>
                             <input type="hidden" name="action"/>
+
                             <div class="twelve wide field">
                                 <label for="">{{trans('words.name')}}</label>
                                 <input type="text" name="name" placeholder="Category Name">
                             </div>
                             <div class="four wide field">
                                 <label for="">{{trans('words.icon')}}</label>
-                                <input type="text" name="icon" id="myiconPicker" />
+                                <input type="text" name="icon" id="myiconPicker"/>
                             </div>
                         </div>
                     </div>
@@ -108,7 +112,7 @@
     <script type="text/javascript">
         $.ajaxSetup({
             cache: false,
-            headers: {'X-CSRF-TOKEN' : $('meta[name=token]').attr("content")}
+            headers: {'X-CSRF-TOKEN': $('meta[name=token]').attr("content")}
         });
         var data = {{ $categories }};
         var serverUrl = "{{ Request::url() }}";
@@ -116,12 +120,9 @@
         $(function () {
 
 
-
-
-
             var iconPicker = $('#myiconPicker').fontIconPicker({
-                source:    ["alarm ","alarm slash ","alarm outline ","alarm slash outline ","at ","browser ","bug ","calendar outline ","calendar ","cloud ","code ","comment ","comments ","comment outline ","comments outline ","copyright ","dashboard ","dropdown ","external square ","external ","eyedropper ","feed ","find ","heartbeat ","history ","home ","idea ","inbox ","lab ","mail ","mail outline ","mail square ","map ","options ","paint brush ","payment ","phone ","phone square ","privacy ","protect ","search ","setting ","settings ","shop ","sidebar ","signal ","sitemap ","tag ","tags ","tasks ","terminal ","text telephone ","ticket ","trophy ","wifi",
-                    "building ","building outline ",
+                source: ["alarm ", "alarm slash ", "alarm outline ", "alarm slash outline ", "at ", "browser ", "bug ", "calendar outline ", "calendar ", "cloud ", "code ", "comment ", "comments ", "comment outline ", "comments outline ", "copyright ", "dashboard ", "dropdown ", "external square ", "external ", "eyedropper ", "feed ", "find ", "heartbeat ", "history ", "home ", "idea ", "inbox ", "lab ", "mail ", "mail outline ", "mail square ", "map ", "options ", "paint brush ", "payment ", "phone ", "phone square ", "privacy ", "protect ", "search ", "setting ", "settings ", "shop ", "sidebar ", "signal ", "sitemap ", "tag ", "tags ", "tasks ", "terminal ", "text telephone ", "ticket ", "trophy ", "wifi",
+                    "building ", "building outline ",
                     "car ",
                     "coffee ",
                     "emergency ",
@@ -280,7 +281,7 @@
                     "spinner ",
                     "square ",
                     "square outline ",
-                    "desktop ", "disk outline ","file archive outline ","file audio outline ","file code outline ","file excel outline ","file ","file image outline ","file outline ","file pdf outline ","file powerpoint outline ","file text ","file text outline ","file video outline ","file word outline ","folder ","folder open ","folder open outline ","folder outline ","game ","keyboard ","laptop ","level down ","level up ","mobile ","power ","plug ","tablet ","trash ","trash outline ","area chart ",
+                    "desktop ", "disk outline ", "file archive outline ", "file audio outline ", "file code outline ", "file excel outline ", "file ", "file image outline ", "file outline ", "file pdf outline ", "file powerpoint outline ", "file text ", "file text outline ", "file video outline ", "file word outline ", "folder ", "folder open ", "folder open outline ", "folder outline ", "game ", "keyboard ", "laptop ", "level down ", "level up ", "mobile ", "power ", "plug ", "tablet ", "trash ", "trash outline ", "area chart ",
                     "bar chart ",
                     "camera retro ",
                     "newspaper ",
@@ -295,7 +296,7 @@
             });
 
             $spinner = {
-                toggle: function() {
+                toggle: function () {
                     $('div.categorielist').toggleClass('loading disabled')
                 }
             };
@@ -317,11 +318,15 @@
                             .attr("data-name", node.name)
                             .attr("data-", node.icon)
 
-                    li.prepend('<i class="icon '+ node.icon +'"></i>')
-                    li.parent().append('<a class="node-delete" style="float: right;" data-pk="' + node.id +'"><i class="red big cancel icon "></i></a>')
+                    li.prepend('<i class="icon ' + node.icon + '"></i>')
+                    li.parent().append('<a class="node-delete" style="float: right;" data-pk="' + node.id + '"><i class="red big cancel icon "></i></a>')
                 }
             }
-            function checkData() { if ($tree.find("ul").children().length === 0) $tree.html("{{trans('phrases.categories_not_setup')}}"); }
+
+            function checkData() {
+                if ($tree.find("ul").children().length === 0) $tree.html("{{trans('phrases.categories_not_setup')}}");
+            }
+
             $tree.bind("tree.init", checkData)
 
             $tree.tree(opts)
@@ -364,7 +369,7 @@
 
             }) // END add
 
-            $(document).on( "click", 'span.jqtree-title',function(e) {
+            $(document).on("click", 'span.jqtree-title', function (e) {
 
                 $('input[name="name"]').val(this.dataset.name)
                 $('input[name="icon"]').val(this.dataset.icon)
@@ -396,15 +401,14 @@
             ;
 
 
-            function showModal()
-            {
+            function showModal() {
                 $modal.modal('setting', 'transition', 'fade up')
                         .modal('setting', 'autofocus', 'true')
                         .modal({
                             onApprove: function () {
                                 $catform.form('validate form')
 
-                                if($catform.form('is valid')) {
+                                if ($catform.form('is valid')) {
                                     var form_values = $catform.form('get values')
 
                                     $catform.addClass('loading')
@@ -412,12 +416,12 @@
                                         method: 'POST',
                                         data: form_values,
                                         url: serverUrl,
-                                        success: function(response) {
+                                        success: function (response) {
                                             $catform.removeClass('loading')
                                             $catform.form('reset');
                                             $modal.modal('hide');
 
-                                            if(form_values.action == 'renameCategory') {
+                                            if (form_values.action == 'renameCategory') {
 
                                                 var node = $tree.tree("getNodeById", form_values.id);
                                                 $tree.tree('updateNode', node, form_values)
@@ -442,7 +446,7 @@
                                             }
 
                                         },
-                                        error: function(xhr) {
+                                        error: function (xhr) {
                                             $catform.removeClass('loading')
                                             alertify.error(xhr.responseJSON.message)
                                             $catform.form('add errors', [xhr.responseJSON.message]);
@@ -458,6 +462,7 @@
                         .modal('show');
 
             }
+
             // delete category
             $(document).on("click", ".node-delete", function () {
                 var nodeId = $(this).data("pk");

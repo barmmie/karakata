@@ -21,9 +21,12 @@
             <div class="ui clearing segment ">
 
                 <div class="ui pointing secondary menu">
-                    <a href="{{route('admin.reports.index', 'all')}}" class="{{$status == 'all' ? 'active' : ''}} item" >{{trans('words.all')}}</a>
-                    <a href="{{route('admin.reports.index', 'reviewed')}}" class="{{$status == 'reviewed' ? 'active' : ''}} item" >{{trans('phrases.reviewed_only')}}</a>
-                    <a href="{{route('admin.reports.index', 'unreviewed')}}" class="{{$status == 'unreviewed' ? 'active' : ''}} item" >{{trans('phrases.unreviewed_only')}}</a>
+                    <a href="{{route('admin.reports.index', 'all')}}"
+                       class="{{$status == 'all' ? 'active' : ''}} item">{{trans('words.all')}}</a>
+                    <a href="{{route('admin.reports.index', 'reviewed')}}"
+                       class="{{$status == 'reviewed' ? 'active' : ''}} item">{{trans('phrases.reviewed_only')}}</a>
+                    <a href="{{route('admin.reports.index', 'unreviewed')}}"
+                       class="{{$status == 'unreviewed' ? 'active' : ''}} item">{{trans('phrases.unreviewed_only')}}</a>
                 </div>
 
             </div>
@@ -55,14 +58,17 @@
                                 </div>
                                 <div class="content">
 
-                                    <a class="header" href="{{route('admin.items.show', $report->item->id)}}">{{$report->item->title}}</a>
+                                    <a class="header"
+                                       href="{{route('admin.items.show', $report->item->id)}}">{{$report->item->title}}</a>
+
                                     <div class="meta">
                                             <span class="date m-b-xs">
                                                 <i class="teal calendar icon"></i> {{$report->item->created_at->format('M j, Y g:i A')}}
                                             </span>
 
                                             <span class="category m-b-xs">
-                                                <i class="minus icon"></i>{{$report->item->category->title}}<i class="minus icon"></i>
+                                                <i class="minus icon"></i>{{$report->item->category->title}}<i
+                                                        class="minus icon"></i>
                                             </span>
                                              <span class="location">
                                                 <i class="teal marker icon"></i>{{$report->item->location->name}}
@@ -71,7 +77,7 @@
                                     </div>
                                     <div class="description">
 
-                                        <p> <i class="red warning icon "> </i> {{$report->message}}</p>
+                                        <p><i class="red warning icon "> </i> {{$report->message}}</p>
                                     </div>
                                     <div class="extra">
                                         @if($report->item->negotiable)
@@ -93,20 +99,23 @@
                                     </div>
                                     <div class="extra">
 
-                                        <a href="{{route('admin.reports.delete', $report->item->id)}}" class="ui right floated tiny red button confirm-delete">
+                                        <a href="{{route('admin.reports.delete', $report->item->id)}}"
+                                           class="ui right floated tiny red button confirm-delete">
                                             <i class="trash icon"></i>
 
                                             {{trans('words.delete')}}
                                         </a>
                                         @if(! $report->isReviewed())
-                                            <a href="{{route('admin.reports.reviewed', $report->id)}}" class="ui right floated tiny primary button">
+                                            <a href="{{route('admin.reports.reviewed', $report->id)}}"
+                                               class="ui right floated tiny primary button">
                                                 <i class="check icon"></i>
 
                                                 {{trans('phrases.mark_as_reviewed')}}
                                             </a>
                                         @endif
                                         @if(! $report->isUnreviewed())
-                                            <a href="{{route('admin.reports.unreviewed', $report->id)}}" class="ui right floated tiny orange button">
+                                            <a href="{{route('admin.reports.unreviewed', $report->id)}}"
+                                               class="ui right floated tiny orange button">
                                                 <i class="cancel icon"></i>
 
                                                 {{trans('phrases.mark_as_unreviewed')}}
@@ -120,7 +129,6 @@
                     </div>
 
                 @endif
-
 
 
             </div>

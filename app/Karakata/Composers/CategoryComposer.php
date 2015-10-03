@@ -9,8 +9,10 @@
 namespace Karakata\Composers;
 
 
-class CategoryComposer {
-    public function compose($view){
+class CategoryComposer
+{
+    public function compose($view)
+    {
 
         $categories = \Category::fetchTree();
 

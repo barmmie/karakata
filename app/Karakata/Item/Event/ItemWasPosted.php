@@ -9,11 +9,13 @@
 namespace Karakata\Item\Event;
 
 
-class ItemWasPosted {
+class ItemWasPosted
+{
 
     public $item;
 
-    public function __construct($item) {
+    public function __construct($item)
+    {
         $this->item = $item;
     }
 }

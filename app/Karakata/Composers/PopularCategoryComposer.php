@@ -9,8 +9,10 @@
 namespace Karakata\Composers;
 
 
-class PopularCategoryComposer {
-    public function compose($view) {
+class PopularCategoryComposer
+{
+    public function compose($view)
+    {
         $categories = \Category::popular(10)->get();
 
         $view->with('popular_categories', $categories);

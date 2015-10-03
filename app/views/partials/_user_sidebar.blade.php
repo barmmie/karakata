@@ -28,14 +28,15 @@
 
     <div class="ui segment">
         <h4 class="header">{{Setting::get('site_name', 'Karakata')}}</h4>
+
         <div class="ui secondary pointing vertical side menu">
             <a class="teal item {{Route::is('users.profile')?' teal active':''}}" href="{{route('users.profile')}}">
                 <i class="user icon"></i>
-               {{trans('phrases.update_profile')}}
+                {{trans('phrases.update_profile')}}
             </a>
             <a class="item" href="{{route('sessions.destroy')}}">
                 <i class="sign out icon"></i>
-               {{trans('words.logout')}}
+                {{trans('words.logout')}}
             </a>
         </div>
     </div>

@@ -5,7 +5,7 @@
 @endsection
 
 @section('title')
-   {{trans('phrases.app_settings')}}
+    {{trans('phrases.app_settings')}}
 @endsection
 
 
@@ -33,15 +33,17 @@
 
                 <div class="ui  active tab content p-md" data-tab="first">
 
-                        <h4 class="ui dividing header">{{trans('phrases.site_details')}}</h4>
+                    <h4 class="ui dividing header">{{trans('phrases.site_details')}}</h4>
 
                     <div class="field">
                         <div class="two fields">
                             <div class="four wide field">
                                 <label for="">{{trans('phrases.site_logo')}}</label>
+
                                 <div id="myDropZone" class="dropzone">
                                     <div class="fallback">
-                                        <input name="files" type="file" />
+                                        <input name="files" type="file"/>
+
                                         <p>{{trans('phrases.upload_logo')}}</p>
                                     </div>
                                 </div>
@@ -70,10 +72,10 @@
                         </div>
                     </div>
 
-                        <div class="field">
-                            <label>{{trans('phrases.site_description')}}</label>
-                            {{Form::textarea('site_description', Setting::get('site_description'))}}
-                        </div>
+                    <div class="field">
+                        <label>{{trans('phrases.site_description')}}</label>
+                        {{Form::textarea('site_description', Setting::get('site_description'))}}
+                    </div>
 
                 </div>
                 <div class="ui  tab content p-md" data-tab="second">
@@ -101,8 +103,6 @@
                         {{Form::textarea('analytics', Setting::get('analytics'))}}
                         <p>{{trans('phrases.paste_analytics_code')}}</p>
                     </div>
-
-
 
 
                 </div>
@@ -169,7 +169,8 @@
 
                 </div>
 
-                <button class="ui teal labeled icon button" tabindex="0" type="submit"><i class="save icon"></i> {{trans('phrases.save_changes')}}</button>
+                <button class="ui teal labeled icon button" tabindex="0" type="submit"><i
+                            class="save icon"></i> {{trans('phrases.save_changes')}}</button>
                 {{Form::close()}}
 
             </div>
@@ -195,8 +196,8 @@
             Dropzone.autoDiscover = false;
 
             dropzone = new Dropzone("div#myDropZone", {
-                init: function() {
-                    var mockFile = { name: "logo", size: 12345 };
+                init: function () {
+                    var mockFile = {name: "logo", size: 12345};
 
                     this.emit("addedfile", mockFile);
 

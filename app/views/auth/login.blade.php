@@ -5,46 +5,49 @@
 @endsection
 
 @section('content')
-        <div class="ui middle aligned center aligned text container p-t-lg">
-            <div class="column">
-                <h2 class="ui teal center aligned icon header">
-                    <i class="large lock icon"></i>
-                    <div class="content">
-                        {{trans('phrases.sign_in_copy', ['site_name' => Setting::get('site_name', 'Karakata')])}}
+    <div class="ui middle aligned center aligned text container p-t-lg">
+        <div class="column">
+            <h2 class="ui teal center aligned icon header">
+                <i class="large lock icon"></i>
 
-                    </div>
-                </h2>
-                    {{Form::open(['route' => 'sessions.store', 'class'=> 'ui form'])}}
-                    <div class="ui stacked segment">
-                        @include('partials._form_errors')
-                        <div class="ui error message"></div>
+                <div class="content">
+                    {{trans('phrases.sign_in_copy', ['site_name' => Setting::get('site_name', 'Karakata')])}}
 
-                        <div class="field">
-                            <div class="ui left icon input">
-                                <i class="user icon"></i>
-                                {{Form::email('email', null, ['placeholder'=>"E-mail address"])}}
-                            </div>
-                        </div>
-                        <div class="field">
-                            <div class="ui left icon input">
-                                <i class="lock icon"></i>
-                                {{Form::password('password', ['placeholder'=>"Password"])}}
-                            </div>
-                        </div>
-                        <button type="submit" class="ui fluid large teal submit button">    {{trans('words.login')}}
-                        </button>
-                    </div>
-
-
-                {{Form::close()}}
-                <div class="ui message">
-                    <div class="ui header">
-                        {{trans('phrases.new_user')}} <a href="{{route('users.register')}}">{{trans('words.signup')}}</a>
-
-                    </div>
-                    <p>{{trans('phrases.forgot_password')}} <a href="{{URL::action('RemindersController@getRemind')}}">{{trans('phrases.reset_password')}}</a></p>
                 </div>
+            </h2>
+            {{Form::open(['route' => 'sessions.store', 'class'=> 'ui form'])}}
+            <div class="ui stacked segment">
+                @include('partials._form_errors')
+                <div class="ui error message"></div>
+
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="user icon"></i>
+                        {{Form::email('email', null, ['placeholder'=>"E-mail address"])}}
+                    </div>
+                </div>
+                <div class="field">
+                    <div class="ui left icon input">
+                        <i class="lock icon"></i>
+                        {{Form::password('password', ['placeholder'=>"Password"])}}
+                    </div>
+                </div>
+                <button type="submit" class="ui fluid large teal submit button">    {{trans('words.login')}}
+                </button>
             </div>
+
+
+            {{Form::close()}}
+            <div class="ui message">
+                <div class="ui header">
+                    {{trans('phrases.new_user')}} <a href="{{route('users.register')}}">{{trans('words.signup')}}</a>
+
+                </div>
+                <p>{{trans('phrases.forgot_password')}} <a
+                            href="{{URL::action('RemindersController@getRemind')}}">{{trans('phrases.reset_password')}}</a>
+                </p>
+            </div>
+        </div>
     </div>
 @endsection
 
@@ -79,5 +82,5 @@
                         }
                     });
         });
-        </script>
-    @endsection
+    </script>
+@endsection

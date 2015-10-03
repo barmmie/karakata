@@ -19,7 +19,7 @@
     <div class="menu">
 
         <a class="item" href="{{route('admin.users.index')}}">
-           <i class="users icon"></i> {{trans('phrases.manage_users')}}
+            <i class="users icon"></i> {{trans('phrases.manage_users')}}
         </a>
 
         <a class="item" href="{{route('admin.items.index')}}">
@@ -29,7 +29,6 @@
         <a class="item" href="{{route('admin.reports.index')}}">
             <i class="warning circle icon"></i> {{trans('phrases.manage_abuse_reports')}}
         </a>
-
 
 
     </div>
@@ -47,7 +46,7 @@
         </a>
 
         <a class="item" href="{{URL::action('Admin\CategoriesController@getIndex')}}">
-           <i class="sitemap icon"></i> {{trans('phrases.manage_categories')}}
+            <i class="sitemap icon"></i> {{trans('phrases.manage_categories')}}
         </a>
 
     </div>

@@ -2,7 +2,8 @@
 
 use Laracasts\Commander\CommandHandler;
 
-class UpdateProfileCommandHandler implements CommandHandler {
+class UpdateProfileCommandHandler implements CommandHandler
+{
 
     /**
      * Handle the command.
@@ -21,7 +22,7 @@ class UpdateProfileCommandHandler implements CommandHandler {
             $result['success'] = true;
             $result['message'] = 'Profile has been updated successfully';
 
-        }catch(\Exception $e) {
+        } catch (\Exception $e) {
             $result['success'] = false;
             $result['message'] = $e->getMessage();
         }
