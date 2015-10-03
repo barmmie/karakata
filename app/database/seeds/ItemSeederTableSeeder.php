@@ -11,7 +11,7 @@ class ItemSeederTableSeeder extends Seeder
         DB::table('items')->delete();
         $faker = Faker\Factory::create();
 
-        $categories = Category::all();
+        $categories = Category::all()->toArray();
 
         $cat_array = [
             'Phones - Mobile Phones' => 219,
@@ -51,7 +51,7 @@ class ItemSeederTableSeeder extends Seeder
         foreach (array_chunk($categories, 3) as $category_row) {
 
             foreach($category_row as $category) {
-                if (array_key_exists($category->title, $cat_array)) {
+                if (array_key_exists($category['title'], $cat_array)) {
 
                     try {
                         $res = $client->get('http://api-v2.olx.com/items',
@@ -60,7 +60,7 @@ class ItemSeederTableSeeder extends Seeder
                                     'location' => 'www.olx.com',
                                     'seo' => 'true',
                                     'offset' => 0,
-                                    'categoryId' => $cat_array[$category->title],
+                                    'categoryId' => $cat_array[$category['title']],
                                     'abundance' => 'true',
                                     'languageId' => 1,
                                     'platform' => 'desktop']]
@@ -83,7 +83,7 @@ class ItemSeederTableSeeder extends Seeder
                                         $item = Item::create([
                                             'title' => $data['title'],
                                             'description' => $data['description'],
-                                            'category_id' => $category->id,
+                                            'category_id' => $category['id'],
                                             'location_id' => rand(1, 14),
                                             'type' => $faker->randomElement(['personal', 'business']),
                                             'amount' => $data['price']['amount']? : $faker->numberBetween(200,4000),
