@@ -4,7 +4,7 @@
     @else
         <i class="circular inverted big teal shadowed search icon"></i>
     @endif
-    <a href="/"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
+    <a href="{{route('admin.dashboard')}}"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
 </div>
 
 <a class="item" target="_blank" href="{{route('pages.homepage')}}">
