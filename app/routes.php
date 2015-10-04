@@ -110,7 +110,8 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|adm
     Route::controller("categories", 'CategoriesController');
 
 });
-
+Route::get('404', ['as' => 'pages.404', 'uses' => 'PageController@page404']);
+Route::get('500', ['as' => 'pages.500', 'uses' => 'PageController@page500']);
 Route::get('install', ['as' => 'installers.create', 'uses' => 'AppController@install']);
 Route::post('install', ['as' => 'installers.store', 'uses' => 'AppController@store']);
 

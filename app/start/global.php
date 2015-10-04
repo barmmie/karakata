@@ -46,20 +46,12 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
 |
 */
 
-App::error(function (Exception $exception, $code) {
+App::error(function (Exception $exception) {
     Log::error($exception);
+    flashError('Fatal app error '.$exception->getCode(), $exception->getMessage());
 
-//    if(true)
-//    {
-//        $config = new Airbrake\Configuration(Config::get('services.airbrake.api_key'),
-//            array(
-//                'async' => true,
-//                'environmentName' => App::environment(),
-//                'url' => Request::url()
-//            ));
-//        $client = new Airbrake\Client($config);
-//        $client->notifyOnException($exception);
-//    }
+    return Redirect::route('pages.500');
+
 });
 
 App::error(function (Karakata\Exceptions\ValidationFailedException $exception) {
@@ -77,6 +69,10 @@ App::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $excep
     flashError('Page/Item not found', 'The page you tried to access does not exist or has been removed');
 
     return Request::header('referer') ? Redirect::back() : Redirect::route('pages.homepage');
+});
+
+App::error(function(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e){
+    return Redirect::route('pages.404');
 });
 
 

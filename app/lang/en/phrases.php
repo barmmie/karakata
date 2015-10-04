@@ -151,6 +151,10 @@ return [
     'update_item' => 'Update item',
     'total_payable' => 'Total payable',
     'powered_by' => 'Powered by',
-    'pay_now' => 'Pay now'
+    'pay_now' => 'Pay now',
+    'page_not_found' => 'Page not found',
+    'go_home' => 'Go home',
+    'return_back' => 'Return back',
+    'error_occured' => 'An error occured'
 
 ];

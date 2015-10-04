@@ -5,19 +5,7 @@ Manage stiings via Admin panel
 Works on shared hosting
 Payment and Ads
 Full support
-
-Name
-
-
-Username
-
-
-Password
-
-
-Create
-
-
+Mobile fully responsive
 
 DB_HOST='localhost'
 DB_NAME='enclassified'

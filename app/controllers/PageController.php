@@ -67,4 +67,15 @@ class PageController extends \BaseController
 
     }
 
+    public function page404()
+    {
+        return View::make('errors.404');
+    }
+
+    public function page500()
+    {
+        return View::make('errors.500');
+
+    }
+
 }
