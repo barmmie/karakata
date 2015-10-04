@@ -321,3 +321,19 @@
 .concealed {
     display: none !important;
 }
+
+@media (min-width:992px) {
+    .desktop-only {
+        display:block !important;
+    }
+}
+
+@media (max-width: 991px) {
+    .mobile-only {
+        display:block !important;
+    }
+
+    .desktop-only {
+        display:none !important;
+    }
+}

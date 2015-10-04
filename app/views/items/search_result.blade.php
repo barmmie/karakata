@@ -15,9 +15,13 @@
                     @include('widgets._popular_categories')
                 </div>
 
-                <div class="ui segment ">
-                    @include('widgets._recent_items')
+                <div class="desktop-only">
+                    <div class="ui segment">
+                        @include('widgets._recent_items')
+                    </div>
                 </div>
+
+
 
             </div>
 

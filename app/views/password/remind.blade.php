@@ -39,7 +39,7 @@
 
             {{Form::close()}}
             <div class="ui message">
-                {{trans('phrases.new_user')}} <a href="#">{{trans('words.signup')}}</a>
+                {{trans('phrases.new_user')}} <a href="{{route('users.register')}}">{{trans('words.signup')}}</a>
             </div>
         </div>
     </div>

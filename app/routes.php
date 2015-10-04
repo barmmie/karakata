@@ -111,10 +111,6 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|adm
 
 });
 
-Route::get('test/{id}', function ($id) {
-    return Image::make('http://images03.olx-st.com/ui/53/59/93/1442503168_833260657_1.jpg')->fit(320, 240);
-});
-
 Route::get('install', ['as' => 'installers.create', 'uses' => 'AppController@install']);
 Route::post('install', ['as' => 'installers.store', 'uses' => 'AppController@store']);
 

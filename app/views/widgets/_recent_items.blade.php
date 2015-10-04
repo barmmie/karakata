@@ -1,3 +1,4 @@
+
 <div class="m-md">
     <h3 class="ui dividing header">
         {{trans('phrases.recent_items')}}

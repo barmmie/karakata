@@ -82,11 +82,11 @@
         </div>
 
         <div class="ui vertical navbar menu">
-            <div class="m-t-lg p-t-lg">
+            <div style="margin-top: 80px; ">
                 @if(Auth::check())
                 @else
                     <a href="{{route('users.login')}}" class="item">{{trans('words.login')}}</a>
-                    <a href="{{route('users.register')}}" class="item">{{trans('words.login')}}</a>
+                    <a href="{{route('users.register')}}" class="item">{{trans('words.signup')}}</a>
 
                 @endif
                 <div class="item">
