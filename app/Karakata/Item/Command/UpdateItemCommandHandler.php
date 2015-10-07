@@ -26,7 +26,7 @@ class UpdateItemCommandHandler implements CommandHandler
                 'category_id' => $command->category_id,
                 'type' => $command->type,
                 'title' => $command->title,
-                'description' => e($command->description),
+                'description' => $command->description,
                 'amount' => $command->amount,
                 'negotiable' => $command->negotiable,
                 'location_id' => $command->location_id,

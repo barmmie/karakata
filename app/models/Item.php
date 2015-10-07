@@ -32,7 +32,7 @@ class Item extends \Eloquent
         parent::boot();
 
         static::creating(function ($item) {
-
+            $item->description = Purifier::clean($item->description);
             $item->ip_address = \Karakata\Services\IpRetriever::get_ip();
 
         });
@@ -68,7 +68,7 @@ class Item extends \Eloquent
         $instance = static::create(
             [
                 'title' => $title,
-                'description' => e($description),
+                'description' => $description,
                 'category_id' => $category_id,
                 'location_id' => $location_id,
                 'type' => $type,
