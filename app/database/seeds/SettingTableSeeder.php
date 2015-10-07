@@ -17,22 +17,20 @@ class SettingTableSeeder extends Seeder {
     private function settings()
     {
         return [
+
             [
-                'name' => 'site_name',
-                'value' => 'Karakata',
+                'name' => 'premium_amount',
+                'value' => '20',
+
 
             ],
             [
-                'name' => 'site_description',
-                'value' => 'lorem ipsum darelatu',
+                'name' => 'premium_days',
+                'value' => '40',
             ],
             [
-                'name' => 'site_slogan',
-                'value' => "Buy what you want. Sell what you don't need. it's free"
-            ],
-            [
-                'name' => 'currency',
-                'value' => '£',
+                'name' => 'allow_premium_payment',
+                'value' => '0',
             ]
         ];
 

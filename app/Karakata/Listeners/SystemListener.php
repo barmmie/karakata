@@ -33,10 +33,10 @@ class SystemListener
 
 //        Artisan::call('key:generate');
 
-        Artisan::call('migrate');
+        Artisan::call('migrate', ['--force' => true]);
 
         foreach ($seeds as $seed) {
-            Artisan::call('db:seed', ['--class' => $seed]);
+            Artisan::call('db:seed', ['--class' => $seed, '--force' => true]);
 
         }
 

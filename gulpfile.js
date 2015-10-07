@@ -29,7 +29,7 @@ gulp.task('live-monitor', function() {
 });
 
 gulp.task('clean-temp', function(){
-    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/sessions/**/*', 'app/storage/views/**/*' ])
+    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/*.json', 'app/storage/sessions/**/*', 'app/storage/views/**/*' ])
 })
 
 gulp.task('prepare-envato', ['clean-temp'],  function(){

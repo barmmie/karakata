@@ -28,3 +28,7 @@ tests/logs/output.html
 .env
 
 karakata.zip
+
+app/storage/settings.json
+
+app/storage/installation.json
