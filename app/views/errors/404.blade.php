@@ -39,8 +39,6 @@
         </div>
     </div>
 
-    @include('partials._search_cta')
-
 @endsection
 
 

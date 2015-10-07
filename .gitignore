@@ -17,6 +17,7 @@ Thumbs.db
 /app/storage/views
 /uploads/*
 /karakata/*
+/karakatamm/*
 
 .idea/vcs.xml
 
