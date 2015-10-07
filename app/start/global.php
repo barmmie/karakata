@@ -49,8 +49,8 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
 App::error(function (Exception $exception) {
     Log::error($exception);
     flashError('Fatal app error '.$exception->getCode(), $exception->getMessage());
-
-    return Redirect::route('pages.500');
+    if(!Config::get('app.debug'))
+        return Redirect::route('pages.500');
 
 });
 

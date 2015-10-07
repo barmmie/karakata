@@ -11,7 +11,11 @@
     <div class="ui container p-t-lg">
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
-                @include('partials._category_sidebar')
+                <div class="ui segment">
+                    @include('partials._category_sidebar')
+
+                </div>
+
                 <div class="desktop-only">
                     <div class="ui segment">
                         @include('widgets._recent_items')
@@ -77,6 +81,13 @@
                         </div>
                     @endif
                 </div>
+                <div class="desktop-only">
+                    @if(Setting::get('ad_leaderboard')!='')
+                        {{Setting::get('ad_leaderboard')}}
+                    @endif
+                </div>
+
+
             </div>
         </div>
     </div>

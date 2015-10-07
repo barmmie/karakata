@@ -11,11 +11,12 @@
         <div class="ui two column relaxed stackable grid">
             <div class="four wide column">
 
-                <div class="ui segment">
-                    @include('widgets._popular_categories')
-                </div>
 
                 <div class="desktop-only">
+
+                    <div class="ui segment">
+                        @include('widgets._popular_categories')
+                    </div>
                     <div class="ui segment">
                         @include('widgets._recent_items')
                     </div>
@@ -80,6 +81,17 @@
 
                         </div>
                     @endif
+                </div>
+
+                <div class="desktop-only">
+                    @if(Setting::get('ad_leaderboard')!='')
+                        {{Setting::get('ad_leaderboard')}}
+                    @endif
+                </div>
+                <div class="mobile-only">
+                    <div class="ui segment">
+                        @include('widgets._popular_categories')
+                    </div>
                 </div>
             </div>
         </div>

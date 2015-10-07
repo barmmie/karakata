@@ -91,7 +91,10 @@
                                     <i class="teal marker icon"></i> {{$item->location->name}}
                                 </div>
                             </div>
-                            <a style="float: right;" class="ui big m-b-md teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                            <div style="float: right;" class="m-b-lg">
+                                <a  class="ui big  teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+
+                            </div>
 
                         </div>
 
@@ -222,6 +225,12 @@
 
                 </div>
 
+                <div class="desktop-only">
+                    @if(Setting::get('ad_leaderboard')!='')
+                        {{Setting::get('ad_leaderboard')}}
+                    @endif
+                </div>
+
             </div>
             <div class="four wide column">
 
@@ -287,8 +296,6 @@
             <form class="ui sendmessage form">
                 <div class="ui error message"></div>
 
-                <h4 class="ui dividing header">{{trans('phrases.give_your_feedback')}}</h4>
-
                 <div class="field">
                     <div class="two fields">
                         <div class="field">
@@ -325,7 +332,7 @@
         </div>
         <div class="content">
             <form class="ui report form">
-                <h4 class="ui dividing header">{{trans('phrases._report_abuse-copy')}}</h4>
+                <h4 class="ui dividing header">{{trans('phrases._report_abuse_copy')}}</h4>
                 <div class="ui error message"></div>
                 {{Form::hidden('item_id', $item->id)}}
                 <div class="field">

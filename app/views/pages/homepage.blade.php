@@ -66,10 +66,12 @@
                 @include('widgets._featured_items')
             </div>
 
+            <div class="desktop-only">
+                @if(Setting::get('ad_leaderboard')!='')
+                    {{Setting::get('ad_leaderboard')}}
+                @endif
+            </div>
 
-            @if(Setting::get('ad_leaderboard')!='')
-                {{Setting::get('ad_leaderboard')}}
-            @endif
 
         </div>
         <div class="four wide column">
@@ -89,50 +91,7 @@
 
 
 
-    {{--<div class="teal row padding-reset m-b-n-lg">--}}
-    {{--<div class="column padding-reset">--}}
 
-    {{--<div class="ui olive p-lg container">--}}
-    {{--<div class="ui four statistics">--}}
-    {{--<div class="statistic">--}}
-    {{--<div class="value">--}}
-    {{--22--}}
-    {{--</div>--}}
-    {{--<div class="label">--}}
-    {{--Saves--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="statistic">--}}
-    {{--<div class="text value">--}}
-    {{--Three<br>--}}
-    {{--Thousand--}}
-    {{--</div>--}}
-    {{--<div class="label">--}}
-    {{--Signups--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="statistic">--}}
-    {{--<div class="value">--}}
-    {{--<i class="plane icon"></i> 5--}}
-    {{--</div>--}}
-    {{--<div class="label">--}}
-    {{--Flights--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--<div class="statistic">--}}
-    {{--<div class="value">--}}
-    {{--<img src="/images/avatar/small/joe.jpg" class="ui circular inline image">--}}
-    {{--42--}}
-    {{--</div>--}}
-    {{--<div class="label">--}}
-    {{--Team Members--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-    {{--</div>--}}
-
-    {{--</div>--}}
 
 
 @endsection
