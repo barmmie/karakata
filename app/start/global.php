@@ -54,6 +54,14 @@ App::error(function (Exception $exception) {
 
 });
 
+App::error(function (\Illuminate\Database\QueryException $exception) {
+    Log::error($exception);
+    flashError('Database error'.$exception->getCode(), $exception->getMessage());
+    if(!Config::get('app.debug'))
+        return Redirect::route('pages.500');
+
+});
+
 App::error(function (Karakata\Exceptions\ValidationFailedException $exception) {
 
     if (Request::ajax()) {
