@@ -15,7 +15,8 @@
       "omnipay/common": "~2.3.0",
       "ignited/laravel-omnipay": "1.*",
       "omnipay/paypal": "*",
-      "vlucas/phpdotenv": "^2.0"
+      "vlucas/phpdotenv": "^2.0",
+      "mews/purifier": "dev-master-l4"
 
 
 	},
