@@ -47,9 +47,9 @@ class PaymentController extends Controller
         Session::save();
 
         $gateway = Omnipay::create('PayPal_Express');
-        $gateway->setUsername('barmmie_api1.gmail.com');
-        $gateway->setPassword('K3WEH4SC4GE5JSD4');
-        $gateway->setSignature('AiPC9BjkCyDFQXbSkoZcgqH3hpacA.2GRnkxpeqk1Jyv4YGnkKsARgiT');
+        $gateway->setUsername(Setting::get('paypal_username'));
+        $gateway->setPassword(Setting::get('paypal_password'));
+        $gateway->setSignature(Setting::get('paypal_signature'));
         $gateway->setTestMode(false);
         $response = $gateway->purchase($params)->send();
 
@@ -72,9 +72,9 @@ class PaymentController extends Controller
     public function success($id)
     {
         $gateway = Omnipay::create('PayPal_Express');
-        $gateway->setUsername('paypal account');
-        $gateway->setPassword('paypal password');
-        $gateway->setSignature('AiPC9BjkCyDFQXbSkoZcgqH3hpacASJcFfmT46nLMylZ2R-SV95AaVCq');
+        $gateway->setUsername(Setting::get('paypal_username'));
+        $gateway->setPassword(Setting::get('paypal_password'));
+        $gateway->setSignature(Setting::get('paypal_signature'));
         $gateway->setTestMode(false);
 
         $params = Session::get('params');
