@@ -45,118 +45,78 @@
 		
 		<h2 id="toc" class="alt">Table of Contents</h2>
 		<ol class="alpha">
-			<li><a href="#htmlStructure">Installation</a></li>
-			<li><a href="#cssFiles">Setup</a></li>
-			<li><a href="#javascript">JavaScript</a></li>
-			<li><a href="#psdFiles">PSD Files</a></li>
+			<li><a href="#requirements">Requirements</a></li>
+			<li><a href="#installation">Installation</a></li>
+			<li><a href="#setup">Setup</a></li>
+			<li><a href="#support"> Support</a></li>
 			<li><a href="#credits">Sources and Credits</a></li>
 			
-			<li><a href="#">PHP Code Explanation</a> <em class="quiet small">(If your theme uses PHP)</em></li>
-				<li><a href="#">Any additional unique features that need an overview</a></li>
 		</ol>
 		
 		<hr>
-		
-		<h3 id="htmlStructure"><strong>A) HTML Structure</strong> - <a href="#toc">top</a></h3>
-		<p>This theme is a fixed layout with two columns. All of the information within the main content area is nested within a div with an id of "primaryContent". The sidebar's (column #2) content is within a div with an id of "secondaryContent". The general template structure is the same throughout the template. Here is the general structure.</p>
-		
-		<img src="assets/images/htmlstructure.png" alt="HTML Structure" />
-		
-		<p>If you would like to edit the color, font, or style of any elements in one of these columns, you would do the following:</p>
+        <h3 id="requirements"><strong>A) Requirements</strong> - <a href="#toc">top</a></h3>
 
-<pre>	#primaryContent a {
-		color: #someColor;
-	} 
-</pre>
 
-		<p>If you find that your new style is not overriding, it is most likely because of a specificity problem. Scroll down in your CSS file and make sure that there isn't a similar style that has more weight.</p>
+        <h3 id="installation"><strong>B) Installation</strong> - <a href="#toc">top</a></h3>
+            <ul>
+                <li>
+                    Unzip the downloaded folder
 
-		<p>I.E.</p>
+                </li>
+                <li>
+                    Copy all the files from the folder : "karakata" into your servers <code>public_html</code> or <code>www</code> directory. Just like in the image below
 
-<pre>	#wrap #primaryContent a {
-		color: #someColor;
-	}
-</pre>
+                </li>
+                <img src="assets/images/folder_structure.png" alt="HTML Structure" />
 
-		<p>So, to ensure that your new styles are applied, make sure that they carry enough "weight" and that there isn't a style lower in the CSS file that is being applied after yours.</p> 
+                <li>
+                    Update your correct database credentials in the <code>.env</code> file above
+
+                </li>
+
+                <img src="assets/images/env_config.png" alt="HTML Structure" />
+
+
+                <li>
+                    Open your browser and go to <code>http://your-url/install</code>
+                </li>
+
+                <li>
+                    You would be taken to the install screen
+                </li>
+
+                <img src="assets/images/install_screen.png" alt="HTML Structure" />
+
+
+                <li>Enter your admin settings and details including your purchase code. <br /></li>
+                <li>Press the "Install" button.</li>
+                <li>That's it!</li>
+            </ul>
+
 
 		<hr>
 
-		<h3 id="cssFiles"><strong>B) CSS Files and Structure</strong> - <a href="#toc">top</a></h3>
+		<h3 id="setup"><strong>C) Setup</strong> - <a href="#toc">top</a></h3>
 
-		<p>I'm using two CSS files in this theme. The first one is a generic reset file. Many browser interpret the default behavior of html elements differently. By using a general reset CSS file, we can work round this. This file also contains some general styling, such as anchor tag colors, font-sizes, etc. Keep in mind, that these values might be overridden somewhere else in the file.</p> 
+		<p>Once installation is complete. you are logged into the admin app. If not navigate to <code>http://your-url/login</code> and sign in with your admin credentials.</p>
 
-		<p>The second file contains all of the specific stylings for the page. The file is separated into sections using:</p>  
+        <h5>Locations</h5>
+        <p>
+            In the admin panel, go to the manage locations section and add locations from a  country or individually
+        </p>
 
-<pre>	/* === Header Section === */
-
-	some code
-
-	/* === Main Section === */
-	
-	some code
-	
-	/* === Sidebar Section === */
-	
-	some code
-	
-	/* === Footer === */
-	
-	some code
-	
-	etc, etc. 
-</pre>
-		
-		<p>If you would like to edit a specific section of the site, simply find the appropriate label in the CSS file, and then scroll down until you find the appropriate style that needs to be edited.</p> 
-
-		<p>Any images that are placed within the blog section have 5px worth of padding and a light bluish background. If you would like to edit the display of these images, find the following section in the style sheet:</p>
-
-<pre>	#primaryContent #blog img {
-		change styles here:
-	}
-</pre>
+        <h5>Categories</h5>
+        <p>
+            In the admin panel, go to the manage categories section. and add/remove cartegories to fit your use case
+        </p>
 
 		<hr>
 		
-		<h3 id="javascript"><strong>C) JavaScript</strong> - <a href="#toc">top</a></h3>
+		<h3 id="support"><strong>D) Support</strong> - <a href="#toc">top</a></h3>
 		
-		<p>This theme imports three Javascript files.</p>
+		<p>If you run into any issues while installing or setting it up, feel free to email me at thedevcyber@gmail.com.</p>
 		
-		<ol>
-			<li>jQuery</li>
-			<li>My custom scripts</li>
-			<li>Some plugin</li>
-		</ol>
-		  
-		<ol>
-			<li>jQuery is a Javascript library that greatly reduces the amount of code that you must write.</li>
-			<li>Most of the animation in this site is carried out from the customs scripts. There are a few functions worth looking over.
-<pre>	[some Javascript goes here...along with an general explanation]
-	[some Javascript goes here...along with an general explanation]
-	[some Javascript goes here...along with an general explanation]
-</pre>
-			</li>
-			<li>In addition to the custom scripts, I implement a few "tried and true" plugins to create the effects. This plugin is packed, so you won't need to manually edit anything in the file. The only necessary thing to know is how to call the method. For example:
-<pre>	[some Javascript goes here...along with an general explanation]</pre>
-			</li>
-		</ol>
-		
-		<hr>
-		
-		<h3 id="psdFiles"><strong>D) PSD Files</strong> - <a href="#toc">top</a></h3>
-		
-		<p>I've included three psds with this theme:</p>
-		
-			<ol>
-				<li>The main layout</li>
-				<li>The header</li>
-				<li>The buttons</li>
-			</ol>
-		
-		<p>If you'd like to change the main image in the header, open "header.psd", make the necessary adjustments, and then save the file as "headerBG.png". Do the same for the buttons.</p> 
-		
-		<p>Include any more specific information about your psds.</p>
-		
+
 		<hr>
 		
 		<h3 id="credits"><strong>E) Sources and Credits</strong> - <a href="#toc">top</a></h3>
@@ -165,21 +125,21 @@
 		
 		<ul>
 			<li><a href="http://laravel.com">Laravel</a></li>
-			<li><a href="http://laravel.com">Semantic-UI</a></li>
-			<li><a href="http://laravel.com">Jquery</a></li>
-			<li><a href="http://laravel.com">Owl Carousel</a></li>
-			<li><a href="http://laravel.com">VueJS</a></li>
-			<li><a href="http://laravel.com">Alertify JS</a></li>
-			<li><a href="http://laravel.com">BXSlider JS</a></li>
-			<li><a href="http://laravel.com">ChartckickJS</a></li>
-			<li><a href="http://laravel.com">DroponeJS</a></li>
+			<li><a href="http://semantic-ui.com">Semantic-UI</a></li>
+			<li><a href="http://jquery.com">Jquery</a></li>
+			<li><a href="http://owlgraphic.com/owlcarousel/">Owl Carousel</a></li>
+			<li><a href="http://vuejs.org">VueJS</a></li>
+			<li><a href="http://alertifyjs.com">Alertify JS</a></li>
+			<li><a href="http://bxslider.com">BXSlider JS</a></li>
+			<li><a href="http://chartkick.com">ChartckickJS</a></li>
+			<li><a href="http://dropzonejs.com">DroponeJS</a></li>
 			<li><a href="http://laravel.com">FontIconPicker</a></li>
-			<li><a href="http://laravel.com">JQTree</a></li>
+			<li><a href="http://mbraak.github.io/jqTree/">JQTree</a></li>
 		</ul>
 		
 		<hr>
 		
-		<p>Once again, thank you so much for purchasing this software. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. No guarantees, but I'll do my best to assist.</p>
+		<p>Once again, thank you so much for purchasing this software. As I said at the beginning, I'd be glad to help you if you have any questions relating to this theme. I'll do my best to assist.</p>
 		
 		<p class="append-bottom alt large"><strong>Dev Cyber</strong></p>
 		<p><a href="#toc">Go To Table of Contents</a></p>
