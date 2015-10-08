@@ -15,7 +15,7 @@ return array(
     |
     */
 
-    'driver' => 'smtp',
+    'driver' => 'mail',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -27,7 +27,7 @@ return array(
     |
     */
 
-    'host' => 'smtp.mailgun.org',
+    'host' => '',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
@@ -111,6 +111,6 @@ return array(
     |
     */
 
-    'pretend' => true,
+    'pretend' => false,
 
 );
