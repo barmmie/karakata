@@ -1,11 +1,11 @@
 $.mockjax({
     url: '*',
-    response: function(options) {
+    response: function (options) {
         this.responseText = ExampleData.example_data;
     },
     responseTime: 0
 });
 
-$(function() {
+$(function () {
     $('#tree1').tree();
 });

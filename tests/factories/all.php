@@ -24,13 +24,13 @@ $factory('Item', [
     'category_id' => 4,
     'amount' => $faker->numberBetween(1000, 2000),
     'negotiable' => $faker->randomElement([0, 1]),
-    'type' => $faker->randomElement(['business','personal']),
+    'type' => $faker->randomElement(['business', 'personal']),
     'email' => $faker->email,
     'seller_name' => $faker->name,
     'phone' => $faker->phoneNumber,
 ]);
 
-$factory('Category', function($faker){
+$factory('Category', function ($faker) {
     Category::createRoot();
     $cat = Category::addNode($faker->word);
     $cat = Category::addNode($faker->word);

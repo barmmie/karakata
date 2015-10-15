@@ -8,7 +8,8 @@
 
 use Laracasts\TestDummy\Factory as TestDummy;
 
-class ItemsTest extends TestCase {
+class ItemsTest extends TestCase
+{
     use DatabaseTransactionTrait;
 
 
@@ -16,26 +17,27 @@ class ItemsTest extends TestCase {
      * @test
      */
 
-    public function it_creates_a_new_item() {
+    public function it_creates_a_new_item()
+    {
         $locs = TestDummy::times(3)->create('Location');
         Category::createTestNodes();
 
         $item = TestDummy::attributesFor('Item');
-            $this->verifiedLogin()
-                ->visit('items/new')
-                ->submitForm('Create my item', $item)
-                ->seeInDatabase('items', $item);
+        $this->verifiedLogin()
+            ->visit('items/new')
+            ->submitForm('Create my item', $item)
+            ->seeInDatabase('items', $item);
 
-                $this->visit('/myitems')
-                    ->see($item['title'])
-            ;
+        $this->visit('/myitems')
+            ->see($item['title']);
     }
 
     /**
      * @test
      */
 
-    public function it_redirects_guests_who_tries_to_creates_a_new_item() {
+    public function it_redirects_guests_who_tries_to_creates_a_new_item()
+    {
         $this->visit('items/new')
             ->see('Authentication required');
 
@@ -49,7 +51,8 @@ class ItemsTest extends TestCase {
      * @test
      */
 
-    public function it_favorites_an_item() {
+    public function it_favorites_an_item()
+    {
 
         $locs = TestDummy::times(3)->create('Location');
         Category::createTestNodes();
@@ -57,7 +60,7 @@ class ItemsTest extends TestCase {
         $user = TestDummy::create('User');
         $item_att = TestDummy::attributesFor('Item');
 
-        $item = Item::create($item_att + ['user_id'=> $user1->id]);
+        $item = Item::create($item_att + ['user_id' => $user1->id]);
         $item->approve();
 
         $this->verifiedLogin($user)
@@ -71,7 +74,6 @@ class ItemsTest extends TestCase {
 //            ->see('Add to favorites')
         ;
     }
-
 
 
 }

@@ -11,11 +11,11 @@ exports.config = require('../config')
 exports.compiler = require('../compiler')
 
 exports.parsers = {
-  path: require('../parsers/path'),
-  text: require('../parsers/text'),
-  template: require('../parsers/template'),
-  directive: require('../parsers/directive'),
-  expression: require('../parsers/expression')
+    path: require('../parsers/path'),
+    text: require('../parsers/text'),
+    template: require('../parsers/template'),
+    directive: require('../parsers/directive'),
+    expression: require('../parsers/expression')
 }
 
 /**
@@ -34,29 +34,29 @@ var cid = 1
  */
 
 exports.extend = function (extendOptions) {
-  extendOptions = extendOptions || {}
-  var Super = this
-  var Sub = createClass(
-    extendOptions.name ||
-    Super.options.name ||
-    'VueComponent'
-  )
-  Sub.prototype = Object.create(Super.prototype)
-  Sub.prototype.constructor = Sub
-  Sub.cid = cid++
-  Sub.options = _.mergeOptions(
-    Super.options,
-    extendOptions
-  )
-  Sub['super'] = Super
-  // allow further extension
-  Sub.extend = Super.extend
-  // create asset registers, so extended classes
-  // can have their private assets too.
-  config._assetTypes.forEach(function (type) {
-    Sub[type] = Super[type]
-  })
-  return Sub
+    extendOptions = extendOptions || {}
+    var Super = this
+    var Sub = createClass(
+        extendOptions.name ||
+        Super.options.name ||
+        'VueComponent'
+    )
+    Sub.prototype = Object.create(Super.prototype)
+    Sub.prototype.constructor = Sub
+    Sub.cid = cid++
+    Sub.options = _.mergeOptions(
+        Super.options,
+        extendOptions
+    )
+    Sub['super'] = Super
+    // allow further extension
+    Sub.extend = Super.extend
+    // create asset registers, so extended classes
+    // can have their private assets too.
+    config._assetTypes.forEach(function (type) {
+        Sub[type] = Super[type]
+    })
+    return Sub
 }
 
 /**
@@ -68,11 +68,11 @@ exports.extend = function (extendOptions) {
  * @return {Function}
  */
 
-function createClass (name) {
-  return new Function(
-    'return function ' + _.classify(name) +
-    ' (options) { this._init(options) }'
-  )()
+function createClass(name) {
+    return new Function(
+        'return function ' + _.classify(name) +
+        ' (options) { this._init(options) }'
+    )()
 }
 
 /**
@@ -82,15 +82,15 @@ function createClass (name) {
  */
 
 exports.use = function (plugin) {
-  // additional parameters
-  var args = _.toArray(arguments, 1)
-  args.unshift(this)
-  if (typeof plugin.install === 'function') {
-    plugin.install.apply(plugin, args)
-  } else {
-    plugin.apply(null, args)
-  }
-  return this
+    // additional parameters
+    var args = _.toArray(arguments, 1)
+    args.unshift(this)
+    if (typeof plugin.install === 'function') {
+        plugin.install.apply(plugin, args)
+    } else {
+        plugin.apply(null, args)
+    }
+    return this
 }
 
 /**
@@ -102,18 +102,18 @@ exports.use = function (plugin) {
  */
 
 config._assetTypes.forEach(function (type) {
-  exports[type] = function (id, definition) {
-    if (!definition) {
-      return this.options[type + 's'][id]
-    } else {
-      if (
-        type === 'component' &&
-        _.isPlainObject(definition)
-      ) {
-        definition.name = id
-        definition = _.Vue.extend(definition)
-      }
-      this.options[type + 's'][id] = definition
+    exports[type] = function (id, definition) {
+        if (!definition) {
+            return this.options[type + 's'][id]
+        } else {
+            if (
+                type === 'component' &&
+                _.isPlainObject(definition)
+            ) {
+                definition.name = id
+                definition = _.Vue.extend(definition)
+            }
+            this.options[type + 's'][id] = definition
+        }
     }
-  }
 })

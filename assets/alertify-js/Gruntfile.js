@@ -14,10 +14,10 @@ module.exports = function (grunt) {
                 options: {
                     position: 'top',
                     banner: '/**\n' +
-                            ' * <%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %>\n' +
-                            ' * <%= pkg.description %>\n' +
-                            ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %> \n' +
-                            ' * Licensed under <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>*/\n',
+                    ' * <%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %>\n' +
+                    ' * <%= pkg.description %>\n' +
+                    ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %> \n' +
+                    ' * Licensed under <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>*/\n',
                     linebreak: false
                 },
                 files: {
@@ -35,7 +35,7 @@ module.exports = function (grunt) {
                 expand: true,
                 cwd: 'src/less',
                 src: ['**/*.less'],
-				ext: '.css',
+                ext: '.css',
                 dest: 'staging'
             }
         },
@@ -73,12 +73,12 @@ module.exports = function (grunt) {
                 src: ['**/*.css'],
                 dest: 'staging',
             },
-			build: {
-				expand : true,
+            build: {
+                expand: true,
                 cwd: 'staging',
                 src: ['**/*.css'],
                 dest: 'staging/rtl',
-				ext: '.css',
+                ext: '.css',
             }
         },
 
@@ -87,69 +87,69 @@ module.exports = function (grunt) {
                 report: 'gzip'
             },
             min: {
-				expand:true,
-				cwd:'staging',
-				src:['*.css', 'themes/*.css'],
-				dest:'build/css',
-				ext: '.min.css',
+                expand: true,
+                cwd: 'staging',
+                src: ['*.css', 'themes/*.css'],
+                dest: 'build/css',
+                ext: '.min.css',
             },
-			rtl: {
-				expand:true,
-				cwd:'staging/rtl',
-				src:['**/*.css'],
-				dest:'build/css',
-				ext: '.rtl.min.css',
+            rtl: {
+                expand: true,
+                cwd: 'staging/rtl',
+                src: ['**/*.css'],
+                dest: 'build/css',
+                ext: '.rtl.min.css',
             }
-		},
-		
-		copy: {
-			ltr:{
-				expand:true,
-				cwd:'staging',
-				src:['*.css', 'themes/*.css'],
-				dest:'build/css',
-				ext:'.css'
-			},
-			rtl:{
-				expand:true,
-				cwd:'staging/rtl',
-				src:['**/*.css'],
-				dest:'build/css',
-				ext:'.rtl.css'
-			},
-			build:{
-				expand:true,
-				cwd:'build',
-				src:['**'],
-				dest:'docpad/files/build'
-			}
-		},
-		
+        },
+
+        copy: {
+            ltr: {
+                expand: true,
+                cwd: 'staging',
+                src: ['*.css', 'themes/*.css'],
+                dest: 'build/css',
+                ext: '.css'
+            },
+            rtl: {
+                expand: true,
+                cwd: 'staging/rtl',
+                src: ['**/*.css'],
+                dest: 'build/css',
+                ext: '.rtl.css'
+            },
+            build: {
+                expand: true,
+                cwd: 'build',
+                src: ['**'],
+                dest: 'docpad/files/build'
+            }
+        },
+
         concat: {
             options: {
                 stripBanners: false,
                 banner: '/**\n' +
-                        ' * <%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %>\n' +
-                        ' * <%= pkg.description %>\n' +
-                        ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %> \n' +
-                        ' * Licensed under <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>*/\n',
+                ' * <%= pkg.name %> <%= pkg.version %> <%= pkg.homepage %>\n' +
+                ' * <%= pkg.description %>\n' +
+                ' * Copyright <%= grunt.template.today("yyyy") %> <%= pkg.author %> \n' +
+                ' * Licensed under <%= pkg.licenses[0].type %> <<%= pkg.licenses[0].url %>>*/\n',
             },
             dist: {
                 src: [
                     'src/js/intro.js',
                     'src/js/event.js',
-					
-					'src/js/dialog/intro.js',
-					'src/js/dialog/commands.js',
-					'src/js/dialog/actions.js',
-					'src/js/dialog/focus.js',
-					'src/js/dialog/transition.js',
-					'src/js/dialog/move.js',
-					'src/js/dialog/resize.js',
-					'src/js/dialog/events.js',
-					'src/js/dialog/dialog.js',
-					'src/js/dialog/outro.js',
-					
+
+                    'src/js/dialog/intro.js',
+                    'src/js/dialog/commands.js',
+                    'src/js/dialog/actions.js',
+                    'src/js/dialog/focus.js',
+                    'src/js/dialog/transition.js',
+                    'src/js/dialog/move.js',
+                    'src/js/dialog/resize.js',
+                    'src/js/dialog/events.js',
+                    'src/js/dialog/dialog.js',
+                    'src/js/dialog/outro.js',
+
                     'src/js/notifier.js',
                     'src/js/alertify.js',
                     'src/js/alert.js',
@@ -178,7 +178,7 @@ module.exports = function (grunt) {
         uglify: {
             options: {
                 banner: '/*! <%= pkg.name %> - v<%= pkg.version %> - ' +
-                        '<%= pkg.author %> */\n',
+                '<%= pkg.author %> */\n',
                 report: 'gzip'
             },
             dist: {
@@ -186,7 +186,7 @@ module.exports = function (grunt) {
                     'build/alertify.min.js': ['<banner>', 'build/alertify.js']
                 }
             }
-		},
+        },
 
         watch: {
             src: {
@@ -194,21 +194,21 @@ module.exports = function (grunt) {
                 tasks: ['build']
             }
         },
-		
-		compress: {
-			options: {
-				archive: 'build/alertifyjs.zip'
-			},
-			build: {
-				files: [
-					{
-						expand:true,
-						cwd: 'build',
-						src: ['**']
-					}
-				]
-			}
-		}
+
+        compress: {
+            options: {
+                archive: 'build/alertifyjs.zip'
+            },
+            build: {
+                files: [
+                    {
+                        expand: true,
+                        cwd: 'build',
+                        src: ['**']
+                    }
+                ]
+            }
+        }
     });
 
     grunt.loadNpmTasks('grunt-rtlcss');
@@ -220,7 +220,7 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-jshint');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-banner');

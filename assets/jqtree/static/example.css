@@ -47,7 +47,7 @@ pre {
 #scroll-container {
     height: 200px;
     overflow-y: scroll;
-    position: relative;  /* ie7 fix */
+    position: relative; /* ie7 fix */
     -ms-user-select: none;
     user-select: none;
 }

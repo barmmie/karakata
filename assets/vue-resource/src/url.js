@@ -70,7 +70,7 @@ module.exports = function (Vue) {
 
         params.add = function (key, value) {
 
-            if (_.isFunction (value)) {
+            if (_.isFunction(value)) {
                 value = value();
             }
 

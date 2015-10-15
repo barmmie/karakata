@@ -5,957 +5,980 @@
  */
 
 (function webpackUniversalModuleDefinition(root, factory) {
-	if(typeof exports === 'object' && typeof module === 'object')
-		module.exports = factory();
-	else if(typeof define === 'function' && define.amd)
-		define(factory);
-	else if(typeof exports === 'object')
-		exports["VueResource"] = factory();
-	else
-		root["VueResource"] = factory();
-})(this, function() {
-return /******/ (function(modules) { // webpackBootstrap
-/******/ 	// The module cache
-/******/ 	var installedModules = {};
+    if (typeof exports === 'object' && typeof module === 'object')
+        module.exports = factory();
+    else if (typeof define === 'function' && define.amd)
+        define(factory);
+    else if (typeof exports === 'object')
+        exports["VueResource"] = factory();
+    else
+        root["VueResource"] = factory();
+})(this, function () {
+    return /******/ (function (modules) { // webpackBootstrap
+        /******/ 	// The module cache
+        /******/
+        var installedModules = {};
+
+        /******/ 	// The require function
+        /******/
+        function __webpack_require__(moduleId) {
+
+            /******/ 		// Check if module is in cache
+            /******/
+            if (installedModules[moduleId])
+            /******/            return installedModules[moduleId].exports;
+
+            /******/ 		// Create a new module (and put it into the cache)
+            /******/
+            var module = installedModules[moduleId] = {
+                /******/            exports: {},
+                /******/            id: moduleId,
+                /******/            loaded: false
+                /******/
+            };
+
+            /******/ 		// Execute the module function
+            /******/
+            modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+
+            /******/ 		// Flag the module as loaded
+            /******/
+            module.loaded = true;
+
+            /******/ 		// Return the exports of the module
+            /******/
+            return module.exports;
+            /******/
+        }
+
+
+        /******/ 	// expose the modules object (__webpack_modules__)
+        /******/
+        __webpack_require__.m = modules;
+
+        /******/ 	// expose the module cache
+        /******/
+        __webpack_require__.c = installedModules;
+
+        /******/ 	// __webpack_public_path__
+        /******/
+        __webpack_require__.p = "";
+
+        /******/ 	// Load entry module and return exports
+        /******/
+        return __webpack_require__(0);
+        /******/
+    })
+        /************************************************************************/
+        /******/([
+        /* 0 */
+        /***/ function (module, exports, __webpack_require__) {
+
+            /**
+             * Install plugin.
+             */
+
+            function install(Vue) {
+                Vue.url = __webpack_require__(1)(Vue);
+                Vue.http = __webpack_require__(3)(Vue);
+                Vue.resource = __webpack_require__(7)(Vue);
+            }
+
+            if (window.Vue) {
+                Vue.use(install);
+            }
+
+            module.exports = install;
+
+
+            /***/
+        },
+        /* 1 */
+        /***/ function (module, exports, __webpack_require__) {
 
-/******/ 	// The require function
-/******/ 	function __webpack_require__(moduleId) {
+            /**
+             * Service for URL templating.
+             */
+
+            var _ = __webpack_require__(2);
+            var el = document.createElement('a');
+
+            module.exports = function (Vue) {
+
+                function Url(url, params) {
 
-/******/ 		// Check if module is in cache
-/******/ 		if(installedModules[moduleId])
-/******/ 			return installedModules[moduleId].exports;
+                    var urlParams = {}, queryParams = {}, options = url, query;
 
-/******/ 		// Create a new module (and put it into the cache)
-/******/ 		var module = installedModules[moduleId] = {
-/******/ 			exports: {},
-/******/ 			id: moduleId,
-/******/ 			loaded: false
-/******/ 		};
+                    if (!_.isPlainObject(options)) {
+                        options = {url: url, params: params};
+                    }
 
-/******/ 		// Execute the module function
-/******/ 		modules[moduleId].call(module.exports, module, module.exports, __webpack_require__);
+                    options = _.extend({}, Url.options, _.options('url', this, options));
 
-/******/ 		// Flag the module as loaded
-/******/ 		module.loaded = true;
+                    url = options.url.replace(/:([a-z]\w*)/gi, function (match, name) {
 
-/******/ 		// Return the exports of the module
-/******/ 		return module.exports;
-/******/ 	}
+                        if (options.params[name]) {
+                            urlParams[name] = true;
+                            return encodeUriSegment(options.params[name]);
+                        }
 
+                        return '';
+                    });
 
-/******/ 	// expose the modules object (__webpack_modules__)
-/******/ 	__webpack_require__.m = modules;
+                    if (typeof options.root === 'string' && !url.match(/^(https?:)?\//)) {
+                        url = options.root + '/' + url;
+                    }
 
-/******/ 	// expose the module cache
-/******/ 	__webpack_require__.c = installedModules;
+                    url = url.replace(/([^:])[\/]{2,}/g, '$1/');
+                    url = url.replace(/(\w+)\/+$/, '$1');
 
-/******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+                    _.each(options.params, function (value, key) {
+                        if (!urlParams[key]) {
+                            queryParams[key] = value;
+                        }
+                    });
 
-/******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(0);
-/******/ })
-/************************************************************************/
-/******/ ([
-/* 0 */
-/***/ function(module, exports, __webpack_require__) {
+                    query = Url.params(queryParams);
 
-	/**
-	 * Install plugin.
-	 */
+                    if (query) {
+                        url += (url.indexOf('?') == -1 ? '?' : '&') + query;
+                    }
 
-	function install(Vue) {
-	    Vue.url = __webpack_require__(1)(Vue);
-	    Vue.http = __webpack_require__(3)(Vue);
-	    Vue.resource = __webpack_require__(7)(Vue);
-	}
+                    return url;
+                }
 
-	if (window.Vue) {
-	    Vue.use(install);
-	}
+                /**
+                 * Url options.
+                 */
 
-	module.exports = install;
+                Url.options = {
+                    url: '',
+                    params: {}
+                };
 
+                /**
+                 * Encodes a Url parameter string.
+                 *
+                 * @param {Object} obj
+                 */
 
-/***/ },
-/* 1 */
-/***/ function(module, exports, __webpack_require__) {
+                Url.params = function (obj) {
 
-	/**
-	 * Service for URL templating.
-	 */
+                    var params = [];
 
-	var _ = __webpack_require__(2);
-	var el = document.createElement('a');
+                    params.add = function (key, value) {
 
-	module.exports = function (Vue) {
+                        if (_.isFunction(value)) {
+                            value = value();
+                        }
 
-	    function Url(url, params) {
+                        if (value === null) {
+                            value = '';
+                        }
 
-	        var urlParams = {}, queryParams = {}, options = url, query;
+                        this.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
+                    };
 
-	        if (!_.isPlainObject(options)) {
-	            options = {url: url, params: params};
-	        }
+                    serialize(params, obj);
 
-	        options = _.extend({}, Url.options, _.options('url', this, options));
+                    return params.join('&');
+                };
 
-	        url = options.url.replace(/:([a-z]\w*)/gi, function (match, name) {
+                /**
+                 * Parse a URL and return its components.
+                 *
+                 * @param {String} url
+                 */
 
-	            if (options.params[name]) {
-	                urlParams[name] = true;
-	                return encodeUriSegment(options.params[name]);
-	            }
+                Url.parse = function (url) {
 
-	            return '';
-	        });
+                    el.href = url;
 
-	        if (typeof options.root === 'string' && !url.match(/^(https?:)?\//)) {
-	            url = options.root + '/' + url;
-	        }
+                    return {
+                        href: el.href,
+                        protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
+                        port: el.port,
+                        host: el.host,
+                        hostname: el.hostname,
+                        pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
+                        search: el.search ? el.search.replace(/^\?/, '') : '',
+                        hash: el.hash ? el.hash.replace(/^#/, '') : ''
+                    };
+                };
 
-	        url = url.replace(/([^:])[\/]{2,}/g, '$1/');
-	        url = url.replace(/(\w+)\/+$/, '$1');
+                function serialize(params, obj, scope) {
 
-	        _.each(options.params, function (value, key) {
-	            if (!urlParams[key]) {
-	                queryParams[key] = value;
-	            }
-	        });
+                    var array = _.isArray(obj), plain = _.isPlainObject(obj), hash;
 
-	        query = Url.params(queryParams);
+                    _.each(obj, function (value, key) {
 
-	        if (query) {
-	            url += (url.indexOf('?') == -1 ? '?' : '&') + query;
-	        }
+                        hash = _.isObject(value) || _.isArray(value);
 
-	        return url;
-	    }
+                        if (scope) {
+                            key = scope + '[' + (plain || hash ? key : '') + ']';
+                        }
 
-	    /**
-	     * Url options.
-	     */
+                        if (!scope && array) {
+                            params.add(value.name, value.value);
+                        } else if (hash) {
+                            serialize(params, value, key);
+                        } else {
+                            params.add(key, value);
+                        }
+                    });
+                }
 
-	    Url.options = {
-	        url: '',
-	        params: {}
-	    };
+                function encodeUriSegment(value) {
 
-	    /**
-	     * Encodes a Url parameter string.
-	     *
-	     * @param {Object} obj
-	     */
+                    return encodeUriQuery(value, true).
+                        replace(/%26/gi, '&').
+                        replace(/%3D/gi, '=').
+                        replace(/%2B/gi, '+');
+                }
 
-	    Url.params = function (obj) {
+                function encodeUriQuery(value, spaces) {
 
-	        var params = [];
+                    return encodeURIComponent(value).
+                        replace(/%40/gi, '@').
+                        replace(/%3A/gi, ':').
+                        replace(/%24/g, '$').
+                        replace(/%2C/gi, ',').
+                        replace(/%20/g, (spaces ? '%20' : '+'));
+                }
 
-	        params.add = function (key, value) {
+                Object.defineProperty(Vue.prototype, '$url', {
 
-	            if (_.isFunction (value)) {
-	                value = value();
-	            }
+                    get: function () {
+                        return _.extend(Url.bind(this), Url);
+                    }
 
-	            if (value === null) {
-	                value = '';
-	            }
+                });
 
-	            this.push(encodeUriSegment(key) + '=' + encodeUriSegment(value));
-	        };
+                return Url;
+            };
 
-	        serialize(params, obj);
 
-	        return params.join('&');
-	    };
+            /***/
+        },
+        /* 2 */
+        /***/ function (module, exports) {
 
-	    /**
-	     * Parse a URL and return its components.
-	     *
-	     * @param {String} url
-	     */
+            /**
+             * Utility functions.
+             */
 
-	    Url.parse = function (url) {
+            var _ = exports;
 
-	        el.href = url;
+            _.isArray = Array.isArray;
 
-	        return {
-	            href: el.href,
-	            protocol: el.protocol ? el.protocol.replace(/:$/, '') : '',
-	            port: el.port,
-	            host: el.host,
-	            hostname: el.hostname,
-	            pathname: el.pathname.charAt(0) === '/' ? el.pathname : '/' + el.pathname,
-	            search: el.search ? el.search.replace(/^\?/, '') : '',
-	            hash: el.hash ? el.hash.replace(/^#/, '') : ''
-	        };
-	    };
+            _.isFunction = function (obj) {
+                return obj && typeof obj === 'function';
+            };
 
-	    function serialize(params, obj, scope) {
+            _.isObject = function (obj) {
+                return obj !== null && typeof obj === 'object';
+            };
 
-	        var array = _.isArray(obj), plain = _.isPlainObject(obj), hash;
+            _.isPlainObject = function (obj) {
+                return Object.prototype.toString.call(obj) === '[object Object]';
+            };
 
-	        _.each(obj, function (value, key) {
+            _.options = function (key, obj, options) {
 
-	            hash = _.isObject(value) || _.isArray(value);
+                var opts = obj.$options || {};
 
-	            if (scope) {
-	                key = scope + '[' + (plain || hash ? key : '') + ']';
-	            }
+                return _.extend({},
+                    opts[key],
+                    options
+                );
+            };
 
-	            if (!scope && array) {
-	                params.add(value.name, value.value);
-	            } else if (hash) {
-	                serialize(params, value, key);
-	            } else {
-	                params.add(key, value);
-	            }
-	        });
-	    }
+            _.each = function (obj, iterator) {
 
-	    function encodeUriSegment(value) {
+                var i, key;
 
-	        return encodeUriQuery(value, true).
-	            replace(/%26/gi, '&').
-	            replace(/%3D/gi, '=').
-	            replace(/%2B/gi, '+');
-	    }
+                if (typeof obj.length == 'number') {
+                    for (i = 0; i < obj.length; i++) {
+                        iterator.call(obj[i], obj[i], i);
+                    }
+                } else if (_.isObject(obj)) {
+                    for (key in obj) {
+                        if (obj.hasOwnProperty(key)) {
+                            iterator.call(obj[key], obj[key], key);
+                        }
+                    }
+                }
 
-	    function encodeUriQuery(value, spaces) {
+                return obj;
+            };
 
-	        return encodeURIComponent(value).
-	            replace(/%40/gi, '@').
-	            replace(/%3A/gi, ':').
-	            replace(/%24/g, '$').
-	            replace(/%2C/gi, ',').
-	            replace(/%20/g, (spaces ? '%20' : '+'));
-	    }
+            _.extend = function (target) {
 
-	    Object.defineProperty(Vue.prototype, '$url', {
+                var array = [], args = array.slice.call(arguments, 1), deep;
 
-	        get: function () {
-	            return _.extend(Url.bind(this), Url);
-	        }
+                if (typeof target == 'boolean') {
+                    deep = target;
+                    target = args.shift();
+                }
 
-	    });
+                args.forEach(function (arg) {
+                    extend(target, arg, deep);
+                });
 
-	    return Url;
-	};
+                return target;
+            };
 
+            function extend(target, source, deep) {
+                for (var key in source) {
+                    if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
+                        if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
+                            target[key] = {};
+                        }
+                        if (_.isArray(source[key]) && !_.isArray(target[key])) {
+                            target[key] = [];
+                        }
+                        extend(target[key], source[key], deep);
+                    } else if (source[key] !== undefined) {
+                        target[key] = source[key];
+                    }
+                }
+            }
 
-/***/ },
-/* 2 */
-/***/ function(module, exports) {
 
-	/**
-	 * Utility functions.
-	 */
+            /***/
+        },
+        /* 3 */
+        /***/ function (module, exports, __webpack_require__) {
 
-	var _ = exports;
+            /**
+             * Service for sending network requests.
+             */
 
-	_.isArray = Array.isArray;
+            var _ = __webpack_require__(2);
+            var xhr = __webpack_require__(4);
+            var jsonp = __webpack_require__(6);
+            var jsonType = {'Content-Type': 'application/json;charset=utf-8'};
 
-	_.isFunction = function (obj) {
-	    return obj && typeof obj === 'function';
-	};
+            module.exports = function (Vue) {
 
-	_.isObject = function (obj) {
-	    return obj !== null && typeof obj === 'object';
-	};
+                var Url = Vue.url;
+                var originUrl = Url.parse(location.href);
 
-	_.isPlainObject = function (obj) {
-	    return Object.prototype.toString.call(obj) === '[object Object]';
-	};
+                function Http(url, options) {
 
-	_.options = function (key, obj, options) {
+                    var self = this, promise;
 
-	    var opts = obj.$options || {};
+                    options = options || {};
 
-	    return _.extend({},
-	        opts[key],
-	        options
-	    );
-	};
+                    if (_.isPlainObject(url)) {
+                        options = url;
+                        url = '';
+                    }
 
-	_.each = function (obj, iterator) {
+                    options = _.extend(true, {url: url},
+                        Http.options, _.options('http', self, options)
+                    );
 
-	    var i, key;
+                    if (options.crossOrigin === null) {
+                        options.crossOrigin = crossOrigin(options.url);
+                    }
 
-	    if (typeof obj.length == 'number') {
-	        for (i = 0; i < obj.length; i++) {
-	            iterator.call(obj[i], obj[i], i);
-	        }
-	    } else if (_.isObject(obj)) {
-	        for (key in obj) {
-	            if (obj.hasOwnProperty(key)) {
-	                iterator.call(obj[key], obj[key], key);
-	            }
-	        }
-	    }
+                    options.headers = _.extend({},
+                        Http.headers.common,
+                        !options.crossOrigin ? Http.headers.custom : {},
+                        Http.headers[options.method.toLowerCase()],
+                        options.headers
+                    );
 
-	    return obj;
-	};
+                    if (_.isPlainObject(options.data) && /^(get|jsonp)$/i.test(options.method)) {
+                        _.extend(options.params, options.data);
+                        delete options.data;
+                    }
 
-	_.extend = function (target) {
+                    if (options.emulateHTTP && !options.crossOrigin && /^(put|patch|delete)$/i.test(options.method)) {
+                        options.headers['X-HTTP-Method-Override'] = options.method;
+                        options.method = 'post';
+                    }
 
-	    var array = [], args = array.slice.call(arguments, 1), deep;
+                    if (options.emulateJSON && _.isPlainObject(options.data)) {
+                        options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
+                        options.data = Url.params(options.data);
+                    }
 
-	    if (typeof target == 'boolean') {
-	        deep = target;
-	        target = args.shift();
-	    }
+                    if (_.isObject(options.data) && /FormData/i.test(options.data.toString())) {
+                        delete options.headers['Content-Type'];
+                    }
 
-	    args.forEach(function (arg) {
-	        extend(target, arg, deep);
-	    });
+                    if (_.isPlainObject(options.data)) {
+                        options.data = JSON.stringify(options.data);
+                    }
 
-	    return target;
-	};
+                    promise = (options.method.toLowerCase() == 'jsonp' ? jsonp : xhr).call(self, self.$url || Url, options);
 
-	function extend(target, source, deep) {
-	    for (var key in source) {
-	        if (deep && (_.isPlainObject(source[key]) || _.isArray(source[key]))) {
-	            if (_.isPlainObject(source[key]) && !_.isPlainObject(target[key])) {
-	                target[key] = {};
-	            }
-	            if (_.isArray(source[key]) && !_.isArray(target[key])) {
-	                target[key] = [];
-	            }
-	            extend(target[key], source[key], deep);
-	        } else if (source[key] !== undefined) {
-	            target[key] = source[key];
-	        }
-	    }
-	}
+                    promise.then(transformResponse, transformResponse);
 
+                    promise.success = function (fn) {
 
-/***/ },
-/* 3 */
-/***/ function(module, exports, __webpack_require__) {
+                        promise.then(function (response) {
+                            fn.call(self, response.data, response.status, response);
+                        }, function () {
+                        });
 
-	/**
-	 * Service for sending network requests.
-	 */
+                        return promise;
+                    };
 
-	var _ = __webpack_require__(2);
-	var xhr = __webpack_require__(4);
-	var jsonp = __webpack_require__(6);
-	var jsonType = {'Content-Type': 'application/json;charset=utf-8'};
+                    promise.error = function (fn) {
 
-	module.exports = function (Vue) {
+                        promise.catch(function (response) {
+                            fn.call(self, response.data, response.status, response);
+                        });
 
-	    var Url = Vue.url;
-	    var originUrl = Url.parse(location.href);
+                        return promise;
+                    };
 
-	    function Http(url, options) {
+                    promise.always = function (fn) {
 
-	        var self = this, promise;
+                        var cb = function (response) {
+                            fn.call(self, response.data, response.status, response);
+                        };
 
-	        options = options || {};
+                        promise.then(cb, cb);
 
-	        if (_.isPlainObject(url)) {
-	            options = url;
-	            url = '';
-	        }
+                        return promise;
+                    };
 
-	        options = _.extend(true, {url: url},
-	            Http.options, _.options('http', self, options)
-	        );
+                    if (options.success) {
+                        promise.success(options.success);
+                    }
 
-	        if (options.crossOrigin === null) {
-	            options.crossOrigin = crossOrigin(options.url);
-	        }
+                    if (options.error) {
+                        promise.error(options.error);
+                    }
 
-	        options.headers = _.extend({},
-	            Http.headers.common,
-	            !options.crossOrigin ? Http.headers.custom : {},
-	            Http.headers[options.method.toLowerCase()],
-	            options.headers
-	        );
+                    return promise;
+                }
 
-	        if (_.isPlainObject(options.data) && /^(get|jsonp)$/i.test(options.method)) {
-	            _.extend(options.params, options.data);
-	            delete options.data;
-	        }
+                function transformResponse(response) {
 
-	        if (options.emulateHTTP && !options.crossOrigin && /^(put|patch|delete)$/i.test(options.method)) {
-	            options.headers['X-HTTP-Method-Override'] = options.method;
-	            options.method = 'post';
-	        }
+                    try {
+                        response.data = JSON.parse(response.responseText);
+                    } catch (e) {
+                        response.data = response.responseText;
+                    }
 
-	        if (options.emulateJSON && _.isPlainObject(options.data)) {
-	            options.headers['Content-Type'] = 'application/x-www-form-urlencoded';
-	            options.data = Url.params(options.data);
-	        }
+                }
 
-	        if (_.isObject(options.data) && /FormData/i.test(options.data.toString())) {
-	            delete options.headers['Content-Type'];
-	        }
+                function crossOrigin(url) {
 
-	        if (_.isPlainObject(options.data)) {
-	            options.data = JSON.stringify(options.data);
-	        }
+                    var requestUrl = Url.parse(url);
 
-	        promise = (options.method.toLowerCase() == 'jsonp' ? jsonp : xhr).call(self, self.$url || Url, options);
+                    return (requestUrl.protocol !== originUrl.protocol || requestUrl.host !== originUrl.host);
+                }
 
-	        promise.then(transformResponse, transformResponse);
+                Http.options = {
+                    method: 'get',
+                    params: {},
+                    data: '',
+                    jsonp: 'callback',
+                    beforeSend: null,
+                    crossOrigin: null,
+                    emulateHTTP: false,
+                    emulateJSON: false
+                };
 
-	        promise.success = function (fn) {
+                Http.headers = {
+                    put: jsonType,
+                    post: jsonType,
+                    patch: jsonType,
+                    delete: jsonType,
+                    common: {'Accept': 'application/json, text/plain, */*'},
+                    custom: {'X-Requested-With': 'XMLHttpRequest'}
+                };
 
-	            promise.then(function (response) {
-	                fn.call(self, response.data, response.status, response);
-	            }, function () {});
+                ['get', 'put', 'post', 'patch', 'delete', 'jsonp'].forEach(function (method) {
 
-	            return promise;
-	        };
+                    Http[method] = function (url, data, success, options) {
 
-	        promise.error = function (fn) {
+                        if (_.isFunction(data)) {
+                            options = success;
+                            success = data;
+                            data = undefined;
+                        }
 
-	            promise.catch(function (response) {
-	                fn.call(self, response.data, response.status, response);
-	            });
+                        return this(url, _.extend({method: method, data: data, success: success}, options));
+                    };
+                });
 
-	            return promise;
-	        };
+                Object.defineProperty(Vue.prototype, '$http', {
 
-	        promise.always = function (fn) {
+                    get: function () {
+                        return _.extend(Http.bind(this), Http);
+                    }
 
-	            var cb = function (response) {
-	                fn.call(self, response.data, response.status, response);
-	            };
+                });
 
-	            promise.then(cb, cb);
+                return Http;
+            };
 
-	            return promise;
-	        };
 
-	        if (options.success) {
-	            promise.success(options.success);
-	        }
+            /***/
+        },
+        /* 4 */
+        /***/ function (module, exports, __webpack_require__) {
 
-	        if (options.error) {
-	            promise.error(options.error);
-	        }
+            /**
+             * XMLHttp request.
+             */
 
-	        return promise;
-	    }
+            var _ = __webpack_require__(2);
+            var Promise = __webpack_require__(5);
 
-	    function transformResponse(response) {
+            module.exports = function (url, options) {
 
-	        try {
-	            response.data = JSON.parse(response.responseText);
-	        } catch (e) {
-	            response.data = response.responseText;
-	        }
+                var request = new XMLHttpRequest(), promise;
 
-	    }
+                if (_.isFunction(options.beforeSend)) {
+                    options.beforeSend.call(this, request, options);
+                }
 
-	    function crossOrigin(url) {
+                promise = new Promise(function (resolve, reject) {
 
-	        var requestUrl = Url.parse(url);
+                    request.open(options.method, url(options), true);
 
-	        return (requestUrl.protocol !== originUrl.protocol || requestUrl.host !== originUrl.host);
-	    }
+                    _.each(options.headers, function (value, header) {
+                        request.setRequestHeader(header, value);
+                    });
 
-	    Http.options = {
-	        method: 'get',
-	        params: {},
-	        data: '',
-	        jsonp: 'callback',
-	        beforeSend: null,
-	        crossOrigin: null,
-	        emulateHTTP: false,
-	        emulateJSON: false
-	    };
+                    request.onreadystatechange = function () {
 
-	    Http.headers = {
-	        put: jsonType,
-	        post: jsonType,
-	        patch: jsonType,
-	        delete: jsonType,
-	        common: {'Accept': 'application/json, text/plain, */*'},
-	        custom: {'X-Requested-With': 'XMLHttpRequest'}
-	    };
+                        if (this.readyState === 4) {
 
-	    ['get', 'put', 'post', 'patch', 'delete', 'jsonp'].forEach(function (method) {
+                            if (this.status >= 200 && this.status < 300) {
+                                resolve(this);
+                            } else {
+                                reject(this);
+                            }
+                        }
+                    };
 
-	        Http[method] = function (url, data, success, options) {
+                    request.send(options.data);
+                });
 
-	            if (_.isFunction(data)) {
-	                options = success;
-	                success = data;
-	                data = undefined;
-	            }
+                _.extend(promise, {
 
-	            return this(url, _.extend({method: method, data: data, success: success}, options));
-	        };
-	    });
+                    abort: function () {
+                        request.abort();
+                    }
 
-	    Object.defineProperty(Vue.prototype, '$http', {
+                });
 
-	        get: function () {
-	            return _.extend(Http.bind(this), Http);
-	        }
+                return promise;
+            };
 
-	    });
 
-	    return Http;
-	};
+            /***/
+        },
+        /* 5 */
+        /***/ function (module, exports) {
 
+            /**
+             * Promises/A+ polyfill v1.1.0 (https://github.com/bramstein/promis)
+             */
 
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
+            var RESOLVED = 0;
+            var REJECTED = 1;
+            var PENDING = 2;
 
-	/**
-	 * XMLHttp request.
-	 */
+            function Promise(executor) {
 
-	var _ = __webpack_require__(2);
-	var Promise = __webpack_require__(5);
+                this.state = PENDING;
+                this.value = undefined;
+                this.deferred = [];
 
-	module.exports = function (url, options) {
+                var promise = this;
 
-	    var request = new XMLHttpRequest(), promise;
+                try {
+                    executor(function (x) {
+                        promise.resolve(x);
+                    }, function (r) {
+                        promise.reject(r);
+                    });
+                } catch (e) {
+                    promise.reject(e);
+                }
+            }
 
-	    if (_.isFunction(options.beforeSend)) {
-	        options.beforeSend.call(this, request, options);
-	    }
+            Promise.reject = function (r) {
+                return new Promise(function (resolve, reject) {
+                    reject(r);
+                });
+            };
 
-	    promise = new Promise(function (resolve, reject) {
+            Promise.resolve = function (x) {
+                return new Promise(function (resolve, reject) {
+                    resolve(x);
+                });
+            };
 
-	        request.open(options.method, url(options), true);
+            Promise.all = function all(iterable) {
+                return new Promise(function (resolve, reject) {
+                    var count = 0,
+                        result = [];
 
-	        _.each(options.headers, function (value, header) {
-	            request.setRequestHeader(header, value);
-	        });
+                    if (iterable.length === 0) {
+                        resolve(result);
+                    }
 
-	        request.onreadystatechange = function () {
+                    function resolver(i) {
+                        return function (x) {
+                            result[i] = x;
+                            count += 1;
 
-	            if (this.readyState === 4) {
+                            if (count === iterable.length) {
+                                resolve(result);
+                            }
+                        };
+                    }
+
+                    for (var i = 0; i < iterable.length; i += 1) {
+                        iterable[i].then(resolver(i), reject);
+                    }
+                });
+            };
+
+            Promise.race = function race(iterable) {
+                return new Promise(function (resolve, reject) {
+                    for (var i = 0; i < iterable.length; i += 1) {
+                        iterable[i].then(resolve, reject);
+                    }
+                });
+            };
+
+            var p = Promise.prototype;
+
+            p.resolve = function resolve(x) {
+                var promise = this;
+
+                if (promise.state === PENDING) {
+                    if (x === promise) {
+                        throw new TypeError('Promise settled with itself.');
+                    }
+
+                    var called = false;
+
+                    try {
+                        var then = x && x['then'];
+
+                        if (x !== null && typeof x === 'object' && typeof then === 'function') {
+                            then.call(x, function (x) {
+                                if (!called) {
+                                    promise.resolve(x);
+                                }
+                                called = true;
+
+                            }, function (r) {
+                                if (!called) {
+                                    promise.reject(r);
+                                }
+                                called = true;
+                            });
+                            return;
+                        }
+                    } catch (e) {
+                        if (!called) {
+                            promise.reject(e);
+                        }
+                        return;
+                    }
+                    promise.state = RESOLVED;
+                    promise.value = x;
+                    promise.notify();
+                }
+            };
+
+            p.reject = function reject(reason) {
+                var promise = this;
+
+                if (promise.state === PENDING) {
+                    if (reason === promise) {
+                        throw new TypeError('Promise settled with itself.');
+                    }
+
+                    promise.state = REJECTED;
+                    promise.value = reason;
+                    promise.notify();
+                }
+            };
+
+            p.notify = function notify() {
+                var promise = this;
+
+                async(function () {
+                    if (promise.state !== PENDING) {
+                        while (promise.deferred.length) {
+                            var deferred = promise.deferred.shift(),
+                                onResolved = deferred[0],
+                                onRejected = deferred[1],
+                                resolve = deferred[2],
+                                reject = deferred[3];
+
+                            try {
+                                if (promise.state === RESOLVED) {
+                                    if (typeof onResolved === 'function') {
+                                        resolve(onResolved.call(undefined, promise.value));
+                                    } else {
+                                        resolve(promise.value);
+                                    }
+                                } else if (promise.state === REJECTED) {
+                                    if (typeof onRejected === 'function') {
+                                        resolve(onRejected.call(undefined, promise.value));
+                                    } else {
+                                        reject(promise.value);
+                                    }
+                                }
+                            } catch (e) {
+                                reject(e);
+                            }
+                        }
+                    }
+                });
+            };
 
-	                if (this.status >= 200 && this.status < 300) {
-	                    resolve(this);
-	                } else {
-	                    reject(this);
-	                }
-	            }
-	        };
+            p.catch = function (onRejected) {
+                return this.then(undefined, onRejected);
+            };
 
-	        request.send(options.data);
-	    });
+            p.then = function then(onResolved, onRejected) {
+                var promise = this;
 
-	    _.extend(promise, {
+                return new Promise(function (resolve, reject) {
+                    promise.deferred.push([onResolved, onRejected, resolve, reject]);
+                    promise.notify();
+                });
+            };
 
-	        abort: function () {
-	            request.abort();
-	        }
+            var queue = [];
+            var async = function (callback) {
+                queue.push(callback);
 
-	    });
+                if (queue.length === 1) {
+                    async.async();
+                }
+            };
 
-	    return promise;
-	};
+            async.run = function () {
+                while (queue.length) {
+                    queue[0]();
+                    queue.shift();
+                }
+            };
 
+            if (window.MutationObserver) {
+                var el = document.createElement('div');
+                var mo = new MutationObserver(async.run);
 
-/***/ },
-/* 5 */
-/***/ function(module, exports) {
+                mo.observe(el, {
+                    attributes: true
+                });
 
-	/**
-	 * Promises/A+ polyfill v1.1.0 (https://github.com/bramstein/promis)
-	 */
+                async.async = function () {
+                    el.setAttribute("x", 0);
+                };
+            } else {
+                async.async = function () {
+                    setTimeout(async.run);
+                };
+            }
 
-	var RESOLVED = 0;
-	var REJECTED = 1;
-	var PENDING  = 2;
+            module.exports = window.Promise || Promise;
 
-	function Promise(executor) {
 
-	    this.state = PENDING;
-	    this.value = undefined;
-	    this.deferred = [];
+            /***/
+        },
+        /* 6 */
+        /***/ function (module, exports, __webpack_require__) {
 
-	    var promise = this;
+            /**
+             * JSONP request.
+             */
 
-	    try {
-	        executor(function (x) {
-	            promise.resolve(x);
-	        }, function (r) {
-	            promise.reject(r);
-	        });
-	    } catch (e) {
-	        promise.reject(e);
-	    }
-	}
+            var _ = __webpack_require__(2);
+            var Promise = __webpack_require__(5);
 
-	Promise.reject = function (r) {
-	    return new Promise(function (resolve, reject) {
-	        reject(r);
-	    });
-	};
+            module.exports = function (url, options) {
 
-	Promise.resolve = function (x) {
-	    return new Promise(function (resolve, reject) {
-	        resolve(x);
-	    });
-	};
+                var callback = '_jsonp' + Math.random().toString(36).substr(2), script, body;
 
-	Promise.all = function all(iterable) {
-	    return new Promise(function (resolve, reject) {
-	        var count = 0,
-	            result = [];
+                options.params[options.jsonp] = callback;
 
-	        if (iterable.length === 0) {
-	            resolve(result);
-	        }
+                if (_.isFunction(options.beforeSend)) {
+                    options.beforeSend.call(this, {}, options);
+                }
 
-	        function resolver(i) {
-	            return function (x) {
-	                result[i] = x;
-	                count += 1;
+                return new Promise(function (resolve, reject) {
 
-	                if (count === iterable.length) {
-	                    resolve(result);
-	                }
-	            };
-	        }
-
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            iterable[i].then(resolver(i), reject);
-	        }
-	    });
-	};
-
-	Promise.race = function race(iterable) {
-	    return new Promise(function (resolve, reject) {
-	        for (var i = 0; i < iterable.length; i += 1) {
-	            iterable[i].then(resolve, reject);
-	        }
-	    });
-	};
-
-	var p = Promise.prototype;
-
-	p.resolve = function resolve(x) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (x === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        var called = false;
-
-	        try {
-	            var then = x && x['then'];
-
-	            if (x !== null && typeof x === 'object' && typeof then === 'function') {
-	                then.call(x, function (x) {
-	                    if (!called) {
-	                        promise.resolve(x);
-	                    }
-	                    called = true;
-
-	                }, function (r) {
-	                    if (!called) {
-	                        promise.reject(r);
-	                    }
-	                    called = true;
-	                });
-	                return;
-	            }
-	        } catch (e) {
-	            if (!called) {
-	                promise.reject(e);
-	            }
-	            return;
-	        }
-	        promise.state = RESOLVED;
-	        promise.value = x;
-	        promise.notify();
-	    }
-	};
-
-	p.reject = function reject(reason) {
-	    var promise = this;
-
-	    if (promise.state === PENDING) {
-	        if (reason === promise) {
-	            throw new TypeError('Promise settled with itself.');
-	        }
-
-	        promise.state = REJECTED;
-	        promise.value = reason;
-	        promise.notify();
-	    }
-	};
-
-	p.notify = function notify() {
-	    var promise = this;
-
-	    async(function () {
-	        if (promise.state !== PENDING) {
-	            while (promise.deferred.length) {
-	                var deferred = promise.deferred.shift(),
-	                    onResolved = deferred[0],
-	                    onRejected = deferred[1],
-	                    resolve = deferred[2],
-	                    reject = deferred[3];
+                    script = document.createElement('script');
+                    script.src = url(options.url, options.params);
+                    script.type = 'text/javascript';
+                    script.async = true;
 
-	                try {
-	                    if (promise.state === RESOLVED) {
-	                        if (typeof onResolved === 'function') {
-	                            resolve(onResolved.call(undefined, promise.value));
-	                        } else {
-	                            resolve(promise.value);
-	                        }
-	                    } else if (promise.state === REJECTED) {
-	                        if (typeof onRejected === 'function') {
-	                            resolve(onRejected.call(undefined, promise.value));
-	                        } else {
-	                            reject(promise.value);
-	                        }
-	                    }
-	                } catch (e) {
-	                    reject(e);
-	                }
-	            }
-	        }
-	    });
-	};
+                    window[callback] = function (data) {
+                        body = data;
+                    };
 
-	p.catch = function (onRejected) {
-	    return this.then(undefined, onRejected);
-	};
+                    var handler = function (event) {
 
-	p.then = function then(onResolved, onRejected) {
-	    var promise = this;
+                        delete window[callback];
+                        document.body.removeChild(script);
 
-	    return new Promise(function (resolve, reject) {
-	        promise.deferred.push([onResolved, onRejected, resolve, reject]);
-	        promise.notify();
-	    });
-	};
+                        if (event.type === 'load' && !body) {
+                            event.type = 'error';
+                        }
 
-	var queue = [];
-	var async = function (callback) {
-	    queue.push(callback);
+                        var text = body ? body : event.type, status = event.type === 'error' ? 404 : 200;
 
-	    if (queue.length === 1) {
-	        async.async();
-	    }
-	};
+                        (status === 200 ? resolve : reject)({responseText: text, status: status});
+                    };
 
-	async.run = function () {
-	    while (queue.length) {
-	        queue[0]();
-	        queue.shift();
-	    }
-	};
+                    script.onload = handler;
+                    script.onerror = handler;
 
-	if (window.MutationObserver) {
-	    var el = document.createElement('div');
-	    var mo = new MutationObserver(async.run);
+                    document.body.appendChild(script);
+                });
 
-	    mo.observe(el, {
-	        attributes: true
-	    });
+            };
 
-	    async.async = function () {
-	        el.setAttribute("x", 0);
-	    };
-	} else {
-	    async.async = function () {
-	        setTimeout(async.run);
-	    };
-	}
 
-	module.exports = window.Promise || Promise;
+            /***/
+        },
+        /* 7 */
+        /***/ function (module, exports, __webpack_require__) {
 
+            /**
+             * Service for interacting with RESTful services.
+             */
 
-/***/ },
-/* 6 */
-/***/ function(module, exports, __webpack_require__) {
+            var _ = __webpack_require__(2);
 
-	/**
-	 * JSONP request.
-	 */
+            module.exports = function (Vue) {
 
-	var _ = __webpack_require__(2);
-	var Promise = __webpack_require__(5);
+                function Resource(url, params, actions) {
 
-	module.exports = function (url, options) {
+                    var self = this, resource = {};
 
-	    var callback = '_jsonp' + Math.random().toString(36).substr(2), script, body;
+                    actions = _.extend({},
+                        Resource.actions,
+                        actions
+                    );
 
-	    options.params[options.jsonp] = callback;
+                    _.each(actions, function (action, name) {
 
-	    if (_.isFunction(options.beforeSend)) {
-	        options.beforeSend.call(this, {}, options);
-	    }
+                        action = _.extend(true, {url: url, params: params || {}}, action);
 
-	    return new Promise(function (resolve, reject) {
+                        resource[name] = function () {
+                            return (self.$http || Vue.http)(opts(action, arguments));
+                        };
+                    });
 
-	        script = document.createElement('script');
-	        script.src = url(options.url, options.params);
-	        script.type = 'text/javascript';
-	        script.async = true;
+                    return resource;
+                }
 
-	        window[callback] = function (data) {
-	            body = data;
-	        };
+                function opts(action, args) {
 
-	        var handler = function (event) {
+                    var options = _.extend({}, action), params = {}, data, success, error;
 
-	            delete window[callback];
-	            document.body.removeChild(script);
+                    switch (args.length) {
 
-	            if (event.type === 'load' && !body) {
-	                event.type = 'error';
-	            }
+                        case 4:
 
-	            var text = body ? body : event.type, status = event.type === 'error' ? 404 : 200;
+                            error = args[3];
+                            success = args[2];
 
-	            (status === 200 ? resolve : reject)({responseText: text, status: status});
-	        };
+                        case 3:
+                        case 2:
 
-	        script.onload = handler;
-	        script.onerror = handler;
+                            if (_.isFunction(args[1])) {
 
-	        document.body.appendChild(script);
-	    });
+                                if (_.isFunction(args[0])) {
 
-	};
+                                    success = args[0];
+                                    error = args[1];
 
+                                    break;
+                                }
 
-/***/ },
-/* 7 */
-/***/ function(module, exports, __webpack_require__) {
+                                success = args[1];
+                                error = args[2];
 
-	/**
-	 * Service for interacting with RESTful services.
-	 */
+                            } else {
 
-	var _ = __webpack_require__(2);
+                                params = args[0];
+                                data = args[1];
+                                success = args[2];
 
-	module.exports = function (Vue) {
+                                break;
+                            }
 
-	    function Resource(url, params, actions) {
+                        case 1:
 
-	        var self = this, resource = {};
+                            if (_.isFunction(args[0])) {
+                                success = args[0];
+                            } else if (/^(post|put|patch)$/i.test(options.method)) {
+                                data = args[0];
+                            } else {
+                                params = args[0];
+                            }
 
-	        actions = _.extend({},
-	            Resource.actions,
-	            actions
-	        );
+                            break;
 
-	        _.each(actions, function (action, name) {
+                        case 0:
 
-	            action = _.extend(true, {url: url, params: params || {}}, action);
+                            break;
 
-	            resource[name] = function () {
-	                return (self.$http || Vue.http)(opts(action, arguments));
-	            };
-	        });
+                        default:
 
-	        return resource;
-	    }
+                            throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
+                    }
 
-	    function opts(action, args) {
+                    options.url = action.url;
+                    options.data = data;
+                    options.params = _.extend({}, action.params, params);
 
-	        var options = _.extend({}, action), params = {}, data, success, error;
+                    if (success) {
+                        options.success = success;
+                    }
 
-	        switch (args.length) {
+                    if (error) {
+                        options.error = error;
+                    }
 
-	            case 4:
+                    return options;
+                }
 
-	                error = args[3];
-	                success = args[2];
+                Resource.actions = {
 
-	            case 3:
-	            case 2:
+                    get: {method: 'get'},
+                    save: {method: 'post'},
+                    query: {method: 'get'},
+                    remove: {method: 'delete'},
+                    delete: {method: 'delete'}
 
-	                if (_.isFunction (args[1])) {
+                };
 
-	                    if (_.isFunction (args[0])) {
+                Object.defineProperty(Vue.prototype, '$resource', {
 
-	                        success = args[0];
-	                        error = args[1];
+                    get: function () {
+                        return Resource.bind(this);
+                    }
 
-	                        break;
-	                    }
+                });
 
-	                    success = args[1];
-	                    error = args[2];
+                return Resource;
+            };
 
-	                } else {
 
-	                    params = args[0];
-	                    data = args[1];
-	                    success = args[2];
-
-	                    break;
-	                }
-
-	            case 1:
-
-	                if (_.isFunction (args[0])) {
-	                    success = args[0];
-	                } else if (/^(post|put|patch)$/i.test(options.method)) {
-	                    data = args[0];
-	                } else {
-	                    params = args[0];
-	                }
-
-	                break;
-
-	            case 0:
-
-	                break;
-
-	            default:
-
-	                throw 'Expected up to 4 arguments [params, data, success, error], got ' + args.length + ' arguments';
-	        }
-
-	        options.url = action.url;
-	        options.data = data;
-	        options.params = _.extend({}, action.params, params);
-
-	        if (success) {
-	            options.success = success;
-	        }
-
-	        if (error) {
-	            options.error = error;
-	        }
-
-	        return options;
-	    }
-
-	    Resource.actions = {
-
-	        get: {method: 'get'},
-	        save: {method: 'post'},
-	        query: {method: 'get'},
-	        remove: {method: 'delete'},
-	        delete: {method: 'delete'}
-
-	    };
-
-	    Object.defineProperty(Vue.prototype, '$resource', {
-
-	        get: function () {
-	            return Resource.bind(this);
-	        }
-
-	    });
-
-	    return Resource;
-	};
-
-
-/***/ }
-/******/ ])
+            /***/
+        }
+        /******/])
 });
 ;

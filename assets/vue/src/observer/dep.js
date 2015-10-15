@@ -7,8 +7,8 @@ var _ = require('../util')
  * @constructor
  */
 
-function Dep () {
-  this.subs = []
+function Dep() {
+    this.subs = []
 }
 
 // the current target watcher being evaluated.
@@ -25,7 +25,7 @@ var p = Dep.prototype
  */
 
 p.addSub = function (sub) {
-  this.subs.push(sub)
+    this.subs.push(sub)
 }
 
 /**
@@ -35,7 +35,7 @@ p.addSub = function (sub) {
  */
 
 p.removeSub = function (sub) {
-  this.subs.$remove(sub)
+    this.subs.$remove(sub)
 }
 
 /**
@@ -43,9 +43,9 @@ p.removeSub = function (sub) {
  */
 
 p.depend = function () {
-  if (Dep.target) {
-    Dep.target.addDep(this)
-  }
+    if (Dep.target) {
+        Dep.target.addDep(this)
+    }
 }
 
 /**
@@ -53,11 +53,11 @@ p.depend = function () {
  */
 
 p.notify = function () {
-  // stablize the subscriber list first
-  var subs = _.toArray(this.subs)
-  for (var i = 0, l = subs.length; i < l; i++) {
-    subs[i].update()
-  }
+    // stablize the subscriber list first
+    var subs = _.toArray(this.subs)
+    for (var i = 0, l = subs.length; i < l; i++) {
+        subs[i].update()
+    }
 }
 
 module.exports = Dep

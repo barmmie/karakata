@@ -18,90 +18,90 @@ $ = jQuery
 
 
 class SimpleWidget
-    defaults: {}
+  defaults: {}
 
-    constructor: (el, options) ->
-        @$el = $(el)
-        @options = $.extend({}, @defaults, options)
+  constructor: (el, options) ->
+    @$el = $(el)
+    @options = $.extend({}, @defaults, options)
 
-    destroy: ->
-        @_deinit()
+  destroy: ->
+    @_deinit()
 
-    _init: ->
-        null
+  _init: ->
+    null
 
-    _deinit: ->
-        null
+  _deinit: ->
+    null
 
-    @register = (widget_class, widget_name) ->
-        getDataKey = ->
-            return "simple_widget_#{widget_name}"
+  @register = (widget_class, widget_name) ->
+    getDataKey = ->
+      return "simple_widget_#{widget_name}"
 
-        getWidgetData = (el, data_key) ->
-            widget = $.data(el, data_key)
+    getWidgetData = (el, data_key) ->
+      widget = $.data(el, data_key)
 
-            if widget and (widget instanceof SimpleWidget)
-                return widget
-            else
-                return null
+      if widget and (widget instanceof SimpleWidget)
+        return widget
+      else
+        return null
 
-        createWidget = ($el, options) ->
-            data_key = getDataKey()
+    createWidget = ($el, options) ->
+      data_key = getDataKey()
 
-            for el in $el
-                existing_widget = getWidgetData(el, data_key)
+      for el in $el
+        existing_widget = getWidgetData(el, data_key)
 
-                if not existing_widget
-                    widget = new widget_class(el, options)
+        if not existing_widget
+          widget = new widget_class(el, options)
 
-                    if not $.data(el, data_key)
-                        $.data(el, data_key, widget)
+          if not $.data(el, data_key)
+            $.data(el, data_key, widget)
 
-                    # Call init after setting data, so we can call methods
-                    widget._init()
+          # Call init after setting data, so we can call methods
+          widget._init()
 
-            return $el
+      return $el
 
-        destroyWidget = ($el) ->
-            data_key = getDataKey()
+    destroyWidget = ($el) ->
+      data_key = getDataKey()
 
-            for el in $el
-                widget = getWidgetData(el, data_key)
+      for el in $el
+        widget = getWidgetData(el, data_key)
 
-                if widget
-                    widget.destroy()
+        if widget
+          widget.destroy()
 
-                $.removeData(el, data_key)
+        $.removeData(el, data_key)
 
-        callFunction = ($el, function_name, args) ->
-            result = null
+    callFunction = ($el, function_name, args) ->
+      result = null
 
-            for el in $el
-                widget = $.data(el, getDataKey())
+      for el in $el
+        widget = $.data(el, getDataKey())
 
-                if widget and (widget instanceof SimpleWidget)
-                    widget_function = widget[function_name]
+        if widget and (widget instanceof SimpleWidget)
+          widget_function = widget[function_name]
 
-                    if widget_function and (typeof widget_function == 'function')
-                        result = widget_function.apply(widget, args)
+          if widget_function and (typeof widget_function == 'function')
+            result = widget_function.apply(widget, args)
 
-            return result
+      return result
 
-        $.fn[widget_name] = (argument1, args...) ->
-            $el = this
+    $.fn[widget_name] = (argument1, args...) ->
+      $el = this
 
-            if argument1 is undefined or typeof argument1 == 'object'
-                options = argument1
-                return createWidget($el, options)
-            else if typeof argument1 == 'string' and argument1[0] != '_'
-                function_name = argument1
+      if argument1 is undefined or typeof argument1 == 'object'
+        options = argument1
+        return createWidget($el, options)
+      else if typeof argument1 == 'string' and argument1[0] != '_'
+        function_name = argument1
 
-                if function_name == 'destroy'
-                    return destroyWidget($el)
-                else if function_name == 'get_widget_class'
-                    return widget_class
-                else
-                    return callFunction($el, function_name, args)
+        if function_name == 'destroy'
+          return destroyWidget($el)
+        else if function_name == 'get_widget_class'
+          return widget_class
+        else
+          return callFunction($el, function_name, args)
 
 
 module.exports = SimpleWidget

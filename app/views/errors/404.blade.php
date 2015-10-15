@@ -29,9 +29,9 @@
                     {{trans('phrases.go_home')}}
                 </a>
                 @if(Auth::check() && Auth::user()->isAdmin())
-                <a class="ui massive basic  button"href="{{route('admin.dashboard')}}">
-                    <i class="sign out icon "></i> {{trans('phrases.admin_dashboard')}}
-                </a>
+                    <a class="ui massive basic  button" href="{{route('admin.dashboard')}}">
+                        <i class="sign out icon "></i> {{trans('phrases.admin_dashboard')}}
+                    </a>
                 @endif
             </div>
 

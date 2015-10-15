@@ -56,7 +56,8 @@
                                     <i class="teal marker icon"></i> {{$item->location->name}}
                                 </div>
                             </div>
-                            <a style="float: right;" class="ui big m-b-md teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+                            <a style="float: right;"
+                               class="ui big m-b-md teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
 
                         </div>
 
@@ -65,7 +66,8 @@
 
                                 @foreach($item->pictures as $picture)
                                     <li class="ui fluid bordered rounded image">
-                                        <img class="ui fluid bordered rounded image" src="{{asset($picture->image_src)}}">
+                                        <img class="ui fluid bordered rounded image"
+                                             src="{{asset($picture->image_src)}}">
                                     </li>
                                 @endforeach
                             </ul>

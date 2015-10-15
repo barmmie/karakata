@@ -7,18 +7,18 @@ var _ = require('../util')
  */
 
 exports.json = {
-  read: function (value, indent) {
-    return typeof value === 'string'
-      ? value
-      : JSON.stringify(value, null, Number(indent) || 2)
-  },
-  write: function (value) {
-    try {
-      return JSON.parse(value)
-    } catch (e) {
-      return value
+    read: function (value, indent) {
+        return typeof value === 'string'
+            ? value
+            : JSON.stringify(value, null, Number(indent) || 2)
+    },
+    write: function (value) {
+        try {
+            return JSON.parse(value)
+        } catch (e) {
+            return value
+        }
     }
-  }
 }
 
 /**
@@ -26,9 +26,9 @@ exports.json = {
  */
 
 exports.capitalize = function (value) {
-  if (!value && value !== 0) return ''
-  value = value.toString()
-  return value.charAt(0).toUpperCase() + value.slice(1)
+    if (!value && value !== 0) return ''
+    value = value.toString()
+    return value.charAt(0).toUpperCase() + value.slice(1)
 }
 
 /**
@@ -36,9 +36,9 @@ exports.capitalize = function (value) {
  */
 
 exports.uppercase = function (value) {
-  return (value || value === 0)
-    ? value.toString().toUpperCase()
-    : ''
+    return (value || value === 0)
+        ? value.toString().toUpperCase()
+        : ''
 }
 
 /**
@@ -46,9 +46,9 @@ exports.uppercase = function (value) {
  */
 
 exports.lowercase = function (value) {
-  return (value || value === 0)
-    ? value.toString().toLowerCase()
-    : ''
+    return (value || value === 0)
+        ? value.toString().toLowerCase()
+        : ''
 }
 
 /**
@@ -59,20 +59,20 @@ exports.lowercase = function (value) {
 
 var digitsRE = /(\d{3})(?=\d)/g
 exports.currency = function (value, currency) {
-  value = parseFloat(value)
-  if (!isFinite(value) || (!value && value !== 0)) return ''
-  currency = currency || '$'
-  var stringified = Math.abs(value).toFixed(2)
-  var _int = stringified.slice(0, -3)
-  var i = _int.length % 3
-  var head = i > 0
-    ? (_int.slice(0, i) + (_int.length > 3 ? ',' : ''))
-    : ''
-  var _float = stringified.slice(-3)
-  var sign = value < 0 ? '-' : ''
-  return currency + sign + head +
-    _int.slice(i).replace(digitsRE, '$1,') +
-    _float
+    value = parseFloat(value)
+    if (!isFinite(value) || (!value && value !== 0)) return ''
+    currency = currency || '$'
+    var stringified = Math.abs(value).toFixed(2)
+    var _int = stringified.slice(0, -3)
+    var i = _int.length % 3
+    var head = i > 0
+        ? (_int.slice(0, i) + (_int.length > 3 ? ',' : ''))
+        : ''
+    var _float = stringified.slice(-3)
+    var sign = value < 0 ? '-' : ''
+    return currency + sign + head +
+        _int.slice(i).replace(digitsRE, '$1,') +
+        _float
 }
 
 /**
@@ -89,10 +89,10 @@ exports.currency = function (value, currency) {
  */
 
 exports.pluralize = function (value) {
-  var args = _.toArray(arguments, 1)
-  return args.length > 1
-    ? (args[value % 10 - 1] || args[args.length - 1])
-    : (args[0] + (value === 1 ? '' : 's'))
+    var args = _.toArray(arguments, 1)
+    return args.length > 1
+        ? (args[value % 10 - 1] || args[args.length - 1])
+        : (args[0] + (value === 1 ? '' : 's'))
 }
 
 /**
@@ -104,27 +104,27 @@ exports.pluralize = function (value) {
  */
 
 var keyCodes = {
-  esc: 27,
-  tab: 9,
-  enter: 13,
-  'delete': 46,
-  up: 38,
-  left: 37,
-  right: 39,
-  down: 40
+    esc: 27,
+    tab: 9,
+    enter: 13,
+    'delete': 46,
+    up: 38,
+    left: 37,
+    right: 39,
+    down: 40
 }
 
 exports.key = function (handler, key) {
-  if (!handler) return
-  var code = keyCodes[key]
-  if (!code) {
-    code = parseInt(key, 10)
-  }
-  return function (e) {
-    if (e.keyCode === code) {
-      return handler.call(this, e)
+    if (!handler) return
+    var code = keyCodes[key]
+    if (!code) {
+        code = parseInt(key, 10)
     }
-  }
+    return function (e) {
+        if (e.keyCode === code) {
+            return handler.call(this, e)
+        }
+    }
 }
 
 // expose keycode hash

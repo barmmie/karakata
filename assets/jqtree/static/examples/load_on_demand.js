@@ -1,7 +1,7 @@
 $.mockjax({
     url: '*',
     responseTime: 1000,
-    response: function(options) {
+    response: function (options) {
         if (options.data && options.data.node) {
             this.responseText = ExampleData.getChildrenOfNode(options.data.node);
         }
@@ -11,7 +11,7 @@ $.mockjax({
     }
 });
 
-$(function() {
+$(function () {
     var $tree = $('#tree1');
 
     $tree.tree({

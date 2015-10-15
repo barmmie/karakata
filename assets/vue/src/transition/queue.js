@@ -9,11 +9,11 @@ var queued = false
  */
 
 exports.push = function (job) {
-  queue.push(job)
-  if (!queued) {
-    queued = true
-    _.nextTick(flush)
-  }
+    queue.push(job)
+    if (!queued) {
+        queued = true
+        _.nextTick(flush)
+    }
 }
 
 /**
@@ -21,15 +21,15 @@ exports.push = function (job) {
  * triggering transitions.
  */
 
-function flush () {
-  // Force layout
-  var f = document.documentElement.offsetHeight
-  for (var i = 0; i < queue.length; i++) {
-    queue[i]()
-  }
-  queue = []
-  queued = false
-  // dummy return, so js linters don't complain about
-  // unused variable f
-  return f
+function flush() {
+    // Force layout
+    var f = document.documentElement.offsetHeight
+    for (var i = 0; i < queue.length; i++) {
+        queue[i]()
+    }
+    queue = []
+    queued = false
+    // dummy return, so js linters don't complain about
+    // unused variable f
+    return f
 }

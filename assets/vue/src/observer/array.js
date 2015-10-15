@@ -6,46 +6,47 @@ var arrayMethods = Object.create(arrayProto)
  * Intercept mutating methods and emit events
  */
 
-;[
-  'push',
-  'pop',
-  'shift',
-  'unshift',
-  'splice',
-  'sort',
-  'reverse'
+    ;
+[
+    'push',
+    'pop',
+    'shift',
+    'unshift',
+    'splice',
+    'sort',
+    'reverse'
 ]
-.forEach(function (method) {
-  // cache original method
-  var original = arrayProto[method]
-  _.define(arrayMethods, method, function mutator () {
-    // avoid leaking arguments:
-    // http://jsperf.com/closure-with-arguments
-    var i = arguments.length
-    var args = new Array(i)
-    while (i--) {
-      args[i] = arguments[i]
-    }
-    var result = original.apply(this, args)
-    var ob = this.__ob__
-    var inserted
-    switch (method) {
-      case 'push':
-        inserted = args
-        break
-      case 'unshift':
-        inserted = args
-        break
-      case 'splice':
-        inserted = args.slice(2)
-        break
-    }
-    if (inserted) ob.observeArray(inserted)
-    // notify change
-    ob.notify()
-    return result
-  })
-})
+    .forEach(function (method) {
+        // cache original method
+        var original = arrayProto[method]
+        _.define(arrayMethods, method, function mutator() {
+            // avoid leaking arguments:
+            // http://jsperf.com/closure-with-arguments
+            var i = arguments.length
+            var args = new Array(i)
+            while (i--) {
+                args[i] = arguments[i]
+            }
+            var result = original.apply(this, args)
+            var ob = this.__ob__
+            var inserted
+            switch (method) {
+                case 'push':
+                    inserted = args
+                    break
+                case 'unshift':
+                    inserted = args
+                    break
+                case 'splice':
+                    inserted = args.slice(2)
+                    break
+            }
+            if (inserted) ob.observeArray(inserted)
+            // notify change
+            ob.notify()
+            return result
+        })
+    })
 
 /**
  * Swap the element at the given index with a new value
@@ -57,14 +58,14 @@ var arrayMethods = Object.create(arrayProto)
  */
 
 _.define(
-  arrayProto,
-  '$set',
-  function $set (index, val) {
-    if (index >= this.length) {
-      this.length = index + 1
+    arrayProto,
+    '$set',
+    function $set(index, val) {
+        if (index >= this.length) {
+            this.length = index + 1
+        }
+        return this.splice(index, 1, val)[0]
     }
-    return this.splice(index, 1, val)[0]
-  }
 )
 
 /**
@@ -75,18 +76,18 @@ _.define(
  */
 
 _.define(
-  arrayProto,
-  '$remove',
-  function $remove (index) {
-    /* istanbul ignore if */
-    if (!this.length) return
-    if (typeof index !== 'number') {
-      index = _.indexOf(this, index)
+    arrayProto,
+    '$remove',
+    function $remove(index) {
+        /* istanbul ignore if */
+        if (!this.length) return
+        if (typeof index !== 'number') {
+            index = _.indexOf(this, index)
+        }
+        if (index > -1) {
+            return this.splice(index, 1)
+        }
     }
-    if (index > -1) {
-      return this.splice(index, 1)
-    }
-  }
 )
 
 module.exports = arrayMethods

@@ -15,36 +15,36 @@ var templateParser = require('../parsers/template')
  */
 
 exports.transclude = function (el, options) {
-  // extract container attributes to pass them down
-  // to compiler, because they need to be compiled in
-  // parent scope. we are mutating the options object here
-  // assuming the same object will be used for compile
-  // right after this.
-  if (options) {
-    options._containerAttrs = extractAttrs(el)
-  }
-  // for template tags, what we want is its content as
-  // a documentFragment (for block instances)
-  if (_.isTemplate(el)) {
-    el = templateParser.parse(el)
-  }
-  if (options) {
-    if (options._asComponent && !options.template) {
-      options.template = '<content></content>'
+    // extract container attributes to pass them down
+    // to compiler, because they need to be compiled in
+    // parent scope. we are mutating the options object here
+    // assuming the same object will be used for compile
+    // right after this.
+    if (options) {
+        options._containerAttrs = extractAttrs(el)
     }
-    if (options.template) {
-      options._content = _.extractContent(el)
-      el = transcludeTemplate(el, options)
+    // for template tags, what we want is its content as
+    // a documentFragment (for block instances)
+    if (_.isTemplate(el)) {
+        el = templateParser.parse(el)
     }
-  }
-  if (el instanceof DocumentFragment) {
-    // anchors for block instance
-    // passing in `persist: true` to avoid them being
-    // discarded by IE during template cloning
-    _.prepend(_.createAnchor('v-start', true), el)
-    el.appendChild(_.createAnchor('v-end', true))
-  }
-  return el
+    if (options) {
+        if (options._asComponent && !options.template) {
+            options.template = '<content></content>'
+        }
+        if (options.template) {
+            options._content = _.extractContent(el)
+            el = transcludeTemplate(el, options)
+        }
+    }
+    if (el instanceof DocumentFragment) {
+        // anchors for block instance
+        // passing in `persist: true` to avoid them being
+        // discarded by IE during template cloning
+        _.prepend(_.createAnchor('v-start', true), el)
+        el.appendChild(_.createAnchor('v-end', true))
+    }
+    return el
 }
 
 /**
@@ -56,47 +56,47 @@ exports.transclude = function (el, options) {
  * @return {Element|DocumentFragment}
  */
 
-function transcludeTemplate (el, options) {
-  var template = options.template
-  var frag = templateParser.parse(template, true)
-  if (!frag) {
-    _.warn('Invalid template option: ' + template)
-  } else {
-    var replacer = frag.firstChild
-    var tag = replacer.tagName && replacer.tagName.toLowerCase()
-    if (options.replace) {
-      /* istanbul ignore if */
-      if (el === document.body) {
-        _.warn(
-          'You are mounting an instance with a template to ' +
-          '<body>. This will replace <body> entirely. You ' +
-          'should probably use `replace: false` here.'
-        )
-      }
-      if (
-        // multi-children template
-        frag.childNodes.length > 1 ||
-        // non-element template
-        replacer.nodeType !== 1 ||
-        // when root node is <component>, is an element
-        // directive, or has v-repeat, the instance could
-        // end up having multiple top-level nodes, thus
-        // becoming a block instance.
-        tag === 'component' ||
-        _.resolveAsset(options, 'elementDirectives', tag) ||
-        replacer.hasAttribute(config.prefix + 'repeat')
-      ) {
-        return frag
-      } else {
-        options._replacerAttrs = extractAttrs(replacer)
-        mergeAttrs(el, replacer)
-        return replacer
-      }
+function transcludeTemplate(el, options) {
+    var template = options.template
+    var frag = templateParser.parse(template, true)
+    if (!frag) {
+        _.warn('Invalid template option: ' + template)
     } else {
-      el.appendChild(frag)
-      return el
+        var replacer = frag.firstChild
+        var tag = replacer.tagName && replacer.tagName.toLowerCase()
+        if (options.replace) {
+            /* istanbul ignore if */
+            if (el === document.body) {
+                _.warn(
+                    'You are mounting an instance with a template to ' +
+                    '<body>. This will replace <body> entirely. You ' +
+                    'should probably use `replace: false` here.'
+                )
+            }
+            if (
+                // multi-children template
+            frag.childNodes.length > 1 ||
+                // non-element template
+            replacer.nodeType !== 1 ||
+                // when root node is <component>, is an element
+                // directive, or has v-repeat, the instance could
+                // end up having multiple top-level nodes, thus
+                // becoming a block instance.
+            tag === 'component' ||
+            _.resolveAsset(options, 'elementDirectives', tag) ||
+            replacer.hasAttribute(config.prefix + 'repeat')
+            ) {
+                return frag
+            } else {
+                options._replacerAttrs = extractAttrs(replacer)
+                mergeAttrs(el, replacer)
+                return replacer
+            }
+        } else {
+            el.appendChild(frag)
+            return el
+        }
     }
-  }
 }
 
 /**
@@ -107,16 +107,16 @@ function transcludeTemplate (el, options) {
  * @return {Object}
  */
 
-function extractAttrs (el) {
-  if (el.nodeType === 1 && el.hasAttributes()) {
-    var attrs = el.attributes
-    var res = {}
-    var i = attrs.length
-    while (i--) {
-      res[attrs[i].name] = attrs[i].value
+function extractAttrs(el) {
+    if (el.nodeType === 1 && el.hasAttributes()) {
+        var attrs = el.attributes
+        var res = {}
+        var i = attrs.length
+        while (i--) {
+            res[attrs[i].name] = attrs[i].value
+        }
+        return res
     }
-    return res
-  }
 }
 
 /**
@@ -127,17 +127,17 @@ function extractAttrs (el) {
  * @param {Element} to
  */
 
-function mergeAttrs (from, to) {
-  var attrs = from.attributes
-  var i = attrs.length
-  var name, value
-  while (i--) {
-    name = attrs[i].name
-    value = attrs[i].value
-    if (!to.hasAttribute(name)) {
-      to.setAttribute(name, value)
-    } else if (name === 'class') {
-      to.className = to.className + ' ' + value
+function mergeAttrs(from, to) {
+    var attrs = from.attributes
+    var i = attrs.length
+    var name, value
+    while (i--) {
+        name = attrs[i].name
+        value = attrs[i].value
+        if (!to.hasAttribute(name)) {
+            to.setAttribute(name, value)
+        } else if (name === 'class') {
+            to.className = to.className + ' ' + value
+        }
     }
-  }
 }

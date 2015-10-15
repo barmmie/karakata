@@ -10,9 +10,9 @@ var _ = require('../util')
  */
 
 exports.append = function (el, target, vm, cb) {
-  apply(el, 1, function () {
-    target.appendChild(el)
-  }, vm, cb)
+    apply(el, 1, function () {
+        target.appendChild(el)
+    }, vm, cb)
 }
 
 /**
@@ -25,9 +25,9 @@ exports.append = function (el, target, vm, cb) {
  */
 
 exports.before = function (el, target, vm, cb) {
-  apply(el, 1, function () {
-    _.before(el, target)
-  }, vm, cb)
+    apply(el, 1, function () {
+        _.before(el, target)
+    }, vm, cb)
 }
 
 /**
@@ -39,9 +39,9 @@ exports.before = function (el, target, vm, cb) {
  */
 
 exports.remove = function (el, vm, cb) {
-  apply(el, -1, function () {
-    _.remove(el)
-  }, vm, cb)
+    apply(el, -1, function () {
+        _.remove(el)
+    }, vm, cb)
 }
 
 /**
@@ -55,9 +55,9 @@ exports.remove = function (el, vm, cb) {
  */
 
 exports.removeThenAppend = function (el, target, vm, cb) {
-  apply(el, -1, function () {
-    target.appendChild(el)
-  }, vm, cb)
+    apply(el, -1, function () {
+        target.appendChild(el)
+    }, vm, cb)
 }
 
 /**
@@ -69,10 +69,10 @@ exports.removeThenAppend = function (el, target, vm, cb) {
  */
 
 exports.blockAppend = function (block, target, vm) {
-  var nodes = _.toArray(block.childNodes)
-  for (var i = 0, l = nodes.length; i < l; i++) {
-    exports.before(nodes[i], target, vm)
-  }
+    var nodes = _.toArray(block.childNodes)
+    for (var i = 0, l = nodes.length; i < l; i++) {
+        exports.before(nodes[i], target, vm)
+    }
 }
 
 /**
@@ -84,13 +84,13 @@ exports.blockAppend = function (block, target, vm) {
  */
 
 exports.blockRemove = function (start, end, vm) {
-  var node = start.nextSibling
-  var next
-  while (node !== end) {
-    next = node.nextSibling
-    exports.remove(node, vm)
-    node = next
-  }
+    var node = start.nextSibling
+    var next
+    while (node !== end) {
+        next = node.nextSibling
+        exports.remove(node, vm)
+        node = next
+    }
 }
 
 /**
@@ -106,23 +106,23 @@ exports.blockRemove = function (start, end, vm) {
  */
 
 var apply = exports.apply = function (el, direction, op, vm, cb) {
-  var transition = el.__v_trans
-  if (
-    !transition ||
-    // skip if there are no js hooks and CSS transition is
-    // not supported
-    (!transition.hooks && !_.transitionEndEvent) ||
-    // skip transitions for initial compile
-    !vm._isCompiled ||
-    // if the vm is being manipulated by a parent directive
-    // during the parent's compilation phase, skip the
-    // animation.
-    (vm.$parent && !vm.$parent._isCompiled)
-  ) {
-    op()
-    if (cb) cb()
-    return
-  }
-  var action = direction > 0 ? 'enter' : 'leave'
-  transition[action](op, cb)
+    var transition = el.__v_trans
+    if (
+        !transition ||
+            // skip if there are no js hooks and CSS transition is
+            // not supported
+        (!transition.hooks && !_.transitionEndEvent) ||
+            // skip transitions for initial compile
+        !vm._isCompiled ||
+            // if the vm is being manipulated by a parent directive
+            // during the parent's compilation phase, skip the
+            // animation.
+        (vm.$parent && !vm.$parent._isCompiled)
+    ) {
+        op()
+        if (cb) cb()
+        return
+    }
+    var action = direction > 0 ? 'enter' : 'leave'
+    transition[action](op, cb)
 }

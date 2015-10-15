@@ -1,4 +1,7 @@
 <?php
+
+error_reporting(E_ALL);
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
@@ -9,6 +12,8 @@
 /*
 |--------------------------------------------------------------------------
 | Register The Auto Loader
+
+
 |--------------------------------------------------------------------------
 |
 | Composer provides a convenient, automatically generated class loader

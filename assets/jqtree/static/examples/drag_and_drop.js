@@ -1,12 +1,12 @@
 $.mockjax({
     url: '*',
-    response: function(options) {
+    response: function (options) {
         this.responseText = ExampleData.example_data;
     },
     responseTime: 0
 });
 
-$(function() {
+$(function () {
     var $tree = $('#tree1');
     $tree.tree({
         dragAndDrop: true,

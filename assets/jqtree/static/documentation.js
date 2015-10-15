@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var $menu = $('#menu');
     var $body = $('body');
     var $h1 = $('#jqtree h1');
@@ -20,7 +20,7 @@ $(function() {
     var scrollspy = $body.data('bs.scrollspy');
 
     // If no menu item is active, then activate first item
-    if (! scrollspy.activeTarget) {
+    if (!scrollspy.activeTarget) {
         scrollspy.activate('#general');
     }
 
@@ -29,14 +29,14 @@ $(function() {
         {
             label: 'node1', id: 1,
             children: [
-                { label: 'child1', id: 2 },
-                { label: 'child2', id: 3 }
+                {label: 'child1', id: 2},
+                {label: 'child2', id: 3}
             ]
         },
         {
             label: 'node2', id: 4,
             children: [
-                { label: 'child3', id: 5 }
+                {label: 'child3', id: 5}
             ]
         }
     ];

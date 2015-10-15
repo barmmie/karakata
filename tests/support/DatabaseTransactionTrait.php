@@ -1,12 +1,13 @@
 <?php
+
 /**
  * Created by PhpStorm.
  * User: barmmie
  * Date: 6/26/15
  * Time: 7:10 AM
  */
-
-trait DatabaseTransactionTrait {
+trait DatabaseTransactionTrait
+{
 
 
     /**
@@ -16,7 +17,7 @@ trait DatabaseTransactionTrait {
      */
     public function beginTransaction()
     {
-        if (! $this->app) {
+        if (!$this->app) {
             $this->app = $this->createApplication();
         }
         $this->artisan('migrate:refresh');

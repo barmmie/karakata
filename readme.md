@@ -29,7 +29,12 @@ Username
 
 Password
 
-
+<p>
+    <a href="mailto:viaviwebtech@gmail.com"><img src="http://www.viaviweb.in/Support/profile/gmail.png"></a>
+    <a href="https://www.facebook.com/viaviweb" rel="nofollow"><img src="http://www.viaviweb.in/Support/profile/facebook.png"></a>
+    <a href="https://twitter.com/viaviwebtech" rel="nofollow"><img src="http://www.viaviweb.in/Support/profile/twiiter.png"></a>
+    <a href="http://codecanyon.net/user/viaviwebtech/follow"><img src="http://www.viaviweb.in/Support/profile/envato.png"></a>
+</p>
 
 
 <h2>Karakata is a modern buy and sell marketplace</h2>

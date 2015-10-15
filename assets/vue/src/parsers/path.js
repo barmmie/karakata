@@ -8,76 +8,77 @@ var identRE = exports.identRE = /^[$_a-zA-Z]+[\w$]*$/
  */
 
 var pathStateMachine = {
-  'beforePath': {
-    'ws': ['beforePath'],
-    'ident': ['inIdent', 'append'],
-    '[': ['beforeElement'],
-    'eof': ['afterPath']
-  },
+    'beforePath': {
+        'ws': ['beforePath'],
+        'ident': ['inIdent', 'append'],
+        '[': ['beforeElement'],
+        'eof': ['afterPath']
+    },
 
-  'inPath': {
-    'ws': ['inPath'],
-    '.': ['beforeIdent'],
-    '[': ['beforeElement'],
-    'eof': ['afterPath']
-  },
+    'inPath': {
+        'ws': ['inPath'],
+        '.': ['beforeIdent'],
+        '[': ['beforeElement'],
+        'eof': ['afterPath']
+    },
 
-  'beforeIdent': {
-    'ws': ['beforeIdent'],
-    'ident': ['inIdent', 'append']
-  },
+    'beforeIdent': {
+        'ws': ['beforeIdent'],
+        'ident': ['inIdent', 'append']
+    },
 
-  'inIdent': {
-    'ident': ['inIdent', 'append'],
-    '0': ['inIdent', 'append'],
-    'number': ['inIdent', 'append'],
-    'ws': ['inPath', 'push'],
-    '.': ['beforeIdent', 'push'],
-    '[': ['beforeElement', 'push'],
-    'eof': ['afterPath', 'push'],
-    ']': ['inPath', 'push']
-  },
+    'inIdent': {
+        'ident': ['inIdent', 'append'],
+        '0': ['inIdent', 'append'],
+        'number': ['inIdent', 'append'],
+        'ws': ['inPath', 'push'],
+        '.': ['beforeIdent', 'push'],
+        '[': ['beforeElement', 'push'],
+        'eof': ['afterPath', 'push'],
+        ']': ['inPath', 'push']
+    },
 
-  'beforeElement': {
-    'ws': ['beforeElement'],
-    '0': ['afterZero', 'append'],
-    'number': ['inIndex', 'append'],
-    "'": ['inSingleQuote', 'append', ''],
-    '"': ['inDoubleQuote', 'append', ''],
-    'ident': ['inIdent', 'append', '*']
-  },
+    'beforeElement': {
+        'ws': ['beforeElement'],
+        '0': ['afterZero', 'append'],
+        'number': ['inIndex', 'append'],
+        "'": ['inSingleQuote', 'append', ''],
+        '"': ['inDoubleQuote', 'append', ''],
+        'ident': ['inIdent', 'append', '*']
+    },
 
-  'afterZero': {
-    'ws': ['afterElement', 'push'],
-    ']': ['inPath', 'push']
-  },
+    'afterZero': {
+        'ws': ['afterElement', 'push'],
+        ']': ['inPath', 'push']
+    },
 
-  'inIndex': {
-    '0': ['inIndex', 'append'],
-    'number': ['inIndex', 'append'],
-    'ws': ['afterElement'],
-    ']': ['inPath', 'push']
-  },
+    'inIndex': {
+        '0': ['inIndex', 'append'],
+        'number': ['inIndex', 'append'],
+        'ws': ['afterElement'],
+        ']': ['inPath', 'push']
+    },
 
-  'inSingleQuote': {
-    "'": ['afterElement'],
-    'eof': 'error',
-    'else': ['inSingleQuote', 'append']
-  },
+    'inSingleQuote': {
+        "'": ['afterElement'],
+        'eof': 'error',
+        'else': ['inSingleQuote', 'append']
+    },
 
-  'inDoubleQuote': {
-    '"': ['afterElement'],
-    'eof': 'error',
-    'else': ['inDoubleQuote', 'append']
-  },
+    'inDoubleQuote': {
+        '"': ['afterElement'],
+        'eof': 'error',
+        'else': ['inDoubleQuote', 'append']
+    },
 
-  'afterElement': {
-    'ws': ['afterElement'],
-    ']': ['inPath', 'push']
-  }
+    'afterElement': {
+        'ws': ['afterElement'],
+        ']': ['inPath', 'push']
+    }
 }
 
-function noop () {}
+function noop() {
+}
 
 /**
  * Determine the type of a character in a keypath.
@@ -86,51 +87,51 @@ function noop () {}
  * @return {String} type
  */
 
-function getPathCharType (ch) {
-  if (ch === undefined) {
-    return 'eof'
-  }
+function getPathCharType(ch) {
+    if (ch === undefined) {
+        return 'eof'
+    }
 
-  var code = ch.charCodeAt(0)
+    var code = ch.charCodeAt(0)
 
-  switch (code) {
-    case 0x5B: // [
-    case 0x5D: // ]
-    case 0x2E: // .
-    case 0x22: // "
-    case 0x27: // '
-    case 0x30: // 0
-      return ch
+    switch (code) {
+        case 0x5B: // [
+        case 0x5D: // ]
+        case 0x2E: // .
+        case 0x22: // "
+        case 0x27: // '
+        case 0x30: // 0
+            return ch
 
-    case 0x5F: // _
-    case 0x24: // $
-      return 'ident'
+        case 0x5F: // _
+        case 0x24: // $
+            return 'ident'
 
-    case 0x20: // Space
-    case 0x09: // Tab
-    case 0x0A: // Newline
-    case 0x0D: // Return
-    case 0xA0:  // No-break space
-    case 0xFEFF:  // Byte Order Mark
-    case 0x2028:  // Line Separator
-    case 0x2029:  // Paragraph Separator
-      return 'ws'
-  }
+        case 0x20: // Space
+        case 0x09: // Tab
+        case 0x0A: // Newline
+        case 0x0D: // Return
+        case 0xA0:  // No-break space
+        case 0xFEFF:  // Byte Order Mark
+        case 0x2028:  // Line Separator
+        case 0x2029:  // Paragraph Separator
+            return 'ws'
+    }
 
-  // a-z, A-Z
-  if (
-    (code >= 0x61 && code <= 0x7A) ||
-    (code >= 0x41 && code <= 0x5A)
-  ) {
-    return 'ident'
-  }
+    // a-z, A-Z
+    if (
+        (code >= 0x61 && code <= 0x7A) ||
+        (code >= 0x41 && code <= 0x5A)
+    ) {
+        return 'ident'
+    }
 
-  // 1-9
-  if (code >= 0x31 && code <= 0x39) {
-    return 'number'
-  }
+    // 1-9
+    if (code >= 0x31 && code <= 0x39) {
+        return 'number'
+    }
 
-  return 'else'
+    return 'else'
 }
 
 /**
@@ -141,71 +142,71 @@ function getPathCharType (ch) {
  * @return {Array|undefined}
  */
 
-function parsePath (path) {
-  var keys = []
-  var index = -1
-  var mode = 'beforePath'
-  var c, newChar, key, type, transition, action, typeMap
+function parsePath(path) {
+    var keys = []
+    var index = -1
+    var mode = 'beforePath'
+    var c, newChar, key, type, transition, action, typeMap
 
-  var actions = {
-    push: function () {
-      if (key === undefined) {
-        return
-      }
-      keys.push(key)
-      key = undefined
-    },
-    append: function () {
-      if (key === undefined) {
-        key = newChar
-      } else {
-        key += newChar
-      }
-    }
-  }
-
-  function maybeUnescapeQuote () {
-    var nextChar = path[index + 1]
-    if ((mode === 'inSingleQuote' && nextChar === "'") ||
-        (mode === 'inDoubleQuote' && nextChar === '"')) {
-      index++
-      newChar = nextChar
-      actions.append()
-      return true
-    }
-  }
-
-  while (mode) {
-    index++
-    c = path[index]
-
-    if (c === '\\' && maybeUnescapeQuote()) {
-      continue
+    var actions = {
+        push: function () {
+            if (key === undefined) {
+                return
+            }
+            keys.push(key)
+            key = undefined
+        },
+        append: function () {
+            if (key === undefined) {
+                key = newChar
+            } else {
+                key += newChar
+            }
+        }
     }
 
-    type = getPathCharType(c)
-    typeMap = pathStateMachine[mode]
-    transition = typeMap[type] || typeMap['else'] || 'error'
-
-    if (transition === 'error') {
-      return // parse error
+    function maybeUnescapeQuote() {
+        var nextChar = path[index + 1]
+        if ((mode === 'inSingleQuote' && nextChar === "'") ||
+            (mode === 'inDoubleQuote' && nextChar === '"')) {
+            index++
+            newChar = nextChar
+            actions.append()
+            return true
+        }
     }
 
-    mode = transition[0]
-    action = actions[transition[1]] || noop
-    newChar = transition[2]
-    newChar = newChar === undefined
-      ? c
-      : newChar === '*'
-        ? newChar + c
-        : newChar
-    action()
+    while (mode) {
+        index++
+        c = path[index]
 
-    if (mode === 'afterPath') {
-      keys.raw = path
-      return keys
+        if (c === '\\' && maybeUnescapeQuote()) {
+            continue
+        }
+
+        type = getPathCharType(c)
+        typeMap = pathStateMachine[mode]
+        transition = typeMap[type] || typeMap['else'] || 'error'
+
+        if (transition === 'error') {
+            return // parse error
+        }
+
+        mode = transition[0]
+        action = actions[transition[1]] || noop
+        newChar = transition[2]
+        newChar = newChar === undefined
+            ? c
+            : newChar === '*'
+            ? newChar + c
+            : newChar
+        action()
+
+        if (mode === 'afterPath') {
+            keys.raw = path
+            return keys
+        }
     }
-  }
 }
 
 /**
@@ -215,16 +216,16 @@ function parsePath (path) {
  * @return {Boolean}
  */
 
-function formatAccessor (key) {
-  if (identRE.test(key)) { // identifier
-    return '.' + key
-  } else if (+key === key >>> 0) { // bracket index
-    return '[' + key + ']'
-  } else if (key.charAt(0) === '*') {
-    return '[o' + formatAccessor(key.slice(1)) + ']'
-  } else { // bracket string
-    return '["' + key.replace(/"/g, '\\"') + '"]'
-  }
+function formatAccessor(key) {
+    if (identRE.test(key)) { // identifier
+        return '.' + key
+    } else if (+key === key >>> 0) { // bracket index
+        return '[' + key + ']'
+    } else if (key.charAt(0) === '*') {
+        return '[o' + formatAccessor(key.slice(1)) + ']'
+    } else { // bracket string
+        return '["' + key.replace(/"/g, '\\"') + '"]'
+    }
 }
 
 /**
@@ -236,8 +237,8 @@ function formatAccessor (key) {
  */
 
 exports.compileGetter = function (path) {
-  var body = 'return o' + path.map(formatAccessor).join('')
-  return new Function('o', body)
+    var body = 'return o' + path.map(formatAccessor).join('')
+    return new Function('o', body)
 }
 
 /**
@@ -248,15 +249,15 @@ exports.compileGetter = function (path) {
  */
 
 exports.parse = function (path) {
-  var hit = pathCache.get(path)
-  if (!hit) {
-    hit = parsePath(path)
-    if (hit) {
-      hit.get = exports.compileGetter(hit)
-      pathCache.put(path, hit)
+    var hit = pathCache.get(path)
+    if (!hit) {
+        hit = parsePath(path)
+        if (hit) {
+            hit.get = exports.compileGetter(hit)
+            pathCache.put(path, hit)
+        }
     }
-  }
-  return hit
+    return hit
 }
 
 /**
@@ -267,10 +268,10 @@ exports.parse = function (path) {
  */
 
 exports.get = function (obj, path) {
-  path = exports.parse(path)
-  if (path) {
-    return path.get(obj)
-  }
+    path = exports.parse(path)
+    if (path) {
+        return path.get(obj)
+    }
 }
 
 /**
@@ -282,46 +283,46 @@ exports.get = function (obj, path) {
  */
 
 exports.set = function (obj, path, val) {
-  var original = obj
-  if (typeof path === 'string') {
-    path = exports.parse(path)
-  }
-  if (!path || !_.isObject(obj)) {
-    return false
-  }
-  var last, key
-  for (var i = 0, l = path.length; i < l; i++) {
-    last = obj
-    key = path[i]
-    if (key.charAt(0) === '*') {
-      key = original[key.slice(1)]
+    var original = obj
+    if (typeof path === 'string') {
+        path = exports.parse(path)
     }
-    if (i < l - 1) {
-      obj = obj[key]
-      if (!_.isObject(obj)) {
-        obj = {}
-        last.$add(key, obj)
-        warnNonExistent(path)
-      }
-    } else {
-      if (_.isArray(obj)) {
-        obj.$set(key, val)
-      } else if (key in obj) {
-        obj[key] = val
-      } else {
-        obj.$add(key, val)
-        warnNonExistent(path)
-      }
+    if (!path || !_.isObject(obj)) {
+        return false
     }
-  }
-  return true
+    var last, key
+    for (var i = 0, l = path.length; i < l; i++) {
+        last = obj
+        key = path[i]
+        if (key.charAt(0) === '*') {
+            key = original[key.slice(1)]
+        }
+        if (i < l - 1) {
+            obj = obj[key]
+            if (!_.isObject(obj)) {
+                obj = {}
+                last.$add(key, obj)
+                warnNonExistent(path)
+            }
+        } else {
+            if (_.isArray(obj)) {
+                obj.$set(key, val)
+            } else if (key in obj) {
+                obj[key] = val
+            } else {
+                obj.$add(key, val)
+                warnNonExistent(path)
+            }
+        }
+    }
+    return true
 }
 
-function warnNonExistent (path) {
-  _.warn(
-    'You are setting a non-existent path "' + path.raw + '" ' +
-    'on a vm instance. Consider pre-initializing the property ' +
-    'with the "data" option for more reliable reactivity ' +
-    'and better performance.'
-  )
+function warnNonExistent(path) {
+    _.warn(
+        'You are setting a non-existent path "' + path.raw + '" ' +
+        'on a vm instance. Consider pre-initializing the property ' +
+        'with the "data" option for more reliable reactivity ' +
+        'and better performance.'
+    )
 }

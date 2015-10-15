@@ -41,9 +41,9 @@ module.exports = function (Vue) {
             case 3:
             case 2:
 
-                if (_.isFunction (args[1])) {
+                if (_.isFunction(args[1])) {
 
-                    if (_.isFunction (args[0])) {
+                    if (_.isFunction(args[0])) {
 
                         success = args[0];
                         error = args[1];
@@ -65,7 +65,7 @@ module.exports = function (Vue) {
 
             case 1:
 
-                if (_.isFunction (args[0])) {
+                if (_.isFunction(args[0])) {
                     success = args[0];
                 } else if (/^(post|put|patch)$/i.test(options.method)) {
                     data = args[0];

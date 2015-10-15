@@ -1,7 +1,7 @@
 // Karma configuration
 // Generated on Mon Nov 24 2014 14:20:45 GMT+0100 (CET)
 
-module.exports = function(config) {
+module.exports = function (config) {
     config.set({
 
         // base path that will be used to resolve all patterns (eg. files, exclude)
@@ -18,8 +18,7 @@ module.exports = function(config) {
         ],
 
         // list of files to exclude
-        exclude: [
-        ],
+        exclude: [],
 
         preprocessors: {
             'src/karma-test.js': ['browserify']

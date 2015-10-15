@@ -18,23 +18,23 @@ var internalQueueDepleted = false
  * Reset the batcher's state.
  */
 
-function reset () {
-  queue = []
-  userQueue = []
-  has = {}
-  waiting = flushing = internalQueueDepleted = false
+function reset() {
+    queue = []
+    userQueue = []
+    has = {}
+    waiting = flushing = internalQueueDepleted = false
 }
 
 /**
  * Flush both queues and run the jobs.
  */
 
-function flush () {
-  flushing = true
-  run(queue)
-  internalQueueDepleted = true
-  run(userQueue)
-  reset()
+function flush() {
+    flushing = true
+    run(queue)
+    internalQueueDepleted = true
+    run(userQueue)
+    reset()
 }
 
 /**
@@ -43,12 +43,12 @@ function flush () {
  * @param {Array} queue
  */
 
-function run (queue) {
-  // do not cache length because more jobs might be pushed
-  // as we run existing jobs
-  for (var i = 0; i < queue.length; i++) {
-    queue[i].run()
-  }
+function run(queue) {
+    // do not cache length because more jobs might be pushed
+    // as we run existing jobs
+    for (var i = 0; i < queue.length; i++) {
+        queue[i].run()
+    }
 }
 
 /**
@@ -63,33 +63,34 @@ function run (queue) {
  */
 
 exports.push = function (job) {
-  var id = job.id
-  if (!id || !has[id] || flushing) {
-    if (!has[id]) {
-      has[id] = 1
-    } else {
-      has[id]++
-      // detect possible infinite update loops
-      if (has[id] > config._maxUpdateCount) {
-        _.warn(
-          'You may have an infinite update loop for the ' +
-          'watcher with expression: "' + job.expression + '".'
-        )
-        return
-      }
+    var id = job.id
+    if (!id || !has[id] || flushing) {
+        if (!has[id]) {
+            has[id] = 1
+        } else {
+            has[id]++
+            // detect possible infinite update loops
+            if (has[id] > config._maxUpdateCount) {
+                _.warn(
+                    'You may have an infinite update loop for the ' +
+                    'watcher with expression: "' + job.expression + '".'
+                )
+                return
+            }
+        }
+        // A user watcher callback could trigger another
+        // directive update during the flushing; at that time
+        // the directive queue would already have been run, so
+        // we call that update immediately as it is pushed.
+        if (flushing && !job.user && internalQueueDepleted) {
+            job.run()
+            return
+        }
+        ;
+        (job.user ? userQueue : queue).push(job)
+        if (!waiting) {
+            waiting = true
+            _.nextTick(flush)
+        }
     }
-    // A user watcher callback could trigger another
-    // directive update during the flushing; at that time
-    // the directive queue would already have been run, so
-    // we call that update immediately as it is pushed.
-    if (flushing && !job.user && internalQueueDepleted) {
-      job.run()
-      return
-    }
-    ;(job.user ? userQueue : queue).push(job)
-    if (!waiting) {
-      waiting = true
-      _.nextTick(flush)
-    }
-  }
 }

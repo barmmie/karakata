@@ -1,55 +1,58 @@
-function bench (fn, n) {
-  var s = Date.now()
-  var vms = []
-  for (var i = 0; i < n; i++) {
-    vms.push(fn())
-  }
-  console.log(n + ' ' + fn.desciption + ': ' + (Date.now() - s) + 'ms')
+function bench(fn, n) {
+    var s = Date.now()
+    var vms = []
+    for (var i = 0; i < n; i++) {
+        vms.push(fn())
+    }
+    console.log(n + ' ' + fn.desciption + ': ' + (Date.now() - s) + 'ms')
 }
 
-function emptyInstance () {
-  return new Vue()
+function emptyInstance() {
+    return new Vue()
 }
 emptyInstance.desciption = 'empty instances'
 
 var options = {
-  template: '{{hi}}',
-  data: function () {
-    return {
-      hi: 'msg'
+    template: '{{hi}}',
+    data: function () {
+        return {
+            hi: 'msg'
+        }
+    },
+    ready: function () {
+    },
+    filters: {
+        that: function () {
+        }
     }
-  },
-  ready: function () {},
-  filters: {
-    that: function () {}
-  }
 }
 
-function instanceWithOption () {
-  return new Vue(options)
+function instanceWithOption() {
+    return new Vue(options)
 }
 instanceWithOption.desciption = 'instance with options'
 
 var Test = Vue.extend(options)
-function extendedInstance () {
-  return new Test()
+function extendedInstance() {
+    return new Test()
 }
 extendedInstance.desciption = 'extended instances'
 
-function extendedInstanceWithOptions () {
-  return new Test({
-    data: function () {
-      return {
-        b: 'lol'
-      }
-    },
-    ready: function () {},
-    directives: {
-      that: function () {
-        
-      }
-    }
-  })
+function extendedInstanceWithOptions() {
+    return new Test({
+        data: function () {
+            return {
+                b: 'lol'
+            }
+        },
+        ready: function () {
+        },
+        directives: {
+            that: function () {
+
+            }
+        }
+    })
 }
 extendedInstanceWithOptions.desciption = 'extended instances with options'
 

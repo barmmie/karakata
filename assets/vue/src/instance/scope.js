@@ -12,11 +12,11 @@ var Dep = require('../observer/dep')
  */
 
 exports._initScope = function () {
-  this._initProps()
-  this._initMeta()
-  this._initMethods()
-  this._initData()
-  this._initComputed()
+    this._initProps()
+    this._initMeta()
+    this._initMethods()
+    this._initData()
+    this._initComputed()
 }
 
 /**
@@ -24,22 +24,22 @@ exports._initScope = function () {
  */
 
 exports._initProps = function () {
-  var options = this.$options
-  var el = options.el
-  var props = options.props
-  if (props && !el) {
-    _.warn(
-      'Props will not be compiled if no `el` option is ' +
-      'provided at instantiation.'
-    )
-  }
-  // make sure to convert string selectors into element now
-  el = options.el = _.query(el)
-  this._propsUnlinkFn = el && props
-    ? compiler.compileAndLinkProps(
+    var options = this.$options
+    var el = options.el
+    var props = options.props
+    if (props && !el) {
+        _.warn(
+            'Props will not be compiled if no `el` option is ' +
+            'provided at instantiation.'
+        )
+    }
+    // make sure to convert string selectors into element now
+    el = options.el = _.query(el)
+    this._propsUnlinkFn = el && props
+        ? compiler.compileAndLinkProps(
         this, el, props
-      )
-    : null
+    )
+        : null
 }
 
 /**
@@ -47,30 +47,30 @@ exports._initProps = function () {
  */
 
 exports._initData = function () {
-  var propsData = this._data
-  var optionsDataFn = this.$options.data
-  var optionsData = optionsDataFn && optionsDataFn()
-  if (optionsData) {
-    this._data = optionsData
-    for (var prop in propsData) {
-      if (this._props[prop].raw !== null) {
-        optionsData.$set(prop, propsData[prop])
-      }
+    var propsData = this._data
+    var optionsDataFn = this.$options.data
+    var optionsData = optionsDataFn && optionsDataFn()
+    if (optionsData) {
+        this._data = optionsData
+        for (var prop in propsData) {
+            if (this._props[prop].raw !== null) {
+                optionsData.$set(prop, propsData[prop])
+            }
+        }
     }
-  }
-  var data = this._data
-  // proxy data on instance
-  var keys = Object.keys(data)
-  var i, key
-  i = keys.length
-  while (i--) {
-    key = keys[i]
-    if (!_.isReserved(key)) {
-      this._proxy(key)
+    var data = this._data
+    // proxy data on instance
+    var keys = Object.keys(data)
+    var i, key
+    i = keys.length
+    while (i--) {
+        key = keys[i]
+        if (!_.isReserved(key)) {
+            this._proxy(key)
+        }
     }
-  }
-  // observe data
-  Observer.create(data, this)
+    // observe data
+    Observer.create(data, this)
 }
 
 /**
@@ -80,46 +80,46 @@ exports._initData = function () {
  */
 
 exports._setData = function (newData) {
-  newData = newData || {}
-  var oldData = this._data
-  this._data = newData
-  var keys, key, i
-  // copy props.
-  // this should only happen during a v-repeat of component
-  // that also happens to have compiled props.
-  var props = this.$options.props
-  if (props) {
-    i = props.length
+    newData = newData || {}
+    var oldData = this._data
+    this._data = newData
+    var keys, key, i
+    // copy props.
+    // this should only happen during a v-repeat of component
+    // that also happens to have compiled props.
+    var props = this.$options.props
+    if (props) {
+        i = props.length
+        while (i--) {
+            key = props[i].name
+            if (key !== '$data' && !newData.hasOwnProperty(key)) {
+                newData.$set(key, oldData[key])
+            }
+        }
+    }
+    // unproxy keys not present in new data
+    keys = Object.keys(oldData)
+    i = keys.length
     while (i--) {
-      key = props[i].name
-      if (key !== '$data' && !newData.hasOwnProperty(key)) {
-        newData.$set(key, oldData[key])
-      }
+        key = keys[i]
+        if (!_.isReserved(key) && !(key in newData)) {
+            this._unproxy(key)
+        }
     }
-  }
-  // unproxy keys not present in new data
-  keys = Object.keys(oldData)
-  i = keys.length
-  while (i--) {
-    key = keys[i]
-    if (!_.isReserved(key) && !(key in newData)) {
-      this._unproxy(key)
+    // proxy keys not already proxied,
+    // and trigger change for changed values
+    keys = Object.keys(newData)
+    i = keys.length
+    while (i--) {
+        key = keys[i]
+        if (!this.hasOwnProperty(key) && !_.isReserved(key)) {
+            // new property
+            this._proxy(key)
+        }
     }
-  }
-  // proxy keys not already proxied,
-  // and trigger change for changed values
-  keys = Object.keys(newData)
-  i = keys.length
-  while (i--) {
-    key = keys[i]
-    if (!this.hasOwnProperty(key) && !_.isReserved(key)) {
-      // new property
-      this._proxy(key)
-    }
-  }
-  oldData.__ob__.removeVm(this)
-  Observer.create(newData, this)
-  this._digest()
+    oldData.__ob__.removeVm(this)
+    Observer.create(newData, this)
+    this._digest()
 }
 
 /**
@@ -130,20 +130,20 @@ exports._setData = function (newData) {
  */
 
 exports._proxy = function (key) {
-  // need to store ref to self here
-  // because these getter/setters might
-  // be called by child instances!
-  var self = this
-  Object.defineProperty(self, key, {
-    configurable: true,
-    enumerable: true,
-    get: function proxyGetter () {
-      return self._data[key]
-    },
-    set: function proxySetter (val) {
-      self._data[key] = val
-    }
-  })
+    // need to store ref to self here
+    // because these getter/setters might
+    // be called by child instances!
+    var self = this
+    Object.defineProperty(self, key, {
+        configurable: true,
+        enumerable: true,
+        get: function proxyGetter() {
+            return self._data[key]
+        },
+        set: function proxySetter(val) {
+            self._data[key] = val
+        }
+    })
 }
 
 /**
@@ -153,7 +153,7 @@ exports._proxy = function (key) {
  */
 
 exports._unproxy = function (key) {
-  delete this[key]
+    delete this[key]
 }
 
 /**
@@ -161,18 +161,18 @@ exports._unproxy = function (key) {
  */
 
 exports._digest = function () {
-  var i = this._watchers.length
-  while (i--) {
-    this._watchers[i].update(true) // shallow updates
-  }
-  var children = this.$children
-  i = children.length
-  while (i--) {
-    var child = children[i]
-    if (child.$options.inherit) {
-      child._digest()
+    var i = this._watchers.length
+    while (i--) {
+        this._watchers[i].update(true) // shallow updates
     }
-  }
+    var children = this.$children
+    i = children.length
+    while (i--) {
+        var child = children[i]
+        if (child.$options.inherit) {
+            child._digest()
+        }
+    }
 }
 
 /**
@@ -180,30 +180,31 @@ exports._digest = function () {
  * special getter/setters
  */
 
-function noop () {}
+function noop() {
+}
 exports._initComputed = function () {
-  var computed = this.$options.computed
-  if (computed) {
-    for (var key in computed) {
-      var userDef = computed[key]
-      var def = {
-        enumerable: true,
-        configurable: true
-      }
-      if (typeof userDef === 'function') {
-        def.get = _.bind(userDef, this)
-        def.set = noop
-      } else {
-        def.get = userDef.get
-          ? _.bind(userDef.get, this)
-          : noop
-        def.set = userDef.set
-          ? _.bind(userDef.set, this)
-          : noop
-      }
-      Object.defineProperty(this, key, def)
+    var computed = this.$options.computed
+    if (computed) {
+        for (var key in computed) {
+            var userDef = computed[key]
+            var def = {
+                enumerable: true,
+                configurable: true
+            }
+            if (typeof userDef === 'function') {
+                def.get = _.bind(userDef, this)
+                def.set = noop
+            } else {
+                def.get = userDef.get
+                    ? _.bind(userDef.get, this)
+                    : noop
+                def.set = userDef.set
+                    ? _.bind(userDef.set, this)
+                    : noop
+            }
+            Object.defineProperty(this, key, def)
+        }
     }
-  }
 }
 
 /**
@@ -213,12 +214,12 @@ exports._initComputed = function () {
  */
 
 exports._initMethods = function () {
-  var methods = this.$options.methods
-  if (methods) {
-    for (var key in methods) {
-      this[key] = _.bind(methods[key], this)
+    var methods = this.$options.methods
+    if (methods) {
+        for (var key in methods) {
+            this[key] = _.bind(methods[key], this)
+        }
     }
-  }
 }
 
 /**
@@ -226,12 +227,12 @@ exports._initMethods = function () {
  */
 
 exports._initMeta = function () {
-  var metas = this.$options._meta
-  if (metas) {
-    for (var key in metas) {
-      this._defineMeta(key, metas[key])
+    var metas = this.$options._meta
+    if (metas) {
+        for (var key in metas) {
+            this._defineMeta(key, metas[key])
+        }
     }
-  }
 }
 
 /**
@@ -243,19 +244,19 @@ exports._initMeta = function () {
  */
 
 exports._defineMeta = function (key, value) {
-  var dep = new Dep()
-  Object.defineProperty(this, key, {
-    enumerable: true,
-    configurable: true,
-    get: function metaGetter () {
-      dep.depend()
-      return value
-    },
-    set: function metaSetter (val) {
-      if (val !== value) {
-        value = val
-        dep.notify()
-      }
-    }
-  })
+    var dep = new Dep()
+    Object.defineProperty(this, key, {
+        enumerable: true,
+        configurable: true,
+        get: function metaGetter() {
+            dep.depend()
+            return value
+        },
+        set: function metaSetter(val) {
+            if (val !== value) {
+                value = val
+                dep.notify()
+            }
+        }
+    })
 }

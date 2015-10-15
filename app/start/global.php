@@ -48,17 +48,19 @@ Log::useFiles(storage_path() . '/logs/laravel.log');
 
 App::error(function (Exception $exception) {
     Log::error($exception);
-    flashError('Fatal app error '.$exception->getCode(), $exception->getMessage());
-    if(!Config::get('app.debug'))
+    flashError('Fatal app error ' . $exception->getCode(), $exception->getMessage());
+    if (!Config::get('app.debug')) {
         return Redirect::route('pages.500');
+    }
 
 });
 
 App::error(function (\Illuminate\Database\QueryException $exception) {
     Log::error($exception);
-    flashError('Database error'.$exception->getCode(), $exception->getMessage());
-    if(!Config::get('app.debug'))
+    flashError('Database error' . $exception->getCode(), $exception->getMessage());
+    if (!Config::get('app.debug')) {
         return Redirect::route('pages.500');
+    }
 
 });
 
@@ -79,7 +81,7 @@ App::error(function (\Illuminate\Database\Eloquent\ModelNotFoundException $excep
     return Request::header('referer') ? Redirect::back() : Redirect::route('pages.homepage');
 });
 
-App::error(function(\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e){
+App::error(function (\Symfony\Component\HttpKernel\Exception\NotFoundHttpException $e) {
     return Redirect::route('pages.404');
 });
 
@@ -119,7 +121,5 @@ App::bind('Laracasts\Commander\CommandTranslator', 'Karakata\Services\MyCommandT
 
 App::setLocale(Session::get('lang', 'en'));
 
-error_reporting(0);
-@ini_set('display_errors', 0);
-@ini_set('memory_limit', '512M');
+
 

@@ -1,11 +1,11 @@
 @if(Setting::get('logo_src')=='')
-<i class="circular inverted big teal shadowed search icon"></i>
+    <i class="circular inverted big teal shadowed search icon"></i>
 @endif
 <div class="mast item">
     @if(Setting::get('logo_src')!='')
         <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
     @else
-    <a href="{{route('admin.dashboard')}}"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
+        <a href="{{route('admin.dashboard')}}"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
 </div>
 
 <a class="item" target="_blank" href="{{route('pages.homepage')}}">

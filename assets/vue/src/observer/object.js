@@ -11,26 +11,26 @@ var objProto = Object.prototype
  */
 
 _.define(
-  objProto,
-  '$add',
-  function $add (key, val) {
-    if (this.hasOwnProperty(key)) return
-    var ob = this.__ob__
-    if (!ob || _.isReserved(key)) {
-      this[key] = val
-      return
+    objProto,
+    '$add',
+    function $add(key, val) {
+        if (this.hasOwnProperty(key)) return
+        var ob = this.__ob__
+        if (!ob || _.isReserved(key)) {
+            this[key] = val
+            return
+        }
+        ob.convert(key, val)
+        ob.notify()
+        if (ob.vms) {
+            var i = ob.vms.length
+            while (i--) {
+                var vm = ob.vms[i]
+                vm._proxy(key)
+                vm._digest()
+            }
+        }
     }
-    ob.convert(key, val)
-    ob.notify()
-    if (ob.vms) {
-      var i = ob.vms.length
-      while (i--) {
-        var vm = ob.vms[i]
-        vm._proxy(key)
-        vm._digest()
-      }
-    }
-  }
 )
 
 /**
@@ -43,12 +43,12 @@ _.define(
  */
 
 _.define(
-  objProto,
-  '$set',
-  function $set (key, val) {
-    this.$add(key, val)
-    this[key] = val
-  }
+    objProto,
+    '$set',
+    function $set(key, val) {
+        this.$add(key, val)
+        this[key] = val
+    }
 )
 
 /**
@@ -60,23 +60,23 @@ _.define(
  */
 
 _.define(
-  objProto,
-  '$delete',
-  function $delete (key) {
-    if (!this.hasOwnProperty(key)) return
-    delete this[key]
-    var ob = this.__ob__
-    if (!ob || _.isReserved(key)) {
-      return
+    objProto,
+    '$delete',
+    function $delete(key) {
+        if (!this.hasOwnProperty(key)) return
+        delete this[key]
+        var ob = this.__ob__
+        if (!ob || _.isReserved(key)) {
+            return
+        }
+        ob.notify()
+        if (ob.vms) {
+            var i = ob.vms.length
+            while (i--) {
+                var vm = ob.vms[i]
+                vm._unproxy(key)
+                vm._digest()
+            }
+        }
     }
-    ob.notify()
-    if (ob.vms) {
-      var i = ob.vms.length
-      while (i--) {
-        var vm = ob.vms[i]
-        vm._unproxy(key)
-        vm._digest()
-      }
-    }
-  }
 )

@@ -1,4 +1,4 @@
-$(function() {
+$(function () {
     var $tree = $('#tree1');
     $tree.tree({
         data: ExampleData.example_data,
@@ -6,7 +6,7 @@ $(function() {
     });
     $tree.bind(
         'tree.click',
-        function(e) {
+        function (e) {
             // Disable single selection
             e.preventDefault();
 

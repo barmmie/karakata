@@ -18,7 +18,7 @@ $(document)
     .ready(function () {
 
         var
-            $tocSticky           = $('.toc .ui.sticky'),
+            $tocSticky = $('.toc .ui.sticky'),
             $fullHeightContainer = $('.pusher > .full.height'),
             $menu = $('#toc');
 

@@ -22,23 +22,23 @@ var expParser = require('./parsers/expression')
  * @constructor
  */
 
-function Directive (name, el, vm, descriptor, def, host) {
-  // public
-  this.name = name
-  this.el = el
-  this.vm = vm
-  // copy descriptor props
-  this.raw = descriptor.raw
-  this.expression = descriptor.expression
-  this.arg = descriptor.arg
-  this.filters = descriptor.filters
-  // private
-  this._descriptor = descriptor
-  this._host = host
-  this._locked = false
-  this._bound = false
-  // init
-  this._bind(def)
+function Directive(name, el, vm, descriptor, def, host) {
+    // public
+    this.name = name
+    this.el = el
+    this.vm = vm
+    // copy descriptor props
+    this.raw = descriptor.raw
+    this.expression = descriptor.expression
+    this.arg = descriptor.arg
+    this.filters = descriptor.filters
+    // private
+    this._descriptor = descriptor
+    this._host = host
+    this._locked = false
+    this._bound = false
+    // init
+    this._bind(def)
 }
 
 var p = Directive.prototype
@@ -52,55 +52,55 @@ var p = Directive.prototype
  */
 
 p._bind = function (def) {
-  if (this.name !== 'cloak' && this.el && this.el.removeAttribute) {
-    this.el.removeAttribute(config.prefix + this.name)
-  }
-  if (typeof def === 'function') {
-    this.update = def
-  } else {
-    _.extend(this, def)
-  }
-  this._watcherExp = this.expression
-  this._checkDynamicLiteral()
-  if (this.bind) {
-    this.bind()
-  }
-  if (this._watcherExp &&
-      (this.update || this.twoWay) &&
-      (!this.isLiteral || this._isDynamicLiteral) &&
-      !this._checkStatement()) {
-    // wrapped updater for context
-    var dir = this
-    var update = this._update = this.update
-      ? function (val, oldVal) {
-          if (!dir._locked) {
-            dir.update(val, oldVal)
-          }
-        }
-      : function () {} // noop if no update is provided
-    // pre-process hook called before the value is piped
-    // through the filters. used in v-repeat.
-    var preProcess = this._preProcess
-      ? _.bind(this._preProcess, this)
-      : null
-    var watcher = this._watcher = new Watcher(
-      this.vm,
-      this._watcherExp,
-      update, // callback
-      {
-        filters: this.filters,
-        twoWay: this.twoWay,
-        deep: this.deep,
-        preProcess: preProcess
-      }
-    )
-    if (this._initValue != null) {
-      watcher.set(this._initValue)
-    } else if (this.update) {
-      this.update(watcher.value)
+    if (this.name !== 'cloak' && this.el && this.el.removeAttribute) {
+        this.el.removeAttribute(config.prefix + this.name)
     }
-  }
-  this._bound = true
+    if (typeof def === 'function') {
+        this.update = def
+    } else {
+        _.extend(this, def)
+    }
+    this._watcherExp = this.expression
+    this._checkDynamicLiteral()
+    if (this.bind) {
+        this.bind()
+    }
+    if (this._watcherExp &&
+        (this.update || this.twoWay) &&
+        (!this.isLiteral || this._isDynamicLiteral) && !this._checkStatement()) {
+        // wrapped updater for context
+        var dir = this
+        var update = this._update = this.update
+            ? function (val, oldVal) {
+            if (!dir._locked) {
+                dir.update(val, oldVal)
+            }
+        }
+            : function () {
+        } // noop if no update is provided
+        // pre-process hook called before the value is piped
+        // through the filters. used in v-repeat.
+        var preProcess = this._preProcess
+            ? _.bind(this._preProcess, this)
+            : null
+        var watcher = this._watcher = new Watcher(
+            this.vm,
+            this._watcherExp,
+            update, // callback
+            {
+                filters: this.filters,
+                twoWay: this.twoWay,
+                deep: this.deep,
+                preProcess: preProcess
+            }
+        )
+        if (this._initValue != null) {
+            watcher.set(this._initValue)
+        } else if (this.update) {
+            this.update(watcher.value)
+        }
+    }
+    this._bound = true
 }
 
 /**
@@ -110,16 +110,16 @@ p._bind = function (def) {
  */
 
 p._checkDynamicLiteral = function () {
-  var expression = this.expression
-  if (expression && this.isLiteral) {
-    var tokens = textParser.parse(expression)
-    if (tokens) {
-      var exp = textParser.tokensToExp(tokens)
-      this.expression = this.vm.$get(exp)
-      this._watcherExp = exp
-      this._isDynamicLiteral = true
+    var expression = this.expression
+    if (expression && this.isLiteral) {
+        var tokens = textParser.parse(expression)
+        if (tokens) {
+            var exp = textParser.tokensToExp(tokens)
+            this.expression = this.vm.$get(exp)
+            this._watcherExp = exp
+            this._isDynamicLiteral = true
+        }
     }
-  }
 }
 
 /**
@@ -134,22 +134,21 @@ p._checkDynamicLiteral = function () {
  */
 
 p._checkStatement = function () {
-  var expression = this.expression
-  if (
-    expression && this.acceptStatement &&
-    !expParser.isSimplePath(expression)
-  ) {
-    var fn = expParser.parse(expression).get
-    var vm = this.vm
-    var handler = function () {
-      fn.call(vm, vm)
+    var expression = this.expression
+    if (
+        expression && this.acceptStatement && !expParser.isSimplePath(expression)
+    ) {
+        var fn = expParser.parse(expression).get
+        var vm = this.vm
+        var handler = function () {
+            fn.call(vm, vm)
+        }
+        if (this.filters) {
+            handler = vm._applyFilters(handler, null, this.filters)
+        }
+        this.update(handler)
+        return true
     }
-    if (this.filters) {
-      handler = vm._applyFilters(handler, null, this.filters)
-    }
-    this.update(handler)
-    return true
-  }
 }
 
 /**
@@ -160,11 +159,11 @@ p._checkStatement = function () {
  */
 
 p._checkParam = function (name) {
-  var param = this.el.getAttribute(name)
-  if (param !== null) {
-    this.el.removeAttribute(name)
-  }
-  return param
+    var param = this.el.getAttribute(name)
+    if (param !== null) {
+        this.el.removeAttribute(name)
+    }
+    return param
 }
 
 /**
@@ -172,16 +171,16 @@ p._checkParam = function (name) {
  */
 
 p._teardown = function () {
-  if (this._bound) {
-    this._bound = false
-    if (this.unbind) {
-      this.unbind()
+    if (this._bound) {
+        this._bound = false
+        if (this.unbind) {
+            this.unbind()
+        }
+        if (this._watcher) {
+            this._watcher.teardown()
+        }
+        this.vm = this.el = this._watcher = null
     }
-    if (this._watcher) {
-      this._watcher.teardown()
-    }
-    this.vm = this.el = this._watcher = null
-  }
 }
 
 /**
@@ -194,11 +193,11 @@ p._teardown = function () {
  */
 
 p.set = function (value) {
-  if (this.twoWay) {
-    this._withLock(function () {
-      this._watcher.set(value)
-    })
-  }
+    if (this.twoWay) {
+        this._withLock(function () {
+            this._watcher.set(value)
+        })
+    }
 }
 
 /**
@@ -209,12 +208,12 @@ p.set = function (value) {
  */
 
 p._withLock = function (fn) {
-  var self = this
-  self._locked = true
-  fn.call(self)
-  _.nextTick(function () {
-    self._locked = false
-  })
+    var self = this
+    self._locked = true
+    fn.call(self)
+    _.nextTick(function () {
+        self._locked = false
+    })
 }
 
 module.exports = Directive

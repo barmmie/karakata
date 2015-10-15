@@ -15,20 +15,20 @@ require('./object')
  * @constructor
  */
 
-function Observer (value) {
-  this.value = value
-  this.active = true
-  this.deps = []
-  _.define(value, '__ob__', this)
-  if (_.isArray(value)) {
-    var augment = config.proto && _.hasProto
-      ? protoAugment
-      : copyAugment
-    augment(value, arrayMethods, arrayKeys)
-    this.observeArray(value)
-  } else {
-    this.walk(value)
-  }
+function Observer(value) {
+    this.value = value
+    this.active = true
+    this.deps = []
+    _.define(value, '__ob__', this)
+    if (_.isArray(value)) {
+        var augment = config.proto && _.hasProto
+            ? protoAugment
+            : copyAugment
+        augment(value, arrayMethods, arrayKeys)
+        this.observeArray(value)
+    } else {
+        this.walk(value)
+    }
 }
 
 // Static methods
@@ -45,24 +45,22 @@ function Observer (value) {
  */
 
 Observer.create = function (value, vm) {
-  var ob
-  if (
-    value &&
-    value.hasOwnProperty('__ob__') &&
-    value.__ob__ instanceof Observer
-  ) {
-    ob = value.__ob__
-  } else if (
-    _.isObject(value) &&
-    !Object.isFrozen(value) &&
-    !value._isVue
-  ) {
-    ob = new Observer(value)
-  }
-  if (ob && vm) {
-    ob.addVm(vm)
-  }
-  return ob
+    var ob
+    if (
+        value &&
+        value.hasOwnProperty('__ob__') &&
+        value.__ob__ instanceof Observer
+    ) {
+        ob = value.__ob__
+    } else if (
+        _.isObject(value) && !Object.isFrozen(value) && !value._isVue
+    ) {
+        ob = new Observer(value)
+    }
+    if (ob && vm) {
+        ob.addVm(vm)
+    }
+    return ob
 }
 
 /**
@@ -72,7 +70,7 @@ Observer.create = function (value, vm) {
  */
 
 Observer.setTarget = function (watcher) {
-  Dep.target = watcher
+    Dep.target = watcher
 }
 
 // Instance methods
@@ -89,16 +87,16 @@ var p = Observer.prototype
  */
 
 p.walk = function (obj) {
-  var keys = Object.keys(obj)
-  var i = keys.length
-  var key, prefix
-  while (i--) {
-    key = keys[i]
-    prefix = key.charCodeAt(0)
-    if (prefix !== 0x24 && prefix !== 0x5F) { // skip $ or _
-      this.convert(key, obj[key])
+    var keys = Object.keys(obj)
+    var i = keys.length
+    var key, prefix
+    while (i--) {
+        key = keys[i]
+        prefix = key.charCodeAt(0)
+        if (prefix !== 0x24 && prefix !== 0x5F) { // skip $ or _
+            this.convert(key, obj[key])
+        }
     }
-  }
 }
 
 /**
@@ -110,7 +108,7 @@ p.walk = function (obj) {
  */
 
 p.observe = function (val) {
-  return Observer.create(val)
+    return Observer.create(val)
 }
 
 /**
@@ -120,10 +118,10 @@ p.observe = function (val) {
  */
 
 p.observeArray = function (items) {
-  var i = items.length
-  while (i--) {
-    this.observe(items[i])
-  }
+    var i = items.length
+    while (i--) {
+        this.observe(items[i])
+    }
 }
 
 /**
@@ -135,37 +133,37 @@ p.observeArray = function (items) {
  */
 
 p.convert = function (key, val) {
-  var ob = this
-  var childOb = ob.observe(val)
-  var dep = new Dep()
-  if (childOb) {
-    childOb.deps.push(dep)
-  }
-  Object.defineProperty(ob.value, key, {
-    enumerable: true,
-    configurable: true,
-    get: function () {
-      if (ob.active) {
-        dep.depend()
-      }
-      return val
-    },
-    set: function (newVal) {
-      if (newVal === val) return
-      // remove dep from old value
-      var oldChildOb = val && val.__ob__
-      if (oldChildOb) {
-        oldChildOb.deps.$remove(dep)
-      }
-      val = newVal
-      // add dep to new value
-      var newChildOb = ob.observe(newVal)
-      if (newChildOb) {
-        newChildOb.deps.push(dep)
-      }
-      dep.notify()
+    var ob = this
+    var childOb = ob.observe(val)
+    var dep = new Dep()
+    if (childOb) {
+        childOb.deps.push(dep)
     }
-  })
+    Object.defineProperty(ob.value, key, {
+        enumerable: true,
+        configurable: true,
+        get: function () {
+            if (ob.active) {
+                dep.depend()
+            }
+            return val
+        },
+        set: function (newVal) {
+            if (newVal === val) return
+            // remove dep from old value
+            var oldChildOb = val && val.__ob__
+            if (oldChildOb) {
+                oldChildOb.deps.$remove(dep)
+            }
+            val = newVal
+            // add dep to new value
+            var newChildOb = ob.observe(newVal)
+            if (newChildOb) {
+                newChildOb.deps.push(dep)
+            }
+            dep.notify()
+        }
+    })
 }
 
 /**
@@ -176,10 +174,10 @@ p.convert = function (key, val) {
  */
 
 p.notify = function () {
-  var deps = this.deps
-  for (var i = 0, l = deps.length; i < l; i++) {
-    deps[i].notify()
-  }
+    var deps = this.deps
+    for (var i = 0, l = deps.length; i < l; i++) {
+        deps[i].notify()
+    }
 }
 
 /**
@@ -192,7 +190,7 @@ p.notify = function () {
  */
 
 p.addVm = function (vm) {
-  (this.vms || (this.vms = [])).push(vm)
+    (this.vms || (this.vms = [])).push(vm)
 }
 
 /**
@@ -203,7 +201,7 @@ p.addVm = function (vm) {
  */
 
 p.removeVm = function (vm) {
-  this.vms.$remove(vm)
+    this.vms.$remove(vm)
 }
 
 // helpers
@@ -216,8 +214,8 @@ p.removeVm = function (vm) {
  * @param {Object} proto
  */
 
-function protoAugment (target, src) {
-  target.__proto__ = src
+function protoAugment(target, src) {
+    target.__proto__ = src
 }
 
 /**
@@ -228,13 +226,13 @@ function protoAugment (target, src) {
  * @param {Object} proto
  */
 
-function copyAugment (target, src, keys) {
-  var i = keys.length
-  var key
-  while (i--) {
-    key = keys[i]
-    _.define(target, key, src[key])
-  }
+function copyAugment(target, src, keys) {
+    var i = keys.length
+    var key
+    while (i--) {
+        key = keys[i]
+        _.define(target, key, src[key])
+    }
 }
 
 module.exports = Observer

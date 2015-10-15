@@ -13,12 +13,13 @@ var filterRE = /[^|]\|[^|]/
  */
 
 exports.$get = function (exp) {
-  var res = expParser.parse(exp)
-  if (res) {
-    try {
-      return res.get.call(this, this)
-    } catch (e) {}
-  }
+    var res = expParser.parse(exp)
+    if (res) {
+        try {
+            return res.get.call(this, this)
+        } catch (e) {
+        }
+    }
 }
 
 /**
@@ -31,10 +32,10 @@ exports.$get = function (exp) {
  */
 
 exports.$set = function (exp, val) {
-  var res = expParser.parse(exp, true)
-  if (res && res.set) {
-    res.set.call(this, this, val)
-  }
+    var res = expParser.parse(exp, true)
+    if (res && res.set) {
+        res.set.call(this, this, val)
+    }
 }
 
 /**
@@ -45,7 +46,7 @@ exports.$set = function (exp, val) {
  */
 
 exports.$add = function (key, val) {
-  this._data.$add(key, val)
+    this._data.$add(key, val)
 }
 
 /**
@@ -55,7 +56,7 @@ exports.$add = function (key, val) {
  */
 
 exports.$delete = function (key) {
-  this._data.$delete(key)
+    this._data.$delete(key)
 }
 
 /**
@@ -72,20 +73,20 @@ exports.$delete = function (key) {
  */
 
 exports.$watch = function (exp, cb, options) {
-  var vm = this
-  var wrappedCb = function (val, oldVal) {
-    cb.call(vm, val, oldVal)
-  }
-  var watcher = new Watcher(vm, exp, wrappedCb, {
-    deep: options && options.deep,
-    user: !options || options.user !== false
-  })
-  if (options && options.immediate) {
-    wrappedCb(watcher.value)
-  }
-  return function unwatchFn () {
-    watcher.teardown()
-  }
+    var vm = this
+    var wrappedCb = function (val, oldVal) {
+        cb.call(vm, val, oldVal)
+    }
+    var watcher = new Watcher(vm, exp, wrappedCb, {
+        deep: options && options.deep,
+        user: !options || options.user !== false
+    })
+    if (options && options.immediate) {
+        wrappedCb(watcher.value)
+    }
+    return function unwatchFn() {
+        watcher.teardown()
+    }
 }
 
 /**
@@ -96,20 +97,20 @@ exports.$watch = function (exp, cb, options) {
  */
 
 exports.$eval = function (text) {
-  // check for filters.
-  if (filterRE.test(text)) {
-    var dir = dirParser.parse(text)[0]
-    // the filter regex check might give false positive
-    // for pipes inside strings, so it's possible that
-    // we don't get any filters here
-    var val = this.$get(dir.expression)
-    return dir.filters
-      ? this._applyFilters(val, null, dir.filters)
-      : val
-  } else {
-    // no filter
-    return this.$get(text)
-  }
+    // check for filters.
+    if (filterRE.test(text)) {
+        var dir = dirParser.parse(text)[0]
+        // the filter regex check might give false positive
+        // for pipes inside strings, so it's possible that
+        // we don't get any filters here
+        var val = this.$get(dir.expression)
+        return dir.filters
+            ? this._applyFilters(val, null, dir.filters)
+            : val
+    } else {
+        // no filter
+        return this.$get(text)
+    }
 }
 
 /**
@@ -120,19 +121,19 @@ exports.$eval = function (text) {
  */
 
 exports.$interpolate = function (text) {
-  var tokens = textParser.parse(text)
-  var vm = this
-  if (tokens) {
-    return tokens.length === 1
-      ? vm.$eval(tokens[0].value)
-      : tokens.map(function (token) {
-          return token.tag
-            ? vm.$eval(token.value)
-            : token.value
+    var tokens = textParser.parse(text)
+    var vm = this
+    if (tokens) {
+        return tokens.length === 1
+            ? vm.$eval(tokens[0].value)
+            : tokens.map(function (token) {
+            return token.tag
+                ? vm.$eval(token.value)
+                : token.value
         }).join('')
-  } else {
-    return text
-  }
+    } else {
+        return text
+    }
 }
 
 /**
@@ -144,11 +145,11 @@ exports.$interpolate = function (text) {
  */
 
 exports.$log = function (path) {
-  var data = path
-    ? Path.get(this._data, path)
-    : this._data
-  if (data) {
-    data = JSON.parse(JSON.stringify(data))
-  }
-  console.log(data)
+    var data = path
+        ? Path.get(this._data, path)
+        : this._data
+    if (data) {
+        data = JSON.parse(JSON.stringify(data))
+    }
+    console.log(data)
 }

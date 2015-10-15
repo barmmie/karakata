@@ -20,26 +20,27 @@ var TYPE_ANIMATION = 2
  * @param {Vue} vm
  */
 
-function Transition (el, id, hooks, vm) {
-  this.el = el
-  this.enterClass = id + '-enter'
-  this.leaveClass = id + '-leave'
-  this.hooks = hooks
-  this.vm = vm
-  // async state
-  this.pendingCssEvent =
-  this.pendingCssCb =
-  this.cancel =
-  this.pendingJsCb =
-  this.op =
-  this.cb = null
-  this.typeCache = {}
-  // bind
-  var self = this
-  ;['enterNextTick', 'enterDone', 'leaveNextTick', 'leaveDone']
-    .forEach(function (m) {
-      self[m] = _.bind(self[m], self)
-    })
+function Transition(el, id, hooks, vm) {
+    this.el = el
+    this.enterClass = id + '-enter'
+    this.leaveClass = id + '-leave'
+    this.hooks = hooks
+    this.vm = vm
+    // async state
+    this.pendingCssEvent =
+        this.pendingCssCb =
+            this.cancel =
+                this.pendingJsCb =
+                    this.op =
+                        this.cb = null
+    this.typeCache = {}
+    // bind
+    var self = this
+        ;
+    ['enterNextTick', 'enterDone', 'leaveNextTick', 'leaveDone']
+        .forEach(function (m) {
+            self[m] = _.bind(self[m], self)
+        })
 }
 
 var p = Transition.prototype
@@ -70,14 +71,14 @@ var p = Transition.prototype
  */
 
 p.enter = function (op, cb) {
-  this.cancelPending()
-  this.callHook('beforeEnter')
-  this.cb = cb
-  addClass(this.el, this.enterClass)
-  op()
-  this.callHookWithCb('enter')
-  this.cancel = this.hooks && this.hooks.enterCancelled
-  queue.push(this.enterNextTick)
+    this.cancelPending()
+    this.callHook('beforeEnter')
+    this.cb = cb
+    addClass(this.el, this.enterClass)
+    op()
+    this.callHookWithCb('enter')
+    this.cancel = this.hooks && this.hooks.enterCancelled
+    queue.push(this.enterNextTick)
 }
 
 /**
@@ -87,17 +88,17 @@ p.enter = function (op, cb) {
  */
 
 p.enterNextTick = function () {
-  var type = this.getCssTransitionType(this.enterClass)
-  var enterDone = this.enterDone
-  if (type === TYPE_TRANSITION) {
-    // trigger transition by removing enter class now
-    removeClass(this.el, this.enterClass)
-    this.setupCssCb(transitionEndEvent, enterDone)
-  } else if (type === TYPE_ANIMATION) {
-    this.setupCssCb(animationEndEvent, enterDone)
-  } else if (!this.pendingJsCb) {
-    enterDone()
-  }
+    var type = this.getCssTransitionType(this.enterClass)
+    var enterDone = this.enterDone
+    if (type === TYPE_TRANSITION) {
+        // trigger transition by removing enter class now
+        removeClass(this.el, this.enterClass)
+        this.setupCssCb(transitionEndEvent, enterDone)
+    } else if (type === TYPE_ANIMATION) {
+        this.setupCssCb(animationEndEvent, enterDone)
+    } else if (!this.pendingJsCb) {
+        enterDone()
+    }
 }
 
 /**
@@ -105,10 +106,10 @@ p.enterNextTick = function () {
  */
 
 p.enterDone = function () {
-  this.cancel = this.pendingJsCb = null
-  removeClass(this.el, this.enterClass)
-  this.callHook('afterEnter')
-  if (this.cb) this.cb()
+    this.cancel = this.pendingJsCb = null
+    removeClass(this.el, this.enterClass)
+    this.callHook('afterEnter')
+    if (this.cb) this.cb()
 }
 
 /**
@@ -133,18 +134,18 @@ p.enterDone = function () {
  */
 
 p.leave = function (op, cb) {
-  this.cancelPending()
-  this.callHook('beforeLeave')
-  this.op = op
-  this.cb = cb
-  addClass(this.el, this.leaveClass)
-  this.callHookWithCb('leave')
-  this.cancel = this.hooks && this.hooks.enterCancelled
-  // only need to do leaveNextTick if there's no explicit
-  // js callback
-  if (!this.pendingJsCb) {
-    queue.push(this.leaveNextTick)
-  }
+    this.cancelPending()
+    this.callHook('beforeLeave')
+    this.op = op
+    this.cb = cb
+    addClass(this.el, this.leaveClass)
+    this.callHookWithCb('leave')
+    this.cancel = this.hooks && this.hooks.enterCancelled
+    // only need to do leaveNextTick if there's no explicit
+    // js callback
+    if (!this.pendingJsCb) {
+        queue.push(this.leaveNextTick)
+    }
 }
 
 /**
@@ -152,15 +153,15 @@ p.leave = function (op, cb) {
  */
 
 p.leaveNextTick = function () {
-  var type = this.getCssTransitionType(this.leaveClass)
-  if (type) {
-    var event = type === TYPE_TRANSITION
-      ? transitionEndEvent
-      : animationEndEvent
-    this.setupCssCb(event, this.leaveDone)
-  } else {
-    this.leaveDone()
-  }
+    var type = this.getCssTransitionType(this.leaveClass)
+    if (type) {
+        var event = type === TYPE_TRANSITION
+            ? transitionEndEvent
+            : animationEndEvent
+        this.setupCssCb(event, this.leaveDone)
+    } else {
+        this.leaveDone()
+    }
 }
 
 /**
@@ -168,11 +169,11 @@ p.leaveNextTick = function () {
  */
 
 p.leaveDone = function () {
-  this.cancel = this.pendingJsCb = null
-  this.op()
-  removeClass(this.el, this.leaveClass)
-  this.callHook('afterLeave')
-  if (this.cb) this.cb()
+    this.cancel = this.pendingJsCb = null
+    this.op()
+    removeClass(this.el, this.leaveClass)
+    this.callHook('afterLeave')
+    if (this.cb) this.cb()
 }
 
 /**
@@ -181,26 +182,26 @@ p.leaveDone = function () {
  */
 
 p.cancelPending = function () {
-  this.op = this.cb = null
-  var hasPending = false
-  if (this.pendingCssCb) {
-    hasPending = true
-    _.off(this.el, this.pendingCssEvent, this.pendingCssCb)
-    this.pendingCssEvent = this.pendingCssCb = null
-  }
-  if (this.pendingJsCb) {
-    hasPending = true
-    this.pendingJsCb.cancel()
-    this.pendingJsCb = null
-  }
-  if (hasPending) {
-    removeClass(this.el, this.enterClass)
-    removeClass(this.el, this.leaveClass)
-  }
-  if (this.cancel) {
-    this.cancel.call(this.vm, this.el)
-    this.cancel = null
-  }
+    this.op = this.cb = null
+    var hasPending = false
+    if (this.pendingCssCb) {
+        hasPending = true
+        _.off(this.el, this.pendingCssEvent, this.pendingCssCb)
+        this.pendingCssEvent = this.pendingCssCb = null
+    }
+    if (this.pendingJsCb) {
+        hasPending = true
+        this.pendingJsCb.cancel()
+        this.pendingJsCb = null
+    }
+    if (hasPending) {
+        removeClass(this.el, this.enterClass)
+        removeClass(this.el, this.leaveClass)
+    }
+    if (this.cancel) {
+        this.cancel.call(this.vm, this.el)
+        this.cancel = null
+    }
 }
 
 /**
@@ -210,9 +211,9 @@ p.cancelPending = function () {
  */
 
 p.callHook = function (type) {
-  if (this.hooks && this.hooks[type]) {
-    this.hooks[type].call(this.vm, this.el)
-  }
+    if (this.hooks && this.hooks[type]) {
+        this.hooks[type].call(this.vm, this.el)
+    }
 }
 
 /**
@@ -227,13 +228,13 @@ p.callHook = function (type) {
  */
 
 p.callHookWithCb = function (type) {
-  var hook = this.hooks && this.hooks[type]
-  if (hook) {
-    if (hook.length > 1) {
-      this.pendingJsCb = _.cancellable(this[type + 'Done'])
+    var hook = this.hooks && this.hooks[type]
+    if (hook) {
+        if (hook.length > 1) {
+            this.pendingJsCb = _.cancellable(this[type + 'Done'])
+        }
+        hook.call(this.vm, this.el, this.pendingJsCb)
     }
-    hook.call(this.vm, this.el, this.pendingJsCb)
-  }
 }
 
 /**
@@ -245,41 +246,41 @@ p.callHookWithCb = function (type) {
  */
 
 p.getCssTransitionType = function (className) {
-  /* istanbul ignore if */
-  if (
-    !transitionEndEvent ||
-    // skip CSS transitions if page is not visible -
-    // this solves the issue of transitionend events not
-    // firing until the page is visible again.
-    // pageVisibility API is supported in IE10+, same as
-    // CSS transitions.
-    document.hidden ||
-    // explicit js-only transition
-    (this.hooks && this.hooks.css === false)
-  ) {
-    return
-  }
-  var type = this.typeCache[className]
-  if (type) return type
-  var inlineStyles = this.el.style
-  var computedStyles = window.getComputedStyle(this.el)
-  var transDuration =
-    inlineStyles[transDurationProp] ||
-    computedStyles[transDurationProp]
-  if (transDuration && transDuration !== '0s') {
-    type = TYPE_TRANSITION
-  } else {
-    var animDuration =
-      inlineStyles[animDurationProp] ||
-      computedStyles[animDurationProp]
-    if (animDuration && animDuration !== '0s') {
-      type = TYPE_ANIMATION
+    /* istanbul ignore if */
+    if (
+        !transitionEndEvent ||
+            // skip CSS transitions if page is not visible -
+            // this solves the issue of transitionend events not
+            // firing until the page is visible again.
+            // pageVisibility API is supported in IE10+, same as
+            // CSS transitions.
+        document.hidden ||
+            // explicit js-only transition
+        (this.hooks && this.hooks.css === false)
+    ) {
+        return
     }
-  }
-  if (type) {
-    this.typeCache[className] = type
-  }
-  return type
+    var type = this.typeCache[className]
+    if (type) return type
+    var inlineStyles = this.el.style
+    var computedStyles = window.getComputedStyle(this.el)
+    var transDuration =
+        inlineStyles[transDurationProp] ||
+        computedStyles[transDurationProp]
+    if (transDuration && transDuration !== '0s') {
+        type = TYPE_TRANSITION
+    } else {
+        var animDuration =
+            inlineStyles[animDurationProp] ||
+            computedStyles[animDurationProp]
+        if (animDuration && animDuration !== '0s') {
+            type = TYPE_ANIMATION
+        }
+    }
+    if (type) {
+        this.typeCache[className] = type
+    }
+    return type
 }
 
 /**
@@ -290,19 +291,19 @@ p.getCssTransitionType = function (className) {
  */
 
 p.setupCssCb = function (event, cb) {
-  this.pendingCssEvent = event
-  var self = this
-  var el = this.el
-  var onEnd = this.pendingCssCb = function (e) {
-    if (e.target === el) {
-      _.off(el, event, onEnd)
-      self.pendingCssEvent = self.pendingCssCb = null
-      if (!self.pendingJsCb && cb) {
-        cb()
-      }
+    this.pendingCssEvent = event
+    var self = this
+    var el = this.el
+    var onEnd = this.pendingCssCb = function (e) {
+        if (e.target === el) {
+            _.off(el, event, onEnd)
+            self.pendingCssEvent = self.pendingCssCb = null
+            if (!self.pendingJsCb && cb) {
+                cb()
+            }
+        }
     }
-  }
-  _.on(el, event, onEnd)
+    _.on(el, event, onEnd)
 }
 
 module.exports = Transition

@@ -14,7 +14,7 @@ gulp.task('default', ['live-monitor']);
  * task - 'laravel-views'
  * monitor laravel views
  */
-gulp.task('laravel-views', function() {
+gulp.task('laravel-views', function () {
     gulp.src('app/views/**/*.blade.php')
         .pipe(livereload());
 });
@@ -23,18 +23,25 @@ gulp.task('laravel-views', function() {
  * task - 'live-monitor'
  * monitors everything
  */
-gulp.task('live-monitor', function() {
+gulp.task('live-monitor', function () {
     livereload.listen();
     gulp.watch('app/views/**/*.blade.php', ['laravel-views']);
 });
 
-gulp.task('clean-temp', function(){
-    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/*.json', 'app/storage/sessions/**/*', 'app/storage/views/**/*' ])
+gulp.task('clean-temp', function () {
+    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/*.json', 'app/storage/sessions/**/*', 'app/storage/views/**/*', 'app/storage/settings.json'])
 })
 
-gulp.task('prepare-envato', ['clean-temp'],  function(){
+gulp.task('prepare-envato', ['clean-temp'], function () {
 
-    return gulp.src(config.vendor_files, {base:'.'})
+    return gulp.src(config.vendor_files, {base: '.'})
         .pipe(zip('karakata.zip'))
         .pipe(gulp.dest('./'))
 })
+
+
+gulp.task('prepare-upload', ['prepare-envato'], function () {
+    return gulp.src(['karakata.zip', 'documentation/**/*'], {base: '.'})
+        .pipe(zip('karakata_envato.zip'))
+        .pipe(gulp.dest('./'))
+});

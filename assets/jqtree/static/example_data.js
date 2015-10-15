@@ -79,14 +79,14 @@ ExampleData.example_data = [
     }
 ];
 
-ExampleData.getFirstLevelData = function(nodes) {
-    if (! nodes) {
+ExampleData.getFirstLevelData = function (nodes) {
+    if (!nodes) {
         nodes = ExampleData.example_data;
     }
 
     var data = [];
 
-    $.each(nodes, function() {
+    $.each(nodes, function () {
         var node = {
             label: this.label,
             id: this.id
@@ -102,11 +102,11 @@ ExampleData.getFirstLevelData = function(nodes) {
     return data;
 }
 
-ExampleData.getChildrenOfNode = function(node_id) {
+ExampleData.getChildrenOfNode = function (node_id) {
     var result = null;
 
     function iterate(nodes) {
-        $.each(nodes, function() {
+        $.each(nodes, function () {
             if (result) {
                 return;
             }
