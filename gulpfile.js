@@ -3,6 +3,7 @@ var livereload = require('gulp-livereload');
 var zip = require('gulp-zip');
 var config = require('./build.config.json');
 var del = require('del');
+var googleTranslate = require('google-translate')('AIzaSyAKueexZnGnhB-Yb5c7B97owIRgN3DjgOY');
 
 /**
  * task - 'default'
@@ -29,7 +30,7 @@ gulp.task('live-monitor', function () {
 });
 
 gulp.task('clean-temp', function () {
-    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/*.json', 'app/storage/sessions/**/*', 'app/storage/views/**/*', 'app/storage/settings.json'])
+    return del(['app/storage/cache/**/*', 'app/storage/logs/laravel.log', 'app/storage/sessions/**/*', 'app/storage/views/**/*', 'app/storage/settings.json'])
 })
 
 gulp.task('prepare-envato', ['clean-temp'], function () {
