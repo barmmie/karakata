@@ -50,7 +50,7 @@ class ItemsController extends BaseController
         if ($result['success']) {
             $item = $result['payload'];
 
-            flashSuccess($result['message'], 'Item is still subject to verification from us before being approved');
+            flashSuccess($result['message'], trans('phrases.item_subject_to_verification'));
 
             return Redirect::route('dash.myitems');
         } else {
@@ -113,9 +113,9 @@ class ItemsController extends BaseController
 
             $item->delete();
 
-            flashInfo('Item has been deleted', 'Your item has been deleted successfully');
+            flashInfo(trans('phrases.item_deleted'), trans('phrases.item_removed'));
         } catch (Exception $e) {
-            flashError('Item could not be deleted', $e->getMessage());
+            flashError(trans('phrases.item_not_deleted'), $e->getMessage());
 
         }
 

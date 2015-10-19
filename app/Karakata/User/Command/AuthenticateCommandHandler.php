@@ -19,7 +19,7 @@ class AuthenticateCommandHandler implements CommandHandler
 
         } catch (ModelNotFoundException $e) {
 
-            $result = ['success' => false, 'message' => 'Invalid credentials check and try again'];
+            $result = ['success' => false, 'message' => trans('phrases.invalid_credentials')];
 
             return $result;
         }
@@ -29,23 +29,23 @@ class AuthenticateCommandHandler implements CommandHandler
             if (!$user->isVerified()) {
                 $result = [
                     'success' => false,
-                    'message' => 'Unverified account. Check the email or resend confirmation email'
+                    'message' => trans('phrases.unverified_account')
                 ];
 
                 return $result;
             }
 
             if ($user->isBanned()) {
-                $result = ['success' => false, 'message' => 'You are banned from logged in'];
+                $result = ['success' => false, 'message' => trans('phrases.banned_logged_in') ];
 
                 return $result;
             }
 
-            \Auth::login($user);
-            $result = ['success' => true, 'message' => 'You are now logged in'];
+            \Auth::login($user, true);
+            $result = ['success' => true, 'message' => trans('phrases.logged_in')];
 
         } else {
-            $result = ['success' => false, 'message' => 'Invalid credentials check and try again'];
+            $result = ['success' => false, 'message' => trans('phrases.invalid_credentials')];
 
         }
 

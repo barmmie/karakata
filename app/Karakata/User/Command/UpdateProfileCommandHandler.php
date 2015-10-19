@@ -20,7 +20,7 @@ class UpdateProfileCommandHandler implements CommandHandler
                     'phone' => $command->phone
                 ]);
             $result['success'] = true;
-            $result['message'] = 'Profile has been updated successfully';
+            $result['message'] = trans('phrases.update_successful');
 
         } catch (\Exception $e) {
             $result['success'] = false;

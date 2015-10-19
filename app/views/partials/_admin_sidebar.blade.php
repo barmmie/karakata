@@ -1,11 +1,20 @@
-@if(Setting::get('logo_src')=='')
-    <i class="circular inverted big teal shadowed search icon"></i>
-@endif
+
 <div class="mast item">
     @if(Setting::get('logo_src')!='')
         <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+        <a href="{{route('admin.dashboard')}}">
+            <b>
+                {{Setting::get('site_name', 'Karakata')}}</b>
+        </a>
     @else
-        <a href="{{route('admin.dashboard')}}"><b>{{Setting::get('site_name', 'Karakata')}}</b></a>
+        <a href="{{route('admin.dashboard')}}">
+            <i class="circular inverted big teal shadowed search icon"></i>
+            <b>
+                {{Setting::get('site_name', 'Karakata')}}</b>
+        </a>
+    @endif
+
+
 </div>
 
 <a class="item" target="_blank" href="{{route('pages.homepage')}}">
@@ -30,7 +39,6 @@
         <a class="item" href="{{route('admin.reports.index')}}">
             <i class="warning circle icon"></i> {{trans('phrases.manage_abuse_reports')}}
         </a>
-
 
     </div>
 </div>

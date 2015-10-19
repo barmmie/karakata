@@ -257,9 +257,26 @@
                             <i class="mail icon"></i>
                             {{trans('phrases.send_a_message')}}
                         </button>
-                        <button class="fluid ui yellow button">
-                            <i class="phone icon"></i> {{$item->phone}}
-                        </button>
+                        @if(Setting::get('mask_phone', '0')== '1')
+                            <button class="fluid ui yellow button phone">
+                                <i class="phone icon"></i> 0-XXX-XXX-XXX
+                            </button>
+
+                            <div class="masked-phone " style="display:none">
+                                <button class="fluid ui yellow button">
+                                    <i class="phone icon"></i> {{$item->phone}}
+                                </button>
+
+                            </div>
+                        @endif
+
+                        @if(Setting::get('mask_phone', '0')== '0')
+                            <button class="fluid ui yellow button">
+                                <i class="phone icon"></i> {{$item->phone}}
+                            </button>
+                        @endif
+
+
                     </div>
                 </div>
 
@@ -376,7 +393,12 @@
             pagerCustom: '#bx-pager'
         });
 
-                @endif
+        @endif
+
+        $('.ui.phone.button').on('click', function() {
+                    $(this).hide();
+                    $('div.masked-phone').show()
+                })
 
                 var $sendform = $('.ui.sendmessage.form')
         var $reportform = $('.ui.report.form')

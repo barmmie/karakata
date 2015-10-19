@@ -25,10 +25,10 @@ class UpdatePasswordCommandHandler implements CommandHandler
                 $user->save();
 
                 $result['success'] = true;
-                $result['message'] = 'Password has been updated successfully';
+                $result['message'] = trans('phrases.password_updated');
             } else {
                 $result['success'] = false;
-                $result['message'] = 'The current password you entered doesnt match our records';
+                $result['message'] = trans('password_doesnt_match');
             }
 
 

@@ -119,7 +119,6 @@ require app_path() . '/macros.php';
 
 App::bind('Laracasts\Commander\CommandTranslator', 'Karakata\Services\MyCommandTranslator');
 
-App::setLocale(Session::get('lang', 'en'));
 
 
 

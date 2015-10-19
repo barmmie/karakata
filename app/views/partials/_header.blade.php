@@ -61,6 +61,18 @@
                     </a>
                 </div>
 
+                <div class="item">
+                    <div class="ui floating dropdown labeled search icon button">
+                        <i class="world icon"></i>
+                        <span class="text">Change Language</span>
+                        <div class="menu">
+                            @foreach($available_langs as $key => $lang)
+                                <a href="{{route('language_switcher', $key)}}" class="item">{{$lang}}</a>
+                            @endforeach
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
         </div>

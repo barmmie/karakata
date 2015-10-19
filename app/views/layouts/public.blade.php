@@ -9,9 +9,18 @@
     @yield('meta')
 
     <title>{{Setting::get('site_name', 'Karakata')}} | @yield('title')</title>
-
+    @if(Setting::get('rtl_display', '0')== '0')
     <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.min.css')}}">
+    @endif
 
+    @if(Setting::get('rtl_display', '0')== '1')
+    <link rel="stylesheet" type="text/css" href="{{asset('assets/semantic-ui/semantic.rtl.min.css')}}">
+        <style type="text/css">
+            html {
+                direction: rtl;
+            }
+        </style>
+    @endif
 
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/alertify.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/themes/semantic.min.css')}}"/>

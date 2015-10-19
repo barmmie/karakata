@@ -21,7 +21,7 @@ class SessionsController extends BaseController
 
         if ($result['success']) {
 
-            flashSuccess('Authentication successful', $result['message']);
+            flashSuccess(trans('phrases.authentication_successful'), $result['message']);
 
             if (Auth::user()->isAdmin()) {
                 return Redirect::route('admin.dashboard');
@@ -31,7 +31,7 @@ class SessionsController extends BaseController
 
         } else {
 
-            flashError('Authentication error', $result['message']);
+            flashError(trans('phrases.authentication_error'), $result['message']);
 
             return Redirect::back()
                 ->withInput();
@@ -43,7 +43,7 @@ class SessionsController extends BaseController
 
         Auth::logout();
 
-        flashInfo('Logged out', 'Your have now been signed out. see ya');
+        flashInfo(trans('phrases.logged_out'), trans('phrases.you_logged_out'));
 
         return Redirect::route('pages.homepage');
     }

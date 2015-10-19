@@ -19,7 +19,7 @@ class PostMessageCommandHandler implements CommandHandler
         try {
             $message = \Message::post($command->name, $command->email, $command->content, $command->item_id);
             $result['success'] = true;
-            $result['message'] = 'Message posted successfully';
+            $result['message'] = trans('phrases.message_posted');
 
             $this->dispatchEventsFor($message);
 

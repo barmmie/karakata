@@ -67,10 +67,25 @@
                                     {{Form::text('currency', Setting::get('currency'))}}
                                 </div>
 
+                                <div class="field p-md">
+                                    <div class="two fields">
+                                        <div class="field">
+                                            <label for="">RTL display</label>
+                                            {{Form::semanticCheckbox('rtl_display', '1', Setting::get('rtl_display', '0'))}}
+                                        </div>
+                                        <div class="field">
+                                            <label for="">Mask user's phone numer</label>
+                                            {{Form::semanticCheckbox('mask_phone', '1', Setting::get('mask_phone', '0'))}}
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
 
                         </div>
                     </div>
+
+
 
                     <div class="field">
                         <label>{{trans('phrases.site_description')}}</label>
@@ -148,20 +163,21 @@
                         <div class="field">
                             <div class="two fields">
                                 <div class="field">
-                                    <label for="">Paypal username</label>
+                                    <label for="">Paypal API username</label>
                                     {{Form::text('paypal_username', Setting::get('paypal_username'))}}
 
                                 </div>
                                 <div class="field">
-                                    <label for="">Paypal password</label>
+                                    <label for="">Paypal API password</label>
                                     {{Form::text('paypal_password', Setting::get('paypal_password'))}}
 
                                 </div>
                             </div>
+                            <p>NOTE: Not your paypal username / password : Your Payment Credentials can be obtained here <a href="https://developer.paypal.com/docs/classic/api/apiCredentials">https://developer.paypal.com/docs/classic/api/apiCredentials</a></p>
                         </div>
 
                         <div class="field">
-                            <label for="">Paypal signature</label>
+                            <label for="">Paypal API signature</label>
                             {{Form::text('paypal_signature', Setting::get('paypal_signature'))}}
                         </div>
                     </div>

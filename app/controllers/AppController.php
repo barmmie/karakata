@@ -71,7 +71,7 @@ class AppController extends \BaseController
     public function store()
     {
         if (Setting::get('is_installed', '0' == '1')) {
-            flashInfo('App has already been installed');
+            flashInfo(trans('phrases.app_has_been_installed'));
 
             return Redirect::route('pages.homepage');
         };
@@ -95,7 +95,7 @@ class AppController extends \BaseController
             return Redirect::route('admin.dashboard');
 
         } catch (Exception $e) {
-            flashError('An error occured while installing', $e->getMessage());
+            flashError(trans('phrases.error_occured'), $e->getMessage());
 
             return Redirect::back();
         }

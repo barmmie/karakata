@@ -38,7 +38,7 @@ class PostItemCommandHandler implements CommandHandler
 
 
             $result['success'] = true;
-            $result['message'] = "Item '{$command->title}' was been posted successfully";
+            $result['message'] = trans('phrases.item_posted_successfully', ['title' => $command->title]);
             $result['payload'] = $item;
         } catch (\Exception $e) {
             $result['success'] = false;

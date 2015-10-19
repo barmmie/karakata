@@ -51,7 +51,7 @@ class UpdateItemCommandHandler implements CommandHandler
 
 
             $result['success'] = true;
-            $result['message'] = "Item '{$command->title}' was been updated successfully";
+            $result['message'] =  trans('phrases.item_updated_successfully', ['title' => $command->title]);
             $result['payload'] = $item;
         } catch (\Exception $e) {
             $result['success'] = false;

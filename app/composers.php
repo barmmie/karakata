@@ -19,4 +19,5 @@ View::composers([
     'Karakata\Composers\PopularCategoryComposer' => ['widgets._popular_categories'],
     'Karakata\Composers\LatestItemComposer' => ['widgets._recent_items'],
     'Karakata\Composers\PremiumItemComposer' => ['widgets._premium_items'],
+    'Karakata\Composers\LangChoiceComposer' => ['partials._header', 'admin.settings.edit']
 ]);

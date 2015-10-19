@@ -78,4 +78,35 @@ class PageController extends \BaseController
 
     }
 
+    public function switch_language($lang = 'en') {
+        Session::put('language_locale', $lang);
+
+        return Request::header('referer') ? Redirect::back() : Redirect::route('pages.homepage');
+    }
+
+    public function feed($type = 'rss') {
+
+        if(in_array($type, ['rss', 'atom'])) {
+            $items = Item::approved()->get();
+            $channel  = [
+                'title' => Setting::get('site_name'),
+                'description' => "Latest items from ".Setting::get('site_name'),
+                'link' => route('pages.homepage'),
+                'logo' => asset(Setting::get('logo_src')),
+                'icon' => asset(Setting::get('logo_src')),
+                'pubdate' => Carbon::now()->toDayDateTimeString(),
+                'lang' => Setting::get('default_locale', 'en')
+
+            ];
+            $content = View::make("feeds.{$type}", compact('items', 'channel'))->render();
+
+            return Response::make($content, '200', ['Content-type' => "application/{$type}+xml;charset=utf-8"]);
+
+        } else {
+            flashError('phrases.error_occured');
+            return Redirect::route('pages.homepage');
+        }
+
+    }
+
 }

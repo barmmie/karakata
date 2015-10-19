@@ -19,7 +19,7 @@ class ReportItemCommandHandler implements CommandHandler
         try {
             $report = \Report::post($command->content, $command->item_id);
             $result['success'] = true;
-            $result['message'] = 'Your report was received and is being looked into';
+            $result['message'] = trans('phrases.report_received');
 
             $this->dispatchEventsFor($report);
 

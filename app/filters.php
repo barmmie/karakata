@@ -36,7 +36,7 @@ Route::filter('auth', function () {
         if (Request::ajax()) {
             return Response::make('Unauthorized', 401);
         } else {
-            flashError('Authentication required', 'You need to login to proceed');
+            flashError(trans('phrases.authentication_required'), trans('phrases.need_login_proceed'));
 
             return Redirect::guest(route('users.login'));
         }
@@ -87,4 +87,13 @@ Route::filter('csrf', function () {
     if (Session::token() != Input::get('_token')) {
         throw new Illuminate\Session\TokenMismatchException;
     }
+});
+
+App::before(function ($request) {
+
+    if(!Session::has('language_locale')) {
+        Session::put('language_locale', Setting::get('default_locale', 'en'));
+    }
+
+    App::setLocale(Session::get('language_locale'));
 });
