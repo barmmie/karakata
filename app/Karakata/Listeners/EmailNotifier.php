@@ -31,12 +31,12 @@ class EmailNotifier extends EventListener
     {
 
         $this->appMailer->sendMail($messagePosted->message->item->email, 'emails.item_message',
-            ['posted_message' => $messagePosted->message]);
+            ['posted_message' => $messagePosted->message], trans('phrases.item_received_message'));
     }
 
     public function whenItemWasPosted($itemWasPosted)
     {
-        $this->appMailer->sendMail($itemWasPosted->item->email, 'emails.new_item', ['item' => $itemWasPosted->item]);
+        $this->appMailer->sendMail($itemWasPosted->item->email, 'emails.new_item', ['item' => $itemWasPosted->item], trans('phrases.item_was_posted'));
     }
 
 

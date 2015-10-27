@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Conto non verificato . Controllare la posta elettronica o inviare nuovamente email di conferma',
 	'logged_in' => 'Si è ora collegato',
 	'banned_logged_in' => 'Sei bannato da Accesso effettuato',
+	'admin_email' => 'Admin -mail del mittente',
+	'admin_email_to_send' => 'Mail inviata da app potrebbe usare questo come mittente dell\'e-mail',
+	'email_from' => 'Posta da Admin',
+	'admin_email_from' => 'Mail inviata da app avrebbe usato questo come nome del mittente',
+	'confirmation_email' => 'mail di conferma',
+	'item_received_message' => 'Nuovo messaggio su uno dei tuoi articoli',
+	'item_was_posted' => 'Il tuo articolo è stato esaminato',
 
 ];

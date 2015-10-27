@@ -438,7 +438,7 @@
                 })
             })
 
-            return locationdata;
+            return JSON.stringify(locationdata);
         }
 
 

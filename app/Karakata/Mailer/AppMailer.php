@@ -1,5 +1,6 @@
 <?php namespace Karakata\Mailer;
 
+use Setting;
 use Illuminate\Mail\Mailer;
 
 /**
@@ -11,10 +12,10 @@ use Illuminate\Mail\Mailer;
 class AppMailer
 {
 
-    protected $from = 'admin@Karakata.com';
     protected $to;
     protected $view;
     protected $data = [];
+    protected  $subject;
     private $mailer;
 
     public function __construct(Mailer $mailer)
@@ -22,13 +23,14 @@ class AppMailer
         $this->mailer = $mailer;
     }
 
-    public function sendMail($to, $view, $data)
+    public function sendMail($to, $view, $data, $subject)
     {
         $this->to = $to;
 
         $this->view = $view;
 
         $this->data = $data;
+        $this->subject = $subject;
 
         $this->deliver();
     }
@@ -36,8 +38,9 @@ class AppMailer
     protected function deliver()
     {
         $this->mailer->send($this->view, $this->data, function ($message) {
-            $message->from($this->from, 'Administrator')
-                ->to($this->to);
+            $message->from(Setting::get('admin_email', 'admin@karakata'), Setting::get('admin_email_from', 'Administrator'))
+                ->to($this->to)
+                ->subject($this->subject);
         });
     }
 
@@ -46,7 +49,7 @@ class AppMailer
         $this->to = $user->email;
 
         $this->view = 'emails.confirm';
-
+        $this->subject = trans('phrases.confirmation_email');
         $this->data = compact('user');
 
         $this->deliver();

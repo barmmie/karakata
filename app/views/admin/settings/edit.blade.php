@@ -35,6 +35,7 @@
 
                     <h4 class="ui dividing header">{{trans('phrases.site_details')}}</h4>
 
+
                     <div class="field">
                         <div class="two fields">
                             <div class="four wide field">
@@ -82,6 +83,22 @@
 
                             </div>
 
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <div class="two fields">
+                            <div class="field">
+                                <label for="">{{trans('phrases.admin_email')}}</label>
+                                {{Form::text('admin_email', Setting::get('admin_email'))}}
+                                <p>{{trans('phrases.admin_email_to_send')}}</p>
+                            </div>
+                            <div class="field">
+                                <label for="">{{trans('phrases.email_from')}}</label>
+                                {{Form::text('email_from', Setting::get('email_from'))}}
+                                <p>{{trans('phrases.admin_email_from')}}</p>
+
+                            </div>
                         </div>
                     </div>
 

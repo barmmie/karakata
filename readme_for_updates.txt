@@ -1,8 +1,31 @@
 To update
 
-Extract the folder update and copy the content into your public_html directory.
-Choose yes to ovewrrite existing files.
+Extract the zip file called update and copy the content into your public_html directory.
+Choose yes to ovewrite existing files.
 
+
+Ver 1.0.4
+    Feature added/Fixes
+        Fixed issues where email was being sent to spam
+    Files changed
+        app/Karakata/Listeners/EmailNotifier.php
+        app/Karakata/Mailer/AppMailer.php
+        app/views/admin/settings/edit.blade.php
+        app/views/partials/_items_filter.blade.php
+        app/lang/bn/phrases.php
+        app/lang/de/phrases.php
+        app/lang/en/phrases.php
+        app/lang/es/phrases.php
+        app/lang/fr/phrases.php
+        app/lang/hi/phrases.php
+        app/lang/it/phrases.php
+        app/lang/pt/phrases.php
+        app/lang/tr/phrases.php
+Ver 1.0.3
+    Feature added/Fixes
+        Fix add location issue
+    Files changed
+         app/views/admin/locations/listr.blade.php
 Ver 1.0.2
     Features added/Fixes
 

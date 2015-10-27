@@ -14,7 +14,7 @@
                 <div class="menu">
                     <div class="ui icon search input">
                         <i class="search icon"></i>
-                        <input type="text" placeholder="{{trans('phrases.search_locations')}}...">
+                        <input type="text" placeholder="{{trans('phrases.search_location')}}...">
                     </div>
                     <div class="divider"></div>
                     <div class="header">

@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Não verificado conta . Verifique o e-mail ou reenviar e-mail de confirmação',
 	'logged_in' => 'Você agora está logado',
 	'banned_logged_in' => 'Você está proibido de sessão iniciada',
+	'admin_email' => 'Remetente e-mail admin',
+	'admin_email_to_send' => 'Mail enviado a partir app usaria isso como remetente de e-mail',
+	'email_from' => 'Mail para admin',
+	'admin_email_from' => 'Mail enviado a partir app usaria isso como nome do remetente',
+	'confirmation_email' => 'E-mail de confirmação',
+	'item_received_message' => 'Nova mensagem em um dos seus artigos',
+	'item_was_posted' => 'Seu item está sendo revisto',
 
 ];

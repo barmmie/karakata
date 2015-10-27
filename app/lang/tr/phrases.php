@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Doğrulanmamış hesap . E-posta kontrol edin veya onay e-postası',
 	'logged_in' => 'Şimdi kaydediliyor',
 	'banned_logged_in' => 'Yapman yasaklandı',
+	'admin_email' => 'Yönetici gönderen e-posta',
+	'admin_email_to_send' => 'App gönderilen posta gönderen e-posta olarak kullanmak istiyorsunuz',
+	'email_from' => 'Admin posta',
+	'admin_email_from' => 'App gönderilen posta gönderen adı olarak bu kullanmak istiyorsunuz',
+	'confirmation_email' => 'Onay e-posta',
+	'item_received_message' => 'Senin öğelerden biri Yeni mesaj',
+	'item_was_posted' => 'Öğeniz gözden geçiriliyor',
 
 ];

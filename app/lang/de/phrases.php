@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Ungeprüft Konto. Überprüfen Sie die E-Mail in Verbindung oder senden Bestätigung',
 	'logged_in' => 'Sie sind jetzt angemeldet',
 	'banned_logged_in' => 'Sie sind aus Angemeldet verboten',
+	'admin_email' => 'Admin Absender E-Mail-',
+	'admin_email_to_send' => 'Mail von App geschickt würde dies als Absender E-Mail verwenden',
+	'email_from' => 'Admin Mail von',
+	'admin_email_from' => 'Mail von App geschickt würde dies als Absendernamen verwenden',
+	'confirmation_email' => 'Bestätigungsmail',
+	'item_received_message' => 'Neue Nachricht auf einer Ihrer Artikel',
+	'item_was_posted' => 'Ihr Einzelteil wird überprüft',
 
 ];

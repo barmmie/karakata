@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Cuenta no verificada . Compruebe el correo electrónico o enviar correo electrónico de confirmación',
 	'logged_in' => 'Ahora está conectado',
 	'banned_logged_in' => 'Usted está prohibido de inicio de sesión',
+	'admin_email' => 'Correo electrónico del remitente administración',
+	'admin_email_to_send' => 'El correo enviado desde la aplicación podría utilizar esto como correo electrónico del remitente',
+	'email_from' => 'Electrónico de administración de',
+	'admin_email_from' => 'El correo enviado desde la aplicación podría utilizar esto como nombre del remitente',
+	'confirmation_email' => 'Email de confirmación',
+	'item_received_message' => 'Nuevo mensaje en uno de sus artículos',
+	'item_was_posted' => 'Su artículo se está revisando',
 
 ];

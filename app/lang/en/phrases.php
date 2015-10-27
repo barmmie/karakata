@@ -185,6 +185,13 @@ return [
     'invalid_credentials' => 'Invalid credentials check and try again',
     'unverified_account' => 'Unverified account. Check the email or resend confirmation email',
     'logged_in' => 'You are now logged in',
-    'banned_logged_in' => 'You are banned from logged in'
+    'banned_logged_in' => 'You are banned from logged in',
+    'admin_email' => 'Admin sender email',
+    'admin_email_to_send' => 'Mail sent from app would use this as sender email',
+    'email_from' => 'Admin mail from',
+    'admin_email_from' => 'Mail sent from app would use this as sender name',
+    'confirmation_email' => 'Confirmation email',
+    'item_received_message' => 'New message on one of your items',
+    'item_was_posted' => 'Your item is being reviewed'
 
 ];

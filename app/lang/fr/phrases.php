@@ -187,5 +187,12 @@ return [
 	'unverified_account' => 'Compte non vérifiée. Vérifiez l\' e-mail ou renvoyer l\'email de confirmation',
 	'logged_in' => 'Vous êtes maintenant connecté',
 	'banned_logged_in' => 'Vous êtes banni d\' Connecté',
+	'admin_email' => 'Administrateur email de l\'expéditeur',
+	'admin_email_to_send' => 'Le courrier envoyé à partir de l\'application serait l\'utiliser comme expéditeur email',
+	'email_from' => 'Administrateur de messagerie',
+	'admin_email_from' => 'Le courrier envoyé à partir de l\'application serait l\'utiliser comme nom de l\'expéditeur',
+	'confirmation_email' => 'Email de confirmation',
+	'item_received_message' => 'Nouveau message sur l\'un de vos articles',
+	'item_was_posted' => 'Votre article est en cours de révision',
 
 ];
