@@ -34,9 +34,13 @@ class UsersController extends \BaseController
     public function store()
     {
         $user = $this->execute('Karakata\User\Command\RegisterUserCommand');
+        $message = '';
+        if(Setting::get('require_email_confirmation', '1') == '1') {
+            $message = trans( 'phrases.confirmation_email_sent', ['email' => $user->email]);
+        }
 
-        flashSuccess(trans('phrases.registration_successful'),
-            trans( 'phrases.confirmation_email_sent', ['email' => $user->email]));
+        flashSuccess(trans('phrases.registration_successful'), $message);
+
 
         return Redirect::route('pages.homepage');
 

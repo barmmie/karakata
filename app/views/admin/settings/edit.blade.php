@@ -69,19 +69,29 @@
                                 </div>
 
                                 <div class="field p-md">
-                                    <div class="two fields">
-                                        <div class="field">
-                                            <label for="">RTL display</label>
-                                            {{Form::semanticCheckbox('rtl_display', '1', Setting::get('rtl_display', '0'))}}
-                                        </div>
-                                        <div class="field">
-                                            <label for="">Mask user's phone numer</label>
-                                            {{Form::semanticCheckbox('mask_phone', '1', Setting::get('mask_phone', '0'))}}
+                                    <label for="">Default language</label>
+                                    <div class="ui fluid search selection dropdown">
+                                        {{Form::hidden('default_locale', Setting::get('default_locale', 'en'))}}
+                                        <i class="dropdown icon"></i>
+
+                                        <div class="default text">Choose default language</div>
+                                        <div class="menu">
+                                            @foreach($available_langs as $key => $lang)
+
+                                                <div class="item" data-value="{{$key}}"><i
+                                                            class="world icon"></i>{{$lang}}</div>
+
+                                            @endforeach
+
                                         </div>
                                     </div>
                                 </div>
 
+
+
                             </div>
+
+
 
                         </div>
                     </div>
@@ -89,14 +99,48 @@
                     <div class="field">
                         <div class="two fields">
                             <div class="field">
+                                <label for="">RTL display</label>
+                                {{Form::semanticCheckbox('rtl_display', '1', Setting::get('rtl_display', '0'))}}
+                                <p><small>Use Right to left display</small></p>
+                            </div>
+                            <div class="field">
+                                <label for="">Mask user's phone numer</label>
+                                {{Form::semanticCheckbox('mask_phone', '1', Setting::get('mask_phone', '0'))}}
+                                <p><small>Initially hide sellers phone number on item page</small></p>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="field ">
+                        <div class="two fields">
+                            <div class="field">
+                                <label for="">Require email confirmation </label>
+                                {{Form::semanticCheckbox('require_email_confirmation', '1', Setting::get('require_email_confirmation', '1'))}}
+                                <p><small>When new users register do you want them to confirm emails?</small></p>
+                            </div>
+                            <div class="field">
+                                <label for="">Require item verification on new item post</label>
+                                {{Form::semanticCheckbox('require_item_verification', '1', Setting::get('require_email_confirmation', '1'))}}
+                                <p><small>When new items are posted do you want it to be verified?</small></p>
+                            </div>
+                            </div>
+
+                    </div>
+
+
+
+                    <div class="field">
+                        <div class="two fields">
+                            <div class="field">
                                 <label for="">{{trans('phrases.admin_email')}}</label>
                                 {{Form::text('admin_email', Setting::get('admin_email'))}}
-                                <p>{{trans('phrases.admin_email_to_send')}}</p>
+                                <p><small>{{trans('phrases.admin_email_to_send')}}</small></p>
                             </div>
                             <div class="field">
                                 <label for="">{{trans('phrases.email_from')}}</label>
                                 {{Form::text('email_from', Setting::get('email_from'))}}
-                                <p>{{trans('phrases.admin_email_from')}}</p>
+                                <p><small>{{trans('phrases.admin_email_from')}}</small></p>
 
                             </div>
                         </div>
@@ -111,6 +155,51 @@
 
                 </div>
                 <div class="ui  tab content p-md" data-tab="second">
+                    <h4 class="ui dividing header">Social authentication</h4>
+                    <div class="field">
+                        <div class="three fields">
+                            <div class="field">
+                                <label for=""><i class="icon facebook"></i> Allow Facebook login</label>
+                                {{Form::semanticCheckbox('allow_facebook_login', '1', Setting::get('allow_facebook_login', '0'))}}
+                            </div>
+                            <div class="field">
+                                <label for=""> Facebook client id
+                                </label>
+                                {{Form::text('facebook_client_id', Setting::get('facebook_client_id'))}}
+
+                            </div>
+                            <div class="field">
+                                <label for="">Facebook client secret</label>
+                                {{Form::text('facebook_client_secret', Setting::get('facebook_client_secret'))}}
+
+                            </div>
+                        </div>
+                        <p><small>Your facebook credentials can be gotten from here <a href="https://developers.facebook.com/apps/" target="_blank">https://developers.facebook.com/apps</a></small></p>
+                    </div>
+
+                    <div class="field p-t-md">
+                        <div class="three fields">
+                            <div class="field">
+                                <label for=""><i class="icon google"></i> Allow Google login</label>
+                                {{Form::semanticCheckbox('allow_google_login', '1', Setting::get('allow_google_login', '0'))}}
+                            </div>
+                            <div class="field">
+                                <label for=""> Google client id
+                                </label>
+                                {{Form::text('google_client_id', Setting::get('google_client_id'))}}
+
+                            </div>
+                            <div class="field">
+                                <label for="">Google client secret</label>
+                                {{Form::text('google_client_secret', Setting::get('google_client_secret'))}}
+
+                            </div>
+                        </div>
+                        <p><small>Your google credentials can be gotten from here <a href="https://console.developers.google.com/project" target="_blank">https://console.developers.google.com/project</a></small></p>
+                    </div>
+
+
+
                     <h4 class="ui dividing header">{{trans('phrases.third_party_keys')}}</h4>
 
                     <div class="field">
@@ -118,12 +207,12 @@
                             <div class="field">
                                 <label for="">{{trans('phrases.250_wide_banner')}}</label>
                                 {{Form::textarea('ad_250', Setting::get('ad_250'))}}
-                                <p>Ideally a {{trans('phrases.250_wide_banner')}}</p>
+                                <p>Paste your google advert here</p>
                             </div>
                             <div class="field">
                                 <label for="">{{trans('phrases.leaderboard_banner')}}</label>
                                 {{Form::textarea('ad_leaderboard', Setting::get('ad_leaderboard'))}}
-                                <p>Ideally a {{trans('phrases.leaderboard_banner')}}</p>
+                                <p>paste your advert code here</p>
 
                             </div>
                         </div>
@@ -190,7 +279,7 @@
 
                                 </div>
                             </div>
-                            <p>NOTE: Not your paypal username / password : Your Payment Credentials can be obtained here <a href="https://developer.paypal.com/docs/classic/api/apiCredentials">https://developer.paypal.com/docs/classic/api/apiCredentials</a></p>
+                            <p>NOTE: Not your paypal username / password : Your Payment Credentials can be obtained here <a href="https://developer.paypal.com/docs/classic/api/apiCredentials" target="_blank">https://developer.paypal.com/docs/classic/api/apiCredentials</a></p>
                         </div>
 
                         <div class="field">
@@ -225,6 +314,7 @@
                     .tab()
 
             $('.ui.checkbox').checkbox()
+            $('.ui.dropdown').dropdown()
 
             Dropzone.autoDiscover = false;
 

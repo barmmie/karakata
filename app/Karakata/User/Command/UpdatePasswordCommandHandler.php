@@ -20,7 +20,7 @@ class UpdatePasswordCommandHandler implements CommandHandler
         try {
             $user = User::find(Auth::id());
 
-            if (Hash::check($command->current_password, $user->password)) {
+            if (Hash::check($command->current_password, $user->password) || $user->isSocial()) {
                 $user->password = Hash::make($command->new_password);
                 $user->save();
 

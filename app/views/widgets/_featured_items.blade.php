@@ -1,4 +1,3 @@
-@if(count($featured_items))
     <h2 class="ui dividing header">
         {{trans('phrases.featured_items')}}
     </h2>
@@ -43,4 +42,3 @@
         </div>
     </div>
 
-@endif

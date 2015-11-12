@@ -21,18 +21,16 @@ DB_NAME='sampling_db'
 DB_USER='7db461c0c46c'
 DB_PASS='0428f679f9f41a7a'
 
-
-
-
-
-RSS feed
-RTL support
-Mask phone number
-Multilingual support
-    Added 8 Language packs
-Fix admin issue
-Fix image upload default issue
-
 git diff --name-only 3ec7260 | zip updates.zip -@
 zip update.zip $(git diff --name-only commit commit)
+
+
+Add translate button on mobile
+Social authentication
+Add 2 more language packs, arabic & some other language
+Email delivery for gmail fix
+Fix errors on admin page
+Fix category selection bug on iOS
+Allow parent category selection
+Fix Tablet & mobile Layout issues
 

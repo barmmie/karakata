@@ -33,7 +33,7 @@ class UpdatePasswordCommand
     public function rules()
     {
         return [
-            'current_password' => 'required',
+//            'current_password' => '',
             'new_password' => 'required',
             'confirm_new_password' => 'required'
         ];

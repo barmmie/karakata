@@ -103,6 +103,13 @@ class AppController extends \BaseController
 
     }
 
+    public function update()
+    {
+        Artisan::call('migrate', ['--force' => true]);
+        flashInfo('Update successful');
+        return Redirect::route('pages.homepage');
+    }
+
     protected function checkInstallation()
     {
 

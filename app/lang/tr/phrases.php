@@ -45,7 +45,7 @@ return [
 	'search_cta_heading' => 'Ne istediğinizi Satın',
 	'search_cta_subheading' => 'Kullanmadığınız ne Satıyoruz . Ücretsiz ve hiçbir komisyon ile',
 	'more_ads_by_user' => 'Bu kullanıcıdan daha fazla reklamları',
-	'remove_from_favorites' => 'Sık kaldır',
+	'remove_from_favorites' => 'Favorilerden çıkar',
 	'add_to_favorites' => 'Favorilere ekle',
 	'report_abuse' => 'Report abuse',
 	'report_abuse_copy' => 'Reklam neyin yanlış olduğunu bize söyleyin',

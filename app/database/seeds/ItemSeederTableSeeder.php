@@ -45,6 +45,12 @@ class ItemSeederTableSeeder extends Seeder
             'Other Vehicles' => 380
         ];
 
+        $proxies = [
+            'http://213.85.92.10:80',
+            'http://117.136.234.51:80',
+            'http://175.156.132.212:80'
+        ];
+
         $categories = Category::whereIn('title', array_keys($cat_array))->get()->toArray();
 
 
@@ -53,6 +59,14 @@ class ItemSeederTableSeeder extends Seeder
         foreach (array_chunk($categories, 3) as $category_row) {
 
             foreach ($category_row as $category) {
+
+
+                $proxy = $proxies[rand(0,count($proxies)-1)];
+
+                $this->command->info("Using proxy: $proxy");
+
+                $this->command->info("Fetching items in category {$category['title']}");
+
 
                 try {
                     $res = $client->get('http://api-v2.olx.com/items',
@@ -67,23 +81,33 @@ class ItemSeederTableSeeder extends Seeder
                                     'abundance' => 'true',
                                     'languageId' => 1,
                                     'platform' => 'desktop'
-                                ]
+                                ],
+                            'proxy' => $proxy
                         ]
 
                     );
                     if ($res->getStatusCode() == 200) {
                         $results = $res->json()['data'];
 
+                        $this->command->info("Retrieved ".count($results)." items in category {$category['title']}");
+
+
                         foreach (array_chunk($results, 5) as $result_row) {
 
                             foreach ($result_row as $result) {
                                 $id = $result['id'];
 
-                                $new_res = $client->get("http://api-v2.olx.com/items/$id");
+                                $new_res = $client->get("http://api-v2.olx.com/items/$id",
+                                    [
+                                        'proxy' => $proxy
+                                    ]);
+                                $this->command->info("Fetching  {$result['title']}");
+
 
                                 if ($new_res->getStatusCode() == 200) {
                                     $data = $new_res->json();
 
+                                    $this->command->info("Found  {$data['title']}");
 
                                     $item = Item::create([
                                         'title' => $data['title'],
@@ -105,25 +129,39 @@ class ItemSeederTableSeeder extends Seeder
                                     ]);
 
                                     foreach (array_chunk($data['images'], 3) as $image_row) {
+                                        $this->command->info("Uploading ".count($data['images'])." images  for  {$result['title']}");
+
                                         foreach ($image_row as $image) {
                                             try {
                                                 Picture::upload($image['url'], $item->id, 'jpg');
+                                                $this->command->info("Image uploaded:  {$image['url']}");
+
 
                                             } catch (\Exception $e) {
+                                                $this->command->info("Image failed  for  {$image['url']}");
+                                                $this->command->info($e->getMessage());
 
                                             }
                                         }
 
                                     }
+                                } else {
+                                    $this->command->info("Could not fetch  {$result['title']}");
+
                                 }
 
                             }
 
 
                         }
+                    } else {
+                        $this->command->info("Could not fetch items in category {$category['title']}");
+
                     }
 
                 } catch (\Exception $e) {
+                    $this->command->info("Failed to fetch items in category {$category['title']}");
+                    $this->command->error($e->getMessage());
 
                 }
 

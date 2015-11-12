@@ -154,7 +154,7 @@ return [
 	'powered_by' => 'Alimenté par',
 	'pay_now' => 'Payez maintenant',
 	'page_not_found' => 'Page non trouvée',
-	'go_home' => 'Rentrer à la maison',
+	'go_home' => 'rentrer chez soi',
 	'return_back' => 'Retourne en arrière',
 	'error_occured' => 'Une erreur s\'est produite',
 	'app_has_been_installed' => 'App a déjà été installé',

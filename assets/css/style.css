@@ -139,3 +139,32 @@ body {
     text-shadow: 0 1px rgba(0, 0, 0, 0.85);
 }
 
+@media only screen and (max-width: 1919px) and (min-width: 1200px) {
+    .ui.page.grid {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+}
+@media only screen and (max-width: 991px) and (min-width: 768px) {
+    .ui.page.grid {
+        padding-left: 1%;
+        padding-right: 1%;
+    }
+
+    .ui.grid.container {
+        width: 100% !important;
+    }
+
+    .ui.container {
+        width: 98%;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .ui.container {
+        width: 100%;
+    }
+}
+
+

@@ -1,5 +1,7 @@
 <?php namespace Karakata\User\Command;
 
+use Setting;
+use Auth;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
@@ -18,6 +20,11 @@ class RegisterUserCommandHandler implements CommandHandler
     {
         $user = \User::register($command->full_name, $command->email, $command->password, $command->phone);
         $this->dispatchEventsFor($user);
+
+        if(Setting::get('require_email_confirmation', '1') != '1') {
+            $user->confirmEmail();
+            Auth::login($user, true);
+        }
 
         return $user;
     }

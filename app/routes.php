@@ -78,8 +78,7 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|adm
 
     Route::get('dashboard', ['as' => 'admin.dashboard', 'uses' => 'DashController@dashboard']);
     Route::get('dashboard/itemsByYear', ['as' => 'admin.items_by_year', 'uses' => 'DashController@itemsByYear']);
-    Route::get('dashboard/itemsByLocation',
-        ['as' => 'admin.items_by_location', 'uses' => 'DashController@itemsByLocation']);
+    Route::get('dashboard/itemsByLocation', ['as' => 'admin.items_by_location', 'uses' => 'DashController@itemsByLocation']);
 
     Route::get('users/{id}/verify', ['as' => 'admin.users.verify', 'uses' => 'UsersController@verify']);
     Route::post('admins', ['as' => 'admin.create', 'uses' => 'UsersController@storeAdmin']);
@@ -114,8 +113,11 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|adm
 Route::get('404', ['as' => 'pages.404', 'uses' => 'PageController@page404']);
 Route::get('500', ['as' => 'pages.500', 'uses' => 'PageController@page500']);
 Route::get('install', ['as' => 'installers.create', 'uses' => 'AppController@install']);
+Route::get('update', ['as' => 'installers.update', 'uses' => 'AppController@update']);
 Route::post('install', ['as' => 'installers.store', 'uses' => 'AppController@store']);
 
 Route::get('switch_language/{lang?}', ['as' => 'language_switcher', 'uses' => 'PageController@switch_language']);
 Route::get('feed/{type?}', ['as' => 'pages.feed', 'uses' => 'PageController@feed']);
 
+Route::get('social/facebook', ['as' => 'social.facebook', 'uses' => 'SocialAuthController@loginWithFacebook']);
+Route::get('social/google', ['as' => 'social.google', 'uses' => 'SocialAuthController@loginWithGoogle']);

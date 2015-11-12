@@ -50,21 +50,6 @@
 <script src="{{asset('assets/js/jquery.min.js')}}"></script>
 <script src="{{asset('assets/semantic-ui/semantic.min.js')}}"></script>
 <script src="{{asset('assets/alertify-js/build/alertify.min.js')}}"></script>
-
-@yield('scripts')
-
-@if(Auth::guest())
-    <script type="text/javascript">
-        $(document).ready(function () {
-            $('.nag-login').popup();
-        });
-    </script>
-@endif
-
-
-{{Setting::get('analytics')}}
-
-
 <script type="text/javascript">
     $(document).ready(function () {
         $.ajaxSetup({
@@ -88,6 +73,21 @@
         ;
     });
 </script>
+@yield('scripts')
+
+@if(Auth::guest())
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('.nag-login').popup();
+        });
+    </script>
+@endif
+
+
+{{Setting::get('analytics')}}
+
+
+
 </body>
 
 </html>

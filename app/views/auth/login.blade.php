@@ -36,6 +36,24 @@
                 </button>
             </div>
 
+            <div class="ui segment">
+                @if(Setting::get('allow_facebook_login', '0') == '1')
+                <a class="ui fluid facebook button" href="{{route('social.facebook')}}">
+                    <i class="facebook icon"></i>
+                    {{trans('words.login')}} via Facebook
+                </a>
+                @endif
+
+
+                @if(Setting::get('allow_google_login', '0') == '1')
+                <a class="ui fluid google plus button m-t-sm" href="{{route('social.google')}}">
+                    <i class="google plus icon"></i>
+                    {{trans('words.login')}} via Google Plus
+                </a>
+                @endif
+
+            </div>
+
 
             {{Form::close()}}
             <div class="ui message">
@@ -47,6 +65,8 @@
                             href="{{URL::action('RemindersController@getRemind')}}">{{trans('phrases.reset_password')}}</a>
                 </p>
             </div>
+
+
         </div>
     </div>
 @endsection

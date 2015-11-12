@@ -14,16 +14,14 @@
                 @if(Auth::check())
 
                     @if(Auth::user()->isAdmin())
-                        <a class="item" href="{{route('admin.dashboard')}}">
+                        <a class="item p-v-none" href="{{route('admin.dashboard')}}">
                             <i class="sign out icon "></i> {{trans('phrases.admin_dashboard')}}
                         </a>
                     @else
 
-                        <a class="item" href="{{route('sessions.destroy')}}">
-                            <i class="sign out icon "></i> {{trans('words.logout')}}
-                        </a>
 
-                        <div class="item">
+
+                        <div class="item p-v-none">
                             <div class="ui buttons">
 
 
@@ -39,8 +37,11 @@
                                     <i class="dropdown icon"></i>
 
                                     <div class="menu">
-                                        <a class="item" href="">{{trans('words.profile')}}</a>
-
+                                        <a class="item" href="{{route('users.profile')}}">
+                                            <i class="user icon"></i> {{trans('words.profile')}}</a>
+                                        <a class="item" href="{{route('sessions.destroy')}}">
+                                            <i class="sign out icon "></i> {{trans('words.logout')}}
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -53,7 +54,7 @@
                     <a href="{{route('users.register')}}" class="item ">{{trans('words.signup')}}</a>
                 @endif
 
-                <div class="item p-r-none">
+                <div class="item p-v-none">
                     <a class="ui huge red icon button nag-login" href="{{route('items.new')}}"
                        data-content="{{trans('phrases.login_required')}}">
                         <i class="icon money"></i>
@@ -61,7 +62,7 @@
                     </a>
                 </div>
 
-                <div class="item">
+                <div class="item p-v-none">
                     <div class="ui floating dropdown labeled search icon button">
                         <i class="world icon"></i>
                         <span class="text">Change Language</span>
@@ -140,6 +141,17 @@
                         {{trans('phrases.sell_your_item')}}
                     </a>
                 </div>
+                    <div class="item">
+                        <div class="ui floating dropdown labeled search icon button">
+                            <i class="world icon"></i>
+                            <span class="text">Change Language</span>
+                            <div class="menu">
+                                @foreach($available_langs as $key => $lang)
+                                    <a href="{{route('language_switcher', $key)}}" class="item">{{$lang}}</a>
+                                @endforeach
+                            </div>
+                        </div>
+                    </div>
             </div>
 
 

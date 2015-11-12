@@ -63,7 +63,7 @@ class PageController extends \BaseController
 
     public function termsConditions()
     {
-        return View::make('pages.terms-conditions');
+        return View::make('pages.terms_conditions');
 
     }
 

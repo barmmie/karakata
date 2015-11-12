@@ -8,7 +8,7 @@
 
 namespace Karakata\Listeners;
 
-
+use Setting;
 use Karakata\Mailer\AppMailer;
 use Laracasts\Commander\Events\EventListener;
 
@@ -24,7 +24,9 @@ class EmailNotifier extends EventListener
 
     public function whenUserHasRegistered($userHasRegistered)
     {
-        $this->appMailer->sendConfirmationMail($userHasRegistered->user);
+        if(Setting::get('require_email_confirmation', '1') == '1') {
+            $this->appMailer->sendConfirmationMail($userHasRegistered->user);
+        }
     }
 
     public function whenMessageHasBeenPosted($messagePosted)
@@ -36,7 +38,10 @@ class EmailNotifier extends EventListener
 
     public function whenItemWasPosted($itemWasPosted)
     {
-        $this->appMailer->sendMail($itemWasPosted->item->email, 'emails.new_item', ['item' => $itemWasPosted->item], trans('phrases.item_was_posted'));
+        if(Setting::get('require_item_verification', '1') == '1') {
+            $this->appMailer->sendMail($itemWasPosted->item->email, 'emails.new_item', ['item' => $itemWasPosted->item],
+                trans('phrases.item_was_posted'));
+        }
     }
 
 

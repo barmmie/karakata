@@ -30,7 +30,7 @@
 
                     <div class="two fields">
                         <div class="required field">
-                            <label for="">{{trans('phrases.choose_a_category')}} {{Lang::choice('words.category', 1)}}</label>
+                            <label for="">{{trans('phrases.choose_a_category')}}</label>
 
                             <div class="category ui dropdown button">
                                 {{Form::hidden('category_id')}}
@@ -64,7 +64,7 @@
                             {{trans('phrases.posting_as')}}
                             <div class="ui inline dropdown">
                                 {{Form::hidden('type', 'personal')}}
-                                <div class="text">today</div>
+                                <div class="text">{{trans('words.individual')}}</div>
                                 <i class="dropdown icon"></i>
 
                                 <div class="menu">
@@ -283,7 +283,7 @@
 
             $('.ui.accordion').accordion();
 
-            $('.category .ui.dropdown')
+            $('.category.ui.dropdown')
                     .dropdown({
                         allowCategorySelection: true
                     });

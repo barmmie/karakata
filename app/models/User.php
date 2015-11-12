@@ -187,4 +187,16 @@ class User extends Eloquent implements UserInterface, RemindableInterface
         return in_array($this->role, [static::ADMIN_ROLE, static::SUPER_ADMIN_ROLE]);
 
     }
+
+    public function isSocial()
+    {
+        $is_social = false;
+
+        if(!is_null($this->facebook_oauth_id) || !is_null($this->google_oauth_id))
+        {
+            $is_social = true;
+        }
+
+        return $is_social;
+    }
 }

@@ -50,9 +50,20 @@ class ItemsController extends BaseController
         if ($result['success']) {
             $item = $result['payload'];
 
-            flashSuccess($result['message'], trans('phrases.item_subject_to_verification'));
+            $message = '';
 
-            return Redirect::route('dash.myitems');
+            if(Setting::get('require_item_verification', '1') == '1') {
+                $message = trans('phrases.item_subject_to_verification');
+                flashSuccess($result['message'], $message);
+
+                return Redirect::route('dash.myitems');
+
+            } else {
+                flashSuccess($result['message'], $message);
+                return Redirect::route('items.show', $item->slug);
+            }
+
+
         } else {
             flashError($result['message']);
 

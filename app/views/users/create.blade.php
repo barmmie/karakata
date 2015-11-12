@@ -63,9 +63,29 @@
                             </div>
                         </div>
                     </div>
+
                     <button class="ui teal button right labeled icon button" tabindex="0">
                         <i class="right arrow icon"></i>{{trans('phrases.create_my_account')}}</button>
                     {{Form::close()}}
+
+                    <div class="ui segment">
+                        @if(Setting::get('allow_facebook_login', '0') == '1')
+                            <a class="ui fluid facebook button" href="{{route('social.facebook')}}">
+                                <i class="facebook icon"></i>
+                                {{trans('words.login')}} via Facebook
+                            </a>
+                        @endif
+
+
+                        @if(Setting::get('allow_google_login', '0') == '1')
+                            <a class="ui fluid google plus button m-t-sm" href="{{route('social.google')}}">
+                                <i class="google plus icon"></i>
+                                {{trans('words.login')}} via Google Plus
+                            </a>
+                        @endif
+
+                    </div>
+
                     <div class="ui bottom attached info message">
                         <i class="icon help"></i>
                         {{trans('phrases.already_signed_up')}}
@@ -73,35 +93,7 @@
                 </div>
             </div>
             <div class="four wide column">
-                <div class="ui content p-md">
-                    <div class="ui center aligned icon header">
-                        <i class="orange circular icon picture">
-
-                        </i>
-                        Post a Free Classified
-                    </div>
-                    <p> Post your free online classified ads with us. Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit.
-                    </p>
-                </div>
-
-                <div class="ui piled segment">
-                    <h4 class="ui header">HOW TO SELL QUICKLY?</h4>
-
-                    <div class="ui bulleted list">
-                        <div class="item">Gaining Access</div>
-                        <div class="item">Inviting Friends</div>
-                        <div class="item">
-                            <div>Benefits</div>
-                            <div class="list">
-                                <div class="item">Use Anywhere</div>
-                                <div class="item">Rebates</div>
-                                <div class="item">Discounts</div>
-                            </div>
-                        </div>
-                        <div class="item">Warranty</div>
-                    </div>
-                </div>
+                @include('partials._how_to_sell_buy')
             </div>
         </div>
     </div>

@@ -27,7 +27,7 @@ return array(
     |
     */
 
-    'host' => 'smtp.mailgun.org',
+    'host' => '',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
@@ -51,7 +51,7 @@ return array(
     |
     */
 
-    'from' => array('address' => null, 'name' => null),
+    'from' => array('address' => Setting::get('admin_email', 'admin@karakata.com'), 'name' => Setting::get('admin_email_from', 'Karakata admin')),
     /*
     |--------------------------------------------------------------------------
     | E-Mail Encryption Protocol
@@ -63,7 +63,7 @@ return array(
     |
     */
 
-    'encryption' => 'tls',
+    'encryption' => 'ssl',
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username

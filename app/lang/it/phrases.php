@@ -121,7 +121,7 @@ return [
 	'add_them_to_locations' => 'Li Aggiungi ai miei luoghi',
 	'add_location_manually' => 'Li Aggiungi ai miei luoghi',
 	'select_country' => 'Seleziona il paese',
-	'location_name' => 'nome Luogo',
+	'location_name' => 'Nome del luogo',
 	'location_country' => 'Località paese',
 	'your_locations' => 'I vostri sedi',
 	'filter_location' => 'posizione filtro',
@@ -191,7 +191,7 @@ return [
 	'admin_email_to_send' => 'Mail inviata da app potrebbe usare questo come mittente dell\'e-mail',
 	'email_from' => 'Posta da Admin',
 	'admin_email_from' => 'Mail inviata da app avrebbe usato questo come nome del mittente',
-	'confirmation_email' => 'mail di conferma',
+	'confirmation_email' => 'Email di conferma',
 	'item_received_message' => 'Nuovo messaggio su uno dei tuoi articoli',
 	'item_was_posted' => 'Il tuo articolo è stato esaminato',
 

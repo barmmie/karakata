@@ -1,6 +1,7 @@
 <?php namespace Karakata\Mailer;
 
 use Setting;
+use View;
 use Illuminate\Mail\Mailer;
 
 /**
@@ -32,16 +33,27 @@ class AppMailer
         $this->data = $data;
         $this->subject = $subject;
 
-        $this->deliver();
+        return $this->deliver();
     }
 
     protected function deliver()
     {
-        $this->mailer->send($this->view, $this->data, function ($message) {
-            $message->from(Setting::get('admin_email', 'admin@karakata'), Setting::get('admin_email_from', 'Administrator'))
-                ->to($this->to)
-                ->subject($this->subject);
-        });
+
+
+        $from_email = Setting::get('admin_email', 'admin@karakata.com');
+        $from_name = Setting::get('admin_email_from', 'Karakata admin');
+
+        $headers   = array();
+        $headers[] = "MIME-Version: 1.0";
+        $headers[] = "Content-type: text/html; charset=iso-8859-1";
+        $headers[] = "From:  $from_name <$from_email>";
+        $headers[] = "Reply-To: $from_name <$from_email>";
+        $headers[] = "Subject: {$this->subject}";
+        $headers[] = "X-Mailer: PHP/".phpversion();
+
+        $email = View::make($this->view, $this->data)->render();
+
+        return mail($this->to, $this->subject, $email, implode("\r\n", $headers));
     }
 
     public function sendConfirmationMail(\User $user)

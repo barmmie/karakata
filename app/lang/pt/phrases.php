@@ -121,7 +121,7 @@ return [
 	'add_them_to_locations' => 'Adicioná-los aos meus locais',
 	'add_location_manually' => 'Adicioná-los aos meus locais',
 	'select_country' => 'Selecione o pais',
-	'location_name' => 'nome do local',
+	'location_name' => 'Nome do local',
 	'location_country' => 'Localização país',
 	'your_locations' => 'seus locais',
 	'filter_location' => 'localização filtro',

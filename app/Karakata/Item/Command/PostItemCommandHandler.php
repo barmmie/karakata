@@ -36,6 +36,10 @@ class PostItemCommandHandler implements CommandHandler
 
             $this->dispatchEventsFor($item);
 
+            if(Setting::get('require_item_verification', '1') != '1') {
+                $item->approve();
+            }
+
 
             $result['success'] = true;
             $result['message'] = trans('phrases.item_posted_successfully', ['title' => $command->title]);
