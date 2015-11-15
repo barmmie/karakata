@@ -8,7 +8,7 @@ class ItemSeederTableSeeder extends Seeder
     public function run()
     {
 
-        DB::table('items')->delete();
+//        DB::table('items')->delete();
         $faker = Faker\Factory::create();
 
 
@@ -49,6 +49,7 @@ class ItemSeederTableSeeder extends Seeder
             'http://213.85.92.10:80',
             'http://117.136.234.51:80',
             'http://175.156.132.212:80'
+
         ];
 
         $categories = Category::whereIn('title', array_keys($cat_array))->get()->toArray();
@@ -59,6 +60,8 @@ class ItemSeederTableSeeder extends Seeder
         foreach (array_chunk($categories, 3) as $category_row) {
 
             foreach ($category_row as $category) {
+                $proxy = $proxies[rand(0, count($proxies) - 1)];
+                $this->command->info('Trying category ...'.$category['title'].'with proxy - ' .$proxy);
 
 
                 $proxy = $proxies[rand(0,count($proxies)-1)];
@@ -69,6 +72,7 @@ class ItemSeederTableSeeder extends Seeder
 
 
                 try {
+
                     $res = $client->get('http://api-v2.olx.com/items',
                         [
                             'query' =>
@@ -83,11 +87,14 @@ class ItemSeederTableSeeder extends Seeder
                                     'platform' => 'desktop'
                                 ],
                             'proxy' => $proxy
+
                         ]
+
 
                     );
                     if ($res->getStatusCode() == 200) {
                         $results = $res->json()['data'];
+                        $this->command->info('Found '.count($results).' item(s) category ...'.$category['title']);
 
                         $this->command->info("Retrieved ".count($results)." items in category {$category['title']}");
 
@@ -104,7 +111,11 @@ class ItemSeederTableSeeder extends Seeder
                                 $this->command->info("Fetching  {$result['title']}");
 
 
+
                                 if ($new_res->getStatusCode() == 200) {
+
+                                    $this->command->info('Retrieved ' . $result['title'] );
+
                                     $data = $new_res->json();
 
                                     $this->command->info("Found  {$data['title']}");
@@ -128,8 +139,12 @@ class ItemSeederTableSeeder extends Seeder
 
                                     ]);
 
+                                    $this->command->info('Created ' . $result['title'] );
+
+
                                     foreach (array_chunk($data['images'], 3) as $image_row) {
                                         $this->command->info("Uploading ".count($data['images'])." images  for  {$result['title']}");
+
 
                                         foreach ($image_row as $image) {
                                             try {
@@ -148,6 +163,7 @@ class ItemSeederTableSeeder extends Seeder
                                 } else {
                                     $this->command->info("Could not fetch  {$result['title']}");
 
+
                                 }
 
                             }
@@ -159,6 +175,7 @@ class ItemSeederTableSeeder extends Seeder
 
                     }
 
+
                 } catch (\Exception $e) {
                     $this->command->info("Failed to fetch items in category {$category['title']}");
                     $this->command->error($e->getMessage());
@@ -166,10 +183,11 @@ class ItemSeederTableSeeder extends Seeder
                 }
 
 
+
             }
 
-        }
-
     }
+
+}
 
 }

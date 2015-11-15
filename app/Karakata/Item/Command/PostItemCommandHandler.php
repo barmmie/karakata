@@ -1,5 +1,6 @@
 <?php namespace Karakata\Item\Command;
 
+use Setting;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 

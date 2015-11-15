@@ -58,6 +58,8 @@ class LocationsController extends \BaseController
 
         }
 
+        \Cache::forget('locations.composer');
+
         return Response::json(['payload' => $result]);
     }
 
@@ -109,6 +111,9 @@ class LocationsController extends \BaseController
         $location = Location::findOrFail($id);
 
         $location->delete();
+
+        \Cache::forget('locations.composer');
+
 
         return [];
 

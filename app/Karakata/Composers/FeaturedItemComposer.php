@@ -14,7 +14,9 @@ class FeaturedItemComposer
     public function compose($view)
     {
 
-        $featured_items = \Item::featured(8)->get();
+        $featured_items = \Cache::remember('items.featured_'.rand(1,10), 20,  function() {
+            return \Item::featured(8)->get();
+        });
 
         $view->with('featured_items', $featured_items);
     }

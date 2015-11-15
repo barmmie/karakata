@@ -33,11 +33,11 @@
                                             </span>
 
                                             <span class="category m-b-xs">
-                                                <i class="minus icon"></i>{{$item->category->title}}<i
+                                                <i class="minus icon"></i>{{$item->category?$item->category->title:'N/A'}}<i
                                                         class="minus icon"></i>
                                             </span>
                                              <span class="location">
-                                                <i class="teal marker icon"></i>{{$item->location->name}}
+                                                <i class="teal marker icon"></i>{{$item->location?$item->location->name:'N/A'}}
                                             </span>
 
         </div>

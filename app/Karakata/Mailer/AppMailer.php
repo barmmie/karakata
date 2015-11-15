@@ -1,6 +1,7 @@
 <?php namespace Karakata\Mailer;
 
 use Setting;
+use Config;
 use View;
 use Illuminate\Mail\Mailer;
 
@@ -16,7 +17,7 @@ class AppMailer
     protected $to;
     protected $view;
     protected $data = [];
-    protected  $subject;
+    protected $subject;
     private $mailer;
 
     public function __construct(Mailer $mailer)
@@ -26,6 +27,8 @@ class AppMailer
 
     public function sendMail($to, $view, $data, $subject)
     {
+
+
         $this->to = $to;
 
         $this->view = $view;
@@ -39,21 +42,37 @@ class AppMailer
     protected function deliver()
     {
 
+        try {
+            if(Config::get('mail.driver') == 'mail') {
+                $from_email = Setting::get('admin_email', 'admin@karakata.com');
+                $from_name = Setting::get('admin_email_from', 'Karakata admin');
 
-        $from_email = Setting::get('admin_email', 'admin@karakata.com');
-        $from_name = Setting::get('admin_email_from', 'Karakata admin');
+                $headers   = array();
+                $headers[] = "MIME-Version: 1.0";
+                $headers[] = "Content-type: text/html; charset=iso-8859-1";
+                $headers[] = "From:  $from_name <$from_email>";
+                $headers[] = "Reply-To: $from_name <$from_email>";
+                $headers[] = "Subject: {$this->subject}";
+                $headers[] = "X-Mailer: PHP/".phpversion();
 
-        $headers   = array();
-        $headers[] = "MIME-Version: 1.0";
-        $headers[] = "Content-type: text/html; charset=iso-8859-1";
-        $headers[] = "From:  $from_name <$from_email>";
-        $headers[] = "Reply-To: $from_name <$from_email>";
-        $headers[] = "Subject: {$this->subject}";
-        $headers[] = "X-Mailer: PHP/".phpversion();
+                $email = View::make($this->view, $this->data)->render();
 
-        $email = View::make($this->view, $this->data)->render();
+                return mail($this->to, $this->subject, $email, implode("\r\n", $headers));
+            } else {
+                return $this->mailer->send($this->view, $this->data, function ($message) {
+                    $message->from(Setting::get('admin_email', 'admin@karakata'), Setting::get('admin_email_from', 'Administrator'))
+                        ->to($this->to)
+                        ->subject($this->subject);
+                });
+            }
+        } catch(Exception $ex) {
+            return false;
+        }
 
-        return mail($this->to, $this->subject, $email, implode("\r\n", $headers));
+
+
+
+
     }
 
     public function sendConfirmationMail(\User $user)

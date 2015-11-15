@@ -2,25 +2,23 @@ To update
 
 Extract the zip file called update and copy the content into your public_html directory.
 Choose yes to ovewrite existing files.
+!! After upload. please visit http://your-url/update
 
-
-Ver 1.0.4
-    Feature added/Fixes
-        Fixed issues where email was being sent to spam
-    Files changed
-        app/Karakata/Listeners/EmailNotifier.php
-        app/Karakata/Mailer/AppMailer.php
-        app/views/admin/settings/edit.blade.php
-        app/views/partials/_items_filter.blade.php
-        app/lang/bn/phrases.php
-        app/lang/de/phrases.php
-        app/lang/en/phrases.php
-        app/lang/es/phrases.php
-        app/lang/fr/phrases.php
-        app/lang/hi/phrases.php
-        app/lang/it/phrases.php
-        app/lang/pt/phrases.php
-        app/lang/tr/phrases.php
+ver 1.2.0
+    Social authentication - Facebook & Google login
+    Added 6 more language packs, arabic & some other language
+    Better expanded documentation
+    Added mobile telephone link as requested by Buyer:winnerskeepscore
+    Added caching around certain bottlenecks to improve speed
+    Allow parent category selection as requested by Buyer:
+    Added translate button on mobile view
+    Ability to choose default language
+    Some UI element had change in appearance
+    Email delivery for gmail fix
+    Fix errors on admin page
+    Fix Tablet & mobile Layout issues
+    Fix category selection bug on iOS
+    Fix typos reported by Buyer:winnerskeepscore
 Ver 1.0.3
     Feature added/Fixes
         Fix add location issue

@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="item">
-                                    <i class="teal marker icon"></i> {{$item->location->name}}
+                                    <i class="teal marker icon"></i> {{$item->location? $item->location->name : 'N/A'}}
                                 </div>
                             </div>
                             <a style="float: right;"
@@ -128,14 +128,24 @@
                                                 <strong>{{trans('words.negotiable')}}:</strong> <span><i
                                                             class="{{$item->negotiable? 'teal check': 'brown cancel'}} icon"></i></span>
                                             </div>
+
                                             <div class="item">
                                                 <strong>{{Lang::choice('words.category', 1)}}
-                                                    :</strong> {{$item->category->title}}
+                                                    :</strong>
+                                                                {{$item->category? $item->category->title : 'N/A'}}
+
                                             </div>
+
+
+
                                             <div class="item">
                                                 <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
-                                                            class="marker icon"></i>{{$item->location->name}}</span>
+                                                            class="marker icon"></i>
+                                                                {{$item->location? $item->location->name : 'N/A'}}
+
+                                                </span>
                                             </div>
+
 
                                             <div class="item">
                                                 <strong>{{trans('phrases.posted_by')}}</strong>
@@ -177,7 +187,7 @@
                             <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
                             <div class="sub header m-b-xs"><strong>{{Lang::choice('words.location',1)}}
-                                    :</strong> {{$item->location->name}}</div>
+                                    :</strong> {{$item->location? $item->location->name : 'N/A'}}</div>
                             <div class="sub header m-b-xs">
                                 <strong>{{trans('phrases.joined_in')}}</strong>: {{$item->owner->created_at->format('M j, Y')}}
                             </div>

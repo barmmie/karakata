@@ -25,6 +25,7 @@
                     <a class="active item" data-tab="first">{{trans('phrases.site_details')}}</a>
                     <a class="item" data-tab="second">{{trans('phrases.third_party_keys')}}</a>
                     <a class="item" data-tab="third">{{trans('phrases.paypal_payment')}}</a>
+                    <a class="item" data-tab="fourth">Email setup</a>
                 </div>
 
             </div>
@@ -130,21 +131,7 @@
 
 
 
-                    <div class="field">
-                        <div class="two fields">
-                            <div class="field">
-                                <label for="">{{trans('phrases.admin_email')}}</label>
-                                {{Form::text('admin_email', Setting::get('admin_email'))}}
-                                <p><small>{{trans('phrases.admin_email_to_send')}}</small></p>
-                            </div>
-                            <div class="field">
-                                <label for="">{{trans('phrases.email_from')}}</label>
-                                {{Form::text('email_from', Setting::get('email_from'))}}
-                                <p><small>{{trans('phrases.admin_email_from')}}</small></p>
 
-                            </div>
-                        </div>
-                    </div>
 
 
 
@@ -286,6 +273,74 @@
                             <label for="">Paypal API signature</label>
                             {{Form::text('paypal_signature', Setting::get('paypal_signature'))}}
                         </div>
+                    </div>
+
+
+                </div>
+
+                <div class="ui  tab content p-md" data-tab="fourth">
+                    <h4 class="ui dividing header">Email setup</h4>
+
+                    <div class="field">
+                        <div class="two fields">
+                            <div class="field">
+                                <label for="">Select email sending type/</label>
+                                {{Form::select('mail_driver', ['mail' => 'PHP Mail', 'smtp' => 'SMTP Mail'], Setting::get('mail_driver', 'mail'), ['class' => 'ui dropdown'])}}
+                                <p>Choose smpt for mailgun/mandrill or other smtp</p>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="field">
+                        <div class="two fields">
+                            <div class="field">
+                                <label for="">{{trans('phrases.admin_email')}}</label>
+                                {{Form::text('admin_email', Setting::get('admin_email'))}}
+                                <p><small>{{trans('phrases.admin_email_to_send')}}</small></p>
+                            </div>
+                            <div class="field">
+                                <label for="">{{trans('phrases.email_from')}}</label>
+                                {{Form::text('email_from', Setting::get('email_from'))}}
+                                <p><small>{{trans('phrases.admin_email_from')}}</small></p>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-t-md">
+
+                        <h4 class="ui horizontal divider header">**Settings below is only for smtp**</h4>
+
+
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">SMTP mail host</label>
+                                    {{Form::text('mail_host', Setting::get('mail_host', ''))}}
+                                </div>
+                                <div class="field">
+                                    <label for="">SMTP mail port</label>
+                                    {{Form::text('mail_port', Setting::get('mail_port', '587'))}}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="field">
+                            <div class="two fields">
+                                <div class="field">
+                                    <label for="">SMTP mail username</label>
+                                    {{Form::text('mail_username', Setting::get('mail_username', ''))}}
+                                </div>
+                                <div class="field">
+                                    <label for="">SMTP mail password</label>
+                                    {{Form::text('mail_username', Setting::get('mail_username', ''))}}
+
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
 
 

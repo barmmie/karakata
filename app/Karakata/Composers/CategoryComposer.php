@@ -13,8 +13,9 @@ class CategoryComposer
 {
     public function compose($view)
     {
-
-        $categories = \Category::fetchTree();
+        $categories =  \Cache::get('categories.composer', function() {
+            return \Category::fetchTree();
+        });
 
         $view->with('categories', $categories);
     }

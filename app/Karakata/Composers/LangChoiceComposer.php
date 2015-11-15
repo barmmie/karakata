@@ -150,15 +150,21 @@ class LangChoiceComposer {
             'zh' => 'Chinese' ,
             'zu' => 'Zulu' , ];
 
-        $available_langs = [];
 
-        $langdirs = $directories = glob(app_path('lang') . '/*' , GLOB_ONLYDIR);
-        foreach($langdirs as $langdir) {
-            $dirName =  basename($langdir);
-            if(array_key_exists($dirName, $list_of_all_langs)) {
-                $available_langs[$dirName] = $list_of_all_langs[$dirName];
+
+        $available_langs = \Cache::remember('languages', 10, function() use ($list_of_all_langs) {
+            $available_langs = [];
+
+            $langdirs = $directories = glob(app_path('lang') . '/*' , GLOB_ONLYDIR);
+            foreach($langdirs as $langdir) {
+                $dirName =  basename($langdir);
+                if(array_key_exists($dirName, $list_of_all_langs)) {
+                    $available_langs[$dirName] = $list_of_all_langs[$dirName];
+                }
             }
-        }
+
+            return $available_langs;
+        });
 
 
 

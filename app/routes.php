@@ -121,3 +121,4 @@ Route::get('feed/{type?}', ['as' => 'pages.feed', 'uses' => 'PageController@feed
 
 Route::get('social/facebook', ['as' => 'social.facebook', 'uses' => 'SocialAuthController@loginWithFacebook']);
 Route::get('social/google', ['as' => 'social.google', 'uses' => 'SocialAuthController@loginWithGoogle']);
+

@@ -15,7 +15,7 @@ return array(
     |
     */
 
-    'driver' => 'mail',
+    'driver' => Setting::get('mail_driver', 'mail'),
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -27,7 +27,7 @@ return array(
     |
     */
 
-    'host' => '',
+    'host' => Setting::get('mail_host', ''),
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
@@ -39,7 +39,7 @@ return array(
     |
     */
 
-    'port' => 587,
+    'port' => Setting::get('mail_port', '587'),
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -75,7 +75,7 @@ return array(
     |
     */
 
-    'username' => null,
+    'username' => Setting::get('mail_username', ''),
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Password
@@ -87,7 +87,7 @@ return array(
     |
     */
 
-    'password' => null,
+    'password' => Setting::get('mail_password', ''),
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path

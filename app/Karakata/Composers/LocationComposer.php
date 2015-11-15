@@ -14,7 +14,9 @@ class LocationComposer
 
     public function compose($view)
     {
-        $locations = \Location::fetchAll();
+        $locations =  \Cache::get('locations.composer', function() {
+            return \Location::fetchAll();
+        });
 
         $view->with('locations', $locations);
 

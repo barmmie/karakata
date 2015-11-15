@@ -25,7 +25,7 @@
                     </div>
                     <div class="meta">
                     <span class="like">
-                        <i class="red marker icon"></i> {{$item->location->name}}
+                        <i class="red marker icon"></i> {{$item->location? $item->location->name : 'N/A'}}
                     </span>
                     </div>
                 </div>

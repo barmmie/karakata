@@ -7,7 +7,7 @@
 @section('meta')
     <meta property="og:title" content="{{$item->title}}"/>
     <meta property="twitter:title" content="{{$item->title}}"/>
-    <meta property="og:type" content="{{$item->category->title}}"/>
+    <meta property="og:type" content="{{$item->category? $item->category->title: 'N/A'}}"/>
     <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
     <meta property="og:image" content="{{asset($item->mainThumbnail())}}"/>
     <meta property="twitter:image" content="{{asset($item->mainThumbnail())}}"/>
@@ -65,14 +65,18 @@
                         @endif
                         <div class="ui breadcrumb">
                             <a class="section" href="{{route('pages.homepage')}}">{{trans('words.home')}}</a>
-                            @if($item->category->parent && $item->category->parent->id !=1)
+                            @if($item->category)
+                                @if($item->category->parent && $item->category->parent->id !=1)
+                                    <i class="right angle icon divider"></i>
+                                    <a class="section"
+                                       href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
+                                @endif
                                 <i class="right angle icon divider"></i>
-                                <a class="section"
-                                   href="{{route('categories.show', $item->category->parent->slug)}}">{{$item->category->parent->title}}</a>
+                                <a class="section "
+                                   href="{{route('categories.show', $item->category->slug)}}">{{$item->category->title}}</a>
                             @endif
-                            <i class="right angle icon divider"></i>
-                            <a class="section "
-                               href="{{route('categories.show', $item->category->slug)}}">{{$item->category->title}}</a>
+
+
                         </div>
 
                     </div>
@@ -83,22 +87,29 @@
                             {{$item->title}}
                         </h3>
 
-                        <div class="p-b-md">
-                            <div class="ui horizontal list">
-                                <div class="item">
-                                    <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
-                                </div>
+                            <div class="ui two column grid p-b-sm">
+                                <div class="ten wide column">
+                                    <div class="ui horizontal list">
+                                        <div class="item">
+                                            <i class="teal calendar icon"></i> {{$item->created_at->format('M j, Y g:i A')}}
+                                        </div>
 
-                                <div class="item">
-                                    <i class="teal marker icon"></i> {{$item->location->name}}
+                                        <div class="item">
+                                            <i class="teal marker icon"></i> {{$item->location? $item->location->name : 'N/A'}}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="six wide column m-b-sm">
+                                    <div style="float: right;">
+                                        <a class="ui big  teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
+
+
+                                    </div>
+
                                 </div>
                             </div>
-                            <div style="float: right;" class="m-b-lg">
-                                <a class="ui big  teal tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</a>
 
-                            </div>
 
-                        </div>
 
 
 
@@ -160,11 +171,11 @@
                                             </div>
                                             <div class="item">
                                                 <strong>{{Lang::choice('words.category', 1)}}
-                                                    :</strong> {{$item->category->title}}
+                                                    :</strong> {{$item->category?$item->category->title: 'N/A'}}
                                             </div>
                                             <div class="item">
                                                 <strong>{{Lang::choice('words.location', 1)}}:</strong> <span><i
-                                                            class="marker icon"></i>{{$item->location->name}}</span>
+                                                            class="marker icon"></i>{{$item->location? $item->location->name : 'N/A'}}</span>
                                             </div>
 
                                             <div class="item">
@@ -249,7 +260,7 @@
                             <img src="{{gravatar($item->email)}}" class="ui circular image">
                             {{$item->seller_name}}
                             <div class="sub header">{{Lang::choice('words.location',1)}}
-                                : {{$item->location->name}}</div>
+                                : {{$item->location?$item->location->name:'N/A'}}</div>
                             <div class="sub header">{{trans('phrases.joined_in')}}
                                 : {{$item->owner->created_at->format('M j, Y')}}</div>
                         </h3>
@@ -263,17 +274,17 @@
                             </button>
 
                             <div class="masked-phone " style="display:none">
-                                <button class="fluid ui yellow button">
+                                <a href="tel:{{$item->phone}}" class="fluid ui yellow button">
                                     <i class="phone icon"></i> {{$item->phone}}
-                                </button>
+                                </a>
 
                             </div>
                         @endif
 
                         @if(Setting::get('mask_phone', '0')== '0')
-                            <button class="fluid ui yellow button">
+                            <a href="tel:{{$item->phone}}" class="fluid ui yellow button">
                                 <i class="phone icon"></i> {{$item->phone}}
-                            </button>
+                            </a>
                         @endif
 
 

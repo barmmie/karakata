@@ -13,7 +13,9 @@ class PopularCategoryComposer
 {
     public function compose($view)
     {
-        $categories = \Category::popular(10)->get();
+        $categories =  \Cache::remember('categories.popular', 30,  function() {
+            return \Category::popular(10)->get();
+        });
 
         $view->with('popular_categories', $categories);
     }

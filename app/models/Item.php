@@ -53,6 +53,21 @@ class Item extends \Eloquent
 
     }
 
+
+
+    public function getDescriptionAttribute($value)
+    {
+
+        $doc = new DOMDocument();
+        $doc->recover = true;
+        $doc->loadHTML(mb_convert_encoding($value, 'HTML-ENTITIES', 'UTF-8'));
+        $doc->normalizeDocument();
+        $clean = $doc->saveHTML();
+
+        return $clean;
+    }
+
+
     public static function post(
         $category_id,
         $type,

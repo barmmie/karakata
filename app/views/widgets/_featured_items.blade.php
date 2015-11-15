@@ -23,7 +23,7 @@
                         <div class="extra content">
                             <a>
                                 <i class="marker icon"></i>
-                                {{$item->location->name}}
+                                {{$item->location?$item->location->name: 'N/A'}}
                             </a>
 
                             <div class="right floated">

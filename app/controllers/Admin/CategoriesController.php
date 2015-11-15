@@ -59,6 +59,8 @@ class CategoriesController extends \BaseController
                 break;
         }
 
+        \Cache::forget('categories.composer');
+
         if (!isset($status) || $status == null) {
             DB::rollback();
             App::abort(400);
