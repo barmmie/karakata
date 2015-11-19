@@ -1,7 +1,7 @@
 <div class="ui grid">
     <div class="computer tablet only row">
         <div class="ui fixed padded secondary menu navbar page grid ">
-            <a class="item" href="{{route('pages.homepage')}}">
+            <a class="item p-r-none m-r-none" href="{{route('pages.homepage')}}">
                 @if(Setting::get('logo_src')!='')
                     <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
                 @else
@@ -10,7 +10,7 @@
                 <span class="ui large header p-l-xs m-t-none">{{Setting::get('site_name', 'Karakata')}}</span>
             </a>
 
-            <div class="right secondary menu">
+            <div class="right secondary menu p-l-none">
                 @if(Auth::check())
 
                     @if(Auth::user()->isAdmin())

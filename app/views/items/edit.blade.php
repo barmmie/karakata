@@ -39,8 +39,8 @@
 
                                 <div class="menu">
                                     @foreach($categories as $category)
-                                        <div class="item">
-                                            <i class="dropdown icon"></i>
+                                        <div class="item" data-value="{{$category->id}}">
+                                        <i class="dropdown icon"></i>
                                             <span class="text">{{$category->label}}</span>
 
                                             <div class="menu">
