@@ -1,5 +1,6 @@
 <?php namespace Karakata\Item\Command;
 
+use Auth;
 use Laracasts\Commander\CommandHandler;
 use Laracasts\Commander\Events\DispatchableTrait;
 
@@ -19,7 +20,20 @@ class UpdateItemCommandHandler implements CommandHandler
 
         try {
             $item = \Item::where('id', $command->id)
-                ->where('user_id', \Auth::user()->id)->firstOrFail();
+                ->firstOrFail();
+
+
+            if (! ($item->user_id == Auth::user()->id || Auth::user()->isAdmin()))
+            {
+                $result['success'] = false;
+                $result['message'] = trans('phrases.operation_failed');
+
+                return $result;
+
+            }
+
+
+
 
 
             $item->update([
@@ -32,7 +46,8 @@ class UpdateItemCommandHandler implements CommandHandler
                 'location_id' => $command->location_id,
                 'email' => $command->email,
                 'phone' => $command->phone,
-                'seller_name' => $command->seller_name
+                'seller_name' => $command->seller_name,
+                'keywords' => $command->keywords
             ]);
 
             if ($command->multipart_upload) {

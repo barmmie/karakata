@@ -70,6 +70,8 @@ class SocialAuthController extends BaseController
     public function loginWithGoogle()
     {
         $code = Input::get('code');
+        OAuth::setHttpClient('CurlClient');
+
         $googleService = OAuth::consumer('Google');
 
         if (!empty($code)) {

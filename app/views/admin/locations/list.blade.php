@@ -300,40 +300,20 @@
                                 $countrySelectionText.html('No locations were found in ' + text)
                                 $countrySelectionLoader.removeClass('active');
 
-
                             } else {
 
-                                if (response.geonames.length > 0) {
-                                    $.each(response.geonames, function (index, item) {
-                                        jxhr.push(
-                                                $.getJSON('http://api.geonames.org/childrenJSON?username=karakata&geonameId=' + item.geonameId, function (locationResponse) {
-                                                    if (locationResponse.geonames) {
-                                                        locations = $.merge(locations, locationResponse.geonames)
+                                locations = response.geonames;
 
-                                                    }
-                                                })
-                                        );
-                                    })
+                                $countrySelectionLoader.removeClass('active');
+                                if (locations.length > 0) {
+                                    $countrySelectionText.html(locations.length + ' {{trans('phrases.locations_found_in')}} ' + text)
+                                    $countrySelectionButton.removeClass('concealed');
 
-                                    $.when.apply($, jxhr).done(function () {
-                                        $countrySelectionLoader.removeClass('active');
-                                        if (locations.length > 0) {
-                                            $countrySelectionText.html(locations.length + ' {{trans('phrases.locations_found_in')}} ' + text)
-                                            $countrySelectionButton.removeClass('concealed');
-
-                                        } else {
-                                            $countrySelectionText.html('{{trans('phrases.no_locations_found_in')}}' + text)
-
-                                        }
-
-                                    });
                                 } else {
                                     $countrySelectionText.html('{{trans('phrases.no_locations_found_in')}} ' + text)
 
                                 }
-
                             }
-
 
                         }).error(function (status) {
                             $countrySelectionLoader.removeClass('active');

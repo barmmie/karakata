@@ -111,6 +111,12 @@
                         {{Form::textarea('description', null, ['class'=> 'classy-editor'])}}
                     </div>
 
+                    <div class="field">
+                        <label>{{trans('words.keywords')}}</label>
+                        {{Form::text('keywords', null, ['placeholder'=> 'E.g phone, nexus, google', 'id'=>'keywords'])}}
+                        <p>{{trans('phrases.keywords_help_search')}}</p>
+                    </div>
+
                     <div class="two fields">
                         <div class="required ten wide   field">
                             <label for="">{{trans('words.amount')}}</label>

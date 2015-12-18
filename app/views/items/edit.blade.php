@@ -65,7 +65,7 @@
                             {{trans('phrases.posting_as')}}
                             <div class="ui inline dropdown">
                                 {{Form::hidden('type', $item->type)}}
-                                <div class="text">today</div>
+                                <div class="text">{{trans('words.individual')}}</div>
                                 <i class="dropdown icon"></i>
 
                                 <div class="menu">
@@ -91,31 +91,33 @@
 
                     </div>
 
+                    @if(count($item->pictures))
 
                     <div class=" field">
                         <label for="">{{trans('phrases.currently_uploaded_photos')}}</label>
 
                         <div class="ui photos segment">
-                            @if(count($item->pictures))
 
                                 <div class="ui massive horizontal celled list">
                                     @foreach($item->pictures as $picture)
                                         <div class="item">
-                                            <img class="ui tiny bordered image" src="{{$picture->thumbnail_src}}">
+                                            <img class="ui tiny bordered image" src="{{asset($picture->thumbnail_src)}}">
 
                                             <div class="m-t-xs center">
                                                 <a class="ui center aligned removephoto" href=""
-                                                   data-picture-id="{{$picture->id}}"><i class="cancel icon"></i></a>
+                                                   data-picture-id="{{$picture->id}}"><i class="red cancel icon"></i></a>
                                             </div>
                                         </div>
                                     @endforeach
 
                                 </div>
 
-                            @endif
                         </div>
 
+
                     </div>
+                    @endif
+
 
                     <div class="field">
                         <label for="">{{Lang::choice('words.photo', 2)}}</label>
@@ -135,6 +137,14 @@
                     <div class="required field">
                         <label>{{trans('words.description')}}</label>
                         {{Form::textarea('description', $item->description, ['class'=> 'classy-editor'])}}
+                    </div>
+
+
+                    <div class="field">
+                        <label>{{trans('words.keywords')}}</label>
+                        {{Form::text('keywords', null, ['placeholder'=> 'E.g phone, nexus, google', 'id'=>'keywords'])}}
+                        <p>{{trans('phrases.keywords_help_search')}}</p>
+
                     </div>
 
                     <div class="two fields">
@@ -305,7 +315,7 @@
 
             $('.ui.accordion').accordion();
 
-            $('.category .ui.dropdown')
+            $('.category.ui.dropdown')
                     .dropdown({
                         allowCategorySelection: true
                     });

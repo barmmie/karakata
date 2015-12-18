@@ -3,7 +3,7 @@
         <div class="ui fixed padded secondary menu navbar page grid ">
             <a class="item p-r-none m-r-none" href="{{route('pages.homepage')}}">
                 @if(Setting::get('logo_src')!='')
-                    <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+                    <img src="{{asset(Setting::get('logo_src'))}}" class="logo" alt=""/>
                 @else
                     <i class="circular inverted big teal shadowed search icon"></i>
                 @endif

@@ -13,7 +13,7 @@ return array(
     |
     */
 
-    'debug' => false,
+    'debug' => true,
     /*
     |--------------------------------------------------------------------------
     | Application URL
@@ -122,7 +122,7 @@ return array(
         'Artdarek\OAuth\OAuthServiceProvider',
         'Intervention\Image\ImageServiceProvider',
         'Mews\Purifier\PurifierServiceProvider',
-
+	    'GrahamCampbell\Flysystem\FlysystemServiceProvider'
 
     ),
     /*
@@ -194,6 +194,8 @@ return array(
         'Setting' => 'anlutro\LaravelSettings\Facade',
         'Omnipay' => 'Ignited\LaravelOmnipay\Facades\OmnipayFacade',
         'Purifier' => 'Mews\Purifier\Facades\Purifier',
+        'Flysystem' => 'GrahamCampbell\Flysystem\Facades\Flysystem'
+
 
 
     ),

@@ -42,7 +42,7 @@ gulp.task('prepare-envato', ['clean-temp'], function () {
 
 
 gulp.task('prepare-upload', ['prepare-envato'], function () {
-    return gulp.src(['karakata.zip', 'documentation/**/*', 'updates.zip', 'readme_for_updates.txt'], {base: '.'})
+    return gulp.src(['karakata.zip', 'documentation/**/*', 'important_readme_for_updates!!!.txt'], {base: '.'})
         .pipe(zip('karakata_envato.zip'))
         .pipe(gulp.dest('./'))
 });

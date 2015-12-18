@@ -38,4 +38,18 @@ class PicturesController extends \BaseController
         }
     }
 
+	public function uploadLogo()
+	{
+		$image = Image::make(Input::get('data'));
+		$logo_src = "/uploads/logo.jpg";
+		$image->save(public_path($logo_src), 100);
+		Setting::set('logo_src', $logo_src);
+
+		return [
+			'filename' =>  $logo_src,
+			'status' => "success",
+			'url' =>  asset($logo_src)
+		];
+	}
+
 }

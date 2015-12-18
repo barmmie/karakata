@@ -34,7 +34,7 @@
                                             <img src="{{asset($item->mainThumbnail())}}">
                                         </div>
                                         <div class="content">
-                                            <a class="header">{{$item->title}}</a>
+                                            <a href="{{$item->isApproved()? route('items.show', $item->slug):'#'}}" class="header">{{$item->title}}</a>
 
                                             <div class="meta">
                                             <span class="date">
@@ -55,33 +55,6 @@
                                             </div>
                                             <div class="extra">
 
-                                                <a class="ui right floated red tiny button"
-                                                   href="{{route('items.delete', $item->id)}}">
-                                                    <i class="trash icon"></i>
-                                                    {{trans('words.delete')}}
-                                                </a>
-
-                                                <a class="ui right floated yellow tiny button"
-                                                   href="{{route('items.edit', $item->id)}}">
-                                                    <i class="pencil icon"></i>
-
-                                                    {{trans('words.edit')}}
-                                                </a>
-
-                                                @if(Setting::get('allow_premium_payment', '0') == '1'))
-
-                                                <a class="ui right floated animated fade button"
-                                                   href="{{route('items.payment', $item->id)}}">
-                                                    <div class="visible content">
-                                                        <i class="paypal icon"></i>
-                                                        {{trans('phrases.pay_for_premium')}}</div>
-                                                    <div class="hidden content">
-                                                        {{Setting::get('paypal_currency', 'USD')}}{{Setting::get('premium_amount', '10.00')}}
-                                                        for {{Setting::get('premium_days', '40')}} day(s)
-                                                    </div>
-                                                </a>
-
-                                                @endif
                                                 <div class="ui brown tag label">{{Setting::get('currency', '£')}} {{$item->amount}}</div>
                                                 @if($item->isApproved())
                                                     <div class="ui green label">{{trans('words.approved')}}</div>
@@ -94,7 +67,68 @@
                                                 @if($item->isRejected())
                                                     <div class="ui red label">{{trans('words.rejected')}}</div>
                                                 @endif
+
+                                                @if( $item->isPremium())
+                                                    <div class="ui purple label">
+                                                        <i class="inverted circular star icon">
+                                                        </i>
+                                                        {{trans('phrases.premium_until')}} {{\Carbon\Carbon::parse($item->premium_until)->toDayDateTimeString()}}
+                                                    </div>
+                                                @endif
                                             </div>
+                                            <div class="extra">
+
+                                                <a class="ui right floated red tiny button"
+                                                   href="{{route('items.delete', $item->id)}}">
+                                                    <i class="trash icon"></i>
+                                                    {{trans('words.delete')}}
+                                                </a>
+
+                                                <a class="ui right floated yellow tiny button"
+                                                   href="{{route('items.edit', $item->id)}}">
+                                                    <i class="pencil icon"></i>
+
+                                                    {{trans('words.edit')}}
+                                                </a>
+                                                </div>
+                                            @if(! $item->isPremium())
+                                            <div class="extra">
+
+                                                @if(Setting::get('allow_premium_payment', '0') == '1')
+
+                                                <a class="ui right floated animated facebook fade button"
+                                                   href="{{route('items.payment', $item->id)}}">
+                                                    <div class="visible content">
+                                                        <i class="big paypal card icon"></i>
+                                                        {{trans('phrases.pay_for_premium')}}</div>
+                                                    <div class="hidden content">
+                                                        {{Setting::get('paypal_currency', 'USD')}}{{Setting::get('premium_amount', '10.00')}}
+                                                        for {{Setting::get('premium_days', '40')}} day(s)
+                                                    </div>
+                                                </a>
+
+                                                @endif
+
+                                                @if(Setting::get('allow_stripe_premium_payment', '0') == '1')
+
+                                                    <a class="ui right floated twitter animated fade button"
+                                                       href="{{route('items.stripe_form', $item->id)}}">
+                                                        <div class="visible content">
+                                                            <i class="big stripe icon"></i>
+                                                            {{trans('phrases.pay_for_premium')}}</div>
+                                                        <div class="hidden content">
+                                                            {{Setting::get('paypal_currency', 'USD')}}{{Setting::get('premium_amount', '10.00')}}
+                                                            for {{Setting::get('premium_days', '40')}} day(s)
+                                                        </div>
+                                                    </a>
+
+                                                @endif
+                                            </div>
+                                            @endif
+
+
+
+
                                         </div>
                                     </div>
                                 @endforeach

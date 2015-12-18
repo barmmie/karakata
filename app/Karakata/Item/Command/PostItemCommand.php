@@ -67,6 +67,11 @@ class PostItemCommand
     public $uploaded_files;
 
     /**
+     * @var string
+     */
+    public $keywords;
+
+    /**
      * @param string title
      * @param string description
      * @param string type
@@ -94,7 +99,8 @@ class PostItemCommand
         $seller_name,
         $pictures_id = [],
         $multipart_upload = false,
-        $files = null
+        $files = null,
+        $keywords
     ) {
 
         $this->title = $title;
@@ -110,6 +116,8 @@ class PostItemCommand
         $this->seller_name = $seller_name;
         $this->pictures_id = $pictures_id;
         $this->uploaded_files = $files;
+        $this->keywords = $keywords;
+
     }
 
     public function rules()

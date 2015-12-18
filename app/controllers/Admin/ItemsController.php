@@ -29,6 +29,31 @@ class ItemsController extends \BaseController
 
     }
 
+    public function edit($id){
+        $item = Item::where('id', $id)
+            ->with('pictures')
+            ->firstOrFail();
+
+        return View::make('admin.items.edit', compact('item'));
+    }
+
+    public function update($id){
+        $result = $this->execute('Karakata\Item\Command\UpdateItemCommand', Input::all() + ['id' => $id]);
+
+        if ($result['success']) {
+            $item = $result['payload'];
+
+            flashSuccess($result['message'], '');
+
+            return Redirect::route('admin.items.show', $id);
+        } else {
+            flashError($result['message']);
+
+            return Redirect::back()->withInput();
+
+        }
+    }
+
     public function index($status = null)
     {
         $items = Item::orderBy('created_at', 'desc');
@@ -97,6 +122,20 @@ class ItemsController extends \BaseController
 
         } catch (\Exception $e) {
             flashError('Item could not be rejected', '');
+        }
+
+        return Redirect::back();
+    }
+
+    public function markPremium($id)
+    {
+        $item = Item::findOrFail($id);
+        try {
+            $item->markAsPremium();
+            flashSuccess('Item has been marked as premium', '');
+
+        } catch (\Exception $e) {
+            flashError('Item could not be marked as premium', '');
         }
 
         return Redirect::back();

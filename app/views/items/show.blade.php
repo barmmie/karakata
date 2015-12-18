@@ -11,8 +11,8 @@
     <meta property="og:url" content="{{route('items.show', $item->slug)}}"/>
     <meta property="og:image" content="{{asset($item->mainThumbnail())}}"/>
     <meta property="twitter:image" content="{{asset($item->mainThumbnail())}}"/>
-    <meta property="og:description" content="{{str_limit($item->description, 100)}}"/>
-    <meta property="twitter:description" content="{{str_limit($item->description, 100)}}"/>
+    <meta property="og:description" content="{{str_limit(strip_tags($item->description), 100)}}"/>
+    <meta property="twitter:description" content="{{str_limit(strip_tags($item->description), 100)}}"/>
 @endsection
 
 @section('styles')
@@ -547,10 +547,10 @@
 
 
         new Share(".share-button", {
-            title: "{{trans('phrases.share_on_social')}} - {{$item->title}}}",
+            title: "{{$item->title}}",
             networks: {
                 facebook: {
-                    app_id: "602752456409826"
+                    app_id: "{{Setting::get('facebook_app_id', 602752456409826)}}"
                 }
             }
         });

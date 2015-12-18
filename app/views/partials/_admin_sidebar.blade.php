@@ -1,7 +1,7 @@
 
 <div class="mast item">
     @if(Setting::get('logo_src')!='')
-        <img src="{{Setting::get('logo_src')}}" class="logo" alt=""/>
+        <img src="{{asset(Setting::get('logo_src'))}}" class="logo" alt=""/>
         <a href="{{route('admin.dashboard')}}">
             <b>
                 {{Setting::get('site_name', 'Karakata')}}</b>
@@ -20,7 +20,7 @@
 <a class="item" target="_blank" href="{{route('pages.homepage')}}">
     <i class="sign out icon"></i>{{trans('phrases.view_frontend')}}
 </a>
-<a class="item" target="_blank" href="{{route('admin.dashboard')}}">
+<a class="item" href="{{route('admin.dashboard')}}">
     <i class="dashboard icon"></i> {{trans('phrases.admin_dashboard')}}
 </a>
 

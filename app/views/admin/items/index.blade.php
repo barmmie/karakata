@@ -70,6 +70,15 @@
                                     <img src="{{asset($item->mainThumbnail())}}">
                                 </div>
                                 <div class="content">
+                                    @if($item->isPremium())
+
+                                        <div class="trap ribbon-wrap fl-right">
+                                            <div class="trap-ribbon">
+                                                <a href="#"><i class="inverted circular star icon"></i> Premium </a>
+                                            </div>
+                                        </div>
+
+                                    @endif
 
                                     <a class="header"
                                        href="{{route('admin.items.show', $item->id)}}">{{$item->title}}</a>
@@ -134,6 +143,15 @@
                                                 <i class="check icon"></i>
 
                                                 {{trans('words.approve')}}
+                                            </a>
+                                        @endif
+
+                                        @if(!$item->isPremium())
+                                            <a href="{{route('admin.items.mark_premium', $item->id)}}"
+                                               class="ui right floated tiny purple button">
+                                                <i class="star icon"></i>
+
+                                                {{trans('phrases.mark_as_premium')}}
                                             </a>
                                         @endif
                                     </div>

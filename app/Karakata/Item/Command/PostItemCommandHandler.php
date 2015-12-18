@@ -21,7 +21,7 @@ class PostItemCommandHandler implements CommandHandler
         try {
             $item = \Item::post($command->category_id, $command->type, $command->title, $command->description,
                 $command->amount, $command->negotiable, $command->location_id, $command->email, $command->phone,
-                $command->seller_name);
+                $command->seller_name,$command->keywords);
 
             if ($command->multipart_upload) {
 

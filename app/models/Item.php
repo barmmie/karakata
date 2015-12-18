@@ -50,6 +50,12 @@ class Item extends \Eloquent
 
         });
 
+        static::deleting(function ($item) {
+
+            foreach($item->pictures as $picture) {
+                $picture->delete();
+            }
+        });
 
     }
 
@@ -82,7 +88,8 @@ class Item extends \Eloquent
         $location_id,
         $email,
         $phone,
-        $sellerName
+        $sellerName,
+        $keywords
     ) {
         $instance = static::create(
             [
@@ -96,6 +103,7 @@ class Item extends \Eloquent
                 'email' => $email,
                 'phone' => $phone,
                 'seller_name' => $sellerName,
+                'keywords' => $keywords,
                 'status' => self::PENDING_STATUS,
                 'user_id' => Auth::user()->id
             ]
@@ -178,7 +186,8 @@ class Item extends \Eloquent
         $searchKey = removeCommonWords(strtolower($searchKey));
         $searchKeys = explode(' ', $searchKey);
 
-        $query = $query->where('title', 'LIKE', "%{$searchKey}%");
+        $query = $query->where('title', 'LIKE', "%{$searchKey}%")
+                        ->orWhere('keywords', 'LIKE', "%{$searchKey}%");
 
         return $query->orderBy('created_at', 'desc');
     }
@@ -268,7 +277,7 @@ class Item extends \Eloquent
 
     public function isPremium()
     {
-        return (!is_null($this->premium_until)) && (Carbon::parse($this->premium_until)->diffInDays() < Setting::get('premium_days',
+        return (bool)(!is_null($this->premium_until)) && (Carbon::parse($this->premium_until)->diffInDays() < Setting::get('premium_days',
                 40));
     }
 

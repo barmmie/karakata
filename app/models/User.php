@@ -199,4 +199,40 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
         return $is_social;
     }
+
+    public function updateStripeCustomer($customer)
+    {
+        $this->is_stripe_customer = true;
+        $this->expiry_month = $customer->sources->data[0]->exp_month;
+        $this->expiry_year = $customer->sources->data[0]->exp_year;
+        $this->last_four = $customer->sources->data[0]->last4;
+        $this->card_type = $customer->sources->data[0]->brand;
+        $this->stripe_customer_id = $customer->id;
+
+        $this->save();
+    }
+
+	public function cardImage(){
+		switch ($this->card_type) {
+			case 'Mastercard':
+				$image_url = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/MC.png';
+				break;
+			case 'Visa':
+				$image_url = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/Visa.png';
+				break;
+			case 'Discovery':
+				$image_url = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/Discover.png';
+				break;
+			case 'Amex':
+				$image_url = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/Amex.png';
+				break;
+			default:
+				$image_url = 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/169963/MC.png';
+				break;
+		}
+
+		return $image_url;
+
+
+	}
 }

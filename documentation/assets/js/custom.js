@@ -1,7 +1,7 @@
 $(function() {
 
     var hash = window.location.hash.substr(1)
-    var available_partials = ['change_log', 'faq', 'credits', 'feature', 'configure_locations', 'configure_categories', 'configure_app_settings', 'paypal_settings', 'banner_settings', 'social_settings','configure_email']
+    var available_partials = ['change_log', 'faq', 'credits', 'feature', 'configure_locations', 'configure_categories', 'configure_app_settings', 'paypal_settings', 'banner_settings', 'social_settings','configure_email','storage_settings','stripe_settings']
     var loadPartial = function(hash, callback) {
         var scallback = callback || $.noop()
         if(available_partials.indexOf(hash) > -1) {

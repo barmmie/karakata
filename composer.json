@@ -18,7 +18,12 @@
     "omnipay/common": "~2.3.0",
     "ignited/laravel-omnipay": "1.*",
     "omnipay/paypal": "*",
+    "stripe/stripe-php": "*",
+    "graham-campbell/flysystem": "1.0.0",
+    "league/flysystem-aws-s3-v2": "~1.0",
+    "league/flysystem-dropbox": "~1.0",
     "vlucas/phpdotenv": "^2.0",
+    "league/flysystem-rackspace": "~1.0",
     "mews/purifier": "dev-master-l4"
   },
   "require-dev": {

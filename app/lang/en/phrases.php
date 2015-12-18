@@ -170,6 +170,7 @@ return [
     'confirmation_email_sent' => 'A confirmation email has been sent to :email. You need to click the link in the message to activate your account',
     'update_successful' => 'Update successfully',
     'operation_failed' => 'Operation failed',
+    'operation_successful' => 'Operation was successful',
     'password_update_successful' => 'Password update successful',
     'verification_successful' => 'Verification successful',
     'invalid_verification_link' => 'Invalid Verification link',
@@ -192,6 +193,13 @@ return [
     'admin_email_from' => 'Mail sent from app would use this as sender name',
     'confirmation_email' => 'Confirmation email',
     'item_received_message' => 'New message on one of your items',
-    'item_was_posted' => 'Your item is being reviewed'
+    'item_was_posted' => 'Your item is being reviewed',
+    'mark_as_premium' => 'Mark as premium',
+    'keywords_help_search' => 'Enter a comma seperated list of keywoards related to this item',
+    'processed_securely_by' => 'Processed securely by',
+    'pay_with_new_card' => 'Pay with new card',
+    'pay_with_this' => 'Pay with this',
+    'existing_card_on_file' => 'You have this existing card on file',
+	'premium_until' => 'Premium until'
 
 ];

@@ -69,6 +69,10 @@ class UpdateItemCommand
      * @var string
      */
     public $uploaded_files;
+    /**
+     * @var string
+     */
+    public $keywords;
 
     /**
      * @param string title
@@ -99,7 +103,8 @@ class UpdateItemCommand
         $seller_name,
         $pictures_id = [],
         $multipart_upload = false,
-        $files = null
+        $files = null,
+        $keywords
     ) {
         $this->id = $id;
         $this->title = $title;
@@ -115,6 +120,8 @@ class UpdateItemCommand
         $this->seller_name = $seller_name;
         $this->pictures_id = $pictures_id;
         $this->uploaded_files = $files;
+        $this->keywords = $keywords;
+
     }
 
     public function rules()

@@ -5,12 +5,14 @@ View::composers([
         'partials._search_cta',
         'categories.show',
         'items.create',
+        'admin.items.edit',
         'items.edit',
         'items.search_result'
     ],
     'Karakata\Composers\CategoryComposer' => [
         'items.create',
         'items.edit',
+        'admin.items.edit',
         'admin.categories.list',
         'items.search_result'
     ],

@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/alertify.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/alertify-js/build/css/themes/semantic.min.css')}}"/>
     @yield('styles')
-    <link rel="stylesheet" href="{{asset('assets/css/helper.css')}}"/>
+    <link rel="stylesheet" href="{{asset('assets/css/style.css')}}"/>
     <link rel="stylesheet" href="{{asset('assets/css/admin_style.css')}}"/>
 
 
@@ -83,9 +83,9 @@
 
 <script src="{{asset('assets/js/admin_script.js')}}"></script>
 
-@yield('scripts')
 
 <script type="text/javascript">
+    $('.ui.dropdown').dropdown();
 
     $('.message .close')
             .on('click', function () {
@@ -100,6 +100,8 @@
         return confirm("{{trans('phrases.confirm_delete')}}");
     })
 </script>
+@yield('scripts')
+
 
 
 </body>

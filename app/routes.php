@@ -46,6 +46,9 @@ Route::group(['before' => 'auth'], function () {
     Route::get('items/{id}/delete', ['as' => 'items.delete', 'uses' => 'ItemsController@delete']);
     Route::get('items/{id}/payment', ['as' => 'items.payment', 'uses' => 'PaymentController@displayItemReceipt']);
     Route::post('items/{id}/payment', ['as' => 'items.post_payment', 'uses' => 'PaymentController@postPayment']);
+    Route::get('items/{id}/stripe_form', ['as' => 'items.stripe_form', 'uses' => 'PaymentController@showStripeForm']);
+    Route::get('items/{id}/stripe_existing', ['as' => 'items.stripe_existing', 'uses' => 'PaymentController@processExistingStripePayment']);
+    Route::post('items/{id}/stripe_form', ['as' => 'items.process_stripe_form', 'uses' => 'PaymentController@processStripeForm']);
 
     Route::get('items/{id}/payment_success', ['as' => 'payments.success', 'uses' => 'PaymentController@success']);
     Route::get('items/{id}/payment_cancel', ['as' => 'payments.cancel', 'uses' => 'PaymentController@cancel']);
@@ -68,6 +71,7 @@ Route::group(['before' => 'auth'], function () {
     Route::post('password', ['as' => 'users.update_password', 'uses' => 'UsersController@updatePassword']);
 
     Route::post('pictures/store', ['as' => 'pictures.store', 'uses' => 'PicturesController@store']);
+    Route::post('pictures/uploadLogo', ['as' => 'pictures.uploadLogo', 'uses' => 'PicturesController@uploadLogo']);
     Route::delete('pictures', ['as' => 'pictures.destroy', 'uses' => 'PicturesController@destroy']);
 
 });
@@ -89,9 +93,12 @@ Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'before' => 'auth|adm
 
     Route::get('items/{status?}', ['as' => 'admin.items.index', 'uses' => 'ItemsController@index']);
     Route::get('items/{id}/show', ['as' => 'admin.items.show', 'uses' => 'ItemsController@show']);
+    Route::get('items/{id}/edit', ['as' => 'admin.items.edit', 'uses' => 'ItemsController@edit']);
+    Route::post('items/{id}/update', ['as' => 'admin.items.update', 'uses' => 'ItemsController@update']);
     Route::get('items/{id}/approve', ['as' => 'admin.items.approve', 'uses' => 'ItemsController@approve']);
     Route::get('items/{id}/reject', ['as' => 'admin.items.reject', 'uses' => 'ItemsController@reject']);
     Route::get('items/{id}/delete', ['as' => 'admin.items.delete', 'uses' => 'ItemsController@delete']);
+    Route::get('items/{id}/markPremium', ['as' => 'admin.items.mark_premium', 'uses' => 'ItemsController@markPremium']);
     Route::get('reports/{id}/delete', ['as' => 'admin.reports.delete', 'uses' => 'ReportsController@delete']);
     Route::get('reports/{id}/reviewed',
         ['as' => 'admin.reports.reviewed', 'uses' => 'ReportsController@markAsReviewed']);
@@ -121,4 +128,9 @@ Route::get('feed/{type?}', ['as' => 'pages.feed', 'uses' => 'PageController@feed
 
 Route::get('social/facebook', ['as' => 'social.facebook', 'uses' => 'SocialAuthController@loginWithFacebook']);
 Route::get('social/google', ['as' => 'social.google', 'uses' => 'SocialAuthController@loginWithGoogle']);
+
+Route::get('test', function(){
+    $item = Item::find(2);
+    dd(phpinfo());
+});
 

@@ -59,5 +59,6 @@ return [
     'faq' => 'Faq',
     'month' => 'Month',
     'year' => 'Year',
-    'reset' => 'Reset'
+    'reset' => 'Reset',
+    'keywords' => 'Keywords'
 ];
