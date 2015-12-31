@@ -10,6 +10,7 @@ class Item extends \Eloquent
 
     const PENDING_STATUS = 1, REJECTED_STATUS = 2, APPROVED_STATUS = 3, SOLD_STATUS = 4;
     protected $softDeletes = true;
+
     protected $fillable = [
         'title',
         'description',
@@ -51,10 +52,7 @@ class Item extends \Eloquent
         });
 
         static::deleting(function ($item) {
-
-            foreach($item->pictures as $picture) {
-                $picture->delete();
-            }
+          $item->pictures()->delete();
         });
 
     }

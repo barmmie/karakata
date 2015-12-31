@@ -200,6 +200,12 @@ return [
     'pay_with_new_card' => 'Pay with new card',
     'pay_with_this' => 'Pay with this',
     'existing_card_on_file' => 'You have this existing card on file',
-	'premium_until' => 'Premium until'
+	'premium_until' => 'Premium until',
+	'add_review' => 'Add review',
+	'leave_review' => 'Leave a review',
+	'login_to_review' => 'You need to login to be able to leave a review',
+	'user_has_no_reviews' => 'No reviews have been added for this user',
+	'already_reviewed' => 'You already reviewed this user',
+	'cant_self_review' => 'You can not review your self'
 
 ];

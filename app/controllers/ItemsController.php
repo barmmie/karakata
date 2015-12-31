@@ -75,7 +75,7 @@ class ItemsController extends BaseController
     public function show($slug)
     {
         $item = Item::approved()->whereSlug($slug)
-            ->with('category', 'location', 'pictures', 'owner', 'favoriters')
+            ->with('category', 'location', 'pictures', 'owner.reviews', 'favoriters')
             ->firstOrFail();
 
         return View::make('items.show', compact('item'));

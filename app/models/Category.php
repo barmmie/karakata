@@ -20,6 +20,10 @@ class Category extends \Kalnoy\Nestedset\Node
                 ->update(['slug' => $category->id . '-' . Str::slug($category->title, '-')]);
         });
 
+	    static::deleting(function ($loc) {
+		    $loc->items()->delete();
+	    });
+
     }
 
     public static function fetchTree($fetchItemsCount = false)

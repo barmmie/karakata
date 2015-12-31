@@ -60,5 +60,7 @@ return [
     'month' => 'Month',
     'year' => 'Year',
     'reset' => 'Reset',
-    'keywords' => 'Keywords'
+    'keywords' => 'Keywords',
+	'reviews' => 'Reviews',
+	'rating' => 'Rating'
 ];

@@ -16,17 +16,32 @@
                             <img src="{{gravatar($user->email, 200)}}">
                         </div>
                         <div class="content">
-                            <a class="header">{{$user->full_name}}</a>
+                            <a href="{{route('users.show', $user->id)}}" class="header">{{$user->full_name}}</a>
 
                             <div class="meta">
                                 <span class="date">{{trans('phrases.joined_in')}} {{$user->created_at->format('M, j Y')}}</span>
                             </div>
 
                         </div>
+                        <div class="content">
+                            <div class="p-b-sm">
+                                <div class="ui star rating myrating" data-rating="{{(int)$user->rating()}}" max-rating="5"></div>
+                                <p>
+                                    {{trans('words.rating')}}: {{$user->rating()}} - <a href="{{route('users.reviews', $user->id)}}">{{count($user->reviews)}} {{trans('words.reviews')}}</a>
+                                </p>
+
+                            </div>
+                            <a class="ui button" href="{{route('users.reviews', $user->id)}}">{{trans('phrases.leave_review')}}</a>
+
+                        </div>
+
                         <div class="extra content">
                             <a>
                                 <i class="file icon"></i>
                                 {{$item_count}} {{Lang::choice('words.item', $item_count)}}
+                            </a>
+                            <a>
+
                             </a>
                         </div>
                     </div>
@@ -78,13 +93,12 @@
 
                     </div>
 
-
-                    @if($item_count > 10)
+                        @if($items->getTotal() > 10)
                         <div class="ui segment">
                             {{$items->links()}}
 
                         </div>
-                    @endif
+                            @endif
                 </div>
             </div>
         </div>
@@ -100,6 +114,11 @@
         });
 
         $('.ui.form').form();
+
+        $('.ui.myrating').rating({
+            maxRating: 5,
+            interactive: false
+        });
 
 
     </script>

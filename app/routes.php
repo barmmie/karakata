@@ -29,6 +29,8 @@ Route::get('items/search', ['as' => 'pages.terms', 'uses' => 'ItemsController@se
 Route::get('register/confirm/{token}', ['as' => 'users.confirm', 'uses' => 'UsersController@confirm']);
 
 Route::get('users/{id}/items', ['as' => 'users.items', 'uses' => 'UsersController@show']);
+Route::get('users/{id}/reviews', ['as' => 'users.reviews', 'uses' => 'UsersController@reviews']);
+Route::post('users/{id}/reviews', ['as' => 'users.post_review', 'uses' => 'UsersController@postReviews']);
 
 Route::resource('users', 'UsersController');
 

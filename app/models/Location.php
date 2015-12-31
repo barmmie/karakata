@@ -4,6 +4,14 @@ class Location extends \Eloquent
 {
     protected $fillable = ['name', 'latitude', 'longitude', 'geonameid'];
 
+	public static function boot()
+	{
+		static::deleting(function ($loc) {
+
+				$loc->items()->delete();
+		});
+	}
+
     public static function bulkInsert($locations)
     {
         $now = Carbon\Carbon::now();

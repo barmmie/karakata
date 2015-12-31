@@ -150,5 +150,47 @@ class UsersController extends \BaseController
         return Redirect::route('pages.homepage');
     }
 
+	public function reviews( $id ) {
+		$user = User::with('reviews.author')->findOrFail($id);
+
+		$reviews = $user->reviews()->paginate(10);
+
+		return View::make('users.reviews', compact('user', 'reviews'));
+
+	}
+
+	public function postReviews( $id ) {
+		$validator = \Validator::make(Input::all(), [
+			'rating' => 'required',
+			'comment' => ''
+		]);
+
+		if ($validator->fails()) {
+			return Redirect::back()
+						->withErrors($validator->getMessageBag());
+		}
+
+		if(Auth::id() == $id) {
+			flashError(trans('phrases.operation_failed'),trans('phrases.cant_self_review'));
+			return Redirect::back();
+		}
+		$user = User::findOrFail($id);
+		$review  = new Review;
+		$review->rating = Input::get('rating');
+		$review->comment = Input::get('comment');
+		$review->author_id = Auth::id();
+		$review->user_id = $id;
+		if($review->save()) {
+			flashSuccess(trans('phrases.operation_successful'), trans('phrases.added_successfully'));
+		} else {
+			flashError(trans('phrases.operation_failed'), trans('phrases.error_occurred'));
+
+		}
+
+		return Redirect::back();
+
+
+	}
+
 
 }

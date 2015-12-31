@@ -235,4 +235,34 @@ class User extends Eloquent implements UserInterface, RemindableInterface
 
 
 	}
+
+	public function rating()
+	{
+		$reviews = $this->reviews();
+		$total_stars = $reviews->sum('rating');
+		$total_review_count = $reviews->count();
+		try {
+			$average_rating = $total_stars/ $total_review_count;
+
+		} catch(Exception $e) {
+			$average_rating = 0;
+		}
+
+		return $average_rating;
+
+	}
+
+	public function reviews()
+	{
+		return $this->hasMany('Review', 'user_id');
+	}
+
+	public function authored_reviews()
+	{
+		return $this->hasMany('Review', 'author_id');
+	}
+
+	public function reviewed($userid) {
+		return in_array($userid, $this->authored_reviews()->lists('user_id'));
+	}
 }

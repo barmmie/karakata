@@ -289,6 +289,17 @@
 
 
                     </div>
+                    <div class="ui segment">
+                            <div class="p-b-sm">
+                                <div class="ui star rating myrating" data-rating="{{(int)$item->owner->rating()}}" max-rating="5"></div>
+                                <p>
+                                    {{trans('words.rating')}}: {{$item->owner->rating()}} - <a href="{{route('users.reviews', $item->owner->id)}}">{{count($item->owner->reviews)}} {{trans('words.reviews')}}</a>
+                                </p>
+
+                            </div>
+                            <a class="ui button" href="{{route('users.reviews', $item->owner->id)}}">{{trans('phrases.leave_review')}}</a>
+
+                    </div>
                 </div>
 
 
@@ -553,6 +564,11 @@
                     app_id: "{{Setting::get('facebook_app_id', 602752456409826)}}"
                 }
             }
+        });
+
+        $('.ui.myrating').rating({
+            maxRating: 5,
+            interactive: false
         });
 
 
