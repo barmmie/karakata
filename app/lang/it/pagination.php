@@ -1,7 +1,7 @@
 <?php
 
 return [
-	'previous' => '& laquo ; precedente',
+	'previous' => '& laquo ; Precedente',
 	'next' => 'Successivo & raquo ;',
 
 ];
