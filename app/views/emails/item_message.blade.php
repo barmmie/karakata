@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>New message received - {{Setting::get('site_name')}}</title>
+    <title>{{trans('phrases.new_message_received')}} - {{Setting::get('site_name')}}</title>
 
 
     <style type="text/css">
@@ -105,7 +105,7 @@
                         <td class="content-wrap"
                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;"
                             valign="top">
-                            <meta itemprop="name" content="Confirm Email"
+                            <meta itemprop="name" content="{{trans('phrases.new_message_received')}}"
                                   style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"/>
                             <table width="100%" cellpadding="0" cellspacing="0"
                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -113,7 +113,7 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        You received a message on your item - {{$posted_message->item->title}}
+                                        {{trans('phrases.you_received_message')}} - {{$posted_message->item->title}}
 
                                     </td>
                                 </tr>
@@ -125,7 +125,7 @@
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
 
-                                        {{$posted_message->item->content}}
+                                        {{$posted_message->content}}
 
                                     </td>
                                 </tr>
@@ -139,8 +139,7 @@
                                         valign="top">
                                         <a href="{{route('items.show', $posted_message->item->slug)}}"
                                            class="btn-primary" itemprop="url"
-                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">View
-                                            the item
+                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">{{trans('phrases.view_item')}}
                                         </a>
                                     </td>
                                 </tr>

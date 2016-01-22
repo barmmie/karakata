@@ -44,5 +44,11 @@ class EmailNotifier extends EventListener
         }
     }
 
+	public function whenItemWasReviewed($itemWasReviewed)
+    {
+            $this->appMailer->sendMail($itemWasReviewed->review->user->email, 'emails.new_review', ['review' => $itemWasReviewed->review],
+                trans('phrases.item_was_reviewed'));
+    }
+
 
 }

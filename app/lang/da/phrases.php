@@ -55,7 +55,7 @@ return [
 	'send_a_message' => 'Send en besked',
 	'give_your_feedback' => 'Din feedback',
 	'consider_modify_filter' => 'Overveje at ændre dine filtre måske?',
-	'search_no_results' => 'Søg efter <strong> :query </ strong> gav noget resultat .',
+	'search_no_results' => 'Søg efter <strong> :query </strong> gav noget resultat .',
 	'choose_a_category' => 'Vælg en kategori',
 	'ad_type' => 'annoncetype',
 	'posting_as' => 'Jeg bogføring som',

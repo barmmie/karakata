@@ -14,11 +14,6 @@ class CategoryTableSeeder extends Seeder
     {
         DB::table('categories')->delete();
 
-        NestedSet::createRoot('categories', array(
-            'title' => 'Root',
-        ));
-
-
         $cat_array = [
             'mobile | Mobile Phones - Tablets' => [
                 'mobile | Phones - Mobile Phones |moa',

@@ -8,6 +8,9 @@
 
 class Review extends \Eloquent {
 
+
+	use \Laracasts\Commander\Events\EventGenerator;
+
 	public function author()
 	{
 		return $this->belongsTo('User', 'author_id');

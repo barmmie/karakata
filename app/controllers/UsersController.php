@@ -2,6 +2,7 @@
 
 class UsersController extends \BaseController
 {
+	use \Laracasts\Commander\Events\DispatchableTrait;
 
     /**
      * Display a listing of the resource.
@@ -181,6 +182,10 @@ class UsersController extends \BaseController
 		$review->author_id = Auth::id();
 		$review->user_id = $id;
 		if($review->save()) {
+
+			$review->raise(new \Karakata\Item\Event\ItemWasReviewed($review));
+			$this->dispatchEventsFor($review);
+
 			flashSuccess(trans('phrases.operation_successful'), trans('phrases.added_successfully'));
 		} else {
 			flashError(trans('phrases.operation_failed'), trans('phrases.error_occurred'));

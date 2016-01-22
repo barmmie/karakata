@@ -63,7 +63,7 @@ return array(
     |
     */
 
-    'encryption' => 'ssl',
+    'encryption' => 'tls',
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username

@@ -350,7 +350,7 @@
                             <div class="field">
                                 <label for="">Select email sending type/</label>
                                 {{Form::select('mail_driver', ['mail' => 'PHP Mail', 'smtp' => 'SMTP Mail'], Setting::get('mail_driver', 'mail'), ['class' => 'ui dropdown'])}}
-                                <p>Choose smpt for mailgun/mandrill or other smtp</p>
+                                <p>Choose smtp for mailgun/mandrill or other smtp</p>
                             </div>
                         </div>
 
@@ -360,12 +360,12 @@
                         <div class="two fields">
                             <div class="field">
                                 <label for="">{{trans('phrases.admin_email')}}</label>
-                                {{Form::text('admin_email', Setting::get('admin_email'))}}
+                                {{Form::text('admin_email', Setting::get('admin_email'), ['placeholder' => 'e.g noreply@devcyber.com'])}}
                                 <p><small>{{trans('phrases.admin_email_to_send')}}</small></p>
                             </div>
                             <div class="field">
                                 <label for="">{{trans('phrases.email_from')}}</label>
-                                {{Form::text('email_from', Setting::get('email_from'))}}
+                                {{Form::text('admin_email_from', Setting::get('admin_email_from'), ['placeholder' => 'e.g Support Team'])}}
                                 <p><small>{{trans('phrases.admin_email_from')}}</small></p>
 
                             </div>

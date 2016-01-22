@@ -5,7 +5,7 @@
 <head>
     <meta name="viewport" content="width=device-width"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
-    <title>{{trans('phrases.reset_password')}} - {{Setting::get('site_name')}}</title>
+    <title>{{trans('phrases.item_was_reviewed')}} - {{Setting::get('site_name')}}</title>
 
 
     <style type="text/css">
@@ -105,7 +105,7 @@
                         <td class="content-wrap"
                             style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;"
                             valign="top">
-                            <meta itemprop="name" content="{{trans('phrases.reset_password')}}"
+                            <meta itemprop="name" content="{{trans('phrases.item_was_reviewed')}}"
                                   style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"/>
                             <table width="100%" cellpadding="0" cellspacing="0"
                                    style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
@@ -113,27 +113,34 @@
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        {{trans('phrases.reset_password_instructions')}}
+                                        {{trans('phrases.item_was_reviewed')}} - {{$review->rating}} stars
 
                                     </td>
+                                </tr>
+                                <tr>
+                                    <hr/>
                                 </tr>
                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                     <td class="content-block"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                       {{trans('phrases.link_expiration')}} {{ Config::get('auth.reminder.expire', 60) }} {{trans('phrases.minutes')}}.
+
+                                        {{$review->comment}}
 
                                     </td>
+                                </tr>
+                                <tr>
+                                    <hr/>
                                 </tr>
                                 <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                                     <td class="content-block" itemprop="handler" itemscope
                                         itemtype="http://schema.org/HttpActionHandler"
                                         style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;"
                                         valign="top">
-                                        <a href=" {{ URL::to('password/reset', array($token)) }}"
+                                        <a href="{{route('users.items', $review->user->id)}}"
                                            class="btn-primary" itemprop="url"
-                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">
-                                            {{trans('phrases.reset_password')}}
+                                           style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; color: #FFF; text-decoration: none; line-height: 2em; font-weight: bold; text-align: center; cursor: pointer; display: inline-block; border-radius: 5px; text-transform: capitalize; background-color: #348eda; margin: 0; border-color: #348eda; border-style: solid; border-width: 10px 20px;">View
+                                            the item
                                         </a>
                                     </td>
                                 </tr>
@@ -155,7 +162,7 @@
                         <tr style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">
                             <td class="aligncenter content-block"
                                 style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;"
-                                align="center" valign="top"><a href="{{route('pages.homepage')}}"
+                                align="center" valign="top">Follow <a href="{{route('pages.homepage')}}"
                                                                       style="font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; color: #999; text-decoration: underline; margin: 0;">{{Setting::get('site_name')}}</a>
                                 .
                             </td>
@@ -171,18 +178,3 @@
 </body>
 </html>
 
-
-<!DOCTYPE html>
-<html lang="en-US">
-<head>
-    <meta charset="utf-8">
-</head>
-<body>
-<h2></h2>
-
-<div>
-    .<br/>
-
-</div>
-</body>
-</html>

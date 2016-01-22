@@ -195,7 +195,7 @@ return [
     'item_received_message' => 'New message on one of your items',
     'item_was_posted' => 'Your item is being reviewed',
     'mark_as_premium' => 'Mark as premium',
-    'keywords_help_search' => 'Enter a comma seperated list of keywoards related to this item',
+    'keywords_help_search' => 'Enter a comma seperated list of keywords related to this item',
     'processed_securely_by' => 'Processed securely by',
     'pay_with_new_card' => 'Pay with new card',
     'pay_with_this' => 'Pay with this',
@@ -206,6 +206,20 @@ return [
 	'login_to_review' => 'You need to login to be able to leave a review',
 	'user_has_no_reviews' => 'No reviews have been added for this user',
 	'already_reviewed' => 'You already reviewed this user',
-	'cant_self_review' => 'You can not review your self'
+	'cant_self_review' => 'You can not review your self',
+	'thanks_for_signing_up' => 'Thanks for signing up on ',
+	'click_below_to_confirm' => 'Please confirm your email address by clicking the link below.',
+	'confirm_email_address' => 'Confirm email address',
+	'reset_password_instructions' => 'We received a request to reset y0ur password, if this request did not originate
+                                        from you ignore this message and know your account is secure',
+	'link_expiration' => ' This link will expire in',
+	'minutes' => 'Minutes',
+	'new_message_received' => 'New message received',
+	'you_received_message' => 'You received a message on this item',
+	'view_item' => 'View the item',
+	'new_item_posted' => 'Your new item posted',
+	'confirm_email' => 'Confirm email',
+	'item_was_reviewed' => 'Your have received a new review',
+
 
 ];
