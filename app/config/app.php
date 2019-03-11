@@ -74,7 +74,7 @@ return array(
     */
 
     'key' => '4yXGRSsnZY1zoxio7qInOUqXqdETJXXQ',
-    'cipher' => MCRYPT_RIJNDAEL_128,
+    'cipher' => 'AES-256-CBC',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
