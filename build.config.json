@@ -1,0 +1,20 @@
+{
+  "build_dir": "build",
+  "vendor_files": [
+    "app/**/*",
+    "assets/**/*",
+    "bootstrap/**/*",
+    "images/**/*",
+    "uploads/**/*",
+    "vendor/**/*",
+    ".env",
+    "artisan",
+    ".htaccess",
+    "index.php"
+  ],
+  "zip_files": [
+    "karakata/**/*"
+  ],
+  "assets": [
+  ]
+}

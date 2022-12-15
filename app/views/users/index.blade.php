@@ -1,0 +1,1 @@
+/vagrant/apps/Karakatad/app/views/users/index.blade.php

@@ -1,0 +1,1 @@
+/vagrant/apps/Karakatad/app/views/messages/create.blade.php

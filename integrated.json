@@ -1,0 +1,8 @@
+{
+  "baseUrl": "http://localhost:8000",
+  "pdo": {
+    "connection": "mysql:host=localhost;dbname=enclassified",
+    "username": "root",
+    "password": "root"
+  }
+}

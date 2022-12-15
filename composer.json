@@ -1,0 +1,72 @@
+{
+  "name": "laravel/laravel",
+  "description": "The Laravel Framework.",
+  "keywords": [
+    "framework",
+    "laravel"
+  ],
+  "license": "MIT",
+  "require": {
+    "laravel/framework": "4.2.*",
+    "intervention/image": "^2.2",
+    "artdarek/oauth-4-laravel": "dev-master",
+    "laracasts/commander": "~1.0",
+    "kalnoy/nestedset": "1.1.*",
+    "rigor789/airbrake-laravel": "0.2",
+    "anlutro/l4-settings": "^0.4.0",
+    "roumen/sitemap": "2.4.*",
+    "omnipay/common": "~2.3.0",
+    "ignited/laravel-omnipay": "1.*",
+    "omnipay/paypal": "*",
+    "stripe/stripe-php": "*",
+    "graham-campbell/flysystem": "1.0.0",
+    "league/flysystem-aws-s3-v2": "~1.0",
+    "league/flysystem-dropbox": "~1.0",
+    "vlucas/phpdotenv": "^2.0",
+    "league/flysystem-rackspace": "~1.0",
+    "mews/purifier": "dev-master-l4"
+  },
+  "require-dev": {
+    "way/generators": "~2.0",
+    "laracasts/integrated": "^0.15.6",
+    "itsgoingd/clockwork": "~1.8"
+  },
+  "autoload": {
+    "classmap": [
+      "app/commands",
+      "app/controllers",
+      "app/models",
+      "app/database/migrations",
+      "app/database/seeds"
+    ],
+    "files": [
+      "app/helpers.php"
+    ],
+    "psr-4": {
+      "Karakata\\": "app/Karakata"
+    }
+  },
+  "autoload-dev": {
+    "classmap": [
+      "tests/TestCase.php",
+      "tests/support"
+    ]
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "php artisan clear-compiled",
+      "php artisan optimize"
+    ],
+    "post-update-cmd": [
+      "php artisan clear-compiled",
+      "php artisan optimize"
+    ],
+    "post-create-project-cmd": [
+      "php artisan key:generate"
+    ]
+  },
+  "config": {
+    "preferred-install": "dist"
+  },
+  "minimum-stability": "dev"
+}
